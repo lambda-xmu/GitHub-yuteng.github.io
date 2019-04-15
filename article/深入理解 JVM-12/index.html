@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          JVM（12.Java内存模型与线程） - 于腾 | Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.huweihuang.com/article/深入理解 JVM-12/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <link rel="stylesheet" href="/css/donate.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#JVM" title="JVM">JVM</a>
+                            
+                        </div>
+                        <h1>JVM（12.Java内存模型与线程）</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by 于腾 on
+                            2019-04-10
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">所爱隔山海</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p><strong>本篇介绍虚拟机如何实现多线程、多线程之间由于共享和竞争数据而导致的一系列问题及解决方案。</strong></p>
+<blockquote>
+<p><strong>内存模型：<font color="#EE2C2C">在特定的操作协议下，对特定的内存或高速缓存进行读写访问的过程抽象。</font></strong></p>
+</blockquote>
+<a id="more"></a>
+<ul>
+<li>概述</li>
+<li>Java内存模型</li>
+<li>Java与线程</li>
+</ul>
+<hr>
+<h2 id="一-概述">一、<font color="black">概述</font></h2>
+<p><strong>多任务处理的必要性：</strong></p>
+<ul>
+<li>1、充分利用计算机处理器的能力，避免处理器在磁盘I/O、网络通信或数据库访问时总是处于等待其他资源的状态。</li>
+<li>2、便于一个服务端同时对多个客户端提供服务。通过指标TPS（Transactions Per Second）可衡量一个服务性能的高低好坏。
+<ul>
+<li>它表示每秒服务端平均能响应的请求总数，进而体现出程序的并发能力。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>硬件的效率与一致性：</strong></p>
+<ul>
+<li>为了更好的理解Java内存模型，先理解物理计算机中的并发问题，两者有很高的可比性。</li>
+</ul>
+<hr>
+<p><strong>由于计算机的存储设备与处理器的运算速度有几个数量级的差距。</strong><br>
+<strong>所以现代计算机系统都不得加入一层读写速度尽可能接近处理器运算速度的<font color="#EE2C2C">高速缓存（Cache）</font>来作为内存与处理器之间的缓冲：</strong></p>
+<ul>
+<li><strong>将运算需要使用到的数据复制到缓存中，让运算能快速进行，</strong></li>
+<li><strong>当运算结束后再从缓存同步回内存之中，而无须让处理器等待缓慢的内存读写。</strong></li>
+</ul>
+<blockquote>
+<p><strong>但是基于高速缓存的存储交互在多处理器系统中会带来缓存一致性（Cache Coherence）的问题。<br>
+这是因为每个处理器都有自己的高速缓存，而它们又共享同一主内存（Main Memory），<br>
+当多个处理器的运算任务都涉及同一块主内存区域时，就可能导致各自的缓存数据不一致。<br>
+解决办法就是需要各个处理器访问缓存时都遵循一些协议，在读写时要根据协议来进行操作。如下图：</strong></p>
+</blockquote>
+<img src="http://ww1.sinaimg.cn/large/006vWPzFly1g20v4599sej30s50cwmy4.jpg" width="800">
+<hr>
+<p><strong>在本篇提到的<font color="#EE2C2C">“内存模型”</font>可以理解为</strong></p>
+<blockquote>
+<p><strong><font color="#EE2C2C">在特定的操作协议下，对特定的内存或高速缓存进行读写访问的过程抽象。</font></strong></p>
+</blockquote>
+<ul>
+<li><strong>不同架构的物理机可以拥有不同的内存模型，Java虚拟机也有自己的内存模型。</strong></li>
+</ul>
+<hr>
+<hr>
+<h2 id="二-java内存模型">二、<font color="black">Java内存模型</font></h2>
+<p><strong><font color="#EE2C2C">目的：</font>屏蔽掉各种硬件和操作系统的内存访问差异，实现Java程序在各种平台下都能达到一致的内存访问效果。</strong></p>
+<hr>
+<p><strong><font color="#EE2C2C">主要目标：</font>通过定义程序中各个变量的访问规则，即在虚拟机中将变量存储到内存和从内存中取出变量这样的底层细节。</strong></p>
+<ul>
+<li><strong>注意：这里的变量与Java编程中说的变量有所区别，它包括了 实例字段、静态字段 和 构成数组对象的元素，</strong></li>
+<li><strong>但不包括局部变量与方法参数，因为后者是线程私有的，不会被共享，自然就不会存在竞争问题。</strong></li>
+</ul>
+<hr>
+<p><strong><font color="black" size="5">Java内存模型规定：</font></strong></p>
+<blockquote>
+<p><strong><font color="#EE2C2C">主内存（Main Memory）：</font>所有的变量都存储在主内存中。直接对应物理硬件的内存。</strong></p>
+<ul>
+<li><strong>这里的主内存、工作内存与Java内存区域中的Java堆、栈、方法区等并不是同一个层次的内存划分，两者基本上是没有关系的。</strong></li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong><font color="#EE2C2C">工作内存（Working Memory)：</font>每条线程还有自己的工作内存，用于保存被该线程使用到的变量的主内存副本拷贝。</strong></p>
+<ul>
+<li><strong>线程对变量的所有操作(读取、赋值等)都必须在 工作内存 中进行，而不能直接读写主内存中的变量。</strong></li>
+<li><strong>不同的线程之间也无法直接访问对方工作内存中的变量，线程间变量值的传递均必须需要通过主内存来完成。</strong></li>
+<li><strong>为了获取更好的运行速度，虚拟机可能会让工作内存优先存储于寄存器和高速缓存中。</strong></li>
+</ul>
+</blockquote>
+<img src="http://ww1.sinaimg.cn/large/006vWPzFly1g20w1740opj30ru0bw3zd.jpg" width="800">
+<hr>
+<p><strong><font color="black" size="5">内存间交互操作：</font></strong></p>
+<p><strong>交互协议：用于规定一个变量如何从主内存拷贝到工作内存、如何从工作内存同步回主内存之类的实现细节。</strong></p>
+<hr>
+<p><strong>共有8种操作：</strong></p>
+<p>**<font color="#EE2C2C">锁定（lock）：</font>**作用于<font color="#FF8247">主内存</font>的变量，把一个变量标识为一条线程独占的状态。<br>
+**<font color="#EE2C2C">解锁（unlock）：</font>**作用于<font color="#FF8247">主内存</font>的变量，把处于锁定状态的变量释放出来，释放后的变量才可以被其他线程锁定。<br>
+**<font color="#EE2C2C">读取（read）：</font>**作用于<font color="#FF8247">主内存</font>的变量，把变量的值从主内存传输到线程的工作内存中，以便随后的load动作使用。<br>
+**<font color="#EE2C2C">载入（load）：</font>**作用于<font color="#B03060">工作内存</font>的变量，把read操作从主内存中得到的变量值放入工作内存的变量副本中。<br>
+**<font color="#EE2C2C">使用（use）：</font>**作用于<font color="#B03060">工作内存</font>的变量，把工作内存中一个变量的值传递给执行引擎。<br>
+**<font color="#EE2C2C">赋值（assign）：</font>**作用于<font color="#B03060">工作内存</font>的变量，把从执行引擎接收到的值赋给工作内存的变量。<br>
+**<font color="#EE2C2C">存储（store）：</font>**作用于<font color="#B03060">工作内存</font>的变量，把工作内存中变量的值传送到主内存中，以便随后的write操作使用。<br>
+**<font color="#EE2C2C">写入（write）：</font>**作用于<font color="#FF8247">主内存</font>的变量，把store操作从工作内存中得到的变量的值放入主内存的变量中。</p>
+<blockquote>
+<p><strong>结论：注意是顺序非连续。</strong><br>
+<strong>如果要把变量从主内存复制到工作内存，那就要顺序地执行 read 和 load。</strong><br>
+<strong>如果要把变量从工作内存同步回主内存，就要顺序地执行 store 和 write。</strong></p>
+</blockquote>
+<hr>
+<p><strong>确保并发操作安全的原则，在Java内存模型中规定了执行上述8种基本操作时需要满足如下规则：</strong></p>
+<blockquote>
+<p>1、不允许read和load、store和write操作之一单独出现。</p>
+<ul>
+<li>即不允许一个变量从主内存读取了但工作内存不接受，或者从工作内存发起回写了但主内存不接受的情况出现。</li>
+</ul>
+<p>2、不允许一个线程丢弃它的最近的assign操作，即变量在工作内存中改变了之后必须把该变化同步回主内存。<br>
+3、不允许一个线程无原因地，即没有发生过任何assign操作就把数据从线程的工作内存同步回主内存中。<br>
+4、一个新的变量只能在主内存中“诞生”，不允许在工作内存中直接使用一个未被初始化（load或assign）的变量，</p>
+<ul>
+<li>即对一个变量实施use、store操作之前必须先执行过了assign和load操作。<br>
+5、一个变量在同一个时刻只允许一条线程对其进行lock操作。</li>
+<li>但lock操作可以被同一条线程重复执行多次，多次执行lock后，只有执行相同次数的unlock操作，变量才会被解锁。<br>
+6、如果对一个变量执行lock操作，将会清空工作内存中此变量的值，在执行引擎使用这个变量前，需要重新执行load或assign操作初始化变量的值。<br>
+7、如果一个变量事先没有被lock操作锁定，那就不允许对它执行unlock操作，也不允许去unlock一个被其他线程锁定住的变量。<br>
+8、对一个变量执行unlock操作之前，必须先把此变量同步回主内存中。</li>
+</ul>
+</blockquote>
+<hr>
+<p><strong>可见这么多规则相当严谨但又十分繁琐，实践起来非常麻烦。下面介绍一个等效判断原则：<font color="#EE2C2C">先行发生原则</font>。</strong></p>
+<h3 id="先行发生原则"><font color="black">先行发生原则</font></h3>
+<p><strong>先行发生原则是Java内存模型中定义的两项操作之间的偏序关系。它是判断数据是否存在竞争、线程是否安全的主要依据。</strong><br>
+<strong>下面例举一些“天然的”先行发生关系，无须任何同步器协助就已经存在，可以在编码中直接使用。</strong></p>
+<ul>
+<li>
+<p>**<font color="#EE2C2C">程序次序规则（Program Order Rule）：</font>**在一个线程内，按照控制流顺序，书写在前面的操作先行发生于书写在后面的操作。</p>
+</li>
+<li>
+<p>**<font color="#EE2C2C">管程锁定规则（Monitor Lock Rule）：</font>**一个unlock操作先行发生于后面对同一个锁的lock操作。</p>
+</li>
+<li>
+<p>**<font color="#EE2C2C">volatile变量规则（Volatile Variable Rule）：</font>**对一个volatile变量的写操作先行发生于后面对这个变量的读操作。</p>
+</li>
+<li>
+<p>**<font color="#EE2C2C">线程启动规则（Thread Start Rule）：</font>**Thread对象的start()先行发生于此线程的每一个动作。</p>
+</li>
+<li>
+<p>**<font color="#EE2C2C">线程终止规则（Thread Termination Rule）：</font>**线程中的所有操作都先行发生于对此线程的终止检测。</p>
+<ul>
+<li>可通过Thread.join()结束、Thread.isAlive()的返回值等手段检测到线程已经终止执行。</li>
+</ul>
+</li>
+<li>
+<p>**<font color="#EE2C2C">线程中断规则（Thread Interruption Rule）：</font>**对线程interrupt()的调用先行发生于被中断线程的代码检测到中断事件的发生。</p>
+<ul>
+<li>可通过Thread.interrupted()检测到是否有中断发生。</li>
+</ul>
+</li>
+<li>
+<p>**<font color="#EE2C2C">对象终结规则（Finalizer Rule）：</font>**一个对象的初始化完成先行发生于它的finalize()的开始。</p>
+</li>
+<li>
+<p>**<font color="#EE2C2C">传递性（Transitivity）：</font>**如果操作A先行发生于操作B，操作B先行发生于操作C，那么操作A一定先行发生于操作C。</p>
+</li>
+</ul>
+<hr>
+<hr>
+<h3 id="原子性-可见性-有序性"><font color="black">原子性、可见性、有序性</font></h3>
+<blockquote>
+<p><strong>原子性（Atomicity）：一个操作要么都执行要么都不执行。</strong></p>
+<ul>
+<li>可直接保证的原子性变量操作有：read、load、assign、use、store和write，因此可认为基本数据类型的访问读写是具备原子性的。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>可见性（Visibility）：当一个线程修改了共享变量的值，其他线程能够立即得知这个修改。</strong></p>
+<ul>
+<li>通过在变量修改后将新值同步回主内存，在变量读取前从主内存刷新变量值这种依赖主内存作为传递媒介的方式来实现。</li>
+<li>提供三个关键字保证可见性：
+<ul>
+<li><strong><code>volatile</code> 能保证新值能立即同步到主内存，且每次使用前立即从主内存刷新；</strong></li>
+<li><strong><code>synchronized</code>对一个变量执行unlock操作之前可以先把此变量同步回主内存中；</strong></li>
+<li><strong><code>final</code> 修饰的字段在构造器中一旦初始化完成且构造器没有把this的引用传递出去，就可以在其他线程中就能看见final字段的值。</strong></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>有序性（Ordering）：程序代码按照指令顺序执行。</strong></p>
+<ul>
+<li><strong>如果在本线程内观察，所有的操作都是有序的，指“线程内表现为串行的语义”；</strong></li>
+<li><strong>如果在一个线程中观察另一个线程，所有的操作都是无序的，指“指令重排序”现象和“工作内存与主内存同步延迟”现象。</strong>
+<ul>
+<li><strong>提供两个关键字保证有序性：</strong></li>
+<li><code>volatile</code> 本身就包含了禁止指令重排序的语义；</li>
+<li><code>synchronized</code>保证一个变量在同一个时刻只允许一条线程对其进行lock操作，使得持有同一个锁的两个同步块只能串行地进入。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<hr>
+<h1 id="java与线程"><font color="black">Java与线程</font></h1>
+<h3 id="线程实现的三种方式">线程实现的三种方式：</h3>
+<p><strong>1、使用内核线程（Kernel-Level Thread,KLT）（一对一线程模型）</strong><br>
+<strong>2、使用用户线程（User Thread,UT）（一对多线程模型）</strong><br>
+<strong>3、使用用户线程加轻量级进程混合（多对多线程模型）</strong></p>
+<hr>
+<h3 id="java线程调度的两种方式">Java线程调度的两种方式</h3>
+<p><strong>线程调度：指系统为线程分配处理器使用权的过程。</strong></p>
+<p><strong>1、协同式线程调度（Cooperative Threads-Scheduling）</strong></p>
+<ul>
+<li><strong>由线程本身来控制线程的执行时间。线程把自己的工作执行完后，要主动通知系统切换到另外一个线程上。</strong></li>
+<li>**优点：**实现简单；切换操作自己可知，不存在线程同步的问题。</li>
+<li>**缺点：**线程执行时间不可控，假如一个线程编写有问题一直不告知系统进行线程切换，那么程序就会一直被阻塞。</li>
+</ul>
+<hr>
+<p><strong>2、抢占式线程调度（Preemptive Threads-Scheduling）</strong></p>
+<ul>
+<li><strong>由系统来分配每个线程的执行时间。</strong></li>
+<li>**优点：**线程执行时间是系统可控的，不存在一个线程导致整个进程阻塞的问题。</li>
+<li>可以通过<strong>设置线程优先级</strong>，优先级越高的线程越容易被系统选择执行。
+<ul>
+<li><strong>但是线程优先级并不是太靠谱：</strong></li>
+<li>1、优先级可能会被系统自行改变。</li>
+<li>2、因为Java的线程是通过映射到系统的原生线程上来实现的，所以线程调度最终还是取决于操作系统，在一些平台上不同的优先级实际会变得相同；</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="线程的五种状态">线程的五种状态</h3>
+<p><strong><font color="#EE2C2C">在任意一个时间，一个线程只能有且只有其中的一种状态：</font></strong><br>
+<strong>新建（New），运行（Runable），无限期等待（Waiting），限期等待（Timed Waiting）,阻塞（Blocked），结束（Terminated）</strong></p>
+<blockquote>
+<p><strong>新建（New）：线程创建后尚未启动。</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>运行（Runable）：包括正在执行（Running）和等待着CPU为它分配执行时间（Ready）两种。</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>无限期等待（Waiting）：该线程不会被分配CPU执行时间，要等待被其他线程显式地唤醒。</strong></p>
+</blockquote>
+<ul>
+<li>以下方法会让线程陷入无限期等待状态：
+<ul>
+<li>没有设置Timeout参数的Object.wait()</li>
+<li>没有设置Timeout参数的Thread.join()</li>
+<li>LockSupport.park()</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>限期等待（Timed Waiting）：该线程不会被分配CPU执行时间，但在一定时间后会被系统自动唤醒。</strong></p>
+</blockquote>
+<ul>
+<li>以下方法会让线程进入限期等待状态：
+<ul>
+<li>Thread.sleep()</li>
+<li>设置了Timeout参数的Object.wai()</li>
+<li>设置了Timeout参数的Thread.join()</li>
+<li>LockSupport.parkNanos()</li>
+<li>LockSupport.parkUntil()</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>阻塞（Blocked）：线程被阻塞。</strong><br>
+<strong>注意区别：</strong></p>
+</blockquote>
+<ul>
+<li><strong>阻塞状态：在等待获取到一个排他锁，在另外一个线程放弃这个锁的时候发生；</strong></li>
+<li><strong>等待状态：在等待一段时间或者唤醒动作的发生，在程序等待进入同步区域的时候发生。</strong></li>
+</ul>
+<blockquote>
+<p><strong>结束（Terminated）：线程已经结束执行。</strong></p>
+</blockquote>
+<hr>
+<p><strong>线程状态之间的转换图：</strong><br>
+<img src="http://ww1.sinaimg.cn/large/006vWPzFly1g20ytckay4j30rs0g8gmh.jpg" width="800"></p>
+<h2 id="参考">参考</h2>
+<p><a href="https://www.jianshu.com/p/90a036212cb4" target="_blank" rel="noopener">厘米姑娘-要点提炼| 理解JVM之内存模型&amp;线程</a></p>
+<h1 id="感谢阅读">感谢阅读</h1>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/article/深入理解 JVM-13/" data-toggle="tooltip" data-placement="top" title="JVM（13.线程安全与锁优化）">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/article/深入理解 JVM-7/" data-toggle="tooltip" data-placement="top" title="JVM（7.虚拟机类加载机制）">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+
+                <!--打赏-->
+                
+                <!--打赏-->
+
+                <br>
+                <!--分享-->
+                
+                    <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                    <!--  css & js -->
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!--分享-->
+                <br>                       
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#JVM" title="JVM">JVM</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://github.com/GitHub-yuteng" target="_blank">GitHub</a></li>
+                    
+                        <li><a href="https://weibo.com/u/5968884687" target="_blank">微博</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/huweihuang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 于腾 2019 
+                    <br>
+                    Theme by <a href="http://beantech.org">BeanTech</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://www.huweihuang.com">胡伟煌</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huweihuang&repo=hexo-theme-huweihuang&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.huweihuang.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'xxx';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://www.huweihuang.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

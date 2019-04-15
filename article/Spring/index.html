@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Spring - 于腾 | Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.huweihuang.com/article/Spring/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <link rel="stylesheet" href="/css/donate.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Spring全家桶" title="Spring全家桶">Spring全家桶</a>
+                            
+                        </div>
+                        <h1>Spring</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by 于腾 on
+                            2019-03-24
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">所爱隔山海</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h3 id="具体描述">具体描述：</h3>
+<ul>
+<li>轻量级：Spring 是非侵入性的 – 基于 Spring 开发的应用中的对象可以不依赖于 Spring 的 API</li>
+<li>依赖注入 (DI – dependency injection、IOC) DI和IOC其实是一回事</li>
+<li>面向切面编程 (AOP – aspect oriented programming)</li>
+<li>容器： Spring 是一个容器, 因为它包含并且管理应用对象的生命周期</li>
+<li>框架： Spring 实现了使用简单的组件配置组合成一个复杂的应用。 在 Spring 中可以使用 XML 和 Java 注解组合这些对象</li>
+<li>一站式：在 IOC 和 AOP 的基础上可以整合各种企业应用的开源框架和优秀的第三方类库</li>
+<li>（实际上 Spring 自身也提供了展现层的 SpringMVC 和 持久层的 Spring JDBC）</li>
+</ul>
+<a id="more"></a>
+<h1 id="spring基石之一-ioc-和-di">Spring基石之一 ： IOC 和 DI</h1>
+<blockquote>
+<p>1、IOC 控制反转(Inversion of Control)</p>
+<ul>
+<li>其思想是反转资源获取的方向。传统的资源查找方式要求组件向容器发起请求查找资源。作为回应，容器适时的返回资源。而应用了 IOC 之后， 则是容器主动地将资源推送给它所管理的组件，组件所要做的仅是选择一种合适的方式来接受资源。这种行为也被称为查找的被动形式。</li>
+</ul>
+<p>2、DI 依赖注入(Dependency Injection)依赖容器把资源注入 — IOC 的另一种表述方式：</p>
+<ul>
+<li>即组件以一些预先定义好的方式(例如： setter 方法)接受来自如容器的资源注入。相对于 IOC 而言，这种表述更直接。</li>
+</ul>
+</blockquote>
+<hr>
+<p>** 添加jar包 **</p>
+<ul>
+<li>commons-logging-1.x.x.jar</li>
+<li>spring-core-4.0.0.RELEASE.jar</li>
+<li>spring-context-4.0.0.RELEASE.jar</li>
+<li>spring-expression-4.0.0.RELEASE.jar</li>
+<li>spring-beans-4.0.0.RELEASE.jar</li>
+</ul>
+<p>** 配置 bean **<br>
+1、配置形式： 基于 XML 文件的方式; 基于 注解 的方式;<br>
+2、Bean 的配置方式：通过全类名（反射）、通过工厂方法（静态工厂方法 &amp; 实例工厂方法）、FactoryBean<br>
+3、IOC 容器 BeanFactory &amp; ApplicationContext 概述<br>
+4、依赖注入的方式： 属性注入; 构造器注入。</p>
+<hr>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"helloWorld"</span> <span class="attr">class</span>=<span class="string">"Spring1.HelloWorld"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"Spring"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="applicationcontextxml-spring配置文件">applicationContext.xml Spring配置文件</h4>
+<blockquote>
+<p>** id： ** Bean的名称</p>
+<ul>
+<li>在IOC容器中必须是唯一的。</li>
+<li>若id没有指定，Spring自动将权限定性类名作为Bean的名字。</li>
+<li>id可以指定多个名字，名字之间可用 逗号、分号、或空格分隔。</li>
+</ul>
+<p>** class：** Bean的全类名，通过反射的机制创建Bean的实例，需要默认构造器。获取容器前会初始化类，调用默认构造器。<br>
+** property：** name属性 --&gt; setXxx方法对应注入。value --&gt; 对变量注入的值。</p>
+</blockquote>
+<hr>
+<h2 id="spring-容器">Spring 容器</h2>
+<blockquote>
+<p>1、在 Spring IOC 容器读取 Bean 配置创建 Bean 实例之前, 必须对它进行实例化。</p>
+<ul>
+<li>只有在容器实例化后, 才可以从 IOC 容器里获取 Bean 实例并使用。<br>
+2、Spring 提供了两种类型的 IOC 容器实现。</li>
+<li>BeanFactory： IOC 容器的基本实现。</li>
+<li>** ApplicationContext： 提供了更多的高级特性。是 BeanFactory 的子接口 **( getBean() 方法所在位置)。<br>
+ClassPathXmlApplicationContext 是 ApplicationContext 实现类，从类路径下加载配置文件。<br>
+3、BeanFactory 是 Spring 框架的基础设施，面向 Spring 本身；<br>
+ApplicationContext 面向使用 Spring 框架的开发者，几乎所有的应用场合都直接使用 ApplicationContext 而非底层的 BeanFactory无论使用何种方式, 配置文件时相同的。</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="xml-配置里的-bean-自动装配">XML 配置里的 Bean 自动装配</h3>
+<ul>
+<li>Spring IOC 容器可以自动装配 Bean。需要做的仅仅是在 <bean> 的 autowire 属性里指定自动装配的模式
+<ul>
+<li>byType(根据类型自动装配)： 若 IOC 容器中有多个与目标 Bean 类型一致的 Bean。
+<ul>
+<li>在这种情况下, Spring 将无法判定哪个 Bean 最合适该属性, 所以不能执行自动装配。</li>
+</ul>
+</li>
+<li>byName(根据名称自动装配)： 必须将目标 Bean 的名称和属性名设置的完全相同。</li>
+<li>constructor(通过构造器自动装配)： 当 Bean 中存在多个构造器时, 此种自动装配方式将会很复杂。 不推荐使用。</li>
+</ul>
+</bean></li>
+</ul>
+<hr>
+<h3 id="bean-的作用域">Bean 的作用域</h3>
+<blockquote>
+<p>** 在 Spring 中, 可以在 <bean> 元素的 scope 属性里设置 Bean 的作用域。**<br>
+默认情况下, Spring 只为每个在 IOC 容器里声明的 Bean 创建** 唯一一个实例 <strong>, 整个 IOC 容器范围内都能共享该实例;<br>
+所有后续的 getBean()调用和Bean引用都将返回这个唯一的Bean实例。</strong> 该作用域被称为 singleton **,它是所有Bean的默认作用域。</bean></p>
+<ul>
+<li>scope属性为 prototype 多例 每次 getBean() 获取Bean都创建一个新实例。</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="ioc-容器中-bean-的生命周期方法">IOC 容器中 Bean 的生命周期方法</h3>
+<p>Spring IOC 容器可以管理 Bean 的生命周期, Spring 允许在 Bean 生命周期的特定点执行定制的任务。</p>
+<p>** Spring IOC 容器对 Bean 的生命周期进行管理的过程：**<br>
+1、通过构造器或工厂方法创建 Bean 实例,调用默认构造器。<br>
+2、为 Bean 的属性设置值和对其他 Bean 的引用。<br>
+3、调用 Bean 的初始化方法 init();<br>
+4、Bean 可以使用了。<br>
+5、当容器关闭时, 调用 Bean 的销毁方法 destroy();<br>
+在 Bean 的声明里设置 init-method 和 destroy-method 属性, 为 Bean 指定初始化和销毁方法。</p>
+<h3 id="创建-bean-后置处理器后的生命周期方法-比较上方生命周期">创建 Bean 后置处理器后的生命周期方法  比较上方生命周期 👆</h3>
+<blockquote>
+<p>Bean 后置处理器允许在调用初始化方法前后对 Bean 进行额外的处理。<br>
+<code>Bean 后置处理器对 IOC 容器里的所有 Bean 实例逐一处理, 而非单一实例。</code></p>
+</blockquote>
+<ul>
+<li>其典型应用是： 检查 Bean 属性的正确性或根据特定的标准更改 Bean 的属性.</li>
+</ul>
+<blockquote>
+<p>** 对Bean 后置处理器而言, 需要实现 BeanPostProcessor 接口。**<br>
+在初始化方法被调用前后, Spring 将把每个 Bean 实例分别传递给上述接口的以下两个方法：<br>
+postProcessAfterInitialization();<br>
+postProcessBeforeInitialization();<br>
+** 需要在 applicationContext.xml配置文件 配置这个实现 BeanPostProcessor 接口的类 **</p>
+</blockquote>
+<p><strong>添加 Bean 后置处理器后 Bean 的生命周期 Spring IOC 容器对 Bean 的生命周期进行管理的过程：</strong><br>
+1、通过构造器或工厂方法创建 Bean 实例,调用默认构造器。<br>
+2、为 Bean 的属性设置值和对其他 Bean 的引用。<br>
+3、将 Bean 实例传递给 Bean 后置处理器的 postProcessBeforeInitialization 方法 init() 方法之前调用<br>
+4、调用 Bean 的初始化方法 init();<br>
+5、将 Bean 实例传递给 Bean 后置处理器的 postProcessAfterInitialization 方法  init() 方法之后调用<br>
+6、Bean 可以使用了<br>
+7、当容器关闭时, 调用 Bean 的销毁方法 destroy();</p>
+<hr>
+<h3 id="使用外部属性文件">使用外部属性文件</h3>
+<blockquote>
+<p>在配置文件里配置 Bean 时, 有时需要在 Bean 的配置里混入系统部署的细节信息(例如： 文件路径, 数据源配置信息等)。<br>
+而这些部署细节实际上需要和 Bean 配置相分离</p>
+</blockquote>
+<p><s>Spring 2.0 Spring 提供了一个 PropertyPlaceholderConfigurer 的 BeanFactory 后置处理器 (过时)</s><br>
+这个处理器允许用户将 Bean 配置的部分内容外移到属性文件中。</p>
+<p>** Spring 2.5 之后： 可通过 &lt; context：property-placeholder /&gt; 元素简化 **</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;context：component-scan base-package="Spring"&gt;&lt;/context：component-scan&gt;</span><br><span class="line">	</span><br><span class="line">&lt;!-- 导入资源文件 --&gt;</span><br><span class="line">&lt;context：property-placeholder location=<span class="string">"classpath：db.properties"</span>/&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 配置 C3P0 数据源 --&gt;</span><br><span class="line">&lt;bean id=<span class="string">"dataSource"</span></span><br><span class="line">	<span class="class"><span class="keyword">class</span></span>=<span class="string">"com.mchange.v2.c3p0.ComboPooledDataSource"</span>&gt;</span><br><span class="line">	&lt;property name="user" value="$&#123;jdbc.user&#125;"&gt;&lt;/property&gt;</span><br><span class="line">	&lt;property name="password" value="$&#123;jdbc.password&#125;"&gt;&lt;/property&gt;</span><br><span class="line">	&lt;property name="jdbcUrl" value="$&#123;jdbc.jdbcUrl&#125;"&gt;&lt;/property&gt;</span><br><span class="line">	&lt;property name="driverClass" value="$&#123;jdbc.driverClass&#125;"&gt;&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">	&lt;property name="initialPoolSize" value="$&#123;jdbc.initPoolSize&#125;"&gt;&lt;/property&gt;</span><br><span class="line">	&lt;property name="maxPoolSize" value="$&#123;jdbc.maxPoolSize&#125;"&gt;&lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">db.properties</span><br><span class="line">文件内容</span><br><span class="line">jdbc.user=root</span><br><span class="line">jdbc.password=root</span><br><span class="line">jdbc.jdbcUrl=jdbc：mysql：//test</span><br><span class="line">jdbc.driverClass=com.mysql.jdbc.Driver</span><br><span class="line"></span><br><span class="line">jdbc.initPoolSize=5</span><br><span class="line">jdbc.maxPoolSize=10</span><br></pre></td></tr></table></figure>
+<p>** 可以在 Bean 配置文件里使用形式为 ${var} 的变量。 **</p>
+<hr>
+<h3 id="通过调用静态工厂方法创建-bean">通过调用静态工厂方法创建 Bean</h3>
+<ul>
+<li>调用静态工厂方法创建 Bean是将对象创建的过程封装到静态方法中。 当客户端需要对象时, 只需要简单地调用静态方法, 而不同关心创建对象的细节。</li>
+<li>要声明通过静态方法创建的 Bean, 需要在 Bean 的 class 属性里指定拥有该工厂的方法的类, 同时在 factory-method 属性里指定工厂方法的名称。</li>
+<li>最后, 使用 <constrctor-arg> 元素为该方法传递方法参数。</constrctor-arg></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 通过静态工厂方法： 一个类中有一个静态方法, 可以返回一个类的实例(了解) --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 在 class 中指定静态工厂方法的全类名, 在 factory-method 中指定静态工厂方法的方法名 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"dateFormat"</span> <span class="attr">class</span>=<span class="string">"java.text.DateFormat"</span> <span class="attr">factory-method</span>=<span class="string">"getDateInstance"</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 可以通过 constructor-arg 子节点为静态工厂方法指定参数 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">"2"</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="通过调用实例工厂方法创建-bean">通过调用实例工厂方法创建 Bean</h3>
+<ul>
+<li>实例工厂方法： 将对象的创建过程封装到另外一个对象实例的方法里。</li>
+<li>当客户端需要请求对象时, 只需要简单的调用该实例方法而不需要关心对象的创建细节。</li>
+</ul>
+<p>** 要声明通过实例工厂方法创建的 Bean **<br>
+1、在 bean 的 factory-bean 属性里指定拥有该工厂方法的 Bean<br>
+2、在 factory-method 属性里指定该工厂方法的名称<br>
+3、使用 construtor-arg 元素为工厂方法传递方法参数</p>
+<p>** 实现 FactoryBean 接口在 Spring IOC 容器中配置 Bean **</p>
+<ul>
+<li>Spring 中有两种类型的 Bean, 一种是普通Bean, 另一种是工厂Bean, 即FactoryBean.</li>
+<li>工厂 Bean 跟普通Bean不同, 其返回的对象不是指定类的一个实例, 其返回的是该工厂 Bean 的 getObject 方法所返回的对象</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 实例工厂方法： 先需要创建工厂对象, 再调用工厂的非静态方法返回实例(了解) --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- ①. 创建工厂对应的 bean --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"simpleDateFormat"</span> <span class="attr">class</span>=<span class="string">"java.text.SimpleDateFormat"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">"yyyy-MM-dd hh：mm：ss"</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- ②. 有实例工厂方法来创建 bean 实例 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- factory-bean 指向工厂 bean, factory-method 指定工厂方法(了解) --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"datetime"</span> <span class="attr">factory-bean</span>=<span class="string">"simpleDateFormat"</span> <span class="attr">factory-method</span>=<span class="string">"parse"</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 通过 constructor-arg 执行调用工厂方法需要传入的参数 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">"1990-12-12 12：12：12"</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="在-classpath-中扫描组件">在 classpath 中扫描组件</h3>
+<p>** 组件扫描(component scanning)： Spring 能够从 classpath 下自动扫描, 侦测和实例化具有特定注解的组件。**</p>
+<ul>
+<li>特定组件包括：
+<ul>
+<li>@Component： 基本注解, 标识了一个受 Spring 管理的组件</li>
+<li>@Respository： 标识持久层组件</li>
+<li>@Service： 标识服务层(业务层)组件</li>
+<li>@Controller： 标识表现层组件<br>
+对于扫描到的组件, Spring 有默认的命名策略： 使用非限定类名, 第一个字母小写。也可以在注解中通过 value 属性值标识组件的名称。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>** 当在组件类上使用了特定的注解之后, 还需要在 Spring 的配置文件中声明 **<br>
+** &lt; context：component-scan base-package=“Spring”&gt; **<br>
+base-package 属性指定一个需要扫描的基类包，Spring 容器将会扫描这个基类包里及其子包中的所有类。<br>
+当需要扫描多个包时, 可以使用逗号分隔。</p>
+</blockquote>
+<blockquote>
+<p>** 如果仅希望扫描特定的类而非基包下的所有类，可使用 resource-pattern 指定扫描的资源，示例：**<br>
+** &lt; context：component-scan base-package=&quot;…&quot; resource-pattern=“Respository/*”&gt;&lt;/context：component-scan &gt; **<br>
+**	&lt; context：include-filter &gt; 子节点表示要包含的目标类 **<br>
+**	&lt; context：exclude-filter &gt; 子节点表示要排除在外的目标类 **<br>
+** &lt; context：component-scan &gt; 下可以拥有若干个 &lt; context：include-filter &gt; 和 &lt; context：exclude-filter &gt; 子节点 **</p>
+</blockquote>
+<p>** &lt; context：include-filter &gt; 和 &lt; context：exclude-filter &gt; 子节点支持多种类型的过滤表达式：**</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">** 注解类型 **</span><br><span class="line"><span class="tag">&lt;<span class="name">context：component-scan</span> <span class="attr">base-package</span>=<span class="string">"Spring"</span> <span class="attr">use-default-filters</span>=<span class="string">"false"</span>&gt;</span> //默认filters如果值为true默认扫描全部</span><br><span class="line">	// include-filter 该子节点需要配合 use-default-filters="false" 使用</span><br><span class="line">	<span class="tag">&lt;<span class="name">context：include-filter</span> <span class="attr">type</span>=<span class="string">"annotation"</span> <span class="attr">expression</span>=<span class="string">"注解类型全类名"</span>/&gt;</span> </span><br><span class="line">	<span class="tag">&lt;<span class="name">context：exclude-filter</span> <span class="attr">type</span>=<span class="string">"annotation"</span> <span class="attr">expression</span>=<span class="string">"注解类型全类名"</span>/&gt;</span> // 不需要</span><br><span class="line"><span class="tag">&lt;/<span class="name">context：component-scan</span>&gt;</span></span><br><span class="line"></span><br><span class="line">** 接口类型扫描 **</span><br><span class="line"><span class="tag">&lt;<span class="name">context：component-scan</span> <span class="attr">base-package</span>=<span class="string">"Spring"</span> <span class="attr">use-default-filters</span>=<span class="string">"false"</span>&gt;</span> //默认filters如果值为true默认扫描全部</span><br><span class="line">	// include-filter 该子节点需要配合 use-default-filters="false" 使用</span><br><span class="line">	<span class="tag">&lt;<span class="name">context：include-filter</span> <span class="attr">type</span>=<span class="string">"assignable"</span> <span class="attr">expression</span>=<span class="string">"接口全类名"</span>/&gt;</span> </span><br><span class="line">	<span class="tag">&lt;<span class="name">context：exclude-filter</span> <span class="attr">type</span>=<span class="string">"assignable"</span> <span class="attr">expression</span>=<span class="string">"接口全类名"</span>/&gt;</span> // 不需要</span><br><span class="line"><span class="tag">&lt;/<span class="name">context：component-scan</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="组件装配-自动注入">组件装配 自动注入</h3>
+<ul>
+<li>&lt; context：component-scan &gt; 元素还会自动注册 AutowiredAnnotationBeanPostProcessor 实例</li>
+<li>该实例可以自动装配具有 @Autowired 和 @Resource 、@Inject注解的属性.</li>
+<li>@Resource 注解要求提供一个 Bean 名称的属性，若该属性为空，则自动采用标注处的变量或方法名作为 Bean 的名称</li>
+<li>建议 @Autowired 自动装配 Bean</li>
+<li>@Autowired 注解自动装配具有兼容类型的单个 Bean属性</li>
+</ul>
+<blockquote>
+<p>构造器, 普通字段 (即使是非 public), 一切具有参数的方法都可以应用@Autowired 注解<br>
+默认情况下, 所有使用 @Autowired 注解的属性都需要被设置。<br>
+当 Spring 找不到匹配的 Bean 装配属性时, 会抛出异常, 若某一属性允许不被设置, 可</p>
+</blockquote>
+<ul>
+<li>以设置 @Autowired 注解的 required 属性为 false</li>
+</ul>
+<blockquote>
+<p>默认情况下, 当 IOC 容器里存在多个类型兼容的 Bean 时, 通过类型的自动装配将无法工作。此时可以在 @Qualifier 注解里提供 Bean 的名称. Spring 允许对方法的入参标注 @Qualifiter 已指定注入 Bean 的名称</p>
+</blockquote>
+<ul>
+<li>@Autowired 注解也可以应用在数组类型的属性上, 此时 Spring 将会把所有匹配的 Bean 进行自动装配。</li>
+<li>@Autowired 注解也可以应用在集合属性上, 此时 Spring 读取该集合的类型信息, 然后自动装配所有与之兼容的 Bean。</li>
+<li>@Autowired 注解用在java.util.Map上时,若该 Map 的键值为 String,那么 Spring 将自动装配与 Map 值类型兼容的 Bean,此时 Bean 的名称作为键值。</li>
+</ul>
+<hr>
+<h3 id="spring表达式语言spel">Spring表达式语言：SpEL</h3>
+<p>Spring 表达式语言（简称SpEL）：是一个支持运行时查询和操作对象图的强大的表达式语言。<br>
+语法类似于 EL：SpEL 使用 #{…} 作为定界符，所有在大框号中的字符都将被认为是 SpEL<br>
+SpEL 为 bean 的属性进行动态赋值提供了便利<br>
+通过 SpEL 可以实现：<br>
+通过 bean 的 id 对 bean 进行引用<br>
+调用方法以及引用对象中的属性<br>
+计算表达式的值<br>
+正则表达式的匹配</p>
+<hr>
+<h1 id="spring基石之一-aop-aspect-oriented-programming-面向切面编程">Spring基石之一 ：AOP (Aspect-Oriented Programming, 面向切面编程)</h1>
+<p>** AOP所处理的问题 **</p>
+<ul>
+<li>代码混乱：越来越多的非业务需求(日志和验证等)加入后, 原有的业务方法急剧膨胀。每个方法在处理核心逻辑的同时还必须兼顾其他多个关注点。</li>
+<li>代码分散：以日志需求为例, 只是为了满足这个需求, 不得不在多个模块(方法)里多次重复相同的日志代码。如果日志需求发生变化, 必须修改所有模块。</li>
+</ul>
+<hr>
+<p>** 使用动态代理解决上述问题 **</p>
+<ul>
+<li>代理设计模式的原理：<br>
+使用一个代理将对象包装起来, 然后用该代理对象取代原始对象。任何对原始对象的调用都要通过代理。代理对象决定是否以及何时将方法调用转到原始对象上</li>
+</ul>
+<hr>
+<p>** AOP (Aspect-Oriented Programming, 面向切面编程) **</p>
+<ul>
+<li>是一种新的方法论, 是对传统 OOP(Object-Oriented Programming, 面向对象编程) 的补充。</li>
+<li>AOP 的主要编程对象是切面(aspect), 切面模块化 --&gt; 横切关注点。</li>
+<li>在应用 AOP 编程时, 仍然需要定义公共功能, 但可以明确的定义这个功能在哪里, 以什么方式应用, 并且不必修改受影响的类。</li>
+<li>这样一来横切关注点就被模块化到特殊的对象(切面)里。</li>
+</ul>
+<hr>
+<p>** AOP 的好处： **</p>
+<ul>
+<li>每个事物逻辑位于一个位置, 代码不分散, 便于维护和升级。</li>
+<li>业务模块更简洁, 只包含核心业务代码。</li>
+</ul>
+<hr>
+<p>** AOP 术语 **<br>
+** 切面(Aspect)：** 横切关注点 (跨越应用程序多个模块的功能) 被模块化的特殊对象。<br>
+** 通知(Advice)：** 切面必须要完成的工作。<br>
+** 目标(Target)：** 被通知的对象。<br>
+** 代理(Proxy)：** 向目标对象应用通知之后创建的对象。<br>
+** 连接点（Joinpoint）：** 程序执行的某个特定位置：如类某个方法调用前、调用后、方法抛出异常后等。</p>
+<ul>
+<li>** 连接点由两个信息确定：**
+<ul>
+<li>方法表示的程序执行点。</li>
+<li>相对点表示的方位。</li>
+<li>例如 Calculator.add() 方法执行前的连接点，执行点为 Calculator.add()；方位为该方法执行前的位置。</li>
+</ul>
+</li>
+</ul>
+<p>** 切点（pointcut）：** 每个类都拥有多个连接点：例如 Calculator 的所有方法实际上都是连接点，即连接点是程序类中客观存在的事务。</p>
+<blockquote>
+<p>** AOP 通过切点定位到特定的连接点。类比：连接点相当于数据库中的记录，切点相当于查询条件。**<br>
+<code>切点和连接点不是一对一的关系，一个切点匹配多个连接点。</code><br>
+切点通过 org.springframework.aop.Pointcut 接口进行描述，它使用类和方法作为连接点的查询条件。</p>
+</blockquote>
+<hr>
+<h2 id="在-spring-中启用-aspectj-注解支持">在 Spring 中启用 AspectJ 注解支持</h2>
+<ul>
+<li>** 要在 Spring 应用中使用 AspectJ 注解, 必须在 classpath 下包含 AspectJ 类库：**
+<ul>
+<li>aopalliance.jar</li>
+<li>aspectj.weaver.jar</li>
+<li>spring-aspects-4.0.0.RELEASE.jar</li>
+<li>spring-aop-4.0.0.RELEASE.jar</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>** 将 aop Schema 添加到 <beans> 根元素中。 **<br>
+要在 Spring IOC 容器中启用 AspectJ 注解支持, 只要在 Spring 配置文件中定义一个空的 XML 元素 &lt;aop：aspectj-autoproxy/&gt;</beans></p>
+</blockquote>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置自动为匹配 aspectJ 注解的 Java 类生成代理对象 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span>&gt;</span><span class="tag">&lt;/<span class="name">aop:aspectj-autoproxy</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>** 当Spring IOC容器侦测到Spring配置文件中的&lt; aop：aspectj-autoproxy /&gt;元素时, 会自动为 AspectJ 切面匹配的 Bean 创建代理 **</p>
+<hr>
+<h2 id="用-aspectj-注解声明切面">用 AspectJ 注解声明切面</h2>
+<p>** 要在 Spring 中声明 AspectJ 切面, 只需要在 IOC 容器中将切面声明为 Bean 实例。**</p>
+<ul>
+<li>@Aspect //声明此类是一个切面对象</li>
+<li>@Component //声明此类是 Spring 容器 管理的组件</li>
+</ul>
+<p>当在 Spring IOC 容器中初始化 AspectJ 切面之后, Spring IOC 容器就会为那些与 AspectJ 切面相匹配的 Bean 创建代理。<br>
+在 AspectJ 注解中, 切面只是一个带有 @Aspect 注解的 Java 类.</p>
+<p>** 通知是标注有某种注解的简单的 Java 方法 **</p>
+<ul>
+<li>AspectJ 支持 5 种类型的通知注解：
+<ul>
+<li>** @Before：** 前置通知, 在方法执行之前执行</li>
+<li>** @After： ** 后置通知, 在方法执行之后执行</li>
+<li>** @AfterRunning：** 返回通知, 在方法返回结果之后执行</li>
+<li>** @AfterThrowing：** 异常通知, 在方法抛出异常之后</li>
+<li>** @Around：** 环绕通知, 围绕着方法执行</li>
+</ul>
+</li>
+</ul>
+<h4 id="指定切面的优先级">指定切面的优先级</h4>
+<p>** 在同一个连接点上应用不止一个切面时, 除非明确指定, 否则它们的优先级是不确定的。**</p>
+<ul>
+<li>切面的优先级可以通过实现 Ordered 接口或利用 @Order 注解指定。
+<ul>
+<li>实现 Ordered 接口, getOrder() 方法的返回值越小, 优先级越高。</li>
+<li>** 若使用 @Order 注解, 序号出现在注解中。**</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.aspectj.lang.JoinPoint;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.ProceedingJoinPoint;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.After;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.AfterReturning;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.AfterThrowing;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Around;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Before;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Pointcut;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.annotation.Order;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 可以使用 <span class="doctag">@Order</span> 注解指定切面的优先级, 值越小优先级越高</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Order</span>(<span class="number">1</span>)</span><br><span class="line"><span class="meta">@Aspect</span> <span class="comment">//声明此类是一个切面对象</span></span><br><span class="line"><span class="meta">@Component</span> <span class="comment">//声明此类是 Spring 容器 管理的组件</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoggingAspect</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 定义一个方法, 用于声明切入点表达式， 一般地, 该方法中再不需要添入其他的代码</span></span><br><span class="line"><span class="comment">	 * 使用 <span class="doctag">@Pointcut</span> 来声明切入点表达式</span></span><br><span class="line"><span class="comment">	 * 后面的其他通知直接使用方法名来引用当前的切入点表达式</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Pointcut</span>(<span class="string">"execution(public int spring.aop.Calculator.*(..))"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">declareJointPointExpression</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 在 spring.aop.Calculator 接口的每一个实现类的每一个方法开始之前执行一段代码</span></span><br><span class="line"><span class="comment">	 * JoinPoint joinPoint 连接点</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Before</span>(value=<span class="string">"declareJointPointExpression()"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforeMethod</span><span class="params">(JoinPoint joinPoint)</span></span>&#123;</span><br><span class="line">		String methodName = joinPoint.getSignature().getName();</span><br><span class="line">		Object [] args = joinPoint.getArgs();</span><br><span class="line">		System.out.println(<span class="string">"The method "</span> + methodName + <span class="string">" begins with "</span> + Arrays.asList(args));</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 在方法执行之后执行的代码, 无论该方法是否出现异常 都执行。访问不到返回值</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@After</span>(value=<span class="string">"declareJointPointExpression()"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterMethod</span><span class="params">(JoinPoint joinPoint)</span></span>&#123;</span><br><span class="line">		String methodName = joinPoint.getSignature().getName();</span><br><span class="line">		System.out.println(<span class="string">"The method "</span> + methodName + <span class="string">" ends"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 在方法法正常结束受执行的代码，出现异常不执行</span></span><br><span class="line"><span class="comment">	 * 返回通知是可以访问到方法的返回值的!</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@AfterReturning</span>(value=<span class="string">"declareJointPointExpression()"</span>,returning=<span class="string">"result"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterReturning</span><span class="params">(JoinPoint joinPoint, Object result)</span></span>&#123;</span><br><span class="line">		String methodName = joinPoint.getSignature().getName();</span><br><span class="line">		System.out.println(<span class="string">"The method "</span> + methodName + <span class="string">" ends with "</span> + result);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 在目标方法出现异常时会执行的代码</span></span><br><span class="line"><span class="comment">	 * 可以访问到异常对象; 且可以指定在出现特定异常时在执行通知代码</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@AfterThrowing</span>(value=<span class="string">"declareJointPointExpression()"</span>,throwing=<span class="string">"e"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterThrowing</span><span class="params">(JoinPoint joinPoint, Exception e)</span></span>&#123;</span><br><span class="line">		String methodName = joinPoint.getSignature().getName();</span><br><span class="line">		System.out.println(<span class="string">"The method "</span> + methodName + <span class="string">" occurs excetion:"</span> + e);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 环绕通知需要携带 ProceedingJoinPoint 类型的参数. </span></span><br><span class="line"><span class="comment"> * 环绕通知类似于动态代理的全过程: ProceedingJoinPoint 类型的参数可以决定是否执行目标方法.</span></span><br><span class="line"><span class="comment"> * 且环绕通知必须有返回值, 返回值即为目标方法的返回值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">	</span><br><span class="line"><span class="meta">@Around</span>(<span class="string">"execution(public int spring.aop.Calculator.*(..))"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">aroundMethod</span><span class="params">(ProceedingJoinPoint pjd)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">	Object result = <span class="keyword">null</span>;</span><br><span class="line">	String methodName = pjd.getSignature().getName();</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="comment">//前置通知</span></span><br><span class="line">		System.out.println(<span class="string">"The method "</span> + methodName + <span class="string">" begins with "</span> + Arrays.asList(pjd.getArgs()));</span><br><span class="line">		<span class="comment">//执行目标方法</span></span><br><span class="line">		result = pjd.proceed();</span><br><span class="line">		<span class="comment">//返回通知</span></span><br><span class="line">		System.out.println(<span class="string">"The method "</span> + methodName + <span class="string">" ends with "</span> + result);</span><br><span class="line">	&#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">		<span class="comment">//异常通知</span></span><br><span class="line">		System.out.println(<span class="string">"The method "</span> + methodName + <span class="string">" occurs exception:"</span> + e);</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">	&#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">		<span class="comment">//后置通知</span></span><br><span class="line">		System.out.println(<span class="string">"The method "</span> + methodName + <span class="string">" ends"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h6 id="一个切面可以包括一个或者多个通知">一个切面可以包括一个或者多个通知。</h6>
+<h5 id="前置通知在方法执行之前执行的通知">前置通知：在方法执行之前执行的通知</h5>
+<ul>
+<li>前置通知使用 @Before 注解, 并将切入点表达式的值作为注解值。</li>
+<li>让通知访问当前连接点的细节</li>
+<li>可以在通知方法中声明一个类型为 JoinPoint 的参数。然后就能访问链接细节, 如方法名称和参数值。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Before</span>(<span class="string">"execution(public int spring.aop.*(int, int))"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforeMethod</span><span class="params">(JoinPoint joinPoint)</span> </span>&#123;</span><br><span class="line">		String methodName = joinPoint.getSignature().getName();</span><br><span class="line">		Object[] args = joinPoint.getArgs();</span><br><span class="line"></span><br><span class="line">		System.out.println(<span class="string">"The method "</span> + methodName + <span class="string">" begins with "</span> + Arrays.asList(args));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="后置通知在目标方法执行后-无论是否发生异常都执行的通知">后置通知：在目标方法执行后 (无论是否发生异常),都执行的通知</h5>
+<ul>
+<li>后置通知是在连接点完成之后执行的, 即连接点返回结果或者抛出异常的时候, 下面的后置通知记录了方法的终止。</li>
+<li>在后置通知中还不能访问目标方法执行的结果。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@After</span>(<span class="string">"execution(public int spring.aop.*(int, int))"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterMethod</span><span class="params">(JoinPoint joinPoint)</span> </span>&#123;</span><br><span class="line">		String methodName = joinPoint.getSignature().getName();</span><br><span class="line">		System.out.println(<span class="string">"The method "</span> + methodName + <span class="string">" ends"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="返回通知在方法正常结束后执行的代码">返回通知：在方法正常结束后执行的代码</h5>
+<ul>
+<li>返回通知是可以访问到方法的返回值的。</li>
+<li>无论连接点是正常返回还是抛出异常, 后置通知都会执行。</li>
+<li>但如果只想在连接点返回的时候记录日志, 应使用返回通知代替后置通知。</li>
+</ul>
+<p>** 在返回通知中访问连接点的返回值 **</p>
+<ul>
+<li>在返回通知中, 只要将 ** returning ** 属性添加到 ** @AfterReturning ** 注解中, 就可以访问连接点的返回值。
+<ul>
+<li>该属性的值即为用来传入返回值的参数名称。</li>
+<li>必须在通知方法的签名中添加一个** 同名 **参数。returning=“result” 签名属性也为 result 。在运行时, Spring AOP 会通过这个参数传递返回值。</li>
+<li>原始的切点表达式需要出现在 pointcut 属性中。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AfterReturning</span>(value=<span class="string">"execution(public int spring.aop.*(..))"</span>,returning=<span class="string">"result"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterReturning</span><span class="params">(JoinPoint joinPoint, Object result)</span></span>&#123;</span><br><span class="line">		String methodName = joinPoint.getSignature().getName();</span><br><span class="line">		System.out.println(<span class="string">"The method "</span> + methodName + <span class="string">" ends with "</span> + result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="异常通知在目标方法出现异常时会执行的代码">异常通知：在目标方法出现异常时会执行的代码</h5>
+<ul>
+<li>可以访问到异常对象， 且可以指定在出现特定异常时在执行通知代码。</li>
+<li>只在连接点抛出异常时才执行异常通知</li>
+</ul>
+<p>** 将 throwing 属性添加到 @AfterThrowing 注解中, 可以访问连接点抛出的异常。**</p>
+<ul>
+<li>Throwable 是所有错误和异常类的超类。所以在异常通知方法可以捕获到任何错误和异常。</li>
+<li>如果只对某种特殊的异常类型感兴趣, ** 可以将参数声明为其他异常的参数类型. 然后通知就只在抛出这个类型及其子类的异常时才被执行。**</li>
+<li>比如讲下面签名参数的 Exception 换成 NullPointerException 只有发生了 NullPointerException 才会执行。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AfterThrowing</span>(value=<span class="string">"execution(public int spring.aop.*(..))"</span>,throwing=<span class="string">"e"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterThrowing</span><span class="params">(JoinPoint joinPoint, Exception e)</span></span>&#123;</span><br><span class="line">		String methodName = joinPoint.getSignature().getName();</span><br><span class="line">		System.out.println(<span class="string">"The method "</span> + methodName + <span class="string">" occurs excetion："</span> + e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="环绕通知">环绕通知</h5>
+<ul>
+<li>环绕通知是所有通知类型中功能最为强大的, 能够全面地控制连接点。 甚至可以控制是否执行连接点。</li>
+<li>对于环绕通知来说, ** 连接点的参数类型必须是 ProceedingJoinPoint。** 它是 JoinPoint 的子接口, 允许控制何时执行, 是否执行连接点。</li>
+<li>** 在环绕通知中需要明确调用 ProceedingJoinPoint 的 proceed() 方法来执行被代理的方法。**</li>
+<li>如果忘记这样做就会导致通知被执行了, 但目标方法没有被执行。</li>
+</ul>
+<p>** 注意： 环绕通知的方法需要返回目标方法执行之后的结果, 即调用 proceedingJoinPoint.proceed() 的返回值, 否则会出现空指针异常。**</p>
+<ul>
+<li>环绕通知需要携带 ProceedingJoinPoint 类型的参数。</li>
+<li>** 环绕通知类似于动态代理的全过程： ProceedingJoinPoint 类型的参数可以决定是否执行目标方法。**</li>
+<li>** 且环绕通知必须有返回值, 返回值即为目标方法的返回值。**</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Around</span>(value=<span class="string">"execution(public int spring.aop.*(..))"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">aroundMethod</span><span class="params">(ProceedingJoinPoint proceedingJoinPoint)</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	Object result = <span class="keyword">null</span>;</span><br><span class="line">	String methodName = pjd.getSignature().getName();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="comment">//前置通知</span></span><br><span class="line">		System.out.println(<span class="string">"The method "</span> + methodName + <span class="string">" begins with "</span> + Arrays.asList(pjd.getArgs()));</span><br><span class="line">		<span class="comment">//执行目标方法</span></span><br><span class="line">		result = proceedingJoinPoint.proceed();</span><br><span class="line">		<span class="comment">//返回通知</span></span><br><span class="line">		System.out.println(<span class="string">"The method "</span> + methodName + <span class="string">" ends with "</span> + result);</span><br><span class="line">	&#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">		<span class="comment">//异常通知</span></span><br><span class="line">		System.out.println(<span class="string">"The method "</span> + methodName + <span class="string">" occurs exception："</span> + e);</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">	&#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">		<span class="comment">//后置通知</span></span><br><span class="line">		System.out.println(<span class="string">"The method "</span> + methodName + <span class="string">" ends"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="重用切入点定义">重用切入点定义</h4>
+<ul>
+<li>在编写 AspectJ 切面时, 可以直接在通知注解中书写切入点表达式。 但同一个切点表达式可能会在多个通知中重复出现。</li>
+<li>** 在 AspectJ 切面中, 可以通过 @Pointcut 注解将一个切入点声明成简单的方法。**</li>
+<li>切入点的方法体通常是空的, 因为将切入点定义与应用程序逻辑混在一起是不合理的。</li>
+<li>切入点方法的访问控制符同时也控制着这个切入点的可见性。</li>
+<li>如果切入点要在多个切面中共用, 最好将它们集中在一个公共的类中. 在这种情况下, 它们必须被声明为 public。</li>
+<li>** 在引入这个切入点时, 必须将类名也包括在内。** 如果类没有与这个切面放在同一个包中, 还必须包含包名。</li>
+<li>** 其他通知可以通过方法名称引入该切入点。**</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 定义一个方法, 用于声明切入点表达式. 一般地, 该方法中再不需要添入其他的代码. </span></span><br><span class="line"><span class="comment">* 使用 <span class="doctag">@Pointcut</span> 来声明切入点表达式. </span></span><br><span class="line"><span class="comment">* 后面的其他通知直接使用方法名来引用当前的切入点表达式. </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">@Pointcut</span>(<span class="string">"execution(public int spring.aop.Calculator.*(..))"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">declareJointPointExpression</span><span class="params">()</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>** 引入通知（很少使用）**</p>
+<ul>
+<li>引入通知是一种特殊的通知类型.</li>
+<li>它通过为接口提供实现类, 允许对象动态地实现接口, 就像对象已经在运行时扩展了实现类一样.</li>
+</ul>
+<hr>
+<h2 id="用基于-xml-的配置声明切面">用基于 XML 的配置声明切面</h2>
+<ul>
+<li>除了使用 AspectJ 注解声明切面, Spring 也支持在 Bean 配置文件中声明切面。</li>
+<li>这种声明是通过 aop schema 中的 XML 元素完成的。</li>
+</ul>
+<hr>
+<p>** 正常情况下, 基于注解的声明要优先于基于 XML 的声明。**</p>
+<ul>
+<li>通过 AspectJ 注解, 切面可以与 AspectJ 兼容, ** 基于 XML 的配置则是 Spring 专有的。**</li>
+<li>由于 AspectJ 得到越来越多的 AOP 框架支持, 所以以注解风格编写的切面将会有更多重用的机会。</li>
+</ul>
+<hr>
+<p>** 基于 XML：声明切面 **</p>
+<ul>
+<li>当使用 XML 声明切面时, 需要在 <beans>  根元素中导入 aop：Schema</beans></li>
+<li>在 Bean 配置文件中, 所有的 Spring AOP 配置都必须定义在 &lt;aop：config&gt; 元素内部。</li>
+<li>对于每个切面而言, 都要创建一个 &lt;aop：aspect&gt; 元素来为具体的切面实现引用后端 Bean 实例。</li>
+<li>切面 Bean 必须有一个 id 标示符, 供 &lt;aop：aspect&gt; 元素引用</li>
+</ul>
+<hr>
+<p>** 基于 XML：声明切入点 **</p>
+<ul>
+<li>切入点使用 &lt;aop：pointcut&gt; 元素声明</li>
+<li>切入点必须定义在
+<ul>
+<li>1、&lt;aop：aspect&gt; 元素下 ——&gt; 定义在 &lt;aop：aspect&gt; 元素下： 只对当前切面有效。</li>
+<li>2、&lt;aop：config&gt; 元素下 ——&gt; 定义在 &lt;aop：config&gt; 元素下： 对所有切面都有效。</li>
+</ul>
+</li>
+<li>** 基于 XML 的 AOP 配置不允许在切入点表达式中用名称引用其他切入点。**</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置 bean --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"Calculator"</span> <span class="attr">class</span>=<span class="string">"spring.aop.xml.CalculatorImpl"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 配置切面的 bean. --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"loggingAspect"</span> <span class="attr">class</span>=<span class="string">"spring.aop.xml.LoggingAspect"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"vlidationAspect"</span> <span class="attr">class</span>=<span class="string">"spring.aop.xml.VlidationAspect"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 配置 AOP --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop：config</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 配置切点表达式 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">aop：pointcut</span> <span class="attr">expression</span>=<span class="string">"execution(* spring.aop.xml.Calculator.*(int, int))"</span> <span class="attr">id</span>=<span class="string">"pointcut"</span>/&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 配置切面及通知 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">aop：aspect</span> <span class="attr">ref</span>=<span class="string">"loggingAspect"</span> <span class="attr">order</span>=<span class="string">"2"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">aop：before</span> <span class="attr">method</span>=<span class="string">"beforeMethod"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pointcut"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">aop：after</span> <span class="attr">method</span>=<span class="string">"afterMethod"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pointcut"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">aop：after-throwing</span> <span class="attr">method</span>=<span class="string">"afterThrowing"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pointcut"</span> <span class="attr">throwing</span>=<span class="string">"e"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">aop：after-returning</span> <span class="attr">method</span>=<span class="string">"afterReturning"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pointcut"</span> <span class="attr">returning</span>=<span class="string">"result"</span>/&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--  </span></span><br><span class="line"><span class="comment">		&lt;aop：around method="aroundMethod" pointcut-ref="pointcut"/&gt;</span></span><br><span class="line"><span class="comment">		--&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">aop：aspect</span>&gt;</span>	</span><br><span class="line">	<span class="tag">&lt;<span class="name">aop：aspect</span> <span class="attr">ref</span>=<span class="string">"vlidationAspect"</span> <span class="attr">order</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">aop：before</span> <span class="attr">method</span>=<span class="string">"validateArgs"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pointcut"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">aop：aspect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop：config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551442650328&di=78dfb03450cc5fff5d31ea92de81ba1f&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160719%2F6ea36d17d5e94124ad1791eadd923554_th.jpg" width="150">
+<h1 id="spring-中的事务管理">Spring 中的事务管理</h1>
+<p>** Spring 既支持编程式事务管理, 也支持声明式的事务管理 **</p>
+<p>1、编程式事务管理：将事务管理代码嵌入到业务方法中来控制事务的提交和回滚。必须在每个事务操作中包含额外的事务管理代码。<br>
+2、<strong>声明式事务管理</strong>：大多数情况下比编程式事务管理更好用。它将事务管理代码从业务方法中分离出来, 以声明的方式来实现事务管理。</p>
+<blockquote>
+<p>** 事务管理作为一种横切关注点, 可以通过 AOP 方法模块化。 Spring 通过 Spring AOP 框架支持声明式事务管理。**</p>
+</blockquote>
+<ul>
+<li>Spring 从不同的事务管理 API 中抽象了一整套的事务机制。 开发人员不必了解底层的事务 API, 就可以利用这些事务机制。</li>
+<li>有了这些事务机制, 事务管理代码就能独立于特定的事务技术了。</li>
+</ul>
+<h2 id="用-transactional-注解-声明式地管理事务">用 @Transactional 注解 声明式地管理事务</h2>
+<p>1、** 配置以下信息 **</p>
+<ul>
+<li>** 添加&lt;tx：&gt; 命名空间 **</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 1、 配置事务管理器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 2、注解驱动 启用事务注解 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tx：annotation-driven</span> <span class="attr">transaction-manager</span>=<span class="string">"transactionManager"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>2、** 在相应的方法上用 @Transactional 注解标注 **</p>
+<hr>
+<h2 id="用-xml-事务通知-声明式地管理事务">用 XML 事务通知 声明式地管理事务</h2>
+<p>** 事务管理是一种横切关注点 **</p>
+<blockquote>
+<p>1、添加&lt;tx：&gt; 命名空间	<br>
+2、配置事务管理器 transactionManager <code>hibernateTransactionManager mybatisTransactionManager</code><br>
+3、配置元素声明事务通知 &lt;tx：advice&gt;&lt;/tx：advice&gt;<br>
+4、配置事务切入点 &lt;aop：config&gt;<br>
+5、在 &lt;aop：config&gt; 中配置 &lt;aop：pointcut&gt; 表达式<br>
+6、在 &lt;aop：config&gt; 中声明一个增强器通知与切入点关联起来<br>
+&lt;aop：advisor advice-ref=“txAdvice” pointcut-ref=“txPointCut”/&gt;</p>
+</blockquote>
+<p>** 由于 Spring AOP 是基于代理的方法, 所以只能增强公共方法。因此, 只有公有方法才能通过 Spring AOP 进行事务管理。**</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 1. 配置事务管理器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 2. 配置事务属性 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tx:advice</span> <span class="attr">id</span>=<span class="string">"txAdvice"</span> <span class="attr">transaction-manager</span>=<span class="string">"transactionManager"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 根据方法名指定事务的属性 传播行为 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"purchase"</span> <span class="attr">propagation</span>=<span class="string">"REQUIRES_NEW"</span> <span class="attr">isolation</span>=<span class="string">"READ-COMMITTED"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"get*"</span> <span class="attr">read-only</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"find*"</span> <span class="attr">read-only</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tx:advice</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 3. 配置事务切入点, 以及把事务切入点和事务属性关联起来 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">expression</span>=<span class="string">"execution(* spring.tx.xml.service.*.*(..))"</span> <span class="attr">id</span>=<span class="string">"txPointCut"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">advice-ref</span>=<span class="string">"txAdvice"</span> <span class="attr">pointcut-ref</span>=<span class="string">"txPointCut"</span>/&gt;</span>	</span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="事务传播行为-propagation-behavior">事务传播行为 (propagation behavior)</h2>
+<p>** 当事务方法被另一个事务方法调用时, 必须指定事务应该如何传播 **<br>
+例如： 方法可能继续在现有事务中运行, 也可能开启一个新事务, 并在自己的事务中运行。</p>
+<p>** 事务传播属性可以在 @Transactional 注解的 propagation 属性中定义 (PROPAGATION_REQUIRED) 默认传播行为 **</p>
+<hr>
+<p>** 事务的传播行为可以由传播属性指定。 Spring 定义了 7  种类传播行为 **</p>
+<table>
+<thead>
+<tr>
+<th>事务传播行为类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PROPAGATION_REQUIRED</strong> (默认)</td>
+<td>如果当前没有事务，就新建一个事务，如果已经存在一个事务中，加入到这个事务中。</td>
+</tr>
+<tr>
+<td>PROPAGATION_SUPPORTS</td>
+<td>支持当前事务，如果当前没有事务，就以非事务方式执行。</td>
+</tr>
+<tr>
+<td>PROPAGATION_MANDATORY</td>
+<td>使用当前的事务，如果当前没有事务，就抛出异常。</td>
+</tr>
+<tr>
+<td><strong>PROPAGATION_REQUIRES_NEW</strong></td>
+<td>新建事务，如果当前存在事务，把当前事务挂起。</td>
+</tr>
+<tr>
+<td>PROPAGATION_NOT_SUPPORTED</td>
+<td>以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。</td>
+</tr>
+<tr>
+<td>PROPAGATION_NEVER</td>
+<td>以非事务方式执行，如果当前存在事务，则抛出异常。</td>
+</tr>
+<tr>
+<td>PROPAGATION_NESTED</td>
+<td>如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与PROPAGATION_REQUIRED类似的操作。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>** REQUIRED 传播行为 **</p>
+</blockquote>
+<ul>
+<li>如果当前没有事务，就新建一个事务，如果已经存在一个事务中，加入到这个事务中。</li>
+</ul>
+<img src="http://ww1.sinaimg.cn/large/006vWPzFly1g1geuy4y6tj30qy0890t6.jpg" width="700">
+<hr>
+<blockquote>
+<p>** REQUIRES_NEW 传播行为 **</p>
+</blockquote>
+<ul>
+<li>它表示该方法必须启动一个新事务, 并在自己的事务内运行。 如果有事务在运行, 就应该先挂起它。</li>
+</ul>
+<img src="http://ww1.sinaimg.cn/large/006vWPzFly1g1gesufobfj30q90a0dgw.jpg" width="700">
+<h3 id="并发事务所导致的问题">并发事务所导致的问题</h3>
+<ul>
+<li>当同一个应用程序或者不同应用程序中的多个事务在同一个数据集上并发执行时, 如果没有采取必要的隔离机制,可能会出现许多意外的问题</li>
+</ul>
+<p>** 并发事务所导致的问题可以分为下面三种类型：**</p>
+<ul>
+<li>** 脏读：** 对于两个事务 T1, T2, T1 读取了已经被 T2 更新但还没有被提交的字段. 之后, 若 T2 回滚, T1读取的内容就是临时且无效的。</li>
+<li>** 不可重复读：** 对于两个事务 T1, T2, T1 读取了一个字段, 然后 T2 更新了该字段. 之后, T1再次读取同一个字段, 值就不同了。</li>
+<li>** 幻读： ** 对于两个事务 T1, T2, T1 从一个表中读取了一个字段, 然后 T2 在该表中插入了一些新的行. 之后, 如果 T1 再次读取同一个表, 就会多出几行。</li>
+</ul>
+<hr>
+<h2 id="事务的隔离级别-isolation-level">事务的隔离级别 (Isolation level)</h2>
+<p>** Spring 支持的事务隔离级别 **<br>
+** 事务的隔离级别要得到底层数据库引擎的支持, 而不是应用程序或者框架的支持。**</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">事务隔离级别</th>
+<th style="text-align:left">脏读</th>
+<th style="text-align:center">不可重复读</th>
+<th style="text-align:left">幻读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">READ-UNCOMMITTED (读未提交)</td>
+<td style="text-align:left">是</td>
+<td style="text-align:center">是</td>
+<td style="text-align:left">是</td>
+</tr>
+<tr>
+<td style="text-align:left">** READ-COMMITTED (读已提交数据)**</td>
+<td style="text-align:left">否</td>
+<td style="text-align:center">是</td>
+<td style="text-align:left">是</td>
+</tr>
+<tr>
+<td style="text-align:left">REPEATABLE-READ (可重复读)</td>
+<td style="text-align:left">否</td>
+<td style="text-align:center">否</td>
+<td style="text-align:left">是</td>
+</tr>
+<tr>
+<td style="text-align:left">SERIALIZABLE (串行化否)</td>
+<td style="text-align:left">否</td>
+<td style="text-align:center">否</td>
+<td style="text-align:left">否</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<blockquote>
+<p>** 设置隔离事务属性 **</p>
+</blockquote>
+<ul>
+<li>用 @Transactional 注解声明式地管理事务时可以在 @Transactional 的 <code>isolation</code> 属性中设置隔离级别。</li>
+<li>用 事务通知 声明式地管理事务时可以在 &lt;tx：advice&gt;&lt;tx：attributes&gt;&lt;tx：method isolation=&quot; &quot;&gt; 元素中指定隔离级别。</li>
+</ul>
+<hr>
+<h2 id="设置回滚事务属性-rollback">设置回滚事务属性 (rollback)</h2>
+<p>** 默认情况下只有未检查异常(RuntimeException和Error类型的异常)会导致事务回滚。而受检查异常不会。**</p>
+<blockquote>
+<p>注解声明式地管理事务 事务的回滚规则可以通过 @Transactional 注解的 <code>rollbackFor 和 noRollbackFor</code> 属性来定义。</p>
+</blockquote>
+<ul>
+<li>这两个属性被声明为 Class[] 类型的, 因此可以为这两个属性指定多个异常类。</li>
+</ul>
+<blockquote>
+<p>事务通知 声明式地管理事务时可以在 &lt;tx：advice&gt;&lt;tx：attributes&gt;&lt;tx：method rollbackFor=&quot; &quot;&gt; 元素中指定回滚规则。</p>
+</blockquote>
+<ul>
+<li>如果有不止一种异常, 用逗号分隔。</li>
+</ul>
+<h2 id="超时和只读属性-timeout-read-only">超时和只读属性 (timeout read-only)</h2>
+<p>** 由于事务可以在行和表上获得锁,因此长事务会占用资源, 并对整体性能产生影响。**</p>
+<blockquote>
+<p>如果一个事物只读取数据但不做修改, 数据库引擎可以对这个事务进行优化。</p>
+</blockquote>
+<ul>
+<li>** 超时事务属性：** 事务在强制回滚之前可以保持多久. 这样可以防止长期运行的事务占用资源。</li>
+<li>** 只读事务属性：** 表示这个事务只读取数据但不更新数据, 这样可以帮助数据库引擎优化事务。</li>
+</ul>
+<blockquote>
+<p>用 @Transactional 注解声明式地管理事务时可以在 @Transactional 的 <code>read-only timeout</code>(秒级别) 属性中设置。<br>
+用 事务通知 声明式地管理事务时可以在&lt;tx：advice&gt;&lt;tx：attributes&gt;&lt;tx：method read-only=&quot;&quot; timeout=&quot;&quot;&gt;元素中指定。</p>
+</blockquote>
+<h6 id="web项目-webxml-配置启动-spring-ioc-容器的-listener">web项目 web.xml 配置启动 Spring IOC 容器的 Listener</h6>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置启动 Spring IOC 容器的 Listener --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- needed for ContextLoaderListener --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:applicationcontext.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Bootstraps the root web application context before servlet initialization --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>org.springframework.web.context.ContextLoaderListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>springDispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:springmvc.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>springDispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="jdbctemplate-简介">JdbcTemplate 简介</h1>
+<p>** 为了使 JDBC 更加易于使用, Spring 在 JDBC API 上定义了一个抽象层, 以此建立一个 JDBC 存取框架。 **</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置 Spirng 的 JdbcTemplate --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"jdbcTemplate"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.core.JdbcTemplate"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 SQL 中列的别名完成列名和类的属性名的映射。 例如 last_name lastName</li>
+<li>不支持级联属性 JdbcTemplate 是一个 JDBC 的小工具, 而不是 ORM 框架。</li>
+</ul>
+<h1 id="感谢阅读">感谢阅读</h1>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/article/Hibernate/" data-toggle="tooltip" data-placement="top" title="Hibernate">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/article/JDBC/" data-toggle="tooltip" data-placement="top" title="JDBC（Java DataBase Connectivity)">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+
+                <!--打赏-->
+                
+                <!--打赏-->
+
+                <br>
+                <!--分享-->
+                
+                    <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                    <!--  css & js -->
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!--分享-->
+                <br>                       
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Spring全家桶" title="Spring全家桶">Spring全家桶</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://github.com/GitHub-yuteng" target="_blank">GitHub</a></li>
+                    
+                        <li><a href="https://weibo.com/u/5968884687" target="_blank">微博</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/huweihuang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 于腾 2019 
+                    <br>
+                    Theme by <a href="http://beantech.org">BeanTech</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://www.huweihuang.com">胡伟煌</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huweihuang&repo=hexo-theme-huweihuang&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.huweihuang.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'xxx';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://www.huweihuang.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
