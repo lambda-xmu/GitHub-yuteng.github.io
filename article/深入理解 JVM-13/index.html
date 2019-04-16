@@ -142,14 +142,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">关于我</a>
                         </li>
                         
                     
@@ -392,6 +392,24 @@
             
             <!-- Tabe of Content -->
             <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#线程安全"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"><font color="black">&#x7EBF;&#x7A0B;&#x5B89;&#x5168;</font></span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#java语言中的线程安全"><span class="toc-nav-number">2.</span> <span class="toc-nav-text"><font color="black">Java&#x8BED;&#x8A00;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;</font></span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#线程安全的实现"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#x5B9E;&#x73B0;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#可分为两大手段本篇重点在虚拟机本身"><span class="toc-nav-number">3.0.1.</span> <span class="toc-nav-text">&#x53EF;&#x5206;&#x4E3A;&#x4E24;&#x5927;&#x624B;&#x6BB5;&#xFF0C;&#x672C;&#x7BC7;&#x91CD;&#x70B9;&#x5728;&#x865A;&#x62DF;&#x673A;&#x672C;&#x8EAB;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-互斥同步mutual-exclusionsynchronization"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">1&#x3001;&#x4E92;&#x65A5;&#x540C;&#x6B65;(Mutual Exclusion&#xFF06;Synchronization&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#使用synchronized关键字实现线程安全"><span class="toc-nav-number">3.1.0.1.</span> <span class="toc-nav-text">&#x4F7F;&#x7528;synchronized&#x5173;&#x952E;&#x5B57;&#x5B9E;&#x73B0;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#xFF1A;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#使用重入锁reentrantlock实现线程安全"><span class="toc-nav-number">3.1.0.2.</span> <span class="toc-nav-text">&#x4F7F;&#x7528;&#x91CD;&#x5165;&#x9501;ReentrantLock&#x5B9E;&#x73B0;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#xFF1A;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-非阻塞同步non-blocking-synchronization"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">2&#x3001;&#x975E;&#x963B;&#x585E;&#x540C;&#x6B65;&#xFF08;Non-Blocking Synchronization&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-无同步方案"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">3&#x3001;&#x65E0;&#x540C;&#x6B65;&#x65B9;&#x6848;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#锁优化"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x9501;&#x4F18;&#x5316;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#参考"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x53C2;&#x8003;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+        
+        </div>
+      </aside>
+    
 
                 
             <!-- Sidebar Container -->

@@ -142,14 +142,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">关于我</a>
                         </li>
                         
                     
@@ -237,7 +237,7 @@
 </ul>
 </blockquote>
 <hr>
-<h2 id="可达性分析算法">可达性分析算法</h2>
+<h3 id="可达性分析算法">可达性分析算法</h3>
 <p><strong>在Java中，是通过可达性分析（Reachability Analysis）来判定对象是否存活的。</strong></p>
 <p><strong>概念：</strong><br>
 <strong>该算法的基本思路就是通过一系列被称为引用链（GC Roots）的对象作为起点，从这些节点开始向下搜索，搜索走过的路径被称为引用链（Reference Chain)</strong><br>
@@ -555,6 +555,24 @@ G1跟踪各个Region里面的垃圾堆积的价值大小（回收所获得的空
             
             <!-- Tabe of Content -->
             <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#垃圾收集器与内存分配策略"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x5783;&#x573E;&#x6536;&#x96C6;&#x5668;&#x4E0E;&#x5185;&#x5B58;&#x5206;&#x914D;&#x7B56;&#x7565;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#引入计数法"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x5F15;&#x5165;&#x8BA1;&#x6570;&#x6CD5;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#引用计数算法的缺陷"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x7B97;&#x6CD5;&#x7684;&#x7F3A;&#x9677;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#可达性分析算法"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">&#x53EF;&#x8FBE;&#x6027;&#x5206;&#x6790;&#x7B97;&#x6CD5;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#引用"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x5F15;&#x7528;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#生存还是死亡"><span class="toc-nav-number">0.0.1.</span> <span class="toc-nav-text">&#x751F;&#x5B58;&#x8FD8;&#x662F;&#x6B7B;&#x4EA1;</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#垃圾收集算法"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x5783;&#x573E;&#x6536;&#x96C6;&#x7B97;&#x6CD5;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#标记-清除算法mark-sweep"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x6807;&#x8BB0; &#x2014; &#x6E05;&#x9664;&#x7B97;&#x6CD5;&#xFF08;Mark-Sweep&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#复制算法copying"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x590D;&#x5236;&#x7B97;&#x6CD5;&#xFF08;Copying&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#标记-整理算法mark-compact"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x6807;&#x8BB0; &#x2014; &#x6574;&#x7406;&#x7B97;&#x6CD5;(Mark-Compact)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#分代收集算法generational-collection"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x5206;&#x4EE3;&#x6536;&#x96C6;&#x7B97;&#x6CD5;&#xFF08;Generational Collection&#xFF09;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#垃圾收集器"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x5783;&#x573E;&#x6536;&#x96C6;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#minor-gc-和-majorfull-gc"><span class="toc-nav-number">0.1.</span> <span class="toc-nav-text">Minor GC &#x548C; Major/Full GC</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#新生代收集器"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x65B0;&#x751F;&#x4EE3;&#x6536;&#x96C6;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#serial-收集器-client-模式"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Serial &#x6536;&#x96C6;&#x5668; (Client &#x6A21;&#x5F0F;)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#parnew-收集器-server-模式"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">ParNew &#x6536;&#x96C6;&#x5668; (Server &#x6A21;&#x5F0F;)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#parallel-scavenge-收集器"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Parallel Scavenge &#x6536;&#x96C6;&#x5668;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#老年代收集器"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x8001;&#x5E74;&#x4EE3;&#x6536;&#x96C6;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#serial-old-收集器"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Serial Old &#x6536;&#x96C6;&#x5668;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#parallel-old-收集器"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Parallel Old &#x6536;&#x96C6;&#x5668;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#cms收集器"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">CMS&#x6536;&#x96C6;&#x5668;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#g1收集器"><span class="toc-nav-number"></span> <span class="toc-nav-text">G1&#x6536;&#x96C6;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#横跨整个堆内存"><span class="toc-nav-number">0.1.</span> <span class="toc-nav-text">&#x6A2A;&#x8DE8;&#x6574;&#x4E2A;&#x5806;&#x5185;&#x5B58;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#建立可预测的时间模型"><span class="toc-nav-number">0.2.</span> <span class="toc-nav-text">&#x5EFA;&#x7ACB;&#x53EF;&#x9884;&#x6D4B;&#x7684;&#x65F6;&#x95F4;&#x6A21;&#x578B;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#避免全堆扫描remembered-set"><span class="toc-nav-number">0.3.</span> <span class="toc-nav-text">&#x907F;&#x514D;&#x5168;&#x5806;&#x626B;&#x63CF;&#x2014;&#x2014;Remembered Set</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x603B;&#x7ED3;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+        
+        </div>
+      </aside>
+    
 
                 
             <!-- Sidebar Container -->

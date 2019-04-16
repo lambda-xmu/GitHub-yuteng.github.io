@@ -142,14 +142,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">关于我</a>
                         </li>
                         
                     
@@ -1076,6 +1076,24 @@ MyBatis 允许你在已映射语句执行过程中的某一点进行拦截调用
             
             <!-- Tabe of Content -->
             <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#一-从-xml-中构建-sqlsessionfactory"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;&#x4ECE; XML &#x4E2D;&#x6784;&#x5EFA; SqlSessionFactory</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#二-从-sqlsessionfactory-中获取-sqlsession"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;&#x4ECE; SqlSessionFactory &#x4E2D;&#x83B7;&#x53D6; SqlSession</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#探究已映射的-sql-语句"><span class="toc-nav-number">2.0.1.</span> <span class="toc-nav-text">&#x63A2;&#x7A76;&#x5DF2;&#x6620;&#x5C04;&#x7684; SQL &#x8BED;&#x53E5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#接口式编程-xxxmapperclass-映射器"><span class="toc-nav-number">2.0.2.</span> <span class="toc-nav-text">&#x63A5;&#x53E3;&#x5F0F;&#x7F16;&#x7A0B; XxxMapper.class &#x6620;&#x5C04;&#x5668;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#三-mybatis-configxml-配置文件"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x4E09;&#x3001;mybatis-config.xml &#x914D;&#x7F6E;&#x6587;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#四-mybatis-xml-映射文件"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x56DB;&#x3001;MyBatis XML &#x6620;&#x5C04;&#x6587;&#x4EF6;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#select"><span class="toc-nav-number">4.0.0.0.1.</span> <span class="toc-nav-text">select</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#自定义-resultmap实现高级结果集映射"><span class="toc-nav-number">4.0.0.0.2.</span> <span class="toc-nav-text">&#x81EA;&#x5B9A;&#x4E49; ResultMap&#xFF0C;&#x5B9E;&#x73B0;&#x9AD8;&#x7EA7;&#x7ED3;&#x679C;&#x96C6;&#x6620;&#x5C04;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#一对一"><span class="toc-nav-number">4.0.0.0.3.</span> <span class="toc-nav-text">&#x4E00;&#x5BF9;&#x4E00;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#一对多"><span class="toc-nav-number">4.0.0.0.4.</span> <span class="toc-nav-text">&#x4E00;&#x5BF9;&#x591A;</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#五-动态sql"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">&#x4E94;&#x3001;&#x52A8;&#x6001;SQL</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#if"><span class="toc-nav-number">5.0.0.0.1.</span> <span class="toc-nav-text">if</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#两个内置参数"><span class="toc-nav-number">5.0.0.0.2.</span> <span class="toc-nav-text">&#x4E24;&#x4E2A;&#x5185;&#x7F6E;&#x53C2;&#x6570;</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#六-mybatis-缓存"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">&#x516D;&#x3001;Mybatis &#x7F13;&#x5B58;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#一级缓存-本地缓存"><span class="toc-nav-number">6.0.0.0.1.</span> <span class="toc-nav-text">&#x4E00;&#x7EA7;&#x7F13;&#x5B58; (&#x672C;&#x5730;&#x7F13;&#x5B58;)</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#二级缓存-全局缓存"><span class="toc-nav-number">6.0.0.0.2.</span> <span class="toc-nav-text">&#x4E8C;&#x7EA7;&#x7F13;&#x5B58; (&#x5168;&#x5C40;&#x7F13;&#x5B58;)</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#逆向工程-mbg"><span class="toc-nav-number">6.0.1.</span> <span class="toc-nav-text">&#x9006;&#x5411;&#x5DE5;&#x7A0B; (MBG)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#spring-整合-mybatis"><span class="toc-nav-number">6.0.2.</span> <span class="toc-nav-text">Spring &#x6574;&#x5408; Mybatis</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#mybatis-工作原理"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">Mybatis &#x5DE5;&#x4F5C;&#x539F;&#x7406;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#插件开发"><span class="toc-nav-number">6.2.</span> <span class="toc-nav-text">&#x63D2;&#x4EF6;&#x5F00;&#x53D1;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#批量处理"><span class="toc-nav-number">6.3.</span> <span class="toc-nav-text">&#x6279;&#x91CF;&#x5904;&#x7406;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
 
                 
             <!-- Sidebar Container -->

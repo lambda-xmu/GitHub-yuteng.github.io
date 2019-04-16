@@ -142,14 +142,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">关于我</a>
                         </li>
                         
                     
@@ -607,6 +607,24 @@ ResultSet 对象维护了一个指向当前数据行的游标，初始的时候�
             
             <!-- Tabe of Content -->
             <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#jdbc是-java-访问数据库的基石"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">JDBC&#x662F; java &#x8BBF;&#x95EE;&#x6570;&#x636E;&#x5E93;&#x7684;&#x57FA;&#x77F3;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#driver-接口"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Driver &#x63A5;&#x53E3;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#加载与注册-jdbc-驱动"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">&#x52A0;&#x8F7D;&#x4E0E;&#x6CE8;&#x518C; JDBC &#x9A71;&#x52A8;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#建立连接"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">&#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#访问数据库"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">&#x8BBF;&#x95EE;&#x6570;&#x636E;&#x5E93;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#resultset-结果集"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">ResultSet &#x7ED3;&#x679C;&#x96C6;&#x3002;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#preparedstatement"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">PreparedStatement</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#preparedstatement-vs-statement"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">PreparedStatement vs Statement</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#dao-data-access-object"><span class="toc-nav-number">2.7.</span> <span class="toc-nav-text">DAO (Data Access Object)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用-jdbc-驱动程序处理元数据"><span class="toc-nav-number">2.8.</span> <span class="toc-nav-text">&#x4F7F;&#x7528; JDBC &#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x5904;&#x7406;&#x5143;&#x6570;&#x636E;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#数据库事务"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x6570;&#x636E;&#x5E93;&#x4E8B;&#x52A1;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#事务的-acid-属性"><span class="toc-nav-number">0.1.</span> <span class="toc-nav-text">&#x4E8B;&#x52A1;&#x7684; ACID &#x5C5E;&#x6027;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#jdbc-事务处理"><span class="toc-nav-number">0.2.</span> <span class="toc-nav-text">JDBC &#x4E8B;&#x52A1;&#x5904;&#x7406;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#数据库的隔离级别"><span class="toc-nav-number">0.3.</span> <span class="toc-nav-text">&#x6570;&#x636E;&#x5E93;&#x7684;&#x9694;&#x79BB;&#x7EA7;&#x522B;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#批量处理jdbc语句提高处理速度"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x6279;&#x91CF;&#x5904;&#x7406;JDBC&#x8BED;&#x53E5;&#x63D0;&#x9AD8;&#x5904;&#x7406;&#x901F;&#x5EA6;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#jdbc数据库连接池的必要性"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">JDBC&#x6570;&#x636E;&#x5E93;&#x8FDE;&#x63A5;&#x6C60;&#x7684;&#x5FC5;&#x8981;&#x6027;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#数据库连接池-connection-pool"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x6570;&#x636E;&#x5E93;&#x8FDE;&#x63A5;&#x6C60; (connection pool)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三种开源的数据库连接池"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x4E09;&#x79CD;&#x5F00;&#x6E90;&#x7684;&#x6570;&#x636E;&#x5E93;&#x8FDE;&#x63A5;&#x6C60;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#callablestatement"><span class="toc-nav-number"></span> <span class="toc-nav-text">CallableStatement</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+        
+        </div>
+      </aside>
+    
 
                 
             <!-- Sidebar Container -->
