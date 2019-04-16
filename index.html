@@ -284,16 +284,14 @@ SYN：同步序列编号（Synchronize Sequence Numbers）。
 
     <a href="/article/深入理解 JVM-13/">
         <h2 class="post-title">
-            JVM（13.线程安全与锁优化）
+            JVM 线程安全与锁优化
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            
-本篇将介绍线程安全所涉及的概念和分类、同步实现的方式及虚拟机的底层运作原理，虚拟机为实现高效并发所采取的一系列锁优化措施。
-
-线程安全
+            本篇将介绍线程安全所涉及的概念和分类、同步实现的方式及虚拟机的底层运作原理，虚拟机为实现高效并发所采取的一系列锁优化措施。
+一、线程安全
 
 《Java Concurrency In Practice》的作者Brian Goetz对“线程安全”有个比较恰当的定义：
 当多个线程访问一个对象时，如果不用考虑这些线程在运行时环境下的调度和交替执行，也不需要进行额外的同步，或者在调用方进行任何其他的协......
@@ -318,16 +316,14 @@ SYN：同步序列编号（Synchronize Sequence Numbers）。
 
     <a href="/article/深入理解 JVM-12/">
         <h2 class="post-title">
-            JVM（12.Java内存模型与线程）
+            JVM Java内存模型与线程
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
             本篇介绍虚拟机如何实现多线程、多线程之间由于共享和竞争数据而导致的一系列问题及解决方案。
-
 内存模型：在特定的操作协议下，对特定的内存或高速缓存进行读写访问的过程抽象。
-
 
 
 概述
@@ -339,7 +335,7 @@ Java与线程
 多任务处理的必要性：
 
 1、充分利用计算机处理器的能力，避免处理器在磁盘I/O、网络通信或数据库访问时总是处于等待其他资源的状态。
-2、便于一个服务端同时对多个客户......
+2、便于一个服务端同时对多个客户端提......
         </div>
     </a>
     
@@ -361,19 +357,23 @@ Java与线程
 
     <a href="/article/深入理解 JVM-7/">
         <h2 class="post-title">
-            JVM（7.虚拟机类加载机制）
+            JVM 虚拟机类加载机制
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            7.1 虚拟机类加载机制是什么？
+            一、虚拟机类加载机制是什么？
 虚拟机把描述类的数据从Class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。
 
-7.2 类加载的时机
-类从被加载到虚拟机内存中开始，到卸载出内存为止，生命周期包括 7 个阶段(前5个阶段是在程序运行期间完成的 Runtime)：
+二、类加载的时机
+类从被加载到虚拟机内存中开始，到卸载出内存为止，生命周期包括 7 个阶段：
 
-加载（Loading）、验证（Verification）、准备（Prepar......
+(前5个阶段是在程序运行期间完成的 Runtime)
+
+1、加载（Loading）
+2、验证（Verification）
+3、准备（Pr......
         </div>
     </a>
     
@@ -395,21 +395,25 @@ Java与线程
 
     <a href="/article/深入理解 JVM-3/">
         <h2 class="post-title">
-            JVM（3.垃圾收集器与内存分配策略）
+            JVM—垃圾收集器-内存分配
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            垃圾收集器与内存分配策略
-Java与C++之间有一堵由内存动态分配和垃圾收集技术所围成的高墙，墙外面的人想进去，墙里面的人却想出来。
+            一、垃圾收集器与内存分配策略
+Java与C++之间有一堵由内存动态分配和垃圾收集技术所围成的“高墙”，
+墙外面的人想进去，墙里面的人却想出来。
+
 
 引入计数法
 概念：
+
 在对象中引入计数器(无符号整数)，用于记录有多少对象引用了该对象。
 每当有一个地方引用它时，计数器加1；引用失效时，计数器减1。任何计数器为0的对象都是不可能再被使用的。
+
 优点：
-1、即刻回收垃圾，在更改引用时就知道该对象是否为垃圾若是垃......
+1、即刻回收垃圾，在更改引用时就知道该对象......
         </div>
     </a>
     
@@ -626,11 +630,11 @@ Spring MVC 通过一套 MVC 注解，让 POJO 成为处理请求的控制器，�
             
         
             
-            <a href="/tags/#Java设计模式" title="Java设计模式" rel="3">Java设计模式</a>
+            <a href="/tags/#排序算法" title="排序算法" rel="3">排序算法</a>
             
         
             
-            <a href="/tags/#排序算法" title="排序算法" rel="3">排序算法</a>
+            <a href="/tags/#Java设计模式" title="Java设计模式" rel="3">Java设计模式</a>
             
         
             
@@ -720,15 +724,15 @@ Spring MVC 通过一套 MVC 注解，让 POJO 成为处理请求的控制器，�
         </li>
       
         <li>
-          <a href="/article/深入理解 JVM-13/">JVM（13.线程安全与锁优化）</a>
+          <a href="/article/深入理解 JVM-13/">JVM 线程安全与锁优化</a>
         </li>
       
         <li>
-          <a href="/article/深入理解 JVM-12/">JVM（12.Java内存模型与线程）</a>
+          <a href="/article/深入理解 JVM-12/">JVM Java内存模型与线程</a>
         </li>
       
         <li>
-          <a href="/article/深入理解 JVM-7/">JVM（7.虚拟机类加载机制）</a>
+          <a href="/article/深入理解 JVM-7/">JVM 虚拟机类加载机制</a>
         </li>
       
     </ul>

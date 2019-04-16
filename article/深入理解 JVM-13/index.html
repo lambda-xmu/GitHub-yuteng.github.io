@@ -14,7 +14,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          JVM（13.线程安全与锁优化） - 于腾 | Blog
+          JVM 线程安全与锁优化 - 于腾 | Blog
         
     </title>
 
@@ -91,7 +91,7 @@
                               <a class="tag" href="/tags/#JVM" title="JVM">JVM</a>
                             
                         </div>
-                        <h1>JVM（13.线程安全与锁优化）</h1>
+                        <h1>JVM 线程安全与锁优化</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by 于腾 on
@@ -212,10 +212,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <ul>
-<li><strong>本篇将介绍线程安全所涉及的概念和分类、同步实现的方式及虚拟机的底层运作原理，虚拟机为实现高效并发所采取的一系列锁优化措施。</strong></li>
-</ul>
-<h2 id="线程安全"><font color="black">线程安全</font></h2>
+                <p><strong>本篇将介绍线程安全所涉及的概念和分类、同步实现的方式及虚拟机的底层运作原理，虚拟机为实现高效并发所采取的一系列锁优化措施。</strong></p>
+<h2 id="一-线程安全">一、线程安全</h2>
 <blockquote>
 <p><strong>《Java Concurrency In Practice》的作者Brian Goetz对“线程安全”有个比较恰当的定义：</strong><br>
 当多个线程访问一个对象时，如果不用考虑这些线程在运行时环境下的调度和交替执行，也不需要进行额外的同步，或者在调用方进行任何其他的协调操作，调用这个对象的行为都可以获得正确的结果，那这个对象是线程安全的。</p>
@@ -223,11 +221,11 @@
 <a id="more"></a>
 <p><strong>这个定义比较严谨，它要求线程安全的代码都必须具备一个特征：</strong></p>
 <ul>
-<li>代码本身封装了所有必要的正确性保障手段（如互斥同步等），令调用者无须关心多线程的问题，更无须自己采取任何措施来保证多线程的正确调用。</li>
+<li><strong>代码本身封装了所有必要的正确性保障手段（如互斥同步等），令调用者无须关心多线程的问题，更无须自己采取任何措施来保证多线程的正确调用。</strong></li>
 </ul>
 <hr>
-<h2 id="java语言中的线程安全"><font color="black">Java语言中的线程安全</font></h2>
-<p><strong>按照线程安全的程度<code>由强至弱分成五类</code>：不可变、绝对的线程安全、相对的线程安全、线程兼容、线程对立</strong></p>
+<h3 id="java语言中的线程安全">Java语言中的线程安全</h3>
+<p><strong>按照线程安全的程度<code>由强至弱分成五类</code>：</strong></p>
 <p><strong><font color="#EE2C2C">不可变：</font>外部的可见状态永远不会改变，在多个线程之中永远都是一致的状态。(一定是线程安全的)</strong></p>
 <ul>
 <li><strong>如何实现：</strong>
@@ -262,35 +260,33 @@
 <hr>
 <p><strong><font color="#EE2C2C">线程对立：</font>无论调用端是否采取了同步措施，都无法在多线程环境中并发使用的代码。</strong></p>
 <hr>
-<h2 id="线程安全的实现">线程安全的实现</h2>
-<blockquote>
-<h4 id="可分为两大手段本篇重点在虚拟机本身">可分为两大手段，本篇重点在虚拟机本身</h4>
-</blockquote>
-<p><strong>1、通过代码编写实现线程安全</strong><br>
-<strong>2、通过虚拟机本身实现同步与锁机制</strong></p>
+<h3 id="线程安全的实现">线程安全的实现</h3>
+<p><strong>可分为两大手段，本篇重点在虚拟机本身</strong></p>
+<ul>
+<li><strong>1、通过代码编写实现线程安全</strong></li>
+<li><strong>2、通过虚拟机本身实现同步与锁机制</strong></li>
+</ul>
 <hr>
-<h3 id="1-互斥同步mutual-exclusionsynchronization">1、互斥同步(Mutual Exclusion＆Synchronization）</h3>
+<h4 id="1-互斥同步mutual-exclusionsynchronization">1、互斥同步(Mutual Exclusion＆Synchronization）</h4>
 <p><strong>同步：在多个线程并发访问共享数据时，保证共享数据在同一个时刻只被一个线程使用。</strong><br>
 <strong>互斥：是实现同步的一种手段，临界区（Critical Section）、互斥量（Mutex）和信号量（Semaphore）都是主要的互斥实现方式。</strong></p>
 <ul>
 <li><strong><font color="red">互斥是因，同步是果；互斥是方法，同步是目的。</font></strong></li>
 </ul>
-<hr>
-<p>属于<strong>悲观并发策略</strong>，即认为只要不做正确的同步措施就肯定会出现问题，因此无论共享数据是否真的会出现竞争，都要加锁。<br>
-最大的问题是进行线程阻塞和唤醒所带来的性能问题，也称为<strong>阻塞同步（Blocking Synchronization）</strong></p>
+<p><strong>属于悲观并发策略</strong>，即认为只要不做正确的同步措施就肯定会出现问题，因此无论共享数据是否真的会出现竞争，都要加锁。最大的问题是进行线程阻塞和唤醒所带来的性能问题，也称为<strong>阻塞同步（Blocking Synchronization）</strong></p>
 <hr>
 <hr>
-<h5 id="使用synchronized关键字实现线程安全">使用synchronized关键字实现线程安全：</h5>
-<p>**原理：**编译后会在同步块的前后分别形成<font color="#EE2C2C">monitorenter</font>和<font color="#EE2C2C">monitorexit</font>这两个字节码指令，<br>
+<h4 id="2-使用synchronized关键字实现线程安全">2、使用synchronized关键字实现线程安全：</h4>
+<p><strong>原理：</strong> 编译后会在同步块的前后分别形成<font color="#EE2C2C">monitorenter</font>和<font color="#EE2C2C">monitorexit</font>这两个字节码指令，<br>
 并通过一个<font color="#EE2C2C">reference</font>类型的参数来指明要锁定和解锁的对象。若明确指定了对象参数，则取该对象的<font color="#EE2C2C">reference</font>；否则，会根据<font color="#EE2C2C">synchronized</font>修饰的是实例方法还是类方法去取对应的对象实例或Class对象来作为锁对象。</p>
 <hr>
-<p>**过程：**执行monitorenter指令时先要尝试获取对象的锁。若该对象没被锁定或者已被当前线程获取，那么锁计数器+1；若获取对象锁失败，那当前线程会一直被阻塞等待，直到对象锁被另外一个线程释放为止。</p>
+<p><strong>过程：</strong> 执行monitorenter指令时先要尝试获取对象的锁。若该对象没被锁定或者已被当前线程获取，那么锁计数器+1；若获取对象锁失败，那当前线程会一直被阻塞等待，直到对象锁被另外一个线程释放为止。</p>
 <hr>
-<p>**特别注意：**synchronized同步块对同一条线程来说是可重入的，不会出现自我锁死的问题；还有，同步块在已进入的线程执行完之前，会阻塞后面其他线程的进入。</p>
+<p><strong>特别注意：</strong> synchronized同步块对同一条线程来说是可重入的，不会出现自我锁死的问题；还有，同步块在已进入的线程执行完之前，会阻塞后面其他线程的进入。</p>
 <hr>
 <hr>
-<h5 id="使用重入锁reentrantlock实现线程安全">使用重入锁ReentrantLock实现线程安全：</h5>
-<p>**相同：**用法与synchronized很相似，且都可重入。</p>
+<h4 id="3-使用重入锁reentrantlock实现线程安全">3、使用重入锁ReentrantLock实现线程安全：</h4>
+<p><strong>相同：</strong> 用法与synchronized很相似，且都可重入。</p>
 <hr>
 <p><strong>不同：</strong></p>
 <ul>
@@ -308,20 +304,20 @@
 </li>
 </ul>
 <hr>
-<p>**选择：**在synchronized能实现需求的情况下，优先考虑使用它来进行同步。改进更偏向于sync。</p>
+<p><strong>选择：</strong> 在synchronized能实现需求的情况下，优先考虑使用它来进行同步。改进更偏向于sync。</p>
 <hr>
 <hr>
-<h3 id="2-非阻塞同步non-blocking-synchronization">2、非阻塞同步（Non-Blocking Synchronization）</h3>
+<h3 id="非阻塞同步non-blocking-synchronization">非阻塞同步（Non-Blocking Synchronization）</h3>
 <p>基于冲突检测的<strong>乐观并发策略</strong>，即先进行操作，若无其他线程争用共享数据，操作成功；反之产生了冲突再去采取其他的补偿措施。</p>
 <p><strong>为了保证操作和冲突检测这两步具备原子性，需要用到硬件指令集，比如：</strong></p>
 <ul>
 <li><strong>测试并设置（Test-and-Set）</strong></li>
-<li>**获取并增加（Fetch-and-Increment） **</li>
-<li>**交换（Swap） **</li>
-<li>**<font color="#EE2C2C">比较并交换（Compare-and-Swap,CAS）</font> **</li>
-<li>**加载链接/条件存储（Load-Linked/Store-Conditional,LL/SC） **</li>
+<li><strong>获取并增加（Fetch-and-Increment）</strong></li>
+<li><strong>交换（Swap）</strong></li>
+<li><strong><font color="#EE2C2C">比较并交换（Compare-and-Swap,CAS）</font></strong></li>
+<li><strong>加载链接/条件存储（Load-Linked/Store-Conditional,LL/SC）</strong></li>
 </ul>
-<h3 id="3-无同步方案">3、无同步方案</h3>
+<h3 id="无同步方案">无同步方案</h3>
 <p><strong>定义：不用同步的方式保证线程安全，因为有些代码天生就是线程安全的。下面举两个例子：</strong></p>
 <ul>
 <li><strong>可重入代码（Reentrant Code）/纯代码（Pure Code）</strong></li>
@@ -329,14 +325,15 @@
 </ul>
 <hr>
 <hr>
-<h1 id="锁优化">锁优化</h1>
-<p><strong>解决并发的正确性之后，为了能在线程之间更『高效』地共享数据、解决竞争问题、提高程序的执行效率。</strong></p>
-<p><strong>下面介绍五种锁优化技术：</strong></p>
-<hr>
-<p><strong>适应性自旋（Adaptive Spinning）</strong><br>
-<strong>锁消除（Lock Elimination）</strong><br>
-<strong>锁粗化(Lock Coarsening)</strong><br>
-<strong>偏向锁（Biased Locking）</strong></p>
+<h2 id="二-锁优化">二、锁优化</h2>
+<p><strong>解决并发的正确性之后，为了能在线程之间更『高效』地共享数据、解决竞争问题、提高程序的执行效率。下面介绍五种锁优化技术：</strong></p>
+<ul>
+<li><strong>适应性自旋（Adaptive Spinning）</strong></li>
+<li><strong>锁消除（Lock Elimination）</strong></li>
+<li><strong>锁粗化(Lock Coarsening)</strong></li>
+<li><strong>轻量级锁（Lightweight Locking）</strong></li>
+<li><strong>偏向锁（Biased Locking）</strong></li>
+</ul>
 <h2 id="参考">参考</h2>
 <p><a href="https://yexua.github.io/2019/04/10/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E4%B8%8E%E9%94%81%E4%BC%98%E5%8C%96/#more" target="_blank" rel="noopener">锁优化参考 友链</a><br>
 <a href="https://www.jianshu.com/p/ca8801044352" target="_blank" rel="noopener">要点提炼| 理解JVM之线程安全&amp;锁优化</a></p>
@@ -354,7 +351,7 @@
                     
                     
                         <li class="next">
-                            <a href="/article/深入理解 JVM-12/" data-toggle="tooltip" data-placement="top" title="JVM（12.Java内存模型与线程）">Next Post &rarr;</a>
+                            <a href="/article/深入理解 JVM-12/" data-toggle="tooltip" data-placement="top" title="JVM Java内存模型与线程">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -405,7 +402,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#线程安全"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"><font color="black">&#x7EBF;&#x7A0B;&#x5B89;&#x5168;</font></span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#java语言中的线程安全"><span class="toc-nav-number">2.</span> <span class="toc-nav-text"><font color="black">Java&#x8BED;&#x8A00;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;</font></span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#线程安全的实现"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#x5B9E;&#x73B0;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#可分为两大手段本篇重点在虚拟机本身"><span class="toc-nav-number">3.0.1.</span> <span class="toc-nav-text">&#x53EF;&#x5206;&#x4E3A;&#x4E24;&#x5927;&#x624B;&#x6BB5;&#xFF0C;&#x672C;&#x7BC7;&#x91CD;&#x70B9;&#x5728;&#x865A;&#x62DF;&#x673A;&#x672C;&#x8EAB;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-互斥同步mutual-exclusionsynchronization"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">1&#x3001;&#x4E92;&#x65A5;&#x540C;&#x6B65;(Mutual Exclusion&#xFF06;Synchronization&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#使用synchronized关键字实现线程安全"><span class="toc-nav-number">3.1.0.1.</span> <span class="toc-nav-text">&#x4F7F;&#x7528;synchronized&#x5173;&#x952E;&#x5B57;&#x5B9E;&#x73B0;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#xFF1A;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#使用重入锁reentrantlock实现线程安全"><span class="toc-nav-number">3.1.0.2.</span> <span class="toc-nav-text">&#x4F7F;&#x7528;&#x91CD;&#x5165;&#x9501;ReentrantLock&#x5B9E;&#x73B0;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#xFF1A;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-非阻塞同步non-blocking-synchronization"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">2&#x3001;&#x975E;&#x963B;&#x585E;&#x540C;&#x6B65;&#xFF08;Non-Blocking Synchronization&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-无同步方案"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">3&#x3001;&#x65E0;&#x540C;&#x6B65;&#x65B9;&#x6848;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#锁优化"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x9501;&#x4F18;&#x5316;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#参考"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x53C2;&#x8003;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一-线程安全"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#java语言中的线程安全"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Java&#x8BED;&#x8A00;&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#线程安全的实现"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#x5B9E;&#x73B0;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-互斥同步mutual-exclusionsynchronization"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">1&#x3001;&#x4E92;&#x65A5;&#x540C;&#x6B65;(Mutual Exclusion&#xFF06;Synchronization&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-使用synchronized关键字实现线程安全"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">2&#x3001;&#x4F7F;&#x7528;synchronized&#x5173;&#x952E;&#x5B57;&#x5B9E;&#x73B0;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#xFF1A;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-使用重入锁reentrantlock实现线程安全"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">3&#x3001;&#x4F7F;&#x7528;&#x91CD;&#x5165;&#x9501;ReentrantLock&#x5B9E;&#x73B0;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#xFF1A;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#非阻塞同步non-blocking-synchronization"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">&#x975E;&#x963B;&#x585E;&#x540C;&#x6B65;&#xFF08;Non-Blocking Synchronization&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#无同步方案"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">&#x65E0;&#x540C;&#x6B65;&#x65B9;&#x6848;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二-锁优化"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;&#x9501;&#x4F18;&#x5316;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#参考"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x53C2;&#x8003;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
         
         </div>
       </aside>
