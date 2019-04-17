@@ -7,6 +7,22 @@
     </url>
 
     <url>
+        <loc>https://github-yuteng.github.io/article/Mybatis/</loc>
+        <lastmod>2019-04-17T13:35:04.046Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/article/Maven/</loc>
+        <lastmod>2019-04-17T09:08:46.713Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://github-yuteng.github.io/article/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20JVM-3/</loc>
         <lastmod>2019-04-17T05:09:02.266Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -169,22 +185,6 @@
     <url>
         <loc>https://github-yuteng.github.io/article/Spring/</loc>
         <lastmod>2019-04-16T08:11:47.506Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://github-yuteng.github.io/article/Mybatis/</loc>
-        <lastmod>2019-04-16T08:11:36.986Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://github-yuteng.github.io/article/Maven/</loc>
-        <lastmod>2019-04-16T08:11:33.761Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
