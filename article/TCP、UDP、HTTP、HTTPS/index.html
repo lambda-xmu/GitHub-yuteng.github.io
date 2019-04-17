@@ -212,9 +212,9 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3 id="tcp三次握手四次挥手">TCP：三次握手，四次挥手</h3>
+                <h2 id="tcp三次握手四次挥手">TCP：三次握手，四次挥手</h2>
 <a id="more"></a>
-<h4 id="三次握手">三次握手</h4>
+<h3 id="三次握手">三次握手</h3>
 <p><strong>第一次握手：建立连接时，客户端发送 SYN包 到服务器，并进入 SYN_SENT状态，等待服务器确认；（SYN=1，seq=x）</strong><br>
 <strong>SYN：同步序列编号（Synchronize Sequence Numbers）。</strong></p>
 <p><strong>第二次握手：服务器收到SYN包，必须确认客户的SYN，同时自己也发送一个SYN包，即SYN+ACK包，此时服务器进入SYN_RECV状态；ACK：(Acknowledgement）即是确认字符(ACK=Seq+1)。（SYN=1，ACK=1，seq=y，ack=x+1）</strong></p>
@@ -225,7 +225,7 @@
 </ul>
 <img src="http://ww1.sinaimg.cn/large/006vWPzFly1g235jzvwi2j30yt0hlwfv.jpg" width="800">
 <hr>
-<h4 id="四次挥手">四次挥手</h4>
+<h3 id="四次挥手">四次挥手</h3>
 <p><strong>在数据传输结束后，通信双方都可以发出释放连接的请求。在释放过程中要释放为该连接分配的所有资源。</strong></p>
 <p><strong>1、客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部，FIN=1，其序列号为seq=u（等于前面已经传送过来的数据的最后一个字节的序号加1），此时，客户端进入FIN-WAIT-1（终止等待1）状态。 TCP规定，FIN报文段即使不携带数据，也要消耗一个序号。</strong></p>
 <p><strong>2、服务器收到连接释放报文，发出确认报文，ACK=1，ack=u+1，并且带上自己的序列号seq=v，此时，服务端就进入了CLOSE-WAIT（关闭等待）状态。TCP服务器通知高层的应用进程，客户端向服务器的方向就释放了，这时候处于半关闭状态，即客户端已经没有数据要发送了，但是服务器若发送数据，客户端依然要接受。这个状态还要持续一段时间，也就是整个CLOSE-WAIT状态持续的时间。</strong></p>
@@ -320,7 +320,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#tcp三次握手四次挥手"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">TCP&#xFF1A;&#x4E09;&#x6B21;&#x63E1;&#x624B;&#xFF0C;&#x56DB;&#x6B21;&#x6325;&#x624B;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#三次握手"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x4E09;&#x6B21;&#x63E1;&#x624B;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#四次挥手"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">&#x56DB;&#x6B21;&#x6325;&#x624B;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#http-https"><span class="toc-nav-number"></span> <span class="toc-nav-text">HTTP HTTPS</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#tcp三次握手四次挥手"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">TCP&#xFF1A;&#x4E09;&#x6B21;&#x63E1;&#x624B;&#xFF0C;&#x56DB;&#x6B21;&#x6325;&#x624B;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#三次握手"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x4E09;&#x6B21;&#x63E1;&#x624B;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#四次挥手"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">&#x56DB;&#x6B21;&#x6325;&#x624B;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#http-https"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">HTTP HTTPS</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
         
         </div>
       </aside>
