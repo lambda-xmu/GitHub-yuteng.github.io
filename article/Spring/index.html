@@ -212,53 +212,18 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3 id="具体描述">具体描述：</h3>
+                <h2 id="一-具体描述">一、具体描述：</h2>
 <ul>
+<li>容器： Spring 是一个容器, 因为它包含并且管理应用对象的生命周期。</li>
 <li>轻量级：Spring 是非侵入性的 – 基于 Spring 开发的应用中的对象可以不依赖于 Spring 的 API</li>
-<li>依赖注入 (DI – dependency injection、IOC) DI和IOC其实是一回事</li>
+<li>依赖注入 (DI – dependency injection、IOC) DI和IOC其实是一回事。</li>
 <li>面向切面编程 (AOP – aspect oriented programming)</li>
-<li>容器： Spring 是一个容器, 因为它包含并且管理应用对象的生命周期</li>
 <li>框架： Spring 实现了使用简单的组件配置组合成一个复杂的应用。 在 Spring 中可以使用 XML 和 Java 注解组合这些对象</li>
 <li>一站式：在 IOC 和 AOP 的基础上可以整合各种企业应用的开源框架和优秀的第三方类库</li>
 <li>（实际上 Spring 自身也提供了展现层的 SpringMVC 和 持久层的 Spring JDBC）</li>
 </ul>
 <a id="more"></a>
-<h1 id="spring基石之一-ioc-和-di">Spring基石之一 ： IOC 和 DI</h1>
-<p><strong>1、IOC 控制反转(Inversion of Control)</strong></p>
-<ul>
-<li>其思想是反转资源获取的方向。传统的资源查找方式要求组件向容器发起请求查找资源。作为回应，容器适时的返回资源。而应用了 IOC 之后， 则是容器主动地将资源推送给它所管理的组件，组件所要做的仅是选择一种合适的方式来接受资源。这种行为也被称为查找的被动形式。</li>
-</ul>
-<p><strong>2、DI 依赖注入(Dependency Injection)依赖容器把资源注入 — IOC 的另一种表述方式：</strong></p>
-<ul>
-<li>即组件以一些预先定义好的方式(例如： setter 方法)接受来自如容器的资源注入。相对于 IOC 而言，这种表述更直接。</li>
-</ul>
-<hr>
-<p><strong>添加 jar 包</strong></p>
-<ul>
-<li>commons-logging-1.x.x.jar</li>
-<li>spring-core-4.0.0.RELEASE.jar</li>
-<li>spring-context-4.0.0.RELEASE.jar</li>
-<li>spring-expression-4.0.0.RELEASE.jar</li>
-<li>spring-beans-4.0.0.RELEASE.jar</li>
-</ul>
-<p><strong>配置 bean</strong><br>
-1、配置形式： 基于 XML 文件的方式; 基于 注解 的方式;<br>
-2、Bean 的配置方式：通过全类名（反射）、通过工厂方法（静态工厂方法 &amp; 实例工厂方法）、FactoryBean<br>
-3、IOC 容器 BeanFactory &amp; ApplicationContext 概述<br>
-4、依赖注入的方式： 属性注入; 构造器注入。</p>
-<hr>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"helloWorld"</span> <span class="attr">class</span>=<span class="string">"Spring1.HelloWorld"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"Spring"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="applicationcontextxml-spring配置文件">applicationContext.xml Spring配置文件</h4>
-<p><strong>id：</strong> Bean的名称</p>
-<ul>
-<li>在IOC容器中必须是唯一的。</li>
-<li>若id没有指定，Spring自动将权限定性类名作为Bean的名字。</li>
-<li>id可以指定多个名字，名字之间可用 逗号、分号、或空格分隔。</li>
-</ul>
-<p><strong>class：</strong> Bean的全类名，通过反射的机制创建Bean的实例，需要默认构造器。获取容器前会初始化类，调用默认构造器。<br>
-<strong>property：</strong> name属性 --&gt; setXxx方法对应注入。value --&gt; 对变量注入的值。</p>
-<hr>
-<h2 id="spring-容器">Spring 容器</h2>
+<h2 id="二-spring-容器">二、Spring 容器</h2>
 <ul>
 <li>1、在 Spring IOC 容器读取 Bean 配置创建 Bean 实例之前, 必须对它进行实例化。</li>
 <li>
@@ -281,8 +246,43 @@
 </ul>
 </li>
 </ul>
+<h3 id="1-iocdi">1、 IOC（DI）</h3>
+<p><strong>IOC 控制反转(Inversion of Control)</strong></p>
+<ul>
+<li>其思想是反转资源获取的方向。传统的资源查找方式要求组件向容器发起请求查找资源。作为回应，容器适时的返回资源。而应用了 IOC 之后， 则是容器主动地将资源推送给它所管理的组件，组件所要做的仅是选择一种合适的方式来接受资源。这种行为也被称为查找的被动形式。</li>
+</ul>
+<p><strong>DI 依赖注入(Dependency Injection)依赖容器把资源注入 — IOC 的另一种表述方式：</strong></p>
+<ul>
+<li>即组件以一些预先定义好的方式(例如： setter 方法)接受来自如容器的资源注入。相对于 IOC 而言，这种表述更直接。</li>
+</ul>
 <hr>
-<h3 id="xml-配置里的-bean-自动装配">XML 配置里的 Bean 自动装配</h3>
+<p><strong>Spring核心 jar 包</strong></p>
+<ul>
+<li>commons-logging-1.x.x.jar</li>
+<li>spring-core-4.0.0.RELEASE.jar</li>
+<li>spring-context-4.0.0.RELEASE.jar</li>
+<li>spring-expression-4.0.0.RELEASE.jar</li>
+<li>spring-beans-4.0.0.RELEASE.jar</li>
+</ul>
+<p><strong>配置 bean</strong><br>
+1、配置形式： 基于 XML 文件的方式; 基于 注解 的方式;<br>
+2、Bean 的配置方式：通过全类名（反射）、通过工厂方法（静态工厂方法 &amp; 实例工厂方法）、FactoryBean<br>
+3、IOC 容器 BeanFactory &amp; ApplicationContext 概述<br>
+4、依赖注入的方式： 属性注入; 构造器注入。</p>
+<hr>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"helloWorld"</span> <span class="attr">class</span>=<span class="string">"Spring1.HelloWorld"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"Spring"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>applicationContext.xml Spring配置文件</strong><br>
+<strong>id：</strong> Bean的名称</p>
+<ul>
+<li>在IOC容器中必须是唯一的。</li>
+<li>若id没有指定，Spring自动将权限定性类名作为Bean的名字。</li>
+<li>id可以指定多个名字，名字之间可用 逗号、分号、或空格分隔。</li>
+</ul>
+<p><strong>class：</strong> Bean的全类名，通过反射的机制创建Bean的实例，需要默认构造器。获取容器前会初始化类，调用默认构造器。<br>
+<strong>property：</strong> name属性 --&gt; setXxx方法对应注入。value --&gt; 对变量注入的值。</p>
+<hr>
+<hr>
+<h3 id="2-xml-配置里的-bean-自动装配">2、XML 配置里的 Bean 自动装配</h3>
 <ul>
 <li>Spring IOC 容器可以自动装配 Bean。需要做的仅仅是在 <bean> 的 autowire 属性指定自动装配的模式
 <ul>
@@ -302,7 +302,7 @@
 </bean></li>
 </ul>
 <hr>
-<h3 id="bean-的作用域">Bean 的作用域</h3>
+<h3 id="3-bean-的作用域">3、Bean 的作用域</h3>
 <p><strong>在 Spring 中, 可以在 <bean> 元素的 scope 属性里设置 Bean 的作用域。</bean></strong></p>
 <p><strong>默认情况下, Spring 只为每个在 IOC 容器里声明的 Bean 创建<code>唯一实例</code></strong><br>
 <strong>整个 IOC 容器范围内都能共享该实例;所有后续的 getBean()调用和Bean引用都将返回这个的Bean</strong></p>
@@ -311,7 +311,7 @@
 <li><strong>scope属性为 prototype 多例 每次 getBean() 获取Bean都创建一个新实例。</strong></li>
 </ul>
 <hr>
-<h3 id="ioc-容器中-bean-的生命周期方法">IOC 容器中 Bean 的生命周期方法</h3>
+<h3 id="4-ioc-容器中-bean-的生命周期方法">4、IOC 容器中 Bean 的生命周期方法</h3>
 <p>Spring IOC 容器可以管理 Bean 的生命周期, Spring 允许在 Bean 生命周期的特定点执行定制的任务。</p>
 <p><strong>Spring IOC 容器对 Bean 的生命周期进行管理的过程：</strong><br>
 1、通过构造器或工厂方法创建 Bean 实例,调用默认构造器。<br>
@@ -320,7 +320,7 @@
 4、Bean 可以使用了。<br>
 5、当容器关闭时, 调用 Bean 的销毁方法 destroy();<br>
 6、在 Bean 的声明里设置 init-method 和 destroy-method 属性, 为 Bean 指定初始化和销毁方法。</p>
-<h3 id="创建-bean-后置处理器后的生命周期方法-比较上方生命周期">创建 Bean 后置处理器后的生命周期方法  比较上方生命周期 👆</h3>
+<h3 id="5-创建-bean-后置处理器后的生命周期方法-比较上方生命周期">5、创建 Bean 后置处理器后的生命周期方法  比较上方生命周期 👆</h3>
 <blockquote>
 <p>Bean 后置处理器允许在调用初始化方法前后对 Bean 进行额外的处理。<br>
 <code>Bean 后置处理器对 IOC 容器里的所有 Bean 实例逐一处理, 而非单一实例。</code></p>
@@ -344,7 +344,7 @@ postProcessBeforeInitialization();<br>
 6、Bean 可以使用了<br>
 7、当容器关闭时, 调用 Bean 的销毁方法 destroy();</p>
 <hr>
-<h3 id="使用外部属性文件">使用外部属性文件</h3>
+<h3 id="6-使用外部属性文件">6、使用外部属性文件</h3>
 <blockquote>
 <p>在配置文件里配置 Bean 时, 有时需要在 Bean 的配置里混入系统部署的细节信息(例如： 文件路径, 数据源配置信息等)。<br>
 而这些部署细节实际上需要和 Bean 配置相分离</p>
@@ -443,20 +443,20 @@ SpEL 为 bean 的属性进行动态赋值提供了便利<br>
 计算表达式的值<br>
 正则表达式的匹配</p>
 <hr>
-<h1 id="spring基石之一-aop-aspect-oriented-programming-面向切面编程">Spring基石之一 ：AOP (Aspect-Oriented Programming, 面向切面编程)</h1>
-<p>** AOP所处理的问题 **</p>
+<h2 id="三-aspect-oriented-programming">三、Aspect-Oriented Programming</h2>
+<p><strong>AOP所处理的问题</strong></p>
 <ul>
 <li>代码混乱：越来越多的非业务需求(日志和验证等)加入后, 原有的业务方法急剧膨胀。每个方法在处理核心逻辑的同时还必须兼顾其他多个关注点。</li>
 <li>代码分散：以日志需求为例, 只是为了满足这个需求, 不得不在多个模块(方法)里多次重复相同的日志代码。如果日志需求发生变化, 必须修改所有模块。</li>
 </ul>
 <hr>
-<p>** 使用动态代理解决上述问题 **</p>
+<p><strong>使用动态代理解决上述问题</strong></p>
 <ul>
 <li>代理设计模式的原理：<br>
 使用一个代理将对象包装起来, 然后用该代理对象取代原始对象。任何对原始对象的调用都要通过代理。代理对象决定是否以及何时将方法调用转到原始对象上</li>
 </ul>
 <hr>
-<p>** AOP (Aspect-Oriented Programming, 面向切面编程) **</p>
+<p><strong>AOP (Aspect-Oriented Programming, 面向切面编程)</strong></p>
 <ul>
 <li>是一种新的方法论, 是对传统 OOP(Object-Oriented Programming, 面向对象编程) 的补充。</li>
 <li>AOP 的主要编程对象是切面(aspect), 切面模块化 --&gt; 横切关注点。</li>
@@ -464,24 +464,27 @@ SpEL 为 bean 的属性进行动态赋值提供了便利<br>
 <li>这样一来横切关注点就被模块化到特殊的对象(切面)里。</li>
 </ul>
 <hr>
-<p>** AOP 的好处： **</p>
+<p><strong>AOP 的好处：</strong></p>
 <ul>
 <li>每个事物逻辑位于一个位置, 代码不分散, 便于维护和升级。</li>
 <li>业务模块更简洁, 只包含核心业务代码。</li>
 </ul>
 <hr>
-<p>** AOP 术语 **<br>
-** 切面(Aspect)：** 横切关注点 (跨越应用程序多个模块的功能) 被模块化的特殊对象。<br>
-** 通知(Advice)：** 切面必须要完成的工作。<br>
-** 目标(Target)：** 被通知的对象。<br>
-** 代理(Proxy)：** 向目标对象应用通知之后创建的对象。<br>
-** 连接点（Joinpoint）：** 程序执行的某个特定位置：如类某个方法调用前、调用后、方法抛出异常后等。</p>
+<p><strong>AOP 术语</strong></p>
 <ul>
-<li>** 连接点由两个信息确定：**
+<li><strong>切面(Aspect)：</strong> 横切关注点 (跨越应用程序多个模块的功能) 被模块化的特殊对象。</li>
+<li><strong>通知(Advice)：</strong> 切面必须要完成的工作。</li>
+<li><strong>目标(Target)：</strong> 被通知的对象。</li>
+<li><strong>代理(Proxy)：</strong> 向目标对象应用通知之后创建的对象。</li>
+<li><strong>连接点（Joinpoint）：</strong> 程序执行的某个特定位置：类某个方法调用前、后、方法抛出异常后等。
+<ul>
+<li><strong>连接点由两个信息确定：</strong>
 <ul>
 <li>方法表示的程序执行点。</li>
 <li>相对点表示的方位。</li>
 <li>例如 Calculator.add() 方法执行前的连接点，执行点为 Calculator.add()；方位为该方法执行前的位置。</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -917,7 +920,7 @@ SpEL 为 bean 的属性进行动态赋值提供了便利<br>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#具体描述"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x5177;&#x4F53;&#x63CF;&#x8FF0;&#xFF1A;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#spring基石之一-ioc-和-di"><span class="toc-nav-number"></span> <span class="toc-nav-text">Spring&#x57FA;&#x77F3;&#x4E4B;&#x4E00; &#xFF1A; IOC &#x548C; DI</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#applicationcontextxml-spring配置文件"><span class="toc-nav-number">0.1.</span> <span class="toc-nav-text">applicationContext.xml Spring&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#spring-容器"><span class="toc-nav-number"></span> <span class="toc-nav-text">Spring &#x5BB9;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#xml-配置里的-bean-自动装配"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">XML &#x914D;&#x7F6E;&#x91CC;&#x7684; Bean &#x81EA;&#x52A8;&#x88C5;&#x914D;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#bean-的作用域"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Bean &#x7684;&#x4F5C;&#x7528;&#x57DF;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ioc-容器中-bean-的生命周期方法"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">IOC &#x5BB9;&#x5668;&#x4E2D; Bean &#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x65B9;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#创建-bean-后置处理器后的生命周期方法-比较上方生命周期"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x521B;&#x5EFA; Bean &#x540E;&#x7F6E;&#x5904;&#x7406;&#x5668;&#x540E;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x65B9;&#x6CD5;  &#x6BD4;&#x8F83;&#x4E0A;&#x65B9;&#x751F;&#x547D;&#x5468;&#x671F; &#x1F446;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用外部属性文件"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">&#x4F7F;&#x7528;&#x5916;&#x90E8;&#x5C5E;&#x6027;&#x6587;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#通过调用静态工厂方法创建-bean"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">&#x901A;&#x8FC7;&#x8C03;&#x7528;&#x9759;&#x6001;&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x521B;&#x5EFA; Bean</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#通过调用实例工厂方法创建-bean"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">&#x901A;&#x8FC7;&#x8C03;&#x7528;&#x5B9E;&#x4F8B;&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x521B;&#x5EFA; Bean</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#在-classpath-中扫描组件"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">&#x5728; classpath &#x4E2D;&#x626B;&#x63CF;&#x7EC4;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#组件装配-自动注入"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">&#x7EC4;&#x4EF6;&#x88C5;&#x914D; &#x81EA;&#x52A8;&#x6CE8;&#x5165;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#spring表达式语言spel"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">Spring&#x8868;&#x8FBE;&#x5F0F;&#x8BED;&#x8A00;&#xFF1A;SpEL</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#spring基石之一-aop-aspect-oriented-programming-面向切面编程"><span class="toc-nav-number"></span> <span class="toc-nav-text">Spring&#x57FA;&#x77F3;&#x4E4B;&#x4E00; &#xFF1A;AOP (Aspect-Oriented Programming, &#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#在-spring-中启用-aspectj-注解支持"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x5728; Spring &#x4E2D;&#x542F;&#x7528; AspectJ &#x6CE8;&#x89E3;&#x652F;&#x6301;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#用-aspectj-注解声明切面"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x7528; AspectJ &#x6CE8;&#x89E3;&#x58F0;&#x660E;&#x5207;&#x9762;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#指定切面的优先级"><span class="toc-nav-number">0.1.</span> <span class="toc-nav-text">&#x6307;&#x5B9A;&#x5207;&#x9762;&#x7684;&#x4F18;&#x5148;&#x7EA7;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#一个切面可以包括一个或者多个通知"><span class="toc-nav-number">0.1.0.1.</span> <span class="toc-nav-text">&#x4E00;&#x4E2A;&#x5207;&#x9762;&#x53EF;&#x4EE5;&#x5305;&#x62EC;&#x4E00;&#x4E2A;&#x6216;&#x8005;&#x591A;&#x4E2A;&#x901A;&#x77E5;&#x3002;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#前置通知在方法执行之前执行的通知"><span class="toc-nav-number">0.1.1.</span> <span class="toc-nav-text">&#x524D;&#x7F6E;&#x901A;&#x77E5;&#xFF1A;&#x5728;&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x4E4B;&#x524D;&#x6267;&#x884C;&#x7684;&#x901A;&#x77E5;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#后置通知在目标方法执行后-无论是否发生异常都执行的通知"><span class="toc-nav-number">0.1.2.</span> <span class="toc-nav-text">&#x540E;&#x7F6E;&#x901A;&#x77E5;&#xFF1A;&#x5728;&#x76EE;&#x6807;&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x540E; (&#x65E0;&#x8BBA;&#x662F;&#x5426;&#x53D1;&#x751F;&#x5F02;&#x5E38;),&#x90FD;&#x6267;&#x884C;&#x7684;&#x901A;&#x77E5;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#返回通知在方法正常结束后执行的代码"><span class="toc-nav-number">0.1.3.</span> <span class="toc-nav-text">&#x8FD4;&#x56DE;&#x901A;&#x77E5;&#xFF1A;&#x5728;&#x65B9;&#x6CD5;&#x6B63;&#x5E38;&#x7ED3;&#x675F;&#x540E;&#x6267;&#x884C;&#x7684;&#x4EE3;&#x7801;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#异常通知在目标方法出现异常时会执行的代码"><span class="toc-nav-number">0.1.4.</span> <span class="toc-nav-text">&#x5F02;&#x5E38;&#x901A;&#x77E5;&#xFF1A;&#x5728;&#x76EE;&#x6807;&#x65B9;&#x6CD5;&#x51FA;&#x73B0;&#x5F02;&#x5E38;&#x65F6;&#x4F1A;&#x6267;&#x884C;&#x7684;&#x4EE3;&#x7801;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#环绕通知"><span class="toc-nav-number">0.1.5.</span> <span class="toc-nav-text">&#x73AF;&#x7ED5;&#x901A;&#x77E5;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#重用切入点定义"><span class="toc-nav-number">0.2.</span> <span class="toc-nav-text">&#x91CD;&#x7528;&#x5207;&#x5165;&#x70B9;&#x5B9A;&#x4E49;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#用基于-xml-的配置声明切面"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x7528;&#x57FA;&#x4E8E; XML &#x7684;&#x914D;&#x7F6E;&#x58F0;&#x660E;&#x5207;&#x9762;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#spring-中的事务管理"><span class="toc-nav-number"></span> <span class="toc-nav-text">Spring &#x4E2D;&#x7684;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#用-transactional-注解-声明式地管理事务"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x7528; @Transactional &#x6CE8;&#x89E3; &#x58F0;&#x660E;&#x5F0F;&#x5730;&#x7BA1;&#x7406;&#x4E8B;&#x52A1;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#用-xml-事务通知-声明式地管理事务"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x7528; XML &#x4E8B;&#x52A1;&#x901A;&#x77E5; &#x58F0;&#x660E;&#x5F0F;&#x5730;&#x7BA1;&#x7406;&#x4E8B;&#x52A1;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#事务传播行为-propagation-behavior"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x4E8B;&#x52A1;&#x4F20;&#x64AD;&#x884C;&#x4E3A; (propagation behavior)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#并发事务所导致的问题"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x5E76;&#x53D1;&#x4E8B;&#x52A1;&#x6240;&#x5BFC;&#x81F4;&#x7684;&#x95EE;&#x9898;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#事务的隔离级别-isolation-level"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x4E8B;&#x52A1;&#x7684;&#x9694;&#x79BB;&#x7EA7;&#x522B; (Isolation level)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#设置回滚事务属性-rollback"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x8BBE;&#x7F6E;&#x56DE;&#x6EDA;&#x4E8B;&#x52A1;&#x5C5E;&#x6027; (rollback)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#超时和只读属性-timeout-read-only"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x8D85;&#x65F6;&#x548C;&#x53EA;&#x8BFB;&#x5C5E;&#x6027; (timeout read-only)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#web项目-webxml-配置启动-spring-ioc-容器的-listener"><span class="toc-nav-number">0.0.0.1.</span> <span class="toc-nav-text">web&#x9879;&#x76EE; web.xml &#x914D;&#x7F6E;&#x542F;&#x52A8; Spring IOC &#x5BB9;&#x5668;&#x7684; Listener</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#jdbctemplate-简介"><span class="toc-nav-number"></span> <span class="toc-nav-text">JdbcTemplate &#x7B80;&#x4ECB;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一-具体描述"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;&#x5177;&#x4F53;&#x63CF;&#x8FF0;&#xFF1A;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二-spring-容器"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;Spring &#x5BB9;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-iocdi"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">1&#x3001; IOC&#xFF08;DI&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-xml-配置里的-bean-自动装配"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">2&#x3001;XML &#x914D;&#x7F6E;&#x91CC;&#x7684; Bean &#x81EA;&#x52A8;&#x88C5;&#x914D;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-bean-的作用域"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">3&#x3001;Bean &#x7684;&#x4F5C;&#x7528;&#x57DF;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-ioc-容器中-bean-的生命周期方法"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">4&#x3001;IOC &#x5BB9;&#x5668;&#x4E2D; Bean &#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x65B9;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5-创建-bean-后置处理器后的生命周期方法-比较上方生命周期"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">5&#x3001;&#x521B;&#x5EFA; Bean &#x540E;&#x7F6E;&#x5904;&#x7406;&#x5668;&#x540E;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x65B9;&#x6CD5;  &#x6BD4;&#x8F83;&#x4E0A;&#x65B9;&#x751F;&#x547D;&#x5468;&#x671F; &#x1F446;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#6-使用外部属性文件"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">6&#x3001;&#x4F7F;&#x7528;&#x5916;&#x90E8;&#x5C5E;&#x6027;&#x6587;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#通过调用静态工厂方法创建-bean"><span class="toc-nav-number">2.7.</span> <span class="toc-nav-text">&#x901A;&#x8FC7;&#x8C03;&#x7528;&#x9759;&#x6001;&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x521B;&#x5EFA; Bean</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#通过调用实例工厂方法创建-bean"><span class="toc-nav-number">2.8.</span> <span class="toc-nav-text">&#x901A;&#x8FC7;&#x8C03;&#x7528;&#x5B9E;&#x4F8B;&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x521B;&#x5EFA; Bean</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#在-classpath-中扫描组件"><span class="toc-nav-number">2.9.</span> <span class="toc-nav-text">&#x5728; classpath &#x4E2D;&#x626B;&#x63CF;&#x7EC4;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#组件装配-自动注入"><span class="toc-nav-number">2.10.</span> <span class="toc-nav-text">&#x7EC4;&#x4EF6;&#x88C5;&#x914D; &#x81EA;&#x52A8;&#x6CE8;&#x5165;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#spring表达式语言spel"><span class="toc-nav-number">2.11.</span> <span class="toc-nav-text">Spring&#x8868;&#x8FBE;&#x5F0F;&#x8BED;&#x8A00;&#xFF1A;SpEL</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三-aspect-oriented-programming"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x4E09;&#x3001;Aspect-Oriented Programming</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#在-spring-中启用-aspectj-注解支持"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x5728; Spring &#x4E2D;&#x542F;&#x7528; AspectJ &#x6CE8;&#x89E3;&#x652F;&#x6301;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#用-aspectj-注解声明切面"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">&#x7528; AspectJ &#x6CE8;&#x89E3;&#x58F0;&#x660E;&#x5207;&#x9762;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#指定切面的优先级"><span class="toc-nav-number">5.0.1.</span> <span class="toc-nav-text">&#x6307;&#x5B9A;&#x5207;&#x9762;&#x7684;&#x4F18;&#x5148;&#x7EA7;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#一个切面可以包括一个或者多个通知"><span class="toc-nav-number">5.0.1.0.1.</span> <span class="toc-nav-text">&#x4E00;&#x4E2A;&#x5207;&#x9762;&#x53EF;&#x4EE5;&#x5305;&#x62EC;&#x4E00;&#x4E2A;&#x6216;&#x8005;&#x591A;&#x4E2A;&#x901A;&#x77E5;&#x3002;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#前置通知在方法执行之前执行的通知"><span class="toc-nav-number">5.0.1.1.</span> <span class="toc-nav-text">&#x524D;&#x7F6E;&#x901A;&#x77E5;&#xFF1A;&#x5728;&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x4E4B;&#x524D;&#x6267;&#x884C;&#x7684;&#x901A;&#x77E5;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#后置通知在目标方法执行后-无论是否发生异常都执行的通知"><span class="toc-nav-number">5.0.1.2.</span> <span class="toc-nav-text">&#x540E;&#x7F6E;&#x901A;&#x77E5;&#xFF1A;&#x5728;&#x76EE;&#x6807;&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x540E; (&#x65E0;&#x8BBA;&#x662F;&#x5426;&#x53D1;&#x751F;&#x5F02;&#x5E38;),&#x90FD;&#x6267;&#x884C;&#x7684;&#x901A;&#x77E5;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#返回通知在方法正常结束后执行的代码"><span class="toc-nav-number">5.0.1.3.</span> <span class="toc-nav-text">&#x8FD4;&#x56DE;&#x901A;&#x77E5;&#xFF1A;&#x5728;&#x65B9;&#x6CD5;&#x6B63;&#x5E38;&#x7ED3;&#x675F;&#x540E;&#x6267;&#x884C;&#x7684;&#x4EE3;&#x7801;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#异常通知在目标方法出现异常时会执行的代码"><span class="toc-nav-number">5.0.1.4.</span> <span class="toc-nav-text">&#x5F02;&#x5E38;&#x901A;&#x77E5;&#xFF1A;&#x5728;&#x76EE;&#x6807;&#x65B9;&#x6CD5;&#x51FA;&#x73B0;&#x5F02;&#x5E38;&#x65F6;&#x4F1A;&#x6267;&#x884C;&#x7684;&#x4EE3;&#x7801;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#环绕通知"><span class="toc-nav-number">5.0.1.5.</span> <span class="toc-nav-text">&#x73AF;&#x7ED5;&#x901A;&#x77E5;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#重用切入点定义"><span class="toc-nav-number">5.0.2.</span> <span class="toc-nav-text">&#x91CD;&#x7528;&#x5207;&#x5165;&#x70B9;&#x5B9A;&#x4E49;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#用基于-xml-的配置声明切面"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">&#x7528;&#x57FA;&#x4E8E; XML &#x7684;&#x914D;&#x7F6E;&#x58F0;&#x660E;&#x5207;&#x9762;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#spring-中的事务管理"><span class="toc-nav-number"></span> <span class="toc-nav-text">Spring &#x4E2D;&#x7684;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#用-transactional-注解-声明式地管理事务"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x7528; @Transactional &#x6CE8;&#x89E3; &#x58F0;&#x660E;&#x5F0F;&#x5730;&#x7BA1;&#x7406;&#x4E8B;&#x52A1;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#用-xml-事务通知-声明式地管理事务"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x7528; XML &#x4E8B;&#x52A1;&#x901A;&#x77E5; &#x58F0;&#x660E;&#x5F0F;&#x5730;&#x7BA1;&#x7406;&#x4E8B;&#x52A1;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#事务传播行为-propagation-behavior"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x4E8B;&#x52A1;&#x4F20;&#x64AD;&#x884C;&#x4E3A; (propagation behavior)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#并发事务所导致的问题"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">&#x5E76;&#x53D1;&#x4E8B;&#x52A1;&#x6240;&#x5BFC;&#x81F4;&#x7684;&#x95EE;&#x9898;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#事务的隔离级别-isolation-level"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x4E8B;&#x52A1;&#x7684;&#x9694;&#x79BB;&#x7EA7;&#x522B; (Isolation level)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#设置回滚事务属性-rollback"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">&#x8BBE;&#x7F6E;&#x56DE;&#x6EDA;&#x4E8B;&#x52A1;&#x5C5E;&#x6027; (rollback)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#超时和只读属性-timeout-read-only"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">&#x8D85;&#x65F6;&#x548C;&#x53EA;&#x8BFB;&#x5C5E;&#x6027; (timeout read-only)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#web项目-webxml-配置启动-spring-ioc-容器的-listener"><span class="toc-nav-number">6.0.0.0.1.</span> <span class="toc-nav-text">web&#x9879;&#x76EE; web.xml &#x914D;&#x7F6E;&#x542F;&#x52A8; Spring IOC &#x5BB9;&#x5668;&#x7684; Listener</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#jdbctemplate-简介"><span class="toc-nav-number"></span> <span class="toc-nav-text">JdbcTemplate &#x7B80;&#x4ECB;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
         
         </div>
       </aside>

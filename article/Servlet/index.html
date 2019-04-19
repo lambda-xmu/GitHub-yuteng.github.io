@@ -220,9 +220,8 @@
 <img src="http://ww1.sinaimg.cn/large/006vWPzFly1g1tthlcdcwj30p7044t8w.jpg" width="700">
 <a id="more"></a>
 <hr>
-<blockquote>
-<p><strong>Servlet容器响应客户请求的过程</strong></p>
-</blockquote>
+<hr>
+<h2 id="servlet容器响应客户请求的过程">Servlet容器响应客户请求的过程</h2>
 <ul>
 <li>①、Servlet引擎检查是否已经装载并创建了该Servlet的实例对象。如果是，则直接执行第④步，否则,执行第②步。</li>
 <li>②、装载并创建该Servlet的一个实例对象：调用该Servlet的构造器。</li>
@@ -234,16 +233,24 @@
 </li>
 <li>⑤、WEB应 用程序被停止或重新启动之前, Servlet引擎将卸载Servlet ,并在卸载之前调用Servlet的destroy()方法。</li>
 </ul>
+<hr>
+<hr>
 <h2 id="servlet的生命周期">Servlet的生命周期</h2>
 <ul>
-<li>Servlet 是一个接口，一个类如果实现了该接口，要实现 Servlet接口的方法。容器是通过Java的反射API来创建Servlet实例。
+<li>
+<p>Servlet 是一个接口，一个类如果实现了该接口，要实现 Servlet接口的方法。容器是通过Java的反射API来创建Servlet实例。</p>
 <ul>
 <li><strong>一般继承 HttpServlet 类 ，覆盖 doGet、doPost类  针对 HTTP 协议 定制</strong></li>
 <li><strong>GenericServlet(一个抽象类) service为抽象方法</strong></li>
 </ul>
 </li>
+<li>
+<p><strong>Servlet 运行在Servlet容器中，其生命周期由容器来管理，容器调用生命周期方法。</strong></p>
+<ul>
+<li>(Tomcat服务器就是Servlet容器)</li>
 </ul>
-<p><strong>Servlet 运行在Servlet容器中，其生命周期由容器来管理，容器调用生命周期方法。(Tomcat服务器就是Servlet容器)</strong></p>
+</li>
+</ul>
 <hr>
 <ul>
 <li><strong>Servlet的生命周期通过javax.servlet.Servlet接口中</strong>
@@ -272,13 +279,13 @@
 </li>
 </ul>
 <hr>
-<p><strong>Servlet 构造器</strong></p>
+<h3 id="servlet-构造器">Servlet 构造器</h3>
 <ul>
 <li>在Servlet的生命周期中，只被调用一次。只有第一次请求Servlet时，创建 Servlet 实例，调用构造器。(Servlet 是单实例)</li>
 <li>每个Servlet类必须有一个公共的无参数的构造器。</li>
 </ul>
 <hr>
-<p><strong>init()方法</strong></p>
+<h3 id="init方法">init()方法</h3>
 <ul>
 <li>在Servlet的生命周期中，仅执行一次init()方法。在创建好 Servlet 实例立即被调用、用于初始化Servlet。Servlet 处于“已初始化”状态。</li>
 <li>它是在服务器装入 Servlet 时执行的，也可以配置服务器，以在启动服务器 当前 WEB应用被 Servlet 容器加载时创建实例。
@@ -295,7 +302,7 @@
 </li>
 </ul>
 <hr>
-<p><strong>service() 方法</strong></p>
+<h3 id="service-方法">service() 方法</h3>
 <ul>
 <li>被多次调用。</li>
 <li>Servlet的核心，每当一个客户请求一个HttpServlet对象，该对象的Service()方法就要调用。</li>
@@ -314,7 +321,7 @@
 <li><strong>PrintWriter out = response.getWriter();</strong></li>
 </ul>
 <hr>
-<p><strong>destroy()方法</strong></p>
+<h3 id="destroy方法">destroy()方法</h3>
 <ul>
 <li>该方法在整个生命周期中，只会被调用一次，在服务器端停止且卸载Servlet 所在WEB应用 之前执行该方法。
 <ul>
@@ -323,7 +330,7 @@
 </li>
 </ul>
 <hr>
-<h3 id="servlet-注册进webxml">Servlet 注册进web.xml</h3>
+<h2 id="servlet-注册进webxml">Servlet 注册进web.xml</h2>
 <ul>
 <li><strong>ServletConfig</strong> 从Web应用程序的配置信息（在web.xml中配置）中获取初始化的参数信息。
 <ul>
@@ -435,7 +442,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#servlet-web-开发的基石"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Servlet &#x2014;&#x2014; Web &#x5F00;&#x53D1;&#x7684;&#x57FA;&#x77F3;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#servlet的生命周期"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Servlet&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#servlet-注册进webxml"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Servlet &#x6CE8;&#x518C;&#x8FDB;web.xml</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#http"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">HTTP</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#servlet-web-开发的基石"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Servlet &#x2014;&#x2014; Web &#x5F00;&#x53D1;&#x7684;&#x57FA;&#x77F3;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#servlet容器响应客户请求的过程"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Servlet&#x5BB9;&#x5668;&#x54CD;&#x5E94;&#x5BA2;&#x6237;&#x8BF7;&#x6C42;&#x7684;&#x8FC7;&#x7A0B;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#servlet的生命周期"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Servlet&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#servlet-构造器"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Servlet &#x6784;&#x9020;&#x5668;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#init方法"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">init()&#x65B9;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#service-方法"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">service() &#x65B9;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#destroy方法"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">destroy()&#x65B9;&#x6CD5;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#servlet-注册进webxml"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Servlet &#x6CE8;&#x518C;&#x8FDB;web.xml</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#http"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">HTTP</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
         
         </div>
       </aside>

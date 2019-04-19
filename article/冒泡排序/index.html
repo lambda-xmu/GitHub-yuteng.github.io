@@ -212,8 +212,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p><strong>冒泡排序</strong><br>
-<strong>冒泡排序（BubbleSort）基本概念是：依次比较相邻的两个数，将小数放在前面，大数放在后面。</strong></p>
+                <h2 id="冒泡排序">冒泡排序</h2>
+<p><strong>冒泡排序（BubbleSort）基本概念是：依次比较相邻的两个数，将小数放在前面，大数放在后面。</strong></p>
 <a id="more"></a>
 <ul>
 <li>即在第一趟：首先比较第1个和第2个数，将小数放前，大数放后。然后比较第2个数和第3个数，将小数放前，大数放后。</li>
@@ -221,6 +221,7 @@
 </ul>
 <p>循环…从第一个开始 每次比较到 length-1。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BubbleSort</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span>[] arr = &#123; <span class="number">9</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">2</span> &#125;;</span><br><span class="line">		System.out.println(Arrays.toString(arr));</span><br><span class="line">		bubbleSort(arr, arr.length);</span><br><span class="line">		System.out.println(Arrays.toString(arr));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 循环一次，最大值在最后</span></span><br><span class="line">		<span class="comment">// Bubble(arr, arr.length);</span></span><br><span class="line">		<span class="comment">// Bubble(arr, arr.length-1);</span></span><br><span class="line">		<span class="comment">// Bubble(arr, arr.length-2);</span></span><br><span class="line">		<span class="comment">// Bubble(arr, ...);</span></span><br><span class="line">		<span class="comment">// Bubble(arr, 1);</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = length; j &gt;= <span class="number">1</span>; j--) &#123;</span><br><span class="line">			bubble(arr, length);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bubble</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> temp;</span><br><span class="line">		<span class="comment">// 一次排序，最大的数到最后一位</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (arr[i] &gt; arr[i + <span class="number">1</span>]) &#123;</span><br><span class="line">				temp = arr[i];</span><br><span class="line">				arr[i] = arr[i + <span class="number">1</span>];</span><br><span class="line">				arr[i + <span class="number">1</span>] = temp;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="感谢阅读">感谢阅读</h1>
 
                 
 
@@ -280,6 +281,24 @@
             
             <!-- Tabe of Content -->
             <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#冒泡排序"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x5192;&#x6CE1;&#x6392;&#x5E8F;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+        
+        </div>
+      </aside>
+    
 
                 
             <!-- Sidebar Container -->

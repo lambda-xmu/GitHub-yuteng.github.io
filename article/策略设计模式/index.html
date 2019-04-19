@@ -212,31 +212,34 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h4 id="什么是策略设计模式">什么是策略设计模式？</h4>
+                <h2 id="什么是策略设计模式">什么是策略设计模式？</h2>
 <p><strong>策略设计模式—&gt;行为型模式</strong></p>
-<p>策略模式定义了一系列的算法并将每一个算法封装起来，而且使它们还可以相互替换，让算法独立于使用它的客户而独立变化。</p>
-<p><strong>策略模式的最大特点是使得算法可以在不影响客户端的情况下发生变化，从而改变不同的功能。</strong></p>
+<p>策略模式定义了一系列的算法并将每一个算法封装起来，而且使它们还可以相互替换，让算法独立于使用它的客户而独立变化。策略模式的最大特点是<strong>使得算法可以在不影响客户端的情况下发生变化，从而改变不同的功能。</strong></p>
 <p><strong>策略模式的意义：</strong><br>
 1、策略模式使开发人员能够开发出由许多可替换的部分组成的软件，各部分之间是低耦合的关系。<br>
 2、低耦合的特性使软件具有更强的可扩展性，易于维护；更重要的是，它提高了软件的可重用性。</p>
 <a id="more"></a>
 <p><strong>优、缺点</strong><br>
-优点: 可以动态的改变对象的行为。<br>
-缺点: 客户端必须知道所有的策略类，并自行决定使用哪个策略类。策略模式将产生很多策略类。</p>
-<p><strong>策略模式中有三个对象：</strong><br>
-(1)、环境对象(Context)：该类中实现了对抽象策略中定义的接口或者抽象类的引用。<br>
-(2)、抽象策略对象(Strategy)：它可由接口或抽象类来实现。<br>
-(3)、具体策略对象(ConcreteStrategy)：它封装了实现同不功能的不同算法。</p>
-<p><strong>策略模式的实现：</strong><br>
-1.对策略对象定义一个公共接口。<br>
-2.编写策略类，该类实现了上面的公共接口。<br>
-3.在使用策略对象的类中保存一个对策略对象的引用。<br>
-4.在使用策略对象的类中，实现对策略对象的set和get方法或者使用构造方法完成赋值。</p>
-<h4 id="代码如下">代码如下：</h4>
-<p><strong>定义一个接口( 抽象策略)，定义一个方法用于对两个整数进行运算</strong></p>
+优点：可以动态的改变对象的行为。<br>
+缺点： 客户端必须知道所有的策略类，并自行决定使用哪个策略类。策略模式将产生很多策略类。</p>
+<hr>
+<h3 id="策略模式中有三个对象">策略模式中有三个对象</h3>
+<p>(1)、<strong>环境对象(Context)：</strong> 该类中实现了对抽象策略中定义的接口或者抽象类的引用。<br>
+(2)、<strong>抽象策略对象(Strategy)：</strong> 它可由接口或抽象类来实现。<br>
+(3)、<strong>具体策略对象(ConcreteStrategy)：</strong> 它封装了实现同不功能的不同算法。</p>
+<hr>
+<h3 id="策略模式的实现">策略模式的实现</h3>
+<p>1、对策略对象定义一个公共接口。<br>
+2、编写策略类，该类实现了上面的公共接口。<br>
+3、在使用策略对象的类中保存一个对策略对象的引用。<br>
+4、在使用策略对象的类中，实现对策略对象的set和get方法或者使用构造方法完成赋值。</p>
+<hr>
+<h4 id="1-定义一个接口-抽象策略">1、定义一个接口( 抽象策略)</h4>
+<p><strong>定义一个方法用于对两个整数进行运算</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Strategy</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<p><strong>定义具体的算法类，实现两个整数的加减乘除运算，但是外部调用形式需要符合接口的定义。</strong></p>
+<h4 id="2-定义具体的算法类">2、定义具体的算法类</h4>
+<p><strong>实现两个整数的加减乘除运算，但是外部调用形式需要符合接口的定义。</strong></p>
 <p><strong>加法运算 实现公共接口</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AddStrategy</span> <span class="keyword">implements</span> <span class="title">Strategy</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a + b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>减法运算 实现公共接口</strong></p>
@@ -245,10 +248,13 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MultiplyStrategy</span> <span class="keyword">implements</span> <span class="title">Strategy</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a * b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>除法运算 实现公共接口</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DivisionStrategy</span>  <span class="keyword">implements</span> <span class="title">Strategy</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(b!=<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> a/b;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"除数不能为零"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>定义具体的环境角色，持有Strategy接口的引用，并且有get和set方法可以完成策略更换。</strong><br>
-<strong>在环境角色中调用接口的方法完成动作。</strong></p>
+<hr>
+<h4 id="3-定义具体的环境角色">3、定义具体的环境角色</h4>
+<p><strong><code>持有接口的引用</code>，并且有get和set方法可以完成策略更换。在环境角色中调用接口的方法完成动作。</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Context</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Strategy strategy;<span class="comment">//</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Context</span><span class="params">(Strategy strategy)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        <span class="keyword">this</span>.strategy = strategy;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Strategy <span class="title">getStrategy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> strategy;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStrategy</span><span class="params">(Strategy strategy)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.strategy = strategy;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> strategy.calculate(a, b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>客户端在调用时，只需向环境角色设置相应的算法类，然后就可以得到相应的结果。</strong></p>
+<hr>
+<h4 id="4-客户端在调用">4、客户端在调用</h4>
+<p><strong>只需向环境角色设置相应的算法类，然后就可以得到相应的结果。</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StrategyTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//加法</span></span><br><span class="line">        Context context=<span class="keyword">new</span> Context(<span class="keyword">new</span> AddStrategy());</span><br><span class="line">        System.out.println(context.calculate(<span class="number">10</span>, <span class="number">5</span>));</span><br><span class="line">        <span class="comment">//减法</span></span><br><span class="line">        Context context2=<span class="keyword">new</span> Context(<span class="keyword">new</span> SubstractStrategy());</span><br><span class="line">        System.out.println(context2.calculate(<span class="number">3</span>, <span class="number">2</span>));</span><br><span class="line">        <span class="comment">//乘法</span></span><br><span class="line">        Context context3=<span class="keyword">new</span> Context(<span class="keyword">new</span> MultiplyStrategy());</span><br><span class="line">        System.out.println(context3.calculate(<span class="number">6</span>, <span class="number">8</span>));</span><br><span class="line">        <span class="comment">//除法</span></span><br><span class="line">        Context context4=<span class="keyword">new</span> Context(<span class="keyword">new</span> DivisionStrategy());</span><br><span class="line">        System.out.println(context4.calculate(<span class="number">90</span>, <span class="number">9</span>));    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551442650328&di=78dfb03450cc5fff5d31ea92de81ba1f&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160719%2F6ea36d17d5e94124ad1791eadd923554_th.jpg" width="150">
@@ -325,7 +331,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#什么是策略设计模式"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4EC0;&#x4E48;&#x662F;&#x7B56;&#x7565;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#xFF1F;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#代码如下"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#什么是策略设计模式"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4EC0;&#x4E48;&#x662F;&#x7B56;&#x7565;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#xFF1F;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#策略模式中有三个对象"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x7B56;&#x7565;&#x6A21;&#x5F0F;&#x4E2D;&#x6709;&#x4E09;&#x4E2A;&#x5BF9;&#x8C61;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#策略模式的实现"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">&#x7B56;&#x7565;&#x6A21;&#x5F0F;&#x7684;&#x5B9E;&#x73B0;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-定义一个接口-抽象策略"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">1&#x3001;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;( &#x62BD;&#x8C61;&#x7B56;&#x7565;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-定义具体的算法类"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">2&#x3001;&#x5B9A;&#x4E49;&#x5177;&#x4F53;&#x7684;&#x7B97;&#x6CD5;&#x7C7B;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-定义具体的环境角色"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">3&#x3001;&#x5B9A;&#x4E49;&#x5177;&#x4F53;&#x7684;&#x73AF;&#x5883;&#x89D2;&#x8272;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4-客户端在调用"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">4&#x3001;&#x5BA2;&#x6237;&#x7AEF;&#x5728;&#x8C03;&#x7528;</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
         
         </div>
       </aside>

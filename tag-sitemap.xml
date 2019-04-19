@@ -2,13 +2,6 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/Servlet/</loc>
-        <lastmod>2019-04-16T08:08:37.913Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/tags/JDBC/</loc>
         <lastmod>2019-04-16T08:11:31.433Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -16,43 +9,8 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/Spring%E5%85%A8%E5%AE%B6%E6%A1%B6/</loc>
-        <lastmod>2019-04-16T08:11:50.162Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://github-yuteng.github.io/tags/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/</loc>
-        <lastmod>2019-04-16T08:12:07.745Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://github-yuteng.github.io/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
-        <lastmod>2019-04-16T08:12:10.227Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/tags/%E9%87%8D%E4%B8%AD%E4%B9%8B%E9%87%8D/</loc>
         <lastmod>2019-04-16T08:12:36.457Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://github-yuteng.github.io/tags/%E7%BA%BF%E7%A8%8B/</loc>
-        <lastmod>2019-04-16T08:12:44.964Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://github-yuteng.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</loc>
-        <lastmod>2019-04-16T08:12:50.121Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -86,13 +44,6 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/JVM/</loc>
-        <lastmod>2019-04-17T05:09:02.266Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/tags/Maven/</loc>
         <lastmod>2019-04-17T09:08:46.713Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -101,7 +52,56 @@
 
     <url>
         <loc>https://github-yuteng.github.io/tags/ORM-%E6%A1%86%E6%9E%B6/</loc>
-        <lastmod>2019-04-17T13:35:04.046Z</lastmod>
+        <lastmod>2019-04-18T03:45:41.926Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
+        <lastmod>2019-04-18T08:53:38.059Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</loc>
+        <lastmod>2019-04-18T08:57:15.706Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/</loc>
+        <lastmod>2019-04-18T08:58:42.866Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/%E7%BA%BF%E7%A8%8B/</loc>
+        <lastmod>2019-04-18T09:02:14.333Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/JVM/</loc>
+        <lastmod>2019-04-18T09:05:09.123Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/Servlet/</loc>
+        <lastmod>2019-04-18T12:19:56.800Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/Spring%E5%85%A8%E5%AE%B6%E6%A1%B6/</loc>
+        <lastmod>2019-04-18T12:33:23.351Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
