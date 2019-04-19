@@ -481,11 +481,9 @@
 </li>
 </ul>
 <p><strong>切点（pointcut）：</strong> 每个类都拥有多个连接点：例如 Calculator 的所有方法实际上都是连接点，即连接点是程序类中客观存在的事务。</p>
-<blockquote>
-<p>** AOP 通过切点定位到特定的连接点。类比：连接点相当于数据库中的记录，切点相当于查询条件。**<br>
+<p><strong>AOP 通过切点定位到特定的连接点。类比：连接点相当于数据库中的记录，切点相当于查询条件。</strong><br>
 <code>切点和连接点不是一对一的关系，一个切点匹配多个连接点。</code><br>
-切点通过 org.springframework.aop.Pointcut 接口进行描述，它使用类和方法作为连接点的查询条件。</p>
-</blockquote>
+切点通过 org.springframework.aop.Pointcut 接口进行描述，它使用类和方法作为连接点查询条件。</p>
 <hr>
 <h3 id="4-在-spring-中启用-aspectj-注解支持">4、在 Spring 中启用 AspectJ 注解支持</h3>
 <ul>
