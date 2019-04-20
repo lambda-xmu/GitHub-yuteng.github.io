@@ -7,8 +7,24 @@
     </url>
 
     <url>
+        <loc>https://github-yuteng.github.io/article/Hibernate/</loc>
+        <lastmod>2019-04-20T12:30:34.391Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/article/JDBC/</loc>
+        <lastmod>2019-04-20T11:57:49.416Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://github-yuteng.github.io/article/Spring/</loc>
-        <lastmod>2019-04-19T06:35:48.600Z</lastmod>
+        <lastmod>2019-04-20T11:49:40.337Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -167,14 +183,6 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/article/Hibernate/</loc>
-        <lastmod>2019-04-16T09:13:47.230Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/article/Hexo%20%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
         <lastmod>2019-04-16T09:07:26.931Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -201,14 +209,6 @@
     <url>
         <loc>https://github-yuteng.github.io/article/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84(%E4%BA%8C)/</loc>
         <lastmod>2019-04-16T08:12:33.241Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://github-yuteng.github.io/article/JDBC/</loc>
-        <lastmod>2019-04-16T08:11:31.433Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

@@ -149,14 +149,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -590,7 +590,7 @@
 <h4 id="环绕通知">环绕通知</h4>
 <ul>
 <li>环绕通知是所有通知类型中功能最为强大的, 能够全面地控制连接点。 甚至可以控制是否执行连接点。</li>
-<li>对于环绕通知来说, **连接点的参数类型必须是 ProceedingJoinPoint。**它是 JoinPoint 的子接口, 允许控制何时执行, 是否执行连接点。</li>
+<li>对于环绕通知来说, <strong>连接点的参数类型必须是 ProceedingJoinPoint</strong>。它是 JoinPoint 的子接口, 允许控制何时执行, 是否执行连接点。</li>
 <li><strong>在环绕通知中需要明确调用 ProceedingJoinPoint 的 proceed() 方法来执行被代理的方法。</strong></li>
 <li>如果忘记这样做就会导致通知被执行了, 但目标方法没有被执行。</li>
 </ul>
@@ -638,7 +638,7 @@
 <ul>
 <li>当使用 XML 声明切面时, 需要在 <beans>  根元素中导入 aop：Schema</beans></li>
 <li>在 Bean 配置文件中, 所有的 Spring AOP 配置都必须定义在 &lt;aop：config&gt; 元素内部。</li>
-<li>对于每个切面而言, 都要创建一个 &lt;aop：aspect&gt; 元素来为具体的切面实现引用后端 Bean 实例。</li>
+<li>对于每个切面, 都要创建一个 &lt;aop：aspect&gt; 元素来为具体的切面实现引用后端 Bean 实例。</li>
 <li>切面 Bean 必须有一个 id 标示符, 供 &lt;aop：aspect&gt; 元素引用。</li>
 </ul>
 <hr>
@@ -651,50 +651,48 @@
 <li>2、&lt;aop：config&gt; 元素下 ——&gt; 定义在 &lt;aop：config&gt; 元素下： 对所有切面都有效。</li>
 </ul>
 </li>
-<li>** 基于 XML 的 AOP 配置不允许在切入点表达式中用名称引用其他切入点。**</li>
+<li><strong>基于 XML 的 AOP 配置不允许在切入点表达式中用名称引用其他切入点。</strong></li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置 bean --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"Calculator"</span> <span class="attr">class</span>=<span class="string">"spring.aop.xml.CalculatorImpl"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 配置切面的 bean. --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"loggingAspect"</span> <span class="attr">class</span>=<span class="string">"spring.aop.xml.LoggingAspect"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"vlidationAspect"</span> <span class="attr">class</span>=<span class="string">"spring.aop.xml.VlidationAspect"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 配置 AOP --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop：config</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 配置切点表达式 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">aop：pointcut</span> <span class="attr">expression</span>=<span class="string">"execution(* spring.aop.xml.Calculator.*(int, int))"</span> <span class="attr">id</span>=<span class="string">"pointcut"</span>/&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 配置切面及通知 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">aop：aspect</span> <span class="attr">ref</span>=<span class="string">"loggingAspect"</span> <span class="attr">order</span>=<span class="string">"2"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">aop：before</span> <span class="attr">method</span>=<span class="string">"beforeMethod"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pointcut"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">aop：after</span> <span class="attr">method</span>=<span class="string">"afterMethod"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pointcut"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">aop：after-throwing</span> <span class="attr">method</span>=<span class="string">"afterThrowing"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pointcut"</span> <span class="attr">throwing</span>=<span class="string">"e"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">aop：after-returning</span> <span class="attr">method</span>=<span class="string">"afterReturning"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pointcut"</span> <span class="attr">returning</span>=<span class="string">"result"</span>/&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--  </span></span><br><span class="line"><span class="comment">		&lt;aop：around method="aroundMethod" pointcut-ref="pointcut"/&gt;</span></span><br><span class="line"><span class="comment">		--&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">aop：aspect</span>&gt;</span>	</span><br><span class="line">	<span class="tag">&lt;<span class="name">aop：aspect</span> <span class="attr">ref</span>=<span class="string">"vlidationAspect"</span> <span class="attr">order</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">aop：before</span> <span class="attr">method</span>=<span class="string">"validateArgs"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pointcut"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">aop：aspect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop：config</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <hr>
 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551442650328&di=78dfb03450cc5fff5d31ea92de81ba1f&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160719%2F6ea36d17d5e94124ad1791eadd923554_th.jpg" width="150">
-<h1 id="spring-中的事务管理">Spring 中的事务管理</h1>
-<p>** Spring 既支持编程式事务管理, 也支持声明式的事务管理 **</p>
+<h2 id="四-spring-中的事务管理">四、Spring 中的事务管理</h2>
+<p><strong>Spring 既支持编程式事务管理, 也支持声明式的事务管理。</strong></p>
 <p>1、编程式事务管理：将事务管理代码嵌入到业务方法中来控制事务的提交和回滚。必须在每个事务操作中包含额外的事务管理代码。<br>
 2、<strong>声明式事务管理</strong>：大多数情况下比编程式事务管理更好用。它将事务管理代码从业务方法中分离出来, 以声明的方式来实现事务管理。</p>
-<blockquote>
-<p>** 事务管理作为一种横切关注点, 可以通过 AOP 方法模块化。 Spring 通过 Spring AOP 框架支持声明式事务管理。**</p>
-</blockquote>
+<p><strong>事务管理作为一种横切关注点, 可以通过 AOP 方法模块化。 Spring 通过 Spring AOP 框架支持声明式事务管理。</strong></p>
 <ul>
 <li>Spring 从不同的事务管理 API 中抽象了一整套的事务机制。 开发人员不必了解底层的事务 API, 就可以利用这些事务机制。</li>
 <li>有了这些事务机制, 事务管理代码就能独立于特定的事务技术了。</li>
 </ul>
-<h2 id="用-transactional-注解-声明式地管理事务">用 @Transactional 注解 声明式地管理事务</h2>
-<p>1、** 配置以下信息 **</p>
+<h3 id="1-用-transactional-注解-声明式地管理事务">1、用 @Transactional 注解 声明式地管理事务</h3>
+<p>1、<strong>配置以下信息</strong></p>
 <ul>
-<li>** 添加&lt;tx：&gt; 命名空间 **</li>
+<li><strong>添加&lt;tx：&gt; 命名空间</strong></li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 1、 配置事务管理器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 2、注解驱动 启用事务注解 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tx：annotation-driven</span> <span class="attr">transaction-manager</span>=<span class="string">"transactionManager"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-<p>2、** 在相应的方法上用 @Transactional 注解标注 **</p>
+<p>2、<strong>在相应的方法上用 @Transactional 注解标注</strong></p>
 <hr>
-<h2 id="用-xml-事务通知-声明式地管理事务">用 XML 事务通知 声明式地管理事务</h2>
-<p>** 事务管理是一种横切关注点 **</p>
-<blockquote>
-<p>1、添加&lt;tx：&gt; 命名空间	<br>
-2、配置事务管理器 transactionManager <code>hibernateTransactionManager mybatisTransactionManager</code><br>
+<hr>
+<h3 id="2-用-xml-事务通知-声明式地管理事务">2、用 XML 事务通知 声明式地管理事务</h3>
+<p>1、添加&lt;tx：&gt; 命名空间。<br>
+2、配置事务管理器 transactionManager 。<br>
+<code>hibernateTransactionManager mybatisTransactionManager</code><br>
 3、配置元素声明事务通知 &lt;tx：advice&gt;&lt;/tx：advice&gt;<br>
 4、配置事务切入点 &lt;aop：config&gt;<br>
-5、在 &lt;aop：config&gt; 中配置 &lt;aop：pointcut&gt; 表达式<br>
-6、在 &lt;aop：config&gt; 中声明一个增强器通知与切入点关联起来<br>
-&lt;aop：advisor advice-ref=“txAdvice” pointcut-ref=“txPointCut”/&gt;</p>
-</blockquote>
-<p>** 由于 Spring AOP 是基于代理的方法, 所以只能增强公共方法。因此, 只有公有方法才能通过 Spring AOP 进行事务管理。**</p>
+5、在 &lt;aop：config&gt; 中配置 &lt;aop：pointcut&gt; 表达式。<br>
+6、在 &lt;aop：config&gt; 中声明一个增强器通知与切入点关联起来 。</p>
+<p>&lt;aop：advisor advice-ref=“txAdvice” pointcut-ref=“txPointCut”/&gt;</p>
+<p><strong>由于 Spring AOP 是基于代理的方法, 所以只能增强公共方法。因此, 只有公有方法才能通过 Spring AOP 进行事务管理。</strong></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 1. 配置事务管理器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"transactionManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 2. 配置事务属性 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tx:advice</span> <span class="attr">id</span>=<span class="string">"txAdvice"</span> <span class="attr">transaction-manager</span>=<span class="string">"transactionManager"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 根据方法名指定事务的属性 传播行为 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"purchase"</span> <span class="attr">propagation</span>=<span class="string">"REQUIRES_NEW"</span> <span class="attr">isolation</span>=<span class="string">"READ-COMMITTED"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"get*"</span> <span class="attr">read-only</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">"find*"</span> <span class="attr">read-only</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">tx:advice</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 3. 配置事务切入点, 以及把事务切入点和事务属性关联起来 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">expression</span>=<span class="string">"execution(* spring.tx.xml.service.*.*(..))"</span> <span class="attr">id</span>=<span class="string">"txPointCut"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">advice-ref</span>=<span class="string">"txAdvice"</span> <span class="attr">pointcut-ref</span>=<span class="string">"txPointCut"</span>/&gt;</span>	</span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="事务传播行为-propagation-behavior">事务传播行为 (propagation behavior)</h2>
-<p>** 当事务方法被另一个事务方法调用时, 必须指定事务应该如何传播 **<br>
-例如： 方法可能继续在现有事务中运行, 也可能开启一个新事务, 并在自己的事务中运行。</p>
-<p>** 事务传播属性可以在 @Transactional 注解的 propagation 属性中定义 (PROPAGATION_REQUIRED) 默认传播行为 **</p>
 <hr>
-<p>** 事务的传播行为可以由传播属性指定。 Spring 定义了 7  种类传播行为 **</p>
+<h3 id="3-事务传播行为-propagation-behavior">3、事务传播行为 (propagation behavior)</h3>
+<p><strong>当事务方法被另一个事务方法调用时, 必须指定事务应该如何传播</strong><br>
+例如： 方法可能继续在现有事务中运行, 也可能开启一个新事务, 并在自己的事务中运行。</p>
+<p><strong>事务传播属性可以在 @Transactional 注解的 propagation 属性中定义 (PROPAGATION_REQUIRED) 默认传播行为。</strong></p>
+<hr>
+<p><strong>事务的传播行为可以由传播属性指定。 Spring 定义了 7  种类传播行为</strong></p>
 <table>
 <thead>
 <tr>
@@ -733,35 +731,34 @@
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>** REQUIRED 传播行为 **</p>
-</blockquote>
+<hr>
+<h4 id="required-传播行为">REQUIRED 传播行为</h4>
 <ul>
 <li>如果当前没有事务，就新建一个事务，如果已经存在一个事务中，加入到这个事务中。</li>
 </ul>
 <img src="http://ww1.sinaimg.cn/large/006vWPzFly1g1geuy4y6tj30qy0890t6.jpg" width="700">
 <hr>
-<blockquote>
-<p>** REQUIRES_NEW 传播行为 **</p>
-</blockquote>
+<h4 id="requires_new-传播行为">REQUIRES_NEW 传播行为</h4>
 <ul>
 <li>它表示该方法必须启动一个新事务, 并在自己的事务内运行。 如果有事务在运行, 就应该先挂起它。</li>
 </ul>
 <img src="http://ww1.sinaimg.cn/large/006vWPzFly1g1gesufobfj30q90a0dgw.jpg" width="700">
-<h3 id="并发事务所导致的问题">并发事务所导致的问题</h3>
+<hr>
+<hr>
+<h3 id="4-并发事务所导致的问题">4、并发事务所导致的问题</h3>
 <ul>
 <li>当同一个应用程序或者不同应用程序中的多个事务在同一个数据集上并发执行时, 如果没有采取必要的隔离机制,可能会出现许多意外的问题</li>
 </ul>
-<p>** 并发事务所导致的问题可以分为下面三种类型：**</p>
+<p><strong>并发事务所导致的问题可以分为下面三种类型：</strong></p>
 <ul>
-<li>** 脏读：** 对于两个事务 T1, T2, T1 读取了已经被 T2 更新但还没有被提交的字段. 之后, 若 T2 回滚, T1读取的内容就是临时且无效的。</li>
-<li>** 不可重复读：** 对于两个事务 T1, T2, T1 读取了一个字段, 然后 T2 更新了该字段. 之后, T1再次读取同一个字段, 值就不同了。</li>
-<li>** 幻读： ** 对于两个事务 T1, T2, T1 从一个表中读取了一个字段, 然后 T2 在该表中插入了一些新的行. 之后, 如果 T1 再次读取同一个表, 就会多出几行。</li>
+<li><strong>脏读：</strong> 对于两个事务 T1, T2, T1 读取了已经被 T2 更新但还没有被提交的字段. 之后, 若 T2 回滚, T1读取的内容就是临时且无效的。</li>
+<li><strong>不可重复读：</strong> 对于两个事务 T1, T2, T1 读取了一个字段, 然后 T2 更新了该字段. 之后, T1再次读取同一个字段, 值就不同了。</li>
+<li><strong>幻读：</strong> 对于两个事务 T1, T2, T1 从一个表中读取了一个字段, 然后 T2 在该表中插入了一些新的行. 之后, 如果 T1 再次读取同一个表, 就会多出几行。</li>
 </ul>
 <hr>
-<h2 id="事务的隔离级别-isolation-level">事务的隔离级别 (Isolation level)</h2>
-<p>** Spring 支持的事务隔离级别 **<br>
-** 事务的隔离级别要得到底层数据库引擎的支持, 而不是应用程序或者框架的支持。**</p>
+<h3 id="5-事务的隔离级别-isolation-level">5、事务的隔离级别 (Isolation level)</h3>
+<p><strong>Spring 支持的事务隔离级别</strong><br>
+<strong>事务的隔离级别要得到底层数据库引擎的支持, 而不是应用程序或者框架的支持。</strong></p>
 <table>
 <thead>
 <tr>
@@ -779,7 +776,7 @@
 <td style="text-align:left">是</td>
 </tr>
 <tr>
-<td style="text-align:left">** READ-COMMITTED (读已提交数据)**</td>
+<td style="text-align:left"><strong>READ-COMMITTED (读已提交数据)</strong></td>
 <td style="text-align:left">否</td>
 <td style="text-align:center">是</td>
 <td style="text-align:left">是</td>
@@ -799,46 +796,47 @@
 </tbody>
 </table>
 <hr>
-<blockquote>
-<p>** 设置隔离事务属性 **</p>
-</blockquote>
+<p><strong>设置隔离事务属性</strong></p>
 <ul>
 <li>用 @Transactional 注解声明式地管理事务时可以在 @Transactional 的 <code>isolation</code> 属性中设置隔离级别。</li>
-<li>用 事务通知 声明式地管理事务时可以在 &lt;tx：advice&gt;&lt;tx：attributes&gt;&lt;tx：method isolation=&quot; &quot;&gt; 元素中指定隔离级别。</li>
+<li>用 事务通知 声明式地管理事务时可以在<br>
+&lt;tx：advice&gt;&lt;tx：attributes&gt;&lt;tx：method isolation=&quot; &quot;&gt; 元素中指定隔离级别。</li>
 </ul>
 <hr>
-<h2 id="设置回滚事务属性-rollback">设置回滚事务属性 (rollback)</h2>
-<p>** 默认情况下只有未检查异常(RuntimeException和Error类型的异常)会导致事务回滚。而受检查异常不会。**</p>
-<blockquote>
+<hr>
+<h3 id="6-设置回滚事务属性-rollback">6、设置回滚事务属性 (rollback)</h3>
+<p><strong>默认情况下只有未检查异常(RuntimeException和Error类型的异常)会导致事务回滚。而受检查异常不会。</strong></p>
 <p>注解声明式地管理事务 事务的回滚规则可以通过 @Transactional 注解的 <code>rollbackFor 和 noRollbackFor</code> 属性来定义。</p>
-</blockquote>
 <ul>
 <li>这两个属性被声明为 Class[] 类型的, 因此可以为这两个属性指定多个异常类。</li>
 </ul>
-<blockquote>
-<p>事务通知 声明式地管理事务时可以在 &lt;tx：advice&gt;&lt;tx：attributes&gt;&lt;tx：method rollbackFor=&quot; &quot;&gt; 元素中指定回滚规则。</p>
-</blockquote>
+<p><strong>事务通知 声明式地管理事务时可以在<br>
+&lt;tx：advice&gt;&lt;tx：attributes&gt;&lt;tx：method rollbackFor=&quot; &quot;&gt; 元素中指定回滚规则。</strong></p>
 <ul>
 <li>如果有不止一种异常, 用逗号分隔。</li>
 </ul>
-<h2 id="超时和只读属性-timeout-read-only">超时和只读属性 (timeout read-only)</h2>
-<p>** 由于事务可以在行和表上获得锁,因此长事务会占用资源, 并对整体性能产生影响。**</p>
-<blockquote>
-<p>如果一个事物只读取数据但不做修改, 数据库引擎可以对这个事务进行优化。</p>
-</blockquote>
+<hr>
+<hr>
+<h3 id="7-超时和只读属性-timeout-read-only">7、超时和只读属性 (timeout read-only)</h3>
+<p><strong>由于事务可以在行和表上获得锁,因此长事务会占用资源, 并对整体性能产生影响。</strong></p>
+<p><strong>如果一个事物<code>只读取数据但不做修改</code>, 数据库引擎可以对这个事务进行优化。</strong></p>
 <ul>
-<li>** 超时事务属性：** 事务在强制回滚之前可以保持多久. 这样可以防止长期运行的事务占用资源。</li>
-<li>** 只读事务属性：** 表示这个事务只读取数据但不更新数据, 这样可以帮助数据库引擎优化事务。</li>
+<li><strong>超时事务属性：</strong> 事务在强制回滚之前可以保持多久. 这样可以防止长期运行的事务占用资源。</li>
+<li><strong>只读事务属性：</strong> 表示这个事务只读取数据但不更新数据, 这样可以帮助数据库引擎优化事务。</li>
 </ul>
-<blockquote>
-<p>用 @Transactional 注解声明式地管理事务时可以在 @Transactional 的 <code>read-only timeout</code>(秒级别) 属性中设置。<br>
-用 事务通知 声明式地管理事务时可以在&lt;tx：advice&gt;&lt;tx：attributes&gt;&lt;tx：method read-only=&quot;&quot; timeout=&quot;&quot;&gt;元素中指定。</p>
-</blockquote>
-<h6 id="web项目-webxml-配置启动-spring-ioc-容器的-listener">web项目 web.xml 配置启动 Spring IOC 容器的 Listener</h6>
+<hr>
+<ul>
+<li>用 @Transactional 注解声明式地管理事务时可以在 @Transactional 的 <code>read-only timeout</code>(秒级别) 属性中设置。</li>
+<li>用 事务通知 声明式地管理事务时可以在<br>
+&lt;tx：advice&gt;&lt;tx：attributes&gt;&lt;tx：method read-only=&quot;&quot; timeout=&quot;&quot;&gt;元素中指定。</li>
+</ul>
+<hr>
+<hr>
+<h1 id="webxml-配置启动-spring-ioc-容器的-listener">web.xml 配置启动 Spring IOC 容器的 Listener</h1>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置启动 Spring IOC 容器的 Listener --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- needed for ContextLoaderListener --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:applicationcontext.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Bootstraps the root web application context before servlet initialization --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>org.springframework.web.context.ContextLoaderListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>springDispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:springmvc.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>springDispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h1 id="jdbctemplate-简介">JdbcTemplate 简介</h1>
-<p>** 为了使 JDBC 更加易于使用, Spring 在 JDBC API 上定义了一个抽象层, 以此建立一个 JDBC 存取框架。 **</p>
+<p><strong>为了使 JDBC 更加易于使用, Spring在JDBC API上定义了一个抽象层, 建立一个 JDBC 存取框架。</strong></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置 Spirng 的 JdbcTemplate --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"jdbcTemplate"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.core.JdbcTemplate"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>使用 SQL 中列的别名完成列名和类的属性名的映射。 例如 last_name lastName</li>
@@ -917,7 +915,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一-具体描述"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;&#x5177;&#x4F53;&#x63CF;&#x8FF0;&#xFF1A;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二-spring-容器"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;Spring &#x5BB9;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-iocdi"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">1&#x3001; IOC&#xFF08;DI&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-xml-配置里的-bean-自动装配"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">2&#x3001;XML &#x914D;&#x7F6E;&#x91CC;&#x7684; Bean &#x81EA;&#x52A8;&#x88C5;&#x914D;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-bean-的作用域"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">3&#x3001;Bean &#x7684;&#x4F5C;&#x7528;&#x57DF;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-ioc-容器中-bean-的生命周期"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">4&#x3001;IOC &#x5BB9;&#x5668;&#x4E2D; Bean &#x7684;&#x751F;&#x547D;&#x5468;&#x671F;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5-创建-bean-后置处理器后的生命周期-比较-4"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">5&#x3001;&#x521B;&#x5EFA; Bean &#x540E;&#x7F6E;&#x5904;&#x7406;&#x5668;&#x540E;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F; &#x1F446;&#x6BD4;&#x8F83; 4</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#6-使用外部属性文件"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">6&#x3001;&#x4F7F;&#x7528;&#x5916;&#x90E8;&#x5C5E;&#x6027;&#x6587;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#7-通过调用静态工厂方法创建-bean"><span class="toc-nav-number">2.7.</span> <span class="toc-nav-text">7&#x3001;&#x901A;&#x8FC7;&#x8C03;&#x7528;&#x9759;&#x6001;&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x521B;&#x5EFA; Bean</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#8-通过调用实例工厂方法创建-bean"><span class="toc-nav-number">2.8.</span> <span class="toc-nav-text">8&#x3001;&#x901A;&#x8FC7;&#x8C03;&#x7528;&#x5B9E;&#x4F8B;&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x521B;&#x5EFA; Bean</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#9-在-classpath-中扫描组件"><span class="toc-nav-number">2.9.</span> <span class="toc-nav-text">9&#x3001;&#x5728; classpath &#x4E2D;&#x626B;&#x63CF;&#x7EC4;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#10-组件装配-自动注入"><span class="toc-nav-number">2.10.</span> <span class="toc-nav-text">10&#x3001;&#x7EC4;&#x4EF6;&#x88C5;&#x914D; &#x81EA;&#x52A8;&#x6CE8;&#x5165;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#11-spring表达式语言spel"><span class="toc-nav-number">2.11.</span> <span class="toc-nav-text">11&#x3001;Spring&#x8868;&#x8FBE;&#x5F0F;&#x8BED;&#x8A00;&#xFF1A;SpEL</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三-aspect-oriented-programming"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x4E09;&#x3001;Aspect-Oriented Programming</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-aop-面向切面编程"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">1&#x3001;AOP &#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-使用动态代理解决上述问题"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">2&#x3001;&#x4F7F;&#x7528;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x89E3;&#x51B3;&#x4E0A;&#x8FF0;&#x95EE;&#x9898;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-aop-术语"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">3&#x3001;AOP &#x672F;&#x8BED;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-在-spring-中启用-aspectj-注解支持"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">4&#x3001;&#x5728; Spring &#x4E2D;&#x542F;&#x7528; AspectJ &#x6CE8;&#x89E3;&#x652F;&#x6301;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5-用-aspectj-注解声明切面"><span class="toc-nav-number">3.5.</span> <span class="toc-nav-text">5&#x3001;&#x7528; AspectJ &#x6CE8;&#x89E3;&#x58F0;&#x660E;&#x5207;&#x9762;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#指定切面的优先级"><span class="toc-nav-number">3.5.1.</span> <span class="toc-nav-text">&#x6307;&#x5B9A;&#x5207;&#x9762;&#x7684;&#x4F18;&#x5148;&#x7EA7;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#前置通知在方法执行之前执行的通知"><span class="toc-nav-number">3.5.2.</span> <span class="toc-nav-text">&#x524D;&#x7F6E;&#x901A;&#x77E5;&#xFF1A;&#x5728;&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x4E4B;&#x524D;&#x6267;&#x884C;&#x7684;&#x901A;&#x77E5;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#后置通知在目标方法执行后"><span class="toc-nav-number">3.5.3.</span> <span class="toc-nav-text">&#x540E;&#x7F6E;&#x901A;&#x77E5;&#xFF1A;&#x5728;&#x76EE;&#x6807;&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x540E;&#x3002;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#返回通知在方法正常结束后执行的代码"><span class="toc-nav-number">3.5.4.</span> <span class="toc-nav-text">&#x8FD4;&#x56DE;&#x901A;&#x77E5;&#xFF1A;&#x5728;&#x65B9;&#x6CD5;&#x6B63;&#x5E38;&#x7ED3;&#x675F;&#x540E;&#x6267;&#x884C;&#x7684;&#x4EE3;&#x7801;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#异常通知在目标方法出现异常时会执行的代码"><span class="toc-nav-number">3.5.5.</span> <span class="toc-nav-text">&#x5F02;&#x5E38;&#x901A;&#x77E5;&#xFF1A;&#x5728;&#x76EE;&#x6807;&#x65B9;&#x6CD5;&#x51FA;&#x73B0;&#x5F02;&#x5E38;&#x65F6;&#x4F1A;&#x6267;&#x884C;&#x7684;&#x4EE3;&#x7801;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#环绕通知"><span class="toc-nav-number">3.5.6.</span> <span class="toc-nav-text">&#x73AF;&#x7ED5;&#x901A;&#x77E5;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#重用切入点定义"><span class="toc-nav-number">3.5.7.</span> <span class="toc-nav-text">&#x91CD;&#x7528;&#x5207;&#x5165;&#x70B9;&#x5B9A;&#x4E49;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#引入通知很少使用"><span class="toc-nav-number">3.5.8.</span> <span class="toc-nav-text">&#x5F15;&#x5165;&#x901A;&#x77E5;&#xFF08;&#x5F88;&#x5C11;&#x4F7F;&#x7528;&#xFF09;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#6-用基于-xml-的配置声明切面"><span class="toc-nav-number">3.6.</span> <span class="toc-nav-text">6&#x3001;&#x7528;&#x57FA;&#x4E8E; XML &#x7684;&#x914D;&#x7F6E;&#x58F0;&#x660E;&#x5207;&#x9762;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#基于-xml声明切面"><span class="toc-nav-number">3.6.1.</span> <span class="toc-nav-text">&#x57FA;&#x4E8E; XML&#xFF1A;&#x58F0;&#x660E;&#x5207;&#x9762;</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#spring-中的事务管理"><span class="toc-nav-number"></span> <span class="toc-nav-text">Spring &#x4E2D;&#x7684;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#用-transactional-注解-声明式地管理事务"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x7528; @Transactional &#x6CE8;&#x89E3; &#x58F0;&#x660E;&#x5F0F;&#x5730;&#x7BA1;&#x7406;&#x4E8B;&#x52A1;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#用-xml-事务通知-声明式地管理事务"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x7528; XML &#x4E8B;&#x52A1;&#x901A;&#x77E5; &#x58F0;&#x660E;&#x5F0F;&#x5730;&#x7BA1;&#x7406;&#x4E8B;&#x52A1;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#事务传播行为-propagation-behavior"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x4E8B;&#x52A1;&#x4F20;&#x64AD;&#x884C;&#x4E3A; (propagation behavior)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#并发事务所导致的问题"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">&#x5E76;&#x53D1;&#x4E8B;&#x52A1;&#x6240;&#x5BFC;&#x81F4;&#x7684;&#x95EE;&#x9898;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#事务的隔离级别-isolation-level"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x4E8B;&#x52A1;&#x7684;&#x9694;&#x79BB;&#x7EA7;&#x522B; (Isolation level)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#设置回滚事务属性-rollback"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">&#x8BBE;&#x7F6E;&#x56DE;&#x6EDA;&#x4E8B;&#x52A1;&#x5C5E;&#x6027; (rollback)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#超时和只读属性-timeout-read-only"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">&#x8D85;&#x65F6;&#x548C;&#x53EA;&#x8BFB;&#x5C5E;&#x6027; (timeout read-only)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#web项目-webxml-配置启动-spring-ioc-容器的-listener"><span class="toc-nav-number">6.0.0.0.1.</span> <span class="toc-nav-text">web&#x9879;&#x76EE; web.xml &#x914D;&#x7F6E;&#x542F;&#x52A8; Spring IOC &#x5BB9;&#x5668;&#x7684; Listener</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#jdbctemplate-简介"><span class="toc-nav-number"></span> <span class="toc-nav-text">JdbcTemplate &#x7B80;&#x4ECB;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一-具体描述"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;&#x5177;&#x4F53;&#x63CF;&#x8FF0;&#xFF1A;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二-spring-容器"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;Spring &#x5BB9;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-iocdi"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">1&#x3001; IOC&#xFF08;DI&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-xml-配置里的-bean-自动装配"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">2&#x3001;XML &#x914D;&#x7F6E;&#x91CC;&#x7684; Bean &#x81EA;&#x52A8;&#x88C5;&#x914D;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-bean-的作用域"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">3&#x3001;Bean &#x7684;&#x4F5C;&#x7528;&#x57DF;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-ioc-容器中-bean-的生命周期"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">4&#x3001;IOC &#x5BB9;&#x5668;&#x4E2D; Bean &#x7684;&#x751F;&#x547D;&#x5468;&#x671F;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5-创建-bean-后置处理器后的生命周期-比较-4"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">5&#x3001;&#x521B;&#x5EFA; Bean &#x540E;&#x7F6E;&#x5904;&#x7406;&#x5668;&#x540E;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F; &#x1F446;&#x6BD4;&#x8F83; 4</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#6-使用外部属性文件"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">6&#x3001;&#x4F7F;&#x7528;&#x5916;&#x90E8;&#x5C5E;&#x6027;&#x6587;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#7-通过调用静态工厂方法创建-bean"><span class="toc-nav-number">2.7.</span> <span class="toc-nav-text">7&#x3001;&#x901A;&#x8FC7;&#x8C03;&#x7528;&#x9759;&#x6001;&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x521B;&#x5EFA; Bean</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#8-通过调用实例工厂方法创建-bean"><span class="toc-nav-number">2.8.</span> <span class="toc-nav-text">8&#x3001;&#x901A;&#x8FC7;&#x8C03;&#x7528;&#x5B9E;&#x4F8B;&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#x521B;&#x5EFA; Bean</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#9-在-classpath-中扫描组件"><span class="toc-nav-number">2.9.</span> <span class="toc-nav-text">9&#x3001;&#x5728; classpath &#x4E2D;&#x626B;&#x63CF;&#x7EC4;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#10-组件装配-自动注入"><span class="toc-nav-number">2.10.</span> <span class="toc-nav-text">10&#x3001;&#x7EC4;&#x4EF6;&#x88C5;&#x914D; &#x81EA;&#x52A8;&#x6CE8;&#x5165;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#11-spring表达式语言spel"><span class="toc-nav-number">2.11.</span> <span class="toc-nav-text">11&#x3001;Spring&#x8868;&#x8FBE;&#x5F0F;&#x8BED;&#x8A00;&#xFF1A;SpEL</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三-aspect-oriented-programming"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x4E09;&#x3001;Aspect-Oriented Programming</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-aop-面向切面编程"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">1&#x3001;AOP &#x9762;&#x5411;&#x5207;&#x9762;&#x7F16;&#x7A0B;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-使用动态代理解决上述问题"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">2&#x3001;&#x4F7F;&#x7528;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x89E3;&#x51B3;&#x4E0A;&#x8FF0;&#x95EE;&#x9898;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-aop-术语"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">3&#x3001;AOP &#x672F;&#x8BED;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-在-spring-中启用-aspectj-注解支持"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">4&#x3001;&#x5728; Spring &#x4E2D;&#x542F;&#x7528; AspectJ &#x6CE8;&#x89E3;&#x652F;&#x6301;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5-用-aspectj-注解声明切面"><span class="toc-nav-number">3.5.</span> <span class="toc-nav-text">5&#x3001;&#x7528; AspectJ &#x6CE8;&#x89E3;&#x58F0;&#x660E;&#x5207;&#x9762;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#指定切面的优先级"><span class="toc-nav-number">3.5.1.</span> <span class="toc-nav-text">&#x6307;&#x5B9A;&#x5207;&#x9762;&#x7684;&#x4F18;&#x5148;&#x7EA7;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#前置通知在方法执行之前执行的通知"><span class="toc-nav-number">3.5.2.</span> <span class="toc-nav-text">&#x524D;&#x7F6E;&#x901A;&#x77E5;&#xFF1A;&#x5728;&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x4E4B;&#x524D;&#x6267;&#x884C;&#x7684;&#x901A;&#x77E5;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#后置通知在目标方法执行后"><span class="toc-nav-number">3.5.3.</span> <span class="toc-nav-text">&#x540E;&#x7F6E;&#x901A;&#x77E5;&#xFF1A;&#x5728;&#x76EE;&#x6807;&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x540E;&#x3002;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#返回通知在方法正常结束后执行的代码"><span class="toc-nav-number">3.5.4.</span> <span class="toc-nav-text">&#x8FD4;&#x56DE;&#x901A;&#x77E5;&#xFF1A;&#x5728;&#x65B9;&#x6CD5;&#x6B63;&#x5E38;&#x7ED3;&#x675F;&#x540E;&#x6267;&#x884C;&#x7684;&#x4EE3;&#x7801;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#异常通知在目标方法出现异常时会执行的代码"><span class="toc-nav-number">3.5.5.</span> <span class="toc-nav-text">&#x5F02;&#x5E38;&#x901A;&#x77E5;&#xFF1A;&#x5728;&#x76EE;&#x6807;&#x65B9;&#x6CD5;&#x51FA;&#x73B0;&#x5F02;&#x5E38;&#x65F6;&#x4F1A;&#x6267;&#x884C;&#x7684;&#x4EE3;&#x7801;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#环绕通知"><span class="toc-nav-number">3.5.6.</span> <span class="toc-nav-text">&#x73AF;&#x7ED5;&#x901A;&#x77E5;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#重用切入点定义"><span class="toc-nav-number">3.5.7.</span> <span class="toc-nav-text">&#x91CD;&#x7528;&#x5207;&#x5165;&#x70B9;&#x5B9A;&#x4E49;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#引入通知很少使用"><span class="toc-nav-number">3.5.8.</span> <span class="toc-nav-text">&#x5F15;&#x5165;&#x901A;&#x77E5;&#xFF08;&#x5F88;&#x5C11;&#x4F7F;&#x7528;&#xFF09;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#6-用基于-xml-的配置声明切面"><span class="toc-nav-number">3.6.</span> <span class="toc-nav-text">6&#x3001;&#x7528;&#x57FA;&#x4E8E; XML &#x7684;&#x914D;&#x7F6E;&#x58F0;&#x660E;&#x5207;&#x9762;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#基于-xml声明切面"><span class="toc-nav-number">3.6.1.</span> <span class="toc-nav-text">&#x57FA;&#x4E8E; XML&#xFF1A;&#x58F0;&#x660E;&#x5207;&#x9762;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#四-spring-中的事务管理"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x56DB;&#x3001;Spring &#x4E2D;&#x7684;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-用-transactional-注解-声明式地管理事务"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">1&#x3001;&#x7528; @Transactional &#x6CE8;&#x89E3; &#x58F0;&#x660E;&#x5F0F;&#x5730;&#x7BA1;&#x7406;&#x4E8B;&#x52A1;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-用-xml-事务通知-声明式地管理事务"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">2&#x3001;&#x7528; XML &#x4E8B;&#x52A1;&#x901A;&#x77E5; &#x58F0;&#x660E;&#x5F0F;&#x5730;&#x7BA1;&#x7406;&#x4E8B;&#x52A1;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-事务传播行为-propagation-behavior"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">3&#x3001;&#x4E8B;&#x52A1;&#x4F20;&#x64AD;&#x884C;&#x4E3A; (propagation behavior)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#required-传播行为"><span class="toc-nav-number">4.3.1.</span> <span class="toc-nav-text">REQUIRED &#x4F20;&#x64AD;&#x884C;&#x4E3A;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#requires_new-传播行为"><span class="toc-nav-number">4.3.2.</span> <span class="toc-nav-text">REQUIRES_NEW &#x4F20;&#x64AD;&#x884C;&#x4E3A;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-并发事务所导致的问题"><span class="toc-nav-number">4.4.</span> <span class="toc-nav-text">4&#x3001;&#x5E76;&#x53D1;&#x4E8B;&#x52A1;&#x6240;&#x5BFC;&#x81F4;&#x7684;&#x95EE;&#x9898;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5-事务的隔离级别-isolation-level"><span class="toc-nav-number">4.5.</span> <span class="toc-nav-text">5&#x3001;&#x4E8B;&#x52A1;&#x7684;&#x9694;&#x79BB;&#x7EA7;&#x522B; (Isolation level)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#6-设置回滚事务属性-rollback"><span class="toc-nav-number">4.6.</span> <span class="toc-nav-text">6&#x3001;&#x8BBE;&#x7F6E;&#x56DE;&#x6EDA;&#x4E8B;&#x52A1;&#x5C5E;&#x6027; (rollback)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#7-超时和只读属性-timeout-read-only"><span class="toc-nav-number">4.7.</span> <span class="toc-nav-text">7&#x3001;&#x8D85;&#x65F6;&#x548C;&#x53EA;&#x8BFB;&#x5C5E;&#x6027; (timeout read-only)</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#webxml-配置启动-spring-ioc-容器的-listener"><span class="toc-nav-number"></span> <span class="toc-nav-text">web.xml &#x914D;&#x7F6E;&#x542F;&#x52A8; Spring IOC &#x5BB9;&#x5668;&#x7684; Listener</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#jdbctemplate-简介"><span class="toc-nav-number"></span> <span class="toc-nav-text">JdbcTemplate &#x7B80;&#x4ECB;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
         
         </div>
       </aside>
