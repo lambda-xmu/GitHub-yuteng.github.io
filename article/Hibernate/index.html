@@ -149,14 +149,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -236,7 +236,6 @@
 </tr>
 </tbody>
 </table>
-<a id="more"></a>
 <hr>
 <h3 id="orm的思想">ORM的思想</h3>
 <p>将关系数据库中表中的记录映射成为对象，以对象的形式展现，程序员可以把对数据库的操作转化为对对象的操作。ORM 采用元数据来描述 对象-关系 映射细节，元数据通常采用 XML 格式，并且存放在专门的 对象-关系 映射文件中。</p>
@@ -271,6 +270,8 @@
 <hr>
 <p><strong>4、测试</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.Session;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.SessionFactory;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.Transaction;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.cfg.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.service.ServiceRegistry;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.service.ServiceRegistryBuilder;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HibernateTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 1. 创建一个 SessionFactory 对象</span></span><br><span class="line">		SessionFactory sessionFactory = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 1). 创建 Configuration 对象: 对应 hibernate 的基本配置信息和 对象关系映射信息</span></span><br><span class="line">		Configuration configuration = <span class="keyword">new</span> Configuration().configure();</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 4.0 之前这样创建</span></span><br><span class="line">		<span class="comment">// sessionFactory = configuration.buildSessionFactory();</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">// 2). 创建一个 ServiceRegistry 对象: hibernate 4.x 新添加的对象</span></span><br><span class="line">		<span class="comment">// hibernate 的任何配置和服务都需要在该对象中注册后才能有效.</span></span><br><span class="line">		ServiceRegistry serviceRegistry = <span class="keyword">new</span> ServiceRegistryBuilder()</span><br><span class="line">				.applySettings(configuration.getProperties())</span><br><span class="line">				.buildServiceRegistry();</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 3).</span></span><br><span class="line">		sessionFactory = configuration.buildSessionFactory(serviceRegistry);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 2. 创建一个 Session 对象</span></span><br><span class="line">		Session session = sessionFactory.openSession();</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 3. 开启事务</span></span><br><span class="line">		Transaction transaction = session.beginTransaction();</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 4. 执行保存操作</span></span><br><span class="line">		News news = <span class="keyword">new</span> News(<span class="string">"Java"</span>, <span class="string">"Hibernate"</span>, <span class="keyword">new</span> Date(<span class="keyword">new</span> java.util.Date().getTime()));</span><br><span class="line">		session.save(news);<span class="comment">//save后，news变成持久态</span></span><br><span class="line">					<span class="comment">//news.setTitle("HB"); ``对持久态的改变，会在session提交时自动更新数据库``</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">// 5. 提交事务</span></span><br><span class="line">		transaction.commit();</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 6. 关闭 Session</span></span><br><span class="line">		session.close();</span><br><span class="line">					<span class="comment">//session关闭后 news.setTitle("HB"); //这时改变其属性，将不会自动更新数据库</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">// 7. 关闭 SessionFactory 对象</span></span><br><span class="line">		sessionFactory.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
 <h2 id="三-configuration-类">三、Configuration 类</h2>
 <p><strong>Configuration 类负责管理 Hibernate 的配置信息。</strong></p>
 <p><strong>包括如下内容：</strong></p>
@@ -282,9 +283,7 @@
 <ul>
 <li>推荐使用XML方式 Xml文件（hibernate.cfg.xml）</li>
 </ul>
-<blockquote>
-<p>Configuration cfg = new Configuration().configure();</p>
-</blockquote>
+<p><strong>Configuration cfg = new Configuration().configure();</strong></p>
 <hr>
 <h3 id="sessionfactory-接口">SessionFactory 接口</h3>
 <p><strong>针对单个数据库映射关系经过编译后的内存镜像，是线程安全的。</strong></p>
@@ -305,14 +304,12 @@ Hibernate4 新增了一个 ServiceRegistry 接口，所有基于 Hibernate 的�
 <li>所有持久化对象必须在 session 的管理下才可以进行持久化操作，相当于 JDBC 中的 Connection。</li>
 </ul>
 <hr>
-<p>** 此对象的生命周期很短 **</p>
+<p><strong>此对象的生命周期很短</strong></p>
 <ul>
 <li>Session 对象有一个一级缓存，显式执行 flush 之前，所有的持久层操作的数据都缓存在 session 对象处。</li>
 </ul>
-<p>** 持久化类与 Session 关联起来后就具有了持久化的能力 **</p>
-<blockquote>
-<p>** Session 类的方法：**</p>
-</blockquote>
+<p><strong>持久化类与 Session 关联起来后就具有了持久化的能力</strong><br>
+<strong>Session 类的方法：</strong></p>
 <ul>
 <li>取得持久化对象的方法： get() load()</li>
 <li>持久化对象都得保存，更新和删除：save(),update(),saveOrUpdate(),delete()</li>
