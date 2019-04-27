@@ -51,20 +51,6 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/Servlet/</loc>
-        <lastmod>2019-04-21T07:27:48.892Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://github-yuteng.github.io/tags/NoSQL/</loc>
-        <lastmod>2019-04-21T07:27:53.373Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/tags/Maven/</loc>
         <lastmod>2019-04-21T07:28:00.892Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -107,15 +93,36 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/JavaScript/</loc>
-        <lastmod>2019-04-23T09:55:06.830Z</lastmod>
+        <loc>https://github-yuteng.github.io/tags/Java8/</loc>
+        <lastmod>2019-04-26T11:45:27.004Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/Java8/</loc>
-        <lastmod>2019-04-26T09:53:23.478Z</lastmod>
+        <loc>https://github-yuteng.github.io/tags/JavaScript/</loc>
+        <lastmod>2019-04-26T12:24:29.647Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/Servlet/</loc>
+        <lastmod>2019-04-27T01:54:15.119Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/NoSQL/</loc>
+        <lastmod>2019-04-27T05:01:56.229Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/MySQL/</loc>
+        <lastmod>2019-04-27T09:25:15.863Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

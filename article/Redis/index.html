@@ -255,6 +255,52 @@
 </ul>
 </li>
 </ul>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th style="text-align:center">MyISAM</th>
+<th style="text-align:center">InnoDB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主外键</td>
+<td style="text-align:center">不支持</td>
+<td style="text-align:center">支持</td>
+</tr>
+<tr>
+<td>事务</td>
+<td style="text-align:center">不支持</td>
+<td style="text-align:center">支持</td>
+</tr>
+<tr>
+<td>行表锁</td>
+<td style="text-align:center">表锁，不适合高并发</td>
+<td style="text-align:center">行锁，适合高并发</td>
+</tr>
+<tr>
+<td>缓存</td>
+<td style="text-align:center">只缓存索引，不缓存真实数据</td>
+<td style="text-align:center">不仅缓存索引，还要缓存真实数据</td>
+</tr>
+<tr>
+<td>表空间</td>
+<td style="text-align:center">小</td>
+<td style="text-align:center">大</td>
+</tr>
+<tr>
+<td>关注点</td>
+<td style="text-align:center">性能</td>
+<td style="text-align:center">事务</td>
+</tr>
+<tr>
+<td>默认安装</td>
+<td style="text-align:center">Y</td>
+<td style="text-align:center">Y</td>
+</tr>
+</tbody>
+</table>
 <hr>
 <ul>
 <li>同时，开始流行使用 <strong>分表 分库</strong> 来缓解写压力和数据增长的扩展问题。</li>
