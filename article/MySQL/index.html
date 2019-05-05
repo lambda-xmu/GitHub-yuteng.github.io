@@ -142,14 +142,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">关于我</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">关于我</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -394,6 +394,8 @@ where A.Key is null</strong></p>
 <strong>唯一索引：索引列的值必须唯一，但允许有空值。</strong><br>
 <strong>复合索引：即一个索引包含多个列。</strong></p>
 <h3 id="explain-sql">explain + SQL</h3>
+<p><strong>show index from Table;</strong></p>
+<p><strong>Create index idx_nameAge on Table(name,age);</strong></p>
 <p><strong><code>explain</code> select * from Table;</strong></p>
 <p><strong>id select_type table type possible_keys key key_len ref rows Extra</strong></p>
 <hr>
@@ -457,15 +459,18 @@ id 相同不同，同时存在：id如果相同，可以认为是一组，从上
 <p><strong>包含不适合在其他列中显示，但十分重要的额外信息。</strong></p>
 <p><strong>1、Using filesort：说明MySQL会对数据使用一个外部的索引排序，而不是按照表内的索引顺序进行读取。MySQL中无法利用索引完成的排序成为“文件排序”。</strong></p>
 <p><strong>2、Using temporary：使用了临时表保存中间结果，MySQL在对查询结果排序时使用临时表。常见于排序order by和分组查询 group by。</strong></p>
-<p><strong>3、Using index：表示相应的select操作中使用了覆盖索引(Covering Index)， 避免访问了表的数据行，效率不错!如果同时出现usingwhere,表明索引被用来执行索引键值的查找;如果没有同时出现usingwhere,表明索引用来读取数据而非执行查找动作。</strong></p>
+<p><strong>3、<code>Using index</code>：表示相应的select操作中使用了覆盖索引(Covering Index)， 避免访问了表的数据行，<code>效率不错!</code>如果同时出现 usingwhere,表明索引被用来执行索引键值的查找;如果没有同时出现 usingwhere,表明索引用来读取数据而非执行查找动作。</strong></p>
 <p><strong>4、Using where：表明使用了 where 过滤。</strong></p>
 <p><strong>5、Using join buffer：使用了连接缓存。</strong></p>
 <p><strong>6、Impossible where：where 字句的值总是false，不能用来获取任何元素。</strong></p>
 <p><strong>7、select tables optimized away：在没有 group by 字句的情况下，基于索引优化MIN/MAX操作或者对于MyISAM存储引擎优化COUNT(*)操作，不必等到执行阶段在进行计算，查询执行计划生成的阶段即完成优化。</strong></p>
 <p><strong>8、distinct：优化 distinct 操作，在找到第一匹配的元素后即停止找同样值的动作。</strong></p>
-<h2 id="索引优化">索引优化</h2>
-<p>type 是 ALL 需要优化。<br>
-Extra 含有 Using filesort 需要优化。</p>
+<h2 id="四-索引优化">四、索引优化</h2>
+<p><strong>explain + SQL;</strong></p>
+<ul>
+<li><strong>type 是 ALL 需要优化。</strong></li>
+<li><strong>Extra 含有 Using filesort 需要优化。</strong></li>
+</ul>
 <p><strong>单表优化：对查询常量值的字段建立相应的索引，对于字段要求 between、&lt;、&gt;、in 会出现range，则不建立索引。</strong><br>
 <strong>两表优化：左连接，右连接 有一表为驱动表 必为ALL。</strong></p>
 <ul>
@@ -473,12 +478,95 @@ Extra 含有 Using filesort 需要优化。</p>
 <li>右连接，索引放左表。<br>
 <strong>三表优化：同两表优化。</strong></li>
 </ul>
-<p><strong>索引最好设置在需要经常查询的字段中。</strong><br>
-<strong>尽可能减少Join语句中的NestedLoop的循环总次数；</strong><br>
-<strong>“永远用小结果集驱动大的结果集”。</strong><br>
-<strong>优先优化NestedLoop的内层循环。</strong><br>
-<strong>保证Join语句中被驱动表上Join条件字段已经被索引。</strong><br>
-<strong>当无法保证被驱动表的Join条件字段被索引且内存资源充足的前提下，不要吝啬JoinBuffer的设置。</strong></p>
+<p><strong>1、索引最好设置在需要经常查询的字段中。</strong><br>
+<strong>2、尽可能减少Join语句中的NestedLoop的循环总次数；</strong><br>
+<strong>3、<code>永远用小结果集驱动大的结果集。</code></strong><br>
+<strong>4、优先优化NestedLoop的内层循环。</strong><br>
+<strong>5、保证Join语句中被驱动表上Join条件字段已经被索引。</strong><br>
+<strong>6、当无法保证被驱动表的Join条件字段被索引且内存资源充足的前提下，不要吝啬JoinBuffer设置</strong></p>
+<hr>
+<hr>
+<h3 id="索引优化规则">索引优化规则</h3>
+<ul>
+<li><strong>1、全值匹配。</strong></li>
+<li><strong>2、最佳左前缀法则：查询从索引的最左前列开始并且不跳过索引中的列。</strong>
+<ul>
+<li><strong>索引带头大哥不能死，中间兄弟不能断。</strong></li>
+</ul>
+</li>
+<li><strong>3、不在索引列上做任何操作，否则会导致索引失效而转向全表扫描。</strong>
+<ul>
+<li><strong>计算，函数，类型转换(手动or自动) 都会导致索引失效。</strong></li>
+</ul>
+</li>
+<li><strong>4、存储引擎不能使用索引中范围条件右边的列。</strong></li>
+<li><strong>5、尽量使用覆盖索引(只访问索引的查询，索引列和查询列一致)，减少 select * 使用。</strong></li>
+<li><strong>6、MySQL在使用不等于(!=或者&lt;&gt;的时候无法使用索引会导致全表扫描)。</strong></li>
+<li><strong>7、is null，is not null 也无法使用索引。</strong></li>
+<li><strong>8、like ‘%A%’ 通配符MySQL语句(%写两边或左面)，索引失效会变成全表扫描操作。</strong>
+<ul>
+<li><strong>%最好写右面 ‘A%’，type=range</strong></li>
+<li><strong>解决 %写两边或左面 索引失效——&gt; 覆盖索引(查询列和索引一致或使用部分索引)</strong></li>
+</ul>
+</li>
+<li><strong>9、字符串不加单引号索引失效，因为MySQL底层会对索引列进行类型转换。</strong></li>
+<li><strong>10、少用 or，用 or 来连接时会索引失效，导致全表扫描。</strong>
+<ul>
+<li><strong>or 连接的是 两个最左索引列 的查询。(name=‘a’ or name=‘b’)</strong></li>
+</ul>
+</li>
+<li><strong>11、order by 后 要和索引的顺序一致。否则会出现 filesort。</strong>
+<ul>
+<li><strong>order by 时，不要用 select *。字段多的话，影响性能。</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="分析">分析</h3>
+<p><strong>1、观察，至少跑1天，生产的慢SQL情况。</strong><br>
+<strong>2、开启慢查询日志，设置阙值，比如超过5秒钟的就是慢SQL,并将它抓取出来。</strong><br>
+<strong>3、explain+慢SQL分析。</strong><br>
+<strong>4、show profile</strong><br>
+<strong>5、进行SQL数据库服务器的参数调优。</strong></p>
+<p><strong>总结</strong></p>
+<ul>
+<li><strong>1、慢查询 开启并捕获。</strong></li>
+<li><strong>2、explain+慢SQL分析。</strong></li>
+<li><strong>3、show profile 查询SQL在MySQL服务器里面执行的细节和生命周期情况。</strong></li>
+<li><strong>4、SQL数据库服务器的参数进行调优。</strong></li>
+</ul>
+<hr>
+<hr>
+<p><strong>MySQL支持两种方式的排序：FileSort 和 Index ，Index效率高。</strong><br>
+<strong><code>尽可能在索引列完成排序操作</code> Order by 满足两种情况会使用Index方式排序：</strong></p>
+<ul>
+<li><strong>Order by 语句使用索引最左前列。</strong></li>
+<li><strong>使用 Where 字句与Order by 子句条件列组合满足索引最左前列。</strong></li>
+</ul>
+<p><strong>如果<code>不再索引列上</code>，FileSort 有两种算法：</strong></p>
+<ul>
+<li><strong>双路排序：两次扫描。</strong></li>
+<li><strong>单路排序：比双路更优。</strong>
+<ul>
+<li><strong>单路优化：增大<code>sort_buffer_size、max_length_for_data</code> 参数的设置。</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>group by 实质是先排序后进行分组，遵照索引 最佳左前缀原则。</strong></p>
+<hr>
+<hr>
+<h3 id="慢查询日志">慢查询日志</h3>
+<p><strong>MySQL的慢查询日志是MySQL提供的一种日志记录，它用来记录在MySQL中响应时间超过阀值的语句,具体指运行时间超过 <code>long_query_time</code> 值 的SQL,则会被记录到慢查询日志中。</strong></p>
+<p><strong>运行时间超过 long_query_time 值的SQL，会被记录到慢查询日志中<code>默认关闭，调优需要手动开启</code>。</strong><br>
+<strong><code>long_ query_ time的默认值为10</code>，意思是运行10秒以上的语句。由他来查看哪些SQL超出了我们的最大忍耐时间值，比如一条sql执行超过5秒钟，我们就算慢SQL,希望能收集超过5秒的sql,结合之前explain进行全面分析。</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--如何查看--&gt;</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">'%slow_query_log%'</span>;</span><br><span class="line"></span><br><span class="line">&lt;!--如何开启 下面命令只对当前数据库有效。--&gt;</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> slow_query_log=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">&lt;!--永久生效 修改 my.cnf [mysqld]下增加或修改参数--&gt;</span><br><span class="line">slow_query_log=1</span><br><span class="line">slow_query_log_file=***</span><br></pre></td></tr></table></figure>
+<h2 id="五-视图">五、视图</h2>
+<p><strong>MySQL 5.1 新特性。通过表数据动态生成的虚拟表，只保存了sql逻辑，不保存查询结果。</strong></p>
+<p><strong>应用：</strong></p>
+<ul>
+<li><strong>1、多个地方用到同样的查询结果。</strong></li>
+<li><strong>2、该查询结果使用的sql语句较复杂。</strong></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> 视图名</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line">查询语句;</span><br></pre></td></tr></table></figure>
 <h1 id="感谢阅读">感谢阅读</h1>
 
                 
@@ -552,7 +640,7 @@ Extra 含有 Using filesort 需要优化。</p>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一-mysql-高级"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;MySQL &#x9AD8;&#x7EA7;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#优化分析"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x4F18;&#x5316;&#x5206;&#x6790;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二-select-joins"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;Select Joins</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#inner-join-内连接"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Inner Join &#x5185;&#x8FDE;&#x63A5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#left-join-左连接"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Left Join &#x5DE6;&#x8FDE;&#x63A5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#right-join-右连接"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Right Join &#x53F3;&#x8FDE;&#x63A5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#full-outer-join-全连接mysql不支持"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">Full Outer Join &#x5168;&#x8FDE;&#x63A5;(MySQL&#x4E0D;&#x652F;&#x6301;)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#union-mysql-合并去重"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">Union (MySQL &#x5408;&#x5E76;&#x53BB;&#x91CD;)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#cross-join-笛卡尔积交差集"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">cross join &#x7B1B;&#x5361;&#x5C14;&#x79EF;(&#x4EA4;&#x5DEE;&#x96C6;)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三-index-索引"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x4E09;&#x3001;Index &#x7D22;&#x5F15;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#索引分类"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">&#x7D22;&#x5F15;&#x5206;&#x7C7B;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#explain-sql"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">explain + SQL</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#id-表的读取顺序"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">id (&#x8868;&#x7684;&#x8BFB;&#x53D6;&#x987A;&#x5E8F;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#select_type-数据读取操作的操作类型"><span class="toc-nav-number">3.2.2.</span> <span class="toc-nav-text">select_type (&#x6570;&#x636E;&#x8BFB;&#x53D6;&#x64CD;&#x4F5C;&#x7684;&#x64CD;&#x4F5C;&#x7C7B;&#x578B;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#type-查询使用类型"><span class="toc-nav-number">3.2.3.</span> <span class="toc-nav-text">type (&#x67E5;&#x8BE2;&#x4F7F;&#x7528;&#x7C7B;&#x578B;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#possible_keys-可能使用的索引"><span class="toc-nav-number">3.2.4.</span> <span class="toc-nav-text">possible_keys (&#x53EF;&#x80FD;&#x4F7F;&#x7528;&#x7684;&#x7D22;&#x5F15;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#key-实际使用索引"><span class="toc-nav-number">3.2.5.</span> <span class="toc-nav-text">key (&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x7D22;&#x5F15;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#key_len-索引长度"><span class="toc-nav-number">3.2.6.</span> <span class="toc-nav-text">key_len (&#x7D22;&#x5F15;&#x957F;&#x5EA6;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#ref-表之间引用"><span class="toc-nav-number">3.2.7.</span> <span class="toc-nav-text">ref (&#x8868;&#x4E4B;&#x95F4;&#x5F15;&#x7528;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#rows-被优化器查询的行数"><span class="toc-nav-number">3.2.8.</span> <span class="toc-nav-text">rows (&#x88AB;&#x4F18;&#x5316;&#x5668;&#x67E5;&#x8BE2;&#x7684;&#x884C;&#x6570;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#extra-扩展"><span class="toc-nav-number">3.2.9.</span> <span class="toc-nav-text">Extra (&#x6269;&#x5C55;)</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#索引优化"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x7D22;&#x5F15;&#x4F18;&#x5316;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一-mysql-高级"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;MySQL &#x9AD8;&#x7EA7;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#优化分析"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x4F18;&#x5316;&#x5206;&#x6790;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二-select-joins"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;Select Joins</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#inner-join-内连接"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Inner Join &#x5185;&#x8FDE;&#x63A5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#left-join-左连接"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Left Join &#x5DE6;&#x8FDE;&#x63A5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#right-join-右连接"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Right Join &#x53F3;&#x8FDE;&#x63A5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#full-outer-join-全连接mysql不支持"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">Full Outer Join &#x5168;&#x8FDE;&#x63A5;(MySQL&#x4E0D;&#x652F;&#x6301;)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#union-mysql-合并去重"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">Union (MySQL &#x5408;&#x5E76;&#x53BB;&#x91CD;)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#cross-join-笛卡尔积交差集"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">cross join &#x7B1B;&#x5361;&#x5C14;&#x79EF;(&#x4EA4;&#x5DEE;&#x96C6;)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三-index-索引"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x4E09;&#x3001;Index &#x7D22;&#x5F15;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#索引分类"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">&#x7D22;&#x5F15;&#x5206;&#x7C7B;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#explain-sql"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">explain + SQL</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#id-表的读取顺序"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">id (&#x8868;&#x7684;&#x8BFB;&#x53D6;&#x987A;&#x5E8F;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#select_type-数据读取操作的操作类型"><span class="toc-nav-number">3.2.2.</span> <span class="toc-nav-text">select_type (&#x6570;&#x636E;&#x8BFB;&#x53D6;&#x64CD;&#x4F5C;&#x7684;&#x64CD;&#x4F5C;&#x7C7B;&#x578B;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#type-查询使用类型"><span class="toc-nav-number">3.2.3.</span> <span class="toc-nav-text">type (&#x67E5;&#x8BE2;&#x4F7F;&#x7528;&#x7C7B;&#x578B;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#possible_keys-可能使用的索引"><span class="toc-nav-number">3.2.4.</span> <span class="toc-nav-text">possible_keys (&#x53EF;&#x80FD;&#x4F7F;&#x7528;&#x7684;&#x7D22;&#x5F15;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#key-实际使用索引"><span class="toc-nav-number">3.2.5.</span> <span class="toc-nav-text">key (&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x7D22;&#x5F15;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#key_len-索引长度"><span class="toc-nav-number">3.2.6.</span> <span class="toc-nav-text">key_len (&#x7D22;&#x5F15;&#x957F;&#x5EA6;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#ref-表之间引用"><span class="toc-nav-number">3.2.7.</span> <span class="toc-nav-text">ref (&#x8868;&#x4E4B;&#x95F4;&#x5F15;&#x7528;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#rows-被优化器查询的行数"><span class="toc-nav-number">3.2.8.</span> <span class="toc-nav-text">rows (&#x88AB;&#x4F18;&#x5316;&#x5668;&#x67E5;&#x8BE2;&#x7684;&#x884C;&#x6570;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#extra-扩展"><span class="toc-nav-number">3.2.9.</span> <span class="toc-nav-text">Extra (&#x6269;&#x5C55;)</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#四-索引优化"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x56DB;&#x3001;&#x7D22;&#x5F15;&#x4F18;&#x5316;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#索引优化规则"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">&#x7D22;&#x5F15;&#x4F18;&#x5316;&#x89C4;&#x5219;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#分析"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">&#x5206;&#x6790;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#慢查询日志"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">&#x6162;&#x67E5;&#x8BE2;&#x65E5;&#x5FD7;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#五-视图"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">&#x4E94;&#x3001;&#x89C6;&#x56FE;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
         
         </div>
       </aside>
