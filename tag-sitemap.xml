@@ -16,13 +16,6 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/JVM/</loc>
-        <lastmod>2019-04-21T07:27:14.852Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/tags/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/</loc>
         <lastmod>2019-04-21T07:27:30.860Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -46,13 +39,6 @@
     <url>
         <loc>https://github-yuteng.github.io/tags/Maven/</loc>
         <lastmod>2019-04-21T07:28:00.892Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://github-yuteng.github.io/tags/JDBC/</loc>
-        <lastmod>2019-04-21T07:28:03.261Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -100,13 +86,6 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/Servlet/</loc>
-        <lastmod>2019-04-27T01:54:15.119Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/tags/NoSQL/</loc>
         <lastmod>2019-04-27T05:01:56.229Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -114,15 +93,36 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/MySQL/</loc>
-        <lastmod>2019-05-05T13:33:13.412Z</lastmod>
+        <loc>https://github-yuteng.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</loc>
+        <lastmod>2019-05-06T04:02:52.478Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</loc>
-        <lastmod>2019-05-06T04:02:52.478Z</lastmod>
+        <loc>https://github-yuteng.github.io/tags/Servlet/</loc>
+        <lastmod>2019-05-06T04:06:59.167Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/JVM/</loc>
+        <lastmod>2019-05-06T04:17:59.118Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/JDBC/</loc>
+        <lastmod>2019-05-06T06:22:41.352Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/MySQL/</loc>
+        <lastmod>2019-05-06T09:17:20.209Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
