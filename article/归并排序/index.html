@@ -226,7 +226,7 @@
 <img src="http://ww1.sinaimg.cn/large/006QzbZDly1g212okix09g30qi0exx1i.gif"></p>
 <hr>
 <h2 id="merge过程">merge过程</h2>
-<img src="https://ws1.sinaimg.cn/large/006QzbZDly1g212xwzlo7j30go0ciwf2.jpg">
+<img src="https://i.loli.net/2019/05/06/5ccfb1d47cdcc.png">
 <hr>
 <p><strong>p1,p2每次只会移动一个，所以必定会有一个越界。如果p1耗尽，需要把p2后面内容拷贝至help数组，反之。</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (p1 &lt;= m) &#123;</span><br><span class="line">    help[i++] = arr[p1++];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> (p2 &lt;= right) &#123;</span><br><span class="line">    help[i++] = arr[p2++];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
