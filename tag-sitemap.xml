@@ -37,13 +37,6 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/Maven/</loc>
-        <lastmod>2019-04-21T07:28:00.892Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
         <lastmod>2019-04-21T07:28:10.292Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -123,6 +116,20 @@
     <url>
         <loc>https://github-yuteng.github.io/tags/MySQL/</loc>
         <lastmod>2019-05-06T09:27:43.568Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/Maven/</loc>
+        <lastmod>2019-05-07T08:17:48.624Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/NIO/</loc>
+        <lastmod>2019-05-07T10:49:34.082Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
