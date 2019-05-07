@@ -616,6 +616,182 @@
 <strong>Pipe有一个source通道和一个sink通道。数据会被写到sink通道，从source通道读取。</strong></p>
 <img src="https://i.loli.net/2019/05/07/5cd1624338cba.png" alt="IP_$6G%)2KE8T$3GEU1)WKP.png" title="IP_$6G%)2KE8T$3GEU1)WKP.png">
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.nio.ByteBuffer;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.Pipe;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestPipe</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 1. 获取管道</span></span><br><span class="line">        Pipe pipe = Pipe.open();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 将缓冲区中的数据写入管道</span></span><br><span class="line">        ByteBuffer buf = ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line"></span><br><span class="line">        Pipe.SinkChannel sinkChannel = pipe.sink();</span><br><span class="line">        buf.put(<span class="string">"通过单向管道发送数据"</span>.getBytes());</span><br><span class="line">        buf.flip();</span><br><span class="line">        sinkChannel.write(buf);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 读取缓冲区中的数据</span></span><br><span class="line">        Pipe.SourceChannel sourceChannel = pipe.source();</span><br><span class="line">        buf.flip();</span><br><span class="line">        <span class="keyword">int</span> len = sourceChannel.read(buf);</span><br><span class="line">        System.out.println(<span class="keyword">new</span> String(buf.array(), <span class="number">0</span>, len));</span><br><span class="line"></span><br><span class="line">        sourceChannel.close();</span><br><span class="line">        sinkChannel.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
+<h2 id="四-path-paths-files-java-17">四、Path、Paths、Files java 1.7</h2>
+<p><strong>随着 JDK 7 的发布，Java对NIO进行了极大的扩展，增强了对文件处理和文件系统特性的支持，我们称他们为 NIO.2。因为 NIO 提供的一些功能，NIO已经成为文件处理中越来越重要的部分。</strong></p>
+<hr>
+<h4 id="path-与-paths">Path 与 Paths</h4>
+<p><strong>java.nio.file.Path 接口代表一个平台无关的平台路径，描述了目录结构中文件的位置。</strong></p>
+<p><strong>Paths 提供的 get() 方法用来获取 Path 对象</strong></p>
+<ul>
+<li><strong>Path get(String first, String … more) 用于将多个字符串串连成路径。</strong></li>
+</ul>
+<p><strong>Path常用方法</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boolean endsWith(String path)</td>
+<td>判断是否以 path 路径结束</td>
+</tr>
+<tr>
+<td>boolean startsWith(String path)</td>
+<td>判断是否以 path 路径开始</td>
+</tr>
+<tr>
+<td>boolean isAbsolute()</td>
+<td>判断是否是绝对路径</td>
+</tr>
+<tr>
+<td>Path getFileName()</td>
+<td>返回与调用 Path 对象关联的文件名</td>
+</tr>
+<tr>
+<td>Path getName(int idx)</td>
+<td>返回的指定索引位置 idx 的路径名称</td>
+</tr>
+<tr>
+<td>int getNameCount()</td>
+<td>返回Path 根目录后面元素的数量</td>
+</tr>
+<tr>
+<td>Path getParent()</td>
+<td>返回Path对象包含整个路径，不包含Path 对象指定的文件路径</td>
+</tr>
+<tr>
+<td>Path getRoot()</td>
+<td>返回调用 Path 对象的根路径</td>
+</tr>
+<tr>
+<td>Path resolve(Path p)</td>
+<td>将相对路径解析为绝对路径</td>
+</tr>
+<tr>
+<td>Path toAbsolutePath()</td>
+<td>作为绝对路径返回调用 Path 对象</td>
+</tr>
+<tr>
+<td>String toString()</td>
+<td>返回调用 Path 对象的字符串表示形式</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h4 id="files">Files</h4>
+<p><strong>java.nio.file.Files 用于操作文件或目录的工具类。</strong></p>
+<p><strong>Files常用方法</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Path copy(Path src, Path dest, CopyOption … how)</td>
+<td>文件的复制</td>
+</tr>
+<tr>
+<td>Path createDirectory(Path path, FileAttribute&lt;?&gt; … attr)</td>
+<td>创建一个目录</td>
+</tr>
+<tr>
+<td>Path createFile(Path path, FileAttribute&lt;?&gt; … arr)</td>
+<td>创建一个文件</td>
+</tr>
+<tr>
+<td>void delete(Path path)</td>
+<td>删除一个文件</td>
+</tr>
+<tr>
+<td>Path move(Path src, Path dest, CopyOption…how)</td>
+<td>将 src 移动到 dest 位置</td>
+</tr>
+<tr>
+<td>long size(Path path)</td>
+<td>返回 path 指定文件的大小</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><strong>Files常用方法：用于判断</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boolean exists(Path path, LinkOption … opts)</td>
+<td>判断文件是否存在</td>
+</tr>
+<tr>
+<td>boolean isDirectory(Path path, LinkOption … opts)</td>
+<td>判断是否是目录</td>
+</tr>
+<tr>
+<td>boolean isExecutable(Path path)</td>
+<td>判断是否是可执行文件</td>
+</tr>
+<tr>
+<td>boolean isHidden(Path path)</td>
+<td>判断是否是隐藏文件</td>
+</tr>
+<tr>
+<td>boolean isReadable(Path path)</td>
+<td>判断文件是否可读</td>
+</tr>
+<tr>
+<td>boolean isWritable(Path path)</td>
+<td>判断文件是否可写</td>
+</tr>
+<tr>
+<td>boolean notExists(Path path, LinkOption … opts)</td>
+<td>判断文件是否不存在</td>
+</tr>
+<tr>
+<td>public static &lt;A extends BasicFileAttributes&gt; A readAttributes(Path path,Class&lt;A&gt; type,LinkOption… options)</td>
+<td>获取与 path 指定的文件相关联的属性。</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><strong>Files常用方法：用于操作内容</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SeekableByteChannel newByteChannel(Path path, OpenOption…how)</td>
+<td>获取与指定文件的连接， how 指定打开方式。</td>
+</tr>
+<tr>
+<td>DirectoryStream newDirectoryStream(Path path)</td>
+<td>打开 path 指定的目录</td>
+</tr>
+<tr>
+<td>InputStream newInputStream(Path path, OpenOption…how)</td>
+<td>获取 InputStream 对象</td>
+</tr>
+<tr>
+<td>OutputStream newOutputStream(Path path, OpenOption…how)</td>
+<td>获取 OutputStream 对象</td>
+</tr>
+</tbody>
+</table>
 <h1 id="感谢阅读">感谢阅读</h1>
 
                 
@@ -689,7 +865,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一-java-nio-简介"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;Java NIO &#x7B80;&#x4ECB;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二-通道channel与-缓冲区buffer"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;&#x901A;&#x9053;&#xFF08;Channel&#xFF09;&#x4E0E; &#x7F13;&#x51B2;&#x533A;&#xFF08;Buffer&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-缓冲区buffer"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">1&#x3001;&#x7F13;&#x51B2;&#x533A;&#xFF08;Buffer&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#缓冲区存取数据的核心方法"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">&#x7F13;&#x51B2;&#x533A;&#x5B58;&#x53D6;&#x6570;&#x636E;&#x7684;&#x6838;&#x5FC3;&#x65B9;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#缓冲区中的五个核心属性"><span class="toc-nav-number">2.1.2.</span> <span class="toc-nav-text">&#x7F13;&#x51B2;&#x533A;&#x4E2D;&#x7684;&#x4E94;&#x4E2A;&#x6838;&#x5FC3;&#x5C5E;&#x6027;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#buffer-的常用方法"><span class="toc-nav-number">2.1.3.</span> <span class="toc-nav-text">Buffer &#x7684;&#x5E38;&#x7528;&#x65B9;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#直接缓冲区与非直接缓冲区"><span class="toc-nav-number">2.1.4.</span> <span class="toc-nav-text">&#x76F4;&#x63A5;&#x7F13;&#x51B2;&#x533A;&#x4E0E;&#x975E;&#x76F4;&#x63A5;&#x7F13;&#x51B2;&#x533A;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-通道channel"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">2&#x3001;&#x901A;&#x9053;&#xFF08;Channel&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#获取通道"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">&#x83B7;&#x53D6;&#x901A;&#x9053;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#非直接缓冲区利用通道完成文件的复制"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">&#x975E;&#x76F4;&#x63A5;&#x7F13;&#x51B2;&#x533A;&#xFF1A;&#x5229;&#x7528;&#x901A;&#x9053;&#x5B8C;&#x6210;&#x6587;&#x4EF6;&#x7684;&#x590D;&#x5236;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#直接缓冲区使用内存映射文件完成文件的复制"><span class="toc-nav-number">2.2.3.</span> <span class="toc-nav-text">&#x76F4;&#x63A5;&#x7F13;&#x51B2;&#x533A;&#xFF1A;&#x4F7F;&#x7528;&#x5185;&#x5B58;&#x6620;&#x5C04;&#x6587;&#x4EF6;&#x5B8C;&#x6210;&#x6587;&#x4EF6;&#x7684;&#x590D;&#x5236;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#直接缓冲区通道之间的数据传输"><span class="toc-nav-number">2.2.4.</span> <span class="toc-nav-text">&#x76F4;&#x63A5;&#x7F13;&#x51B2;&#x533A;&#xFF1A;&#x901A;&#x9053;&#x4E4B;&#x95F4;&#x7684;&#x6570;&#x636E;&#x4F20;&#x8F93;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#分散scatter和聚集gather"><span class="toc-nav-number">2.2.5.</span> <span class="toc-nav-text">&#x5206;&#x6563;(Scatter)&#x548C;&#x805A;&#x96C6;(Gather)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#字符集-charbuffer"><span class="toc-nav-number">2.2.6.</span> <span class="toc-nav-text">&#x5B57;&#x7B26;&#x96C6; CharBuffer</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三-nio-的非阻塞式网络通信"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x4E09;&#x3001;NIO &#x7684;&#x975E;&#x963B;&#x585E;&#x5F0F;&#x7F51;&#x7EDC;&#x901A;&#x4FE1;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用-nio-完成网络通信的三个核心"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">&#x4F7F;&#x7528; NIO &#x5B8C;&#x6210;&#x7F51;&#x7EDC;&#x901A;&#x4FE1;&#x7684;&#x4E09;&#x4E2A;&#x6838;&#x5FC3;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#选择器selector"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">&#x9009;&#x62E9;&#x5668;&#xFF08;Selector&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#selector-的常用方法"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">Selector &#x7684;&#x5E38;&#x7528;&#x65B9;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#selectionkey"><span class="toc-nav-number">3.2.2.</span> <span class="toc-nav-text">SelectionKey</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#socketchannel-tcp网络套接字"><span class="toc-nav-number">3.2.3.</span> <span class="toc-nav-text">SocketChannel TCP&#x7F51;&#x7EDC;&#x5957;&#x63A5;&#x5B57;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#阻塞式nio-demo"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">&#x963B;&#x585E;&#x5F0F;NIO Demo</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#非阻塞式nio-使用选择器-selector"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">&#x975E;&#x963B;&#x585E;&#x5F0F;NIO &#x4F7F;&#x7528;&#x9009;&#x62E9;&#x5668; Selector</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#datagramchannel-收发udp包的通道"><span class="toc-nav-number">3.5.</span> <span class="toc-nav-text">DatagramChannel &#x6536;&#x53D1;UDP&#x5305;&#x7684;&#x901A;&#x9053;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#管道-pipe"><span class="toc-nav-number">3.6.</span> <span class="toc-nav-text">&#x7BA1;&#x9053; (Pipe)</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一-java-nio-简介"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;Java NIO &#x7B80;&#x4ECB;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二-通道channel与-缓冲区buffer"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;&#x901A;&#x9053;&#xFF08;Channel&#xFF09;&#x4E0E; &#x7F13;&#x51B2;&#x533A;&#xFF08;Buffer&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-缓冲区buffer"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">1&#x3001;&#x7F13;&#x51B2;&#x533A;&#xFF08;Buffer&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#缓冲区存取数据的核心方法"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">&#x7F13;&#x51B2;&#x533A;&#x5B58;&#x53D6;&#x6570;&#x636E;&#x7684;&#x6838;&#x5FC3;&#x65B9;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#缓冲区中的五个核心属性"><span class="toc-nav-number">2.1.2.</span> <span class="toc-nav-text">&#x7F13;&#x51B2;&#x533A;&#x4E2D;&#x7684;&#x4E94;&#x4E2A;&#x6838;&#x5FC3;&#x5C5E;&#x6027;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#buffer-的常用方法"><span class="toc-nav-number">2.1.3.</span> <span class="toc-nav-text">Buffer &#x7684;&#x5E38;&#x7528;&#x65B9;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#直接缓冲区与非直接缓冲区"><span class="toc-nav-number">2.1.4.</span> <span class="toc-nav-text">&#x76F4;&#x63A5;&#x7F13;&#x51B2;&#x533A;&#x4E0E;&#x975E;&#x76F4;&#x63A5;&#x7F13;&#x51B2;&#x533A;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-通道channel"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">2&#x3001;&#x901A;&#x9053;&#xFF08;Channel&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#获取通道"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">&#x83B7;&#x53D6;&#x901A;&#x9053;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#非直接缓冲区利用通道完成文件的复制"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">&#x975E;&#x76F4;&#x63A5;&#x7F13;&#x51B2;&#x533A;&#xFF1A;&#x5229;&#x7528;&#x901A;&#x9053;&#x5B8C;&#x6210;&#x6587;&#x4EF6;&#x7684;&#x590D;&#x5236;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#直接缓冲区使用内存映射文件完成文件的复制"><span class="toc-nav-number">2.2.3.</span> <span class="toc-nav-text">&#x76F4;&#x63A5;&#x7F13;&#x51B2;&#x533A;&#xFF1A;&#x4F7F;&#x7528;&#x5185;&#x5B58;&#x6620;&#x5C04;&#x6587;&#x4EF6;&#x5B8C;&#x6210;&#x6587;&#x4EF6;&#x7684;&#x590D;&#x5236;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#直接缓冲区通道之间的数据传输"><span class="toc-nav-number">2.2.4.</span> <span class="toc-nav-text">&#x76F4;&#x63A5;&#x7F13;&#x51B2;&#x533A;&#xFF1A;&#x901A;&#x9053;&#x4E4B;&#x95F4;&#x7684;&#x6570;&#x636E;&#x4F20;&#x8F93;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#分散scatter和聚集gather"><span class="toc-nav-number">2.2.5.</span> <span class="toc-nav-text">&#x5206;&#x6563;(Scatter)&#x548C;&#x805A;&#x96C6;(Gather)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#字符集-charbuffer"><span class="toc-nav-number">2.2.6.</span> <span class="toc-nav-text">&#x5B57;&#x7B26;&#x96C6; CharBuffer</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三-nio-的非阻塞式网络通信"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x4E09;&#x3001;NIO &#x7684;&#x975E;&#x963B;&#x585E;&#x5F0F;&#x7F51;&#x7EDC;&#x901A;&#x4FE1;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#使用-nio-完成网络通信的三个核心"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">&#x4F7F;&#x7528; NIO &#x5B8C;&#x6210;&#x7F51;&#x7EDC;&#x901A;&#x4FE1;&#x7684;&#x4E09;&#x4E2A;&#x6838;&#x5FC3;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#选择器selector"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">&#x9009;&#x62E9;&#x5668;&#xFF08;Selector&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#selector-的常用方法"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">Selector &#x7684;&#x5E38;&#x7528;&#x65B9;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#selectionkey"><span class="toc-nav-number">3.2.2.</span> <span class="toc-nav-text">SelectionKey</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#socketchannel-tcp网络套接字"><span class="toc-nav-number">3.2.3.</span> <span class="toc-nav-text">SocketChannel TCP&#x7F51;&#x7EDC;&#x5957;&#x63A5;&#x5B57;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#阻塞式nio-demo"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">&#x963B;&#x585E;&#x5F0F;NIO Demo</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#非阻塞式nio-使用选择器-selector"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">&#x975E;&#x963B;&#x585E;&#x5F0F;NIO &#x4F7F;&#x7528;&#x9009;&#x62E9;&#x5668; Selector</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#datagramchannel-收发udp包的通道"><span class="toc-nav-number">3.5.</span> <span class="toc-nav-text">DatagramChannel &#x6536;&#x53D1;UDP&#x5305;&#x7684;&#x901A;&#x9053;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#管道-pipe"><span class="toc-nav-number">3.6.</span> <span class="toc-nav-text">&#x7BA1;&#x9053; (Pipe)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#四-path-paths-files-java-17"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x56DB;&#x3001;Path&#x3001;Paths&#x3001;Files java 1.7</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#path-与-paths"><span class="toc-nav-number">4.0.1.</span> <span class="toc-nav-text">Path &#x4E0E; Paths</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#files"><span class="toc-nav-number">4.0.2.</span> <span class="toc-nav-text">Files</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
         
         </div>
       </aside>
