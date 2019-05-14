@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          选择排序（Selection Sort） - 于腾 | Blog
+          于腾 | Blog
         
     </title>
 
-    <link rel="canonical" href="https://github-yuteng.github.io/article/选择排序/">
+    <link rel="canonical" href="https://github-yuteng.github.io/archives/4/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -71,8 +71,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/article_header/article_bg.jpg')
-            /*post*/
+            background-image: url('/img/header_img/home.jpg') 
+            /*config*/
         
     }
     
@@ -85,18 +85,10 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="post-heading">
-                        <div class="tags">
-                            
-                              <a class="tag" href="/tags/#排序算法" title="排序算法">排序算法</a>
-                            
-                        </div>
-                        <h1>选择排序（Selection Sort）</h1>
-                        <h2 class="subheading"></h2>
-                        <span class="meta">
-                            Posted by 于腾 on
-                            2019-02-21
-                        </span>
+                    <div class="site-heading">
+                        <h1>所爱隔山海</h1>
+                        <!--<hr class="small">-->
+                        <span class="subheading">个人博客</span>
                     </div>
                 
 
@@ -199,188 +191,300 @@
 
 
     <!-- Main Content -->
-    <!-- Modify by Yu-Hsuan Yen -->
+    <!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-            <!-- Post Container -->
+<!-- USE SIDEBAR -->
+    <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+            
+                <!-- Main Content -->
 
-                <h2 id="选择排序">选择排序</h2>
-<p><strong>是不稳定的排序方法。</strong></p>
-<ul>
-<li><strong>第一次从下标为 0 的开始下标为 0 的这个数与后面的 n-1 个进行比较；找出最小或者最大的放在下标为 0 的这个位置；</strong></li>
-<li><strong>第二次从下标为 1 的开始比较；查询剩下的最大或者最小值；放在下标为 1 的位置；以此类推；直到排序完成</strong></li>
+
+<div class="post-preview">
+
+    <a href="/article/Hexo 博客搭建/">
+        <h2 class="post-title">
+            Hexo 博客搭建
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Node.js+Hexo+Git+GitHub
+必须准备
+
+Node.js
+Git
+GitHub 账户及仓库
+
+Windows
+1、创建一个文件夹 Blog。
+2、在该目录下 CMD 输入命令：npm install -g hexo-cli hexo -v：查看版本
+3、安装 Hexo 完成后，请执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件。
+
+$ hexo init 
+$ c......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 于腾 on
+            2019-02-02
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Hexo" title="Hexo">Hexo</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/随笔/">
+        <h2 class="post-title">
+            随笔
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+2019年3月26日
+今天过得很充实，把Spring的笔记做的差不多了。
+自己也理解了一遍收货很多。
+其实只要自己下功夫了还是会有收货的，不能眼高手低。
+学习的时候心无杂念，两耳不闻窗外事一心只读我心物。
+可能才是学习的最高境界把。
+明天复习一下Hibernate 做一下笔记。后天出去一下。
+下个月开始魔鬼式战斗复习。刷面试题迎接Offer
+暑假目标，能找到一个差不多的公司实习，提升自己的......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 于腾 on
+            2019-02-01
+        </p>
+        <div class="tags">
+            
+        </div>
+    
+
+</div>
+<hr>
+
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+        <li class="previous">
+            <a href="/archives/3/">&larr; Newer Posts</a>
+        </li>
+    
+    
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SelectionSort</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span>[] arr = &#123;<span class="number">15</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">45</span>, <span class="number">65</span>, <span class="number">33</span>, <span class="number">12</span>&#125;;</span><br><span class="line">		System.out.println(<span class="string">"交换之前："</span> + Arrays.toString(arr));</span><br><span class="line"><span class="comment">//		0--1</span></span><br><span class="line"><span class="comment">//		0--2</span></span><br><span class="line"><span class="comment">//		0--3</span></span><br><span class="line"><span class="comment">//		0--4</span></span><br><span class="line"><span class="comment">//		1--2</span></span><br><span class="line"><span class="comment">//		1--3</span></span><br><span class="line"><span class="comment">//		1--4</span></span><br><span class="line"><span class="comment">//		2--3</span></span><br><span class="line"><span class="comment">//		2--4</span></span><br><span class="line"><span class="comment">//		3--4</span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j&lt;=arr.length-<span class="number">1</span>;j++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = j;i&lt;=arr.length-<span class="number">1</span>;i++)&#123;</span><br><span class="line">				<span class="keyword">int</span> temp;</span><br><span class="line">				<span class="keyword">if</span>(arr[j-<span class="number">1</span>]&gt;arr[i])&#123;</span><br><span class="line">					temp = arr[j-<span class="number">1</span>];</span><br><span class="line">					arr[j-<span class="number">1</span>] = arr[i];</span><br><span class="line">					arr[i] = temp;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		System.out.println(<span class="string">"交换之后："</span> + Arrays.toString(arr));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="感谢阅读">感谢阅读</h1>
 
-                
 
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/article/归并排序/" data-toggle="tooltip" data-placement="top" title="归并排序（Merge Sort）">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/article/冒泡排序/" data-toggle="tooltip" data-placement="top" title="冒泡排序（Bubble Sort）">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
 
                 <br>
 
-                <!--打赏-->
-                
-                    <div class="reward">
-                        <div class="reward-button">赏 <span class="reward-code"> 
-                            <span class="alipay-code"> <img class="alipay-img" src="http://ww1.sinaimg.cn/large/006vWPzFly1g0o77ru34uj30dz0drdhv.jpg"><b>支付宝打赏</b></span> 
-                            <span class="wechat-code"> <img class="wechat-img" src="http://ww1.sinaimg.cn/large/006vWPzFly1g0o740lhb9j30rb0ov77z.jpg"><b>微信打赏</b> </span>
-                            </span></div>
-                        <p class="reward-notice">赞赏一下</p>
-                    </div>
-                
-                <!--打赏-->
-
-                <br>
-                <!--分享-->
-                
-                <!--分享-->
-                <br>                       
-                
                 <!-- require APlayer -->
                 
 
-                <!-- duoshuo Share start -->
+                <!-- 如果开启评论功能 -->
                 
-                <!-- 多说 Share end-->
-
-                <!-- 多说评论框 start -->
-                
-                <!-- 多说评论框 end -->
-
-                <!-- disqus comment start -->
-                
-                <!-- disqus comment end -->
-
-                
-
             </div>
+
+          <!-- Sidebar Container -->
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+        <!-- Featured Tags -->
+
+<section>
+    <!-- no hr -->
+    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
             
-            <!-- Tabe of Content -->
-            <!-- Table of Contents -->
-
-  
-    <style>
-      span.toc-nav-number{
-        display: none
-      }
-    </style>
-  
-    
-      <aside id="sidebar">
-        <div id="toc" class="toc-article">
-        <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#选择排序"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x9009;&#x62E9;&#x6392;&#x5E8F;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+            
         
-        </div>
-      </aside>
-    
-
-                
-            <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#排序算法" title="排序算法">排序算法</a>
-                        
-                    </div>
-                </section>
-                
-
-                <!-- Friends Blog -->
-                
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-
-                    
-                        <li><a href="https://yexua.github.io/" target="_blank">大佬</a></li>
-                    
-                        <li><a href="https://snailclimb.gitee.io/javaguide/#/" target="_blank">JavaGuide</a></li>
-                    
-                        <li><a href="http://cyc2018.gitee.io/cs-notes/#/notes/%E5%89%91%E6%8C%87%20Offer%20%E9%A2%98%E8%A7%A3%20-%20%E7%9B%AE%E5%BD%951" target="_blank">剑指Offer</a></li>
-                    
-                        <li><a href="http://cyc2018.gitee.io/cs-notes/#/" target="_blank">技术面试必备基础知识</a></li>
-                    
-                </ul>
-                
-            </div>
-        </div>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Java设计模式" title="Java设计模式" rel="3">Java设计模式</a>
+            
+        
+            
+            <a href="/tags/#排序算法" title="排序算法" rel="3">排序算法</a>
+            
+        
+            
+            <a href="/tags/#重中之重" title="重中之重" rel="2">重中之重</a>
+            
+        
+            
+            <a href="/tags/#JVM" title="JVM" rel="4">JVM</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Spring全家桶" title="Spring全家桶" rel="3">Spring全家桶</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#ORM 框架" title="ORM 框架" rel="2">ORM 框架</a>
+            
+        
+            
+        
     </div>
-</article>
+</section>
 
+        <hr>
+    
+        <!-- Short About -->
+<section class="visible-md visible-lg">
+    <h5><a href="/about/">ABOUT ME</a></h5>
+    <div class="short-about">
 
+        
+            <img id = "avatar_pic" src="/img/avatar/yt.png" />
+        
 
+        
+            <p>永远年轻，永远热泪盈眶</p>
+        
 
+        <!-- SNS Link -->
+        <ul class="list-inline">
+            
+            
+            
 
+            
 
+            
 
+            
+                <li>
+                    <a target="_blank"  href="https://github.com/GitHub-yuteng">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+            
+            
+            
+        </ul>
+    </div>
+</section>
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'hover',
-          placement: 'left',
-          icon: 'ℬ'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+        <hr>
+    
+        
+  <h5>RECENT POSTS</h3>
+  <div class="widget">
+    <ul>
+      
+        <li>
+          <a href="/article/简历/">简历</a>
+        </li>
+      
+        <li>
+          <a href="/article/SpringBoot/">SpringBoot</a>
+        </li>
+      
+        <li>
+          <a href="/article/Ajax/">Ajax (Asynchronous)</a>
+        </li>
+      
+        <li>
+          <a href="/article/NIO/">NIO（Non-Blocking IO）</a>
+        </li>
+      
+        <li>
+          <a href="/article/Java8新特性/">Java 8 新特性</a>
+        </li>
+      
+    </ul>
+  </div>
 
+        <hr>
+    
+        <!-- Friends Blog -->
+
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+
+    
+        <li><a href="https://yexua.github.io/" target="_blank">大佬</a></li>
+    
+        <li><a href="https://snailclimb.gitee.io/javaguide/#/" target="_blank">JavaGuide</a></li>
+    
+        <li><a href="http://cyc2018.gitee.io/cs-notes/#/notes/%E5%89%91%E6%8C%87%20Offer%20%E9%A2%98%E8%A7%A3%20-%20%E7%9B%AE%E5%BD%951" target="_blank">剑指Offer</a></li>
+    
+        <li><a href="http://cyc2018.gitee.io/cs-notes/#/" target="_blank">技术面试必备基础知识</a></li>
+    
+</ul>
+
+        <hr>
+    
+        
+    <h5>ARCHIVES</h5>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">11</span></li></ul>
+    </div>
+
+        <hr>
+    
+</div>
+
+        
+    </div>
+</div>
 
 
     <!-- Footer -->

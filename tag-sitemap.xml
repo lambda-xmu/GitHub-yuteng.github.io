@@ -23,13 +23,6 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/Spring%E5%85%A8%E5%AE%B6%E6%A1%B6/</loc>
-        <lastmod>2019-04-21T07:27:46.285Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/tags/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
         <lastmod>2019-04-21T07:28:10.292Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -129,7 +122,21 @@
 
     <url>
         <loc>https://github-yuteng.github.io/tags/%E7%AE%80%E5%8E%86/</loc>
-        <lastmod>2019-05-07T11:42:57.030Z</lastmod>
+        <lastmod>2019-05-12T03:36:19.071Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/Ajax/</loc>
+        <lastmod>2019-05-13T02:37:05.973Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/Spring%E5%85%A8%E5%AE%B6%E6%A1%B6/</loc>
+        <lastmod>2019-05-14T06:58:53.304Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

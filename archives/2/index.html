@@ -134,13 +134,6 @@
 
                         
                         <li>
-                            <a href="/about/">关于我</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -149,6 +142,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">关于我</a>
                         </li>
                         
                     
@@ -208,6 +208,81 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/article/深入理解 JVM-3/">
+        <h2 class="post-title">
+            JVM 垃圾收集器-内存分配
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            一、垃圾收集器与内存分配策略
+Java与C++之间有一堵由内存动态分配和垃圾收集技术所围成的“高墙”，
+墙外面的人想进去，墙里面的人却想出来。
+
+引入计数法
+概念：
+
+在对象中引入计数器(无符号整数)，用于记录有多少对象引用了该对象。
+每当有一个地方引用它时，计数器加1；引用失效时，计数器减1。任何计数器为0的对象都是不可能再被使用的。
+
+优点：
+1、即刻回收垃圾，在更改引用时就知道该对象是......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 于腾 on
+            2019-04-08
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#JVM" title="JVM">JVM</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/Redis/">
+        <h2 class="post-title">
+            Redis
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            REmote DIctionary Server(远程字典服务器) 非关系型数据库
+
+NoSQL 这些类型的数据存储不需要固定的模式，无需多余操作就可以横向扩展。
+
+Redis 作为一个独立的分布式的缓存服务器，为多个web服务器提供了一个共享的高性能缓存服务。
+然后又出现了一致性hash来解决增加或减少缓存服务器导致重新hash带来的大量缓存失效的弊端。
+一、Why？主从复制 读写分离
+
+......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 于腾 on
+            2019-04-07
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#NoSQL" title="NoSQL">NoSQL</a>
+            
+        </div>
+    
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -507,76 +582,6 @@ Servlet容器响应客户请求的过程
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/article/线程——JUC理解/">
-        <h2 class="post-title">
-            JUC理解
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            一个程序同时执行多个任务，每一个任务称为一个线程。
-多进程与多线程区别
-
-本质区别在于每个进程拥有自己的一套变量，而线程则共享数据。
-共享变量使线程之间的通信比进程之间的通信更有效，更容易。
-线程更加“轻量级”，创建、撤销一个线程比启动新进程的开销小得多。
-
-
-JUC-&gt; volatile
-
-volatile 关键字：当多个线程进行操作共享数据时，可以保证内存中的数据可见。
-提供一个免......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 于腾 on
-            2019-03-01
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#线程" title="线程">线程</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/二分查找/">
-        <h2 class="post-title">
-            二分查找（Binary search）
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            二分查找
-必须在有序数组中查找
-
-1234567891011121314151617181920212223242526272829303132333435public class BinarySearch &#123;    public static void main(String[] args) &#123;        int[] arr = &#123;1, 2, 3, 4, ......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 于腾 on
-            2019-02-24
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#查找算法" title="查找算法">查找算法</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -632,11 +637,13 @@ volatile 关键字：当多个线程进行操作共享数据时，可以保证�
             
         
             
-            <a href="/tags/#排序算法" title="排序算法" rel="3">排序算法</a>
-            
         
             
             <a href="/tags/#Java设计模式" title="Java设计模式" rel="3">Java设计模式</a>
+            
+        
+            
+            <a href="/tags/#排序算法" title="排序算法" rel="3">排序算法</a>
             
         
             
@@ -658,6 +665,10 @@ volatile 关键字：当多个线程进行操作共享数据时，可以保证�
             
         
             
+            <a href="/tags/#Spring全家桶" title="Spring全家桶" rel="3">Spring全家桶</a>
+            
+        
+            
         
             
         
@@ -665,10 +676,6 @@ volatile 关键字：当多个线程进行操作共享数据时，可以保证�
             <a href="/tags/#ORM 框架" title="ORM 框架" rel="2">ORM 框架</a>
             
         
-            
-        
-            
-            <a href="/tags/#Spring全家桶" title="Spring全家桶" rel="2">Spring全家桶</a>
             
         
     </div>
@@ -728,19 +735,19 @@ volatile 关键字：当多个线程进行操作共享数据时，可以保证�
         </li>
       
         <li>
+          <a href="/article/SpringBoot/">SpringBoot</a>
+        </li>
+      
+        <li>
+          <a href="/article/Ajax/">Ajax (Asynchronous)</a>
+        </li>
+      
+        <li>
           <a href="/article/NIO/">NIO（Non-Blocking IO）</a>
         </li>
       
         <li>
           <a href="/article/Java8新特性/">Java 8 新特性</a>
-        </li>
-      
-        <li>
-          <a href="/article/TCP、UDP、HTTP、HTTPS/">TCP、UDP、HTTP、HTTPS</a>
-        </li>
-      
-        <li>
-          <a href="/article/JavaScript/">JavaScript</a>
         </li>
       
     </ul>
@@ -769,7 +776,7 @@ volatile 关键字：当多个线程进行操作共享数据时，可以保证�
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">11</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">11</span></li></ul>
     </div>
 
         <hr>

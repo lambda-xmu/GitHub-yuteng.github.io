@@ -134,13 +134,6 @@
 
                         
                         <li>
-                            <a href="/about/">关于我</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -149,6 +142,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">关于我</a>
                         </li>
                         
                     
@@ -198,19 +198,21 @@
             <!-- 标签云 -->
             <div id='tag_cloud' class="tags">
                 
+                    <a href="#Ajax" title="Ajax" rel="1">Ajax</a>
+                
                     <a href="#Hexo" title="Hexo" rel="1">Hexo</a>
                 
                     <a href="#JavaScript" title="JavaScript" rel="1">JavaScript</a>
                 
                     <a href="#Servlet" title="Servlet" rel="1">Servlet</a>
                 
-                    <a href="#网络协议" title="网络协议" rel="1">网络协议</a>
-                
                     <a href="#查找算法" title="查找算法" rel="1">查找算法</a>
                 
-                    <a href="#排序算法" title="排序算法" rel="3">排序算法</a>
+                    <a href="#网络协议" title="网络协议" rel="1">网络协议</a>
                 
                     <a href="#Java设计模式" title="Java设计模式" rel="3">Java设计模式</a>
+                
+                    <a href="#排序算法" title="排序算法" rel="3">排序算法</a>
                 
                     <a href="#重中之重" title="重中之重" rel="2">重中之重</a>
                 
@@ -226,6 +228,8 @@
                 
                     <a href="#MySQL" title="MySQL" rel="1">MySQL</a>
                 
+                    <a href="#Spring全家桶" title="Spring全家桶" rel="3">Spring全家桶</a>
+                
                     <a href="#线程" title="线程" rel="1">线程</a>
                 
                     <a href="#NIO" title="NIO" rel="1">NIO</a>
@@ -234,12 +238,32 @@
                 
                     <a href="#NoSQL" title="NoSQL" rel="1">NoSQL</a>
                 
-                    <a href="#Spring全家桶" title="Spring全家桶" rel="2">Spring全家桶</a>
-                
             </div>
 
             <!-- 标签列表 -->
 
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="Ajax">
+                    <span class="tag-text">Ajax</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/article/Ajax/">
+                        <h2 class="post-title">
+                            Ajax (Asynchronous)
+                        </h2>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
             
             <div class="one-tag-list">
                 <span class="fa fa-tag listing-seperator" id="Hexo">
@@ -308,6 +332,28 @@
             </div>
             
             <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="查找算法">
+                    <span class="tag-text">查找算法</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/article/二分查找/">
+                        <h2 class="post-title">
+                            二分查找（Binary search）
+                        </h2>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
                 <span class="fa fa-tag listing-seperator" id="网络协议">
                     <span class="tag-text">网络协议</span>
                 </span>
@@ -330,8 +376,8 @@
             </div>
             
             <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="查找算法">
-                    <span class="tag-text">查找算法</span>
+                <span class="fa fa-tag listing-seperator" id="Java设计模式">
+                    <span class="tag-text">Java设计模式</span>
                 </span>
                 
                   <!-- <li class="listing-item">
@@ -339,9 +385,39 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/article/二分查找/">
+                     <a href="/article/工厂设计模式/">
                         <h2 class="post-title">
-                            二分查找（Binary search）
+                            工厂设计模式（Factory）
+                        </h2>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/article/单例设计模式/">
+                        <h2 class="post-title">
+                            单例设计模式（Singleton）
+                        </h2>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/article/策略设计模式/">
+                        <h2 class="post-title">
+                            策略设计模式（Strategy）
                         </h2>
                         
                     </a>
@@ -394,58 +470,6 @@
                      <a href="/article/选择排序/">
                         <h2 class="post-title">
                             选择排序（Selection Sort）
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="Java设计模式">
-                    <span class="tag-text">Java设计模式</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/单例设计模式/">
-                        <h2 class="post-title">
-                            单例设计模式（Singleton）
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/工厂设计模式/">
-                        <h2 class="post-title">
-                            工厂设计模式（Factory）
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/策略设计模式/">
-                        <h2 class="post-title">
-                            策略设计模式（Strategy）
                         </h2>
                         
                     </a>
@@ -670,6 +694,58 @@
             </div>
             
             <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="Spring全家桶">
+                    <span class="tag-text">Spring全家桶</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/article/SpringBoot/">
+                        <h2 class="post-title">
+                            SpringBoot
+                        </h2>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/article/SpringMVC/">
+                        <h2 class="post-title">
+                            SpringMVC
+                        </h2>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/article/Spring/">
+                        <h2 class="post-title">
+                            Spring
+                        </h2>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
                 <span class="fa fa-tag listing-seperator" id="线程">
                     <span class="tag-text">线程</span>
                 </span>
@@ -763,43 +839,6 @@
                      <a href="/article/Redis/">
                         <h2 class="post-title">
                             Redis
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="Spring全家桶">
-                    <span class="tag-text">Spring全家桶</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/Spring/">
-                        <h2 class="post-title">
-                            Spring
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/SpringMVC/">
-                        <h2 class="post-title">
-                            SpringMVC
                         </h2>
                         
                     </a>
