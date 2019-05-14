@@ -142,6 +142,13 @@
 
                         
                         <li>
+                            <a href="/about/">关于我</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -150,13 +157,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">关于我</a>
                         </li>
                         
                     
@@ -684,6 +684,186 @@
 </tbody>
 </table>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">日志输出格式：</span><br><span class="line">    %d表示日期时间</span><br><span class="line">    %thread表示线程名</span><br><span class="line">    %‐5level：级别从左显示5个字符宽度</span><br><span class="line">    %logger&#123;50&#125; 表示logger名字最长50个字符，否则按照句点分割。</span><br><span class="line">    %msg：日志消息</span><br><span class="line">    %n是换行符</span><br></pre></td></tr></table></figure>
+<h3 id="5-指定配置">5、指定配置</h3>
+<p><strong>给类路径下放上每个日志框架自己的配置文件即可；SpringBoot就不使用默认配置了。</strong></p>
+<table>
+<thead>
+<tr>
+<th>Logging System</th>
+<th>Customization</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Logback</td>
+<td><code>logback-spring.xml</code> , logback-spring.groovy , <code>logback.xml</code> or logback.groovy</td>
+</tr>
+<tr>
+<td>Log4j2</td>
+<td>log4j2-spring.xml or log4j2.xml</td>
+</tr>
+<tr>
+<td>JDK (Java Util Logging)</td>
+<td>logging.properties</td>
+</tr>
+</tbody>
+</table>
+<p><strong>logback.xml：</strong> 直接就被日志框架识别了；<br>
+<strong><code>logback-spring.xml：</code></strong> 日志框架就不直接加载日志的配置项，由SpringBoot解析日志配置，可以使用 SpringBoot 的高级 Profile 功能。在 xml 文件中配置以下内容。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">springProfile</span> <span class="attr">name</span>=<span class="string">"staging"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">!‐‐</span> <span class="attr">configuration</span> <span class="attr">to</span> <span class="attr">be</span> <span class="attr">enabled</span> <span class="attr">when</span> <span class="attr">the</span> "<span class="attr">staging</span>" <span class="attr">profile</span> <span class="attr">is</span> <span class="attr">active</span> ‐‐&gt;</span></span><br><span class="line">    可以指定某段配置只在某个环境下生效</span><br><span class="line"><span class="tag">&lt;/<span class="name">springProfile</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>如果使用logback.xml作为日志配置文件，还要使用profile功能，会有以下错误</strong><br>
+<strong><code>no applicable action for [springProfile]</code></strong></p>
+<hr>
+<h3 id="6-切换日志框架">6、切换日志框架</h3>
+<p><strong>可以按照slf4j的日志适配图，进行相关的切换；</strong></p>
+<hr>
+<hr>
+<h2 id="六-spring-boot-web开发">六、Spring Boot Web开发</h2>
+<h3 id="1-springboot-对静态资源的映射规则">1、SpringBoot 对静态资源的映射规则</h3>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">!‐‐引入jquery‐webjar‐‐</span>&gt;</span>在访问的时候只需要写webjars下面资源的名称即可</span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.webjars<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jquery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>webjars：以jar包的方式引入静态资源；</strong></p>
+<p><strong>Springboot ——&gt; SpringMVC 默认配置</strong></p>
+<ul>
+<li>
+<p><strong>1、所有 /webjars/** ，都去 classpath:/META-INF/resources/webjars/ 找资源。</strong></p>
+</li>
+<li>
+<p><strong>2、&quot;/**&quot; 访问当前项目的任何资源，都去（静态资源的文件夹）找映射。</strong></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;classpath:/META‐INF/resources/&quot;,</span><br><span class="line">&quot;classpath:/resources/&quot;,</span><br><span class="line">&quot;classpath:/static/&quot;,</span><br><span class="line">&quot;classpath:/public/&quot;</span><br><span class="line">&quot;/&quot;：当前项目的根路径</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><strong>3、欢迎页， 静态资源文件夹下的所有 index.html 页面；被&quot;/**&quot;映射；</strong></p>
+</li>
+<li>
+<p><strong>4、所有的 **/favicon.ico 都是在静态资源文件下找；</strong></p>
+</li>
+</ul>
+<hr>
+<h3 id="2-模板引擎-thymeleaf">2、模板引擎 Thymeleaf</h3>
+<p><strong>JSP、Velocity、Freemarker、Thymeleaf</strong></p>
+<img src="https://i.loli.net/2019/05/14/5cda81fb01b4978563.png" alt="R~_((Y411Z}U)B0EMVDZONV.png" title="R~_((Y411Z}U)B0EMVDZONV.png">
+<p><strong>1、引入Thymeleaf；</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">thymeleaf.version</span>&gt;</span>3.0.11.RELEASE<span class="tag">&lt;/<span class="name">thymeleaf.version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">!‐‐</span> 布局功能的支持程序 <span class="attr">thymeleaf3</span>主程序 <span class="attr">layout2</span>以上版本 ‐‐&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">thymeleaf-layout-dialect.version</span>&gt;</span>2.3.0<span class="tag">&lt;/<span class="name">thymeleaf-layout-dialect.version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>2、Thymeleaf 使用</strong></p>
+<ul>
+<li><strong>把 HTML 页面放入 classpath:/templates/  —&gt; Thymeleaf 自动渲染</strong></li>
+</ul>
+<p><strong>原理：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"spring.thymeleaf"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThymeleafProperties</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Charset DEFAULT_ENCODING = Charset.forName(<span class="string">"UTF‐8"</span>);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> MimeType DEFAULT_CONTENT_TYPE = MimeType.valueOf(<span class="string">"text/html"</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_PREFIX = <span class="string">"classpath:/templates/"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_SUFFIX = <span class="string">".html"</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>使用：</strong></p>
+<ul>
+<li><strong>导入thymeleaf的名称空间</strong></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">xmlns:th</span>=<span class="string">"http://www.thymeleaf.org"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>3、语法规则</strong></p>
+<ul>
+<li>
+<p><strong>th：任意html属性；来替换原生属性的值</strong></p>
+<ul>
+<li><strong><code>th:text=${ }</code>：会转义特殊字符。</strong></li>
+<li><strong><code>th:utext=${ }</code>：不会转义特殊字符</strong></li>
+</ul>
+<p><strong>行内取法</strong></p>
+<ul>
+<li><strong>[[…]]</strong> 对应 <strong>th:text=${ }</strong></li>
+<li><strong>[(…)]</strong> 对应 <strong>th:utext=${ }</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Simple expressions:（表达式语法）</span><br><span class="line">    Variable Expressions: $&#123;...&#125;：获取变量值；OGNL；</span><br><span class="line">    <span class="number">1</span>）、获取对象的属性、调用方法</span><br><span class="line">    <span class="number">2</span>）、使用内置的基本对象：</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Selection Variable Expressions: *&#123;...&#125;：选择表达式：和$&#123;&#125;在功能上是一样；</span><br><span class="line"></span><br><span class="line">补充：配合 th:object=<span class="string">"$&#123;session.user&#125; ——&gt; *&#123;firstName&#125; == $&#123;session.user.firstName&#125;</span></span><br><span class="line"><span class="string">&lt;div th:object="</span>$&#123;session.user&#125;<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    &lt;p&gt;Name: &lt;span th:text="</span>*&#123;firstName&#125;<span class="string">"&gt;Sebastian&lt;/span&gt;.&lt;/p&gt;</span></span><br><span class="line"><span class="string">    &lt;p&gt;Surname: &lt;span th:text="</span>*&#123;lastName&#125;<span class="string">"&gt;Pepper&lt;/span&gt;.&lt;/p&gt;</span></span><br><span class="line"><span class="string">    &lt;p&gt;Nationality: &lt;span th:text="</span>*&#123;nationality&#125;<span class="string">"&gt;Saturn&lt;/span&gt;.&lt;/p&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Message Expressions: #&#123;...&#125;：获取国际化内容</span><br><span class="line">Link URL Expressions: @&#123;...&#125;：定义URL；</span><br><span class="line">Fragment Expressions: ~&#123;...&#125;：片段引用表达式</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">Literals（字面量）</span><br><span class="line">    Text literals: &apos;one text&apos; , &apos;Another one!&apos; ,…</span><br><span class="line">    Number literals: 0 , 34 , 3.0 , 12.3 ,…</span><br><span class="line">    Boolean literals: true , false</span><br><span class="line">    Null literal: null</span><br><span class="line">    Literal tokens: one , sometext , main ,…</span><br><span class="line">    </span><br><span class="line">Text operations:（文本操作）</span><br><span class="line">    String concatenation: +</span><br><span class="line">    Literal substitutions: |The name is $&#123;name&#125;|</span><br><span class="line"></span><br><span class="line">Arithmetic operations:（数学运算）</span><br><span class="line">    Binary operators: + , ‐ , * , / , %</span><br><span class="line">    Minus sign (unary operator): ‐</span><br><span class="line"></span><br><span class="line">Boolean operations:（布尔运算）</span><br><span class="line">    Binary operators: and , or</span><br><span class="line">    Boolean negation (unary operator): ! , not</span><br><span class="line"></span><br><span class="line">Comparisons and equality:（比较运算）</span><br><span class="line">    Comparators: &gt; , &lt; , &gt;= , &lt;= ( gt , lt , ge , le )</span><br><span class="line">    Equality operators: == , != ( eq , ne )</span><br><span class="line"></span><br><span class="line">Conditional operators:条件运算（三元运算符）</span><br><span class="line">    If‐then: (if) ? (then)</span><br><span class="line">    If‐then‐else: (if) ? (then) : (else)</span><br><span class="line">    Default: (value) ?: (defaultvalue)</span><br><span class="line">Special tokens:</span><br><span class="line">    No‐Operation: _</span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
+<h3 id="springmvc自动配置">SpringMVC自动配置</h3>
+<p><a href="https://docs.spring.io/spring-boot/docs/1.5.10.RELEASE/reference/htmlsingle/#boot-features-developing-web-applications" target="_blank" rel="noopener">https://docs.spring.io/spring-boot/docs/1.5.10.RELEASE/reference/htmlsingle/#boot-features-developing-web-applications</a></p>
+<h4 id="2711-spring-mvc-auto-configuration">27.1.1 Spring MVC auto-configuration</h4>
+<p>Spring Boot provides auto-configuration for Spring MVC that works well with most applications.<br>
+The auto-configuration adds the following features on top of Spring’s defaults:</p>
+<p><strong>WebMvcAutoConfiguration</strong></p>
+<ul>
+<li><strong>Inclusion of <code>ContentNegotiatingViewResolver</code> and <code>BeanNameViewResolver</code> beans.</strong>
+<ul>
+<li><strong>自动配置了ViewResolver（视图解析器：根据方法的返回值得到视图对象（View），视图对象决定如何渲染（转发 or 重定向））</strong></li>
+<li><strong>ContentNegotiatingViewResolver：组合所有的视图解析器。</strong></li>
+</ul>
+</li>
+<li><strong>Support for serving static resources, including support for <code>WebJars</code> (see below).</strong>
+<ul>
+<li>静态资源文件夹路径：webjars</li>
+</ul>
+</li>
+<li><strong>Automatic registration of Converter, GenericConverter, Formatter beans.</strong>
+<ul>
+<li><strong>Converter：转换器；</strong> public String hello(User user)：</li>
+<li><strong>Formatter 格式化器；</strong> 2019.5.12 === Date；</li>
+<li><strong>自己添加的格式化器转换器，只需要放在容器中即可。</strong></li>
+</ul>
+</li>
+<li><strong>Support for HttpMessageConverters (see below).</strong>
+<ul>
+<li>HttpMessageConverter：用来转换Http请求和响应；User—Json；</li>
+<li>HttpMessageConverters：获取所有的HttpMessageConverter；</li>
+</ul>
+</li>
+<li><strong>Automatic registration of MessageCodesResolver (see below).</strong>
+<ul>
+<li>定义错误代码生成规则。</li>
+</ul>
+</li>
+<li><strong>Static index.html support.：静态首页访问</strong></li>
+<li><strong>Custom Favicon support (see below).：favicon.ico</strong></li>
+<li>Automatic use of a ConfigurableWebBindingInitializer bean (see below).
+<ul>
+<li>可以配置一个<code>ConfigurableWebBindingInitializer</code>来替换默认的；（添加到容器）。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">初始化WebDataBinder；</span><br><span class="line">请求数据=====JavaBean；</span><br></pre></td></tr></table></figure>
+<p>If you want to keep Spring Boot MVC features, and you just want to add additional MVC configuration (interceptors, formatters, view controllers etc.)<code>you can add your own @Configuration class of type WebMvcConfigurerAdapter</code>, but without @EnableWebMvc. If you wish to provide custom instances of RequestMappingHandlerMapping,RequestMappingHandlerAdapter or ExceptionHandlerExceptionResolver you can declare a WebMvcRegistrationsAdapter instance providing such components.</p>
+<p>If you want to take complete control of Spring MVC, you can add your own @Configuration annotated with <code>@EnableWebMvc.</code> <strong>全面控制 Spring MVC</strong></p>
+<hr>
+<h3 id="扩展springmvc">扩展SpringMVC</h3>
+<p><strong>编写一个配置类（@Configuration），是 WebMvcConfigurerAdapter 类型；不能标注@EnableWebMvc; 这样既保留了所有的自动配置，也能用我们扩展的配置；</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用 WebMvcConfigurerAdapter 可以来扩展SpringMVC的功能</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMvcConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addViewControllers</span><span class="params">(ViewControllerRegistry registry)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// super.addViewControllers(registry);</span></span><br><span class="line">        <span class="comment">//浏览器发送 /Spring 请求来到 success</span></span><br><span class="line">        registry.addViewController(<span class="string">"/Spring"</span>).setViewName(<span class="string">"success"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="全面接管springmvc-enablewebmvc">全面接管SpringMVC <code>@EnableWebMvc</code></h3>
+<p><strong>我们需要在配置类中添加 <code>@EnableWebMvc</code> 即可；</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用WebMvcConfigurerAdapter可以来扩展SpringMVC的功能</span></span><br><span class="line"><span class="meta">@EnableWebMvc</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMvcConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addViewControllers</span><span class="params">(ViewControllerRegistry registry)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// super.addViewControllers(registry);</span></span><br><span class="line">        <span class="comment">//浏览器发送 /Spring 请求来到 success</span></span><br><span class="line">        registry.addViewController(<span class="string">"/Spring"</span>).setViewName(<span class="string">"success"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>原理：</strong></p>
+<ul>
+<li>
+<p><strong>1、@EnableWebMvc的核心</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Import</span>(DelegatingWebMvcConfiguration.class)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableWebMvc &#123;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>2、DelegatingWebMvcConfiguration.class</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DelegatingWebMvcConfiguration</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurationSupport</span> </span>&#123;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>3、WebMvcAutoConfiguration</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ConditionalOnWebApplication</span>(type = Type.SERVLET)</span><br><span class="line"><span class="meta">@ConditionalOnClass</span>(&#123; Servlet.class, DispatcherServlet.class, WebMvcConfigurer.class&#125;)</span><br><span class="line"><span class="comment">//容器中没有这个组件的时候，这个自动配置类才生效</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean</span>(WebMvcConfigurationSupport.class)</span><br><span class="line"><span class="meta">@AutoConfigureOrder</span>(Ordered.HIGHEST_PRECEDENCE + <span class="number">10</span>)</span><br><span class="line"><span class="meta">@AutoConfigureAfter</span>(&#123; DispatcherServletAutoConfiguration.class,</span><br><span class="line">		TaskExecutionAutoConfiguration.class, ValidationAutoConfiguration.class &#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcAutoConfiguration</span> </span>&#123;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>4、@EnableWebMvc 将 WebMvcConfigurationSupport 组件导入进来；</strong></p>
+</li>
+<li>
+<p><strong>5、导入的 WebMvcConfigurationSupport 只是SpringMVC最基本的功能；</strong></p>
+</li>
+</ul>
+<hr>
+<h3 id="如何修改-springboot-的默认配置">如何修改 SpringBoot 的默认配置</h3>
+<p><strong>模式：</strong></p>
+<ul>
+<li><strong>1、SpringBoot在自动配置很多组件的时候，先看容器中有没有用户自己配置的（@Bean、@Component）如果有就用用户配置的，如果没有，才自动配置；如果有些组件可以有多个（ViewResolver）将用户配置的和自己默认的组合起来；</strong></li>
+<li><strong>2、在SpringBoot中会有非常多的xxxConfigurer帮助我们进行扩展配置。</strong></li>
+<li><strong>3、在SpringBoot中会有很多的xxxCustomizer帮助我们进行定制配置。</strong></li>
+</ul>
 <h1 id="感谢阅读">感谢阅读</h1>
 
                 
@@ -757,7 +937,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一-spring-boot-入门"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;Spring Boot &#x5165;&#x95E8;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-spring-boot-简介"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">1&#x3001;Spring Boot &#x7B80;&#x4ECB;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-微服务"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">2&#x3001;&#x5FAE;&#x670D;&#x52A1;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二-spring-boot-helloworld"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;Spring Boot HelloWorld</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#hello-world探究"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Hello World&#x63A2;&#x7A76;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-pom文件"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">1&#x3001;POM&#x6587;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-启动器"><span class="toc-nav-number">2.1.2.</span> <span class="toc-nav-text">2&#x3001;&#x542F;&#x52A8;&#x5668;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-主程序类主入口类"><span class="toc-nav-number">2.1.3.</span> <span class="toc-nav-text">3&#x3001;&#x4E3B;&#x7A0B;&#x5E8F;&#x7C7B;&#xFF0C;&#x4E3B;&#x5165;&#x53E3;&#x7C7B;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三-使用spring-initializer快速创建spring-boot项目"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x4E09;&#x3001;&#x4F7F;&#x7528;Spring Initializer&#x5FEB;&#x901F;&#x521B;&#x5EFA;Spring Boot&#x9879;&#x76EE;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#四-spring-boot配置"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x56DB;&#x3001;Spring Boot&#x914D;&#x7F6E;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-配置文件"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">1&#x3001;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-yaml语法"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">2&#x3001;YAML&#x8BED;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-配置文件值注入"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">3&#x3001;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x503C;&#x6CE8;&#x5165;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#configurationproperties"><span class="toc-nav-number">4.3.1.</span> <span class="toc-nav-text">@ConfigurationProperties</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#value"><span class="toc-nav-number">4.3.2.</span> <span class="toc-nav-text">@Value</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#propertysource-amp-importresource-amp-bean"><span class="toc-nav-number">4.3.3.</span> <span class="toc-nav-text">@PropertySource &amp; @ImportResource &amp; @Bean</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#配置类"><span class="toc-nav-number">4.3.4.</span> <span class="toc-nav-text">&#x914D;&#x7F6E;&#x7C7B;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#配置文件占位符"><span class="toc-nav-number">4.3.5.</span> <span class="toc-nav-text">&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5360;&#x4F4D;&#x7B26;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#profile"><span class="toc-nav-number">4.3.6.</span> <span class="toc-nav-text">Profile</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#配置文件加载位置"><span class="toc-nav-number">4.3.7.</span> <span class="toc-nav-text">&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x52A0;&#x8F7D;&#x4F4D;&#x7F6E;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#外部配置加载顺序"><span class="toc-nav-number">4.3.8.</span> <span class="toc-nav-text">&#x5916;&#x90E8;&#x914D;&#x7F6E;&#x52A0;&#x8F7D;&#x987A;&#x5E8F;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#自动配置原理"><span class="toc-nav-number">4.3.9.</span> <span class="toc-nav-text">&#x81EA;&#x52A8;&#x914D;&#x7F6E;&#x539F;&#x7406;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#springboot-精髓"><span class="toc-nav-number">4.3.10.</span> <span class="toc-nav-text">SpringBoot &#x7CBE;&#x9AD3;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#conditional派生注解"><span class="toc-nav-number">4.3.11.</span> <span class="toc-nav-text">@Conditional&#x6D3E;&#x751F;&#x6CE8;&#x89E3;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#五-日志"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">&#x4E94;&#x3001;&#x65E5;&#x5FD7;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-slf4j使用"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">1&#x3001;SLF4j&#x4F7F;&#x7528;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-解决-log"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">2&#x3001;&#x89E3;&#x51B3; log</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-日志使用"><span class="toc-nav-number">5.3.</span> <span class="toc-nav-text">3&#x3001;&#x65E5;&#x5FD7;&#x4F7F;&#x7528;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-springboot-修改日志的默认配置"><span class="toc-nav-number">5.4.</span> <span class="toc-nav-text">4&#x3001;SpringBoot &#x4FEE;&#x6539;&#x65E5;&#x5FD7;&#x7684;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一-spring-boot-入门"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;Spring Boot &#x5165;&#x95E8;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-spring-boot-简介"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">1&#x3001;Spring Boot &#x7B80;&#x4ECB;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-微服务"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">2&#x3001;&#x5FAE;&#x670D;&#x52A1;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二-spring-boot-helloworld"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;Spring Boot HelloWorld</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#hello-world探究"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Hello World&#x63A2;&#x7A76;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-pom文件"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">1&#x3001;POM&#x6587;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-启动器"><span class="toc-nav-number">2.1.2.</span> <span class="toc-nav-text">2&#x3001;&#x542F;&#x52A8;&#x5668;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-主程序类主入口类"><span class="toc-nav-number">2.1.3.</span> <span class="toc-nav-text">3&#x3001;&#x4E3B;&#x7A0B;&#x5E8F;&#x7C7B;&#xFF0C;&#x4E3B;&#x5165;&#x53E3;&#x7C7B;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三-使用spring-initializer快速创建spring-boot项目"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x4E09;&#x3001;&#x4F7F;&#x7528;Spring Initializer&#x5FEB;&#x901F;&#x521B;&#x5EFA;Spring Boot&#x9879;&#x76EE;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#四-spring-boot配置"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x56DB;&#x3001;Spring Boot&#x914D;&#x7F6E;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-配置文件"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">1&#x3001;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-yaml语法"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">2&#x3001;YAML&#x8BED;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-配置文件值注入"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">3&#x3001;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x503C;&#x6CE8;&#x5165;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#configurationproperties"><span class="toc-nav-number">4.3.1.</span> <span class="toc-nav-text">@ConfigurationProperties</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#value"><span class="toc-nav-number">4.3.2.</span> <span class="toc-nav-text">@Value</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#propertysource-amp-importresource-amp-bean"><span class="toc-nav-number">4.3.3.</span> <span class="toc-nav-text">@PropertySource &amp; @ImportResource &amp; @Bean</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#配置类"><span class="toc-nav-number">4.3.4.</span> <span class="toc-nav-text">&#x914D;&#x7F6E;&#x7C7B;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#配置文件占位符"><span class="toc-nav-number">4.3.5.</span> <span class="toc-nav-text">&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5360;&#x4F4D;&#x7B26;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#profile"><span class="toc-nav-number">4.3.6.</span> <span class="toc-nav-text">Profile</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#配置文件加载位置"><span class="toc-nav-number">4.3.7.</span> <span class="toc-nav-text">&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x52A0;&#x8F7D;&#x4F4D;&#x7F6E;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#外部配置加载顺序"><span class="toc-nav-number">4.3.8.</span> <span class="toc-nav-text">&#x5916;&#x90E8;&#x914D;&#x7F6E;&#x52A0;&#x8F7D;&#x987A;&#x5E8F;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#自动配置原理"><span class="toc-nav-number">4.3.9.</span> <span class="toc-nav-text">&#x81EA;&#x52A8;&#x914D;&#x7F6E;&#x539F;&#x7406;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#springboot-精髓"><span class="toc-nav-number">4.3.10.</span> <span class="toc-nav-text">SpringBoot &#x7CBE;&#x9AD3;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#conditional派生注解"><span class="toc-nav-number">4.3.11.</span> <span class="toc-nav-text">@Conditional&#x6D3E;&#x751F;&#x6CE8;&#x89E3;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#五-日志"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">&#x4E94;&#x3001;&#x65E5;&#x5FD7;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-slf4j使用"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">1&#x3001;SLF4j&#x4F7F;&#x7528;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-解决-log"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">2&#x3001;&#x89E3;&#x51B3; log</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-日志使用"><span class="toc-nav-number">5.3.</span> <span class="toc-nav-text">3&#x3001;&#x65E5;&#x5FD7;&#x4F7F;&#x7528;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-springboot-修改日志的默认配置"><span class="toc-nav-number">5.4.</span> <span class="toc-nav-text">4&#x3001;SpringBoot &#x4FEE;&#x6539;&#x65E5;&#x5FD7;&#x7684;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5-指定配置"><span class="toc-nav-number">5.5.</span> <span class="toc-nav-text">5&#x3001;&#x6307;&#x5B9A;&#x914D;&#x7F6E;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#6-切换日志框架"><span class="toc-nav-number">5.6.</span> <span class="toc-nav-text">6&#x3001;&#x5207;&#x6362;&#x65E5;&#x5FD7;&#x6846;&#x67B6;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#六-spring-boot-web开发"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">&#x516D;&#x3001;Spring Boot Web&#x5F00;&#x53D1;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-springboot-对静态资源的映射规则"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">1&#x3001;SpringBoot &#x5BF9;&#x9759;&#x6001;&#x8D44;&#x6E90;&#x7684;&#x6620;&#x5C04;&#x89C4;&#x5219;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-模板引擎-thymeleaf"><span class="toc-nav-number">6.2.</span> <span class="toc-nav-text">2&#x3001;&#x6A21;&#x677F;&#x5F15;&#x64CE; Thymeleaf</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#springmvc自动配置"><span class="toc-nav-number">6.3.</span> <span class="toc-nav-text">SpringMVC&#x81EA;&#x52A8;&#x914D;&#x7F6E;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2711-spring-mvc-auto-configuration"><span class="toc-nav-number">6.3.1.</span> <span class="toc-nav-text">27.1.1 Spring MVC auto-configuration</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#扩展springmvc"><span class="toc-nav-number">6.4.</span> <span class="toc-nav-text">&#x6269;&#x5C55;SpringMVC</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#全面接管springmvc-enablewebmvc"><span class="toc-nav-number">6.5.</span> <span class="toc-nav-text">&#x5168;&#x9762;&#x63A5;&#x7BA1;SpringMVC <code>@EnableWebMvc</code></span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#如何修改-springboot-的默认配置"><span class="toc-nav-number">6.6.</span> <span class="toc-nav-text">&#x5982;&#x4F55;&#x4FEE;&#x6539; SpringBoot &#x7684;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
         
         </div>
       </aside>
