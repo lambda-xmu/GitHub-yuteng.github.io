@@ -295,10 +295,12 @@
 <hr>
 <hr>
 <h3 id="3-bean-的作用域">3、Bean 的作用域</h3>
-<p><strong>在 Spring 中, 可以在 <bean> 元素的 scope 属性里设置 Bean 的作用域。默认情况下为<code>singleton</code>, Spring 只为每个在 IOC 容器里声明的 Bean 创建<code>唯一实例</code>。</bean></strong></p>
-<p><strong>整个 IOC 容器范围内都能共享该实例;所有后续的 getBean()调用和Bean引用都将返回这个的Bean该作用域被称为 <code>singleton</code>,它是所有Bean的默认作用域。</strong></p>
+<p><strong>在 Spring 中, 可以在 <bean> 元素的 scope 属性里设置 Bean 的作用域。</bean></strong></p>
+<p><strong>默认情况下为<code>singleton</code>, Spring 只为每个在 IOC 容器里声明的 Bean 创建<code>唯一实例</code>。整个 IOC 容器范围内都能共享该实例;所有后续的 getBean()调用和Bean引用都将返回这个的Bean该作用域被称为 <code>singleton</code>,它是所有Bean的默认作用域。</strong></p>
 <ul>
-<li><strong>scope属性若为 prototype 多例 每次 getBean() 获取Bean都创建一个新实例。</strong></li>
+<li><strong>scope 属性若为 prototype 多例 每次 getBean() 获取Bean都创建一个新实例。</strong></li>
+<li><strong>scope 属性若为 request 每次HTTP请求都会创建一个新的Bean，该作用域仅适用于WebApplicationContext环境。</strong></li>
+<li><strong>scope 属性若为 session 同一个HTTP Session 共享一个Bean，不同的HTTP Session 使用不同的Bean。该作用域仅适用于WebApplicationContext环境。</strong></li>
 </ul>
 <hr>
 <hr>
