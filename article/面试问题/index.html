@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          归并排序（Merge Sort） - 于腾 | Blog
+          面试问题总结 - 于腾 | Blog
         
     </title>
 
-    <link rel="canonical" href="https://github-yuteng.github.io/article/归并排序/">
+    <link rel="canonical" href="https://github-yuteng.github.io/article/面试问题/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -88,14 +88,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#排序算法" title="排序算法">排序算法</a>
+                              <a class="tag" href="/tags/#面试" title="面试">面试</a>
                             
                         </div>
-                        <h1>归并排序（Merge Sort）</h1>
+                        <h1>面试问题总结</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by 于腾 on
-                            2019-02-22
+                            2019-05-08
                         </span>
                     </div>
                 
@@ -212,35 +212,15 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="归并排序">归并排序</h2>
-<p><strong>归并排序（Merging Sort）就是将两个或者两个以上的有序表合并成一个有序表的过程。2-路归并</strong></p>
-<p><strong>归并排序算法的思想是：</strong><br>
-假设初始序列含有n个记录，则可看成n个有序的子序列，每个子序列的长度为1，然后两两归并，得到[n/2]个长度为2或1的子序列；<br>
-再两两归并, ……， 如此重复，直至得到一个长度为n的有序序列为止。</p>
+                <h3 id="hashcode">HashCode</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span>;<span class="comment">//该方法返回一个int类型的数值，并且是本地方法</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>配合基于散列的集合一起正常运行，散列集合包括HashSet、HashMap以及HashTable。</strong></li>
+</ul>
+<p>集合要添加新的对象时，先调用这个对象的hashCode方法，得到对应的hashcode值，实际上在HashMap的具体实现中会用一个table保存已经存进去的对象的hashcode值，如果table中没有该hashcode值，它就可以直接存进去，不用再进行任何比较了；如果存在该hashcode值， 就调用它的equals方法与新元素进行比较，相同的话就不存了，不相同就散列其它的地址，所以这里存在一个冲突解决的问题，这样一来实际调用equals方法的次数就大大降低了。通俗来说：Java中的hashCode方法就是根据一定的规则将与对象相关的信息（比如对象的存储地址，对象的字段等）映射成一个数值，这个数值称作为散列值(HashCode值)。 有些朋友误以为默认情况下，hashCode返回的就是对象的存储地址，事实上这种看法是不全面的，确实有些JVM在实现时是直接返回对象的存储地址，但是大多时候并不是这样，只能说可能存储地址有一定关联。</p>
 <hr>
-<h2 id="代码实现">代码实现</h2>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MergeSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(arr == <span class="keyword">null</span> || arr.length &lt; <span class="number">2</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        mergeSort(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(left == right)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> mid = left + ((right-left) &gt;&gt; <span class="number">1</span>); <span class="comment">// &lt;--&gt;  (l+r)/2</span></span><br><span class="line">        mergeSort(arr, left, mid);</span><br><span class="line">        mergeSort(arr, mid + <span class="number">1</span>, right);</span><br><span class="line">        <span class="comment">// left - mid   mid+1 - right 两个序列已经排好序，但整体无序</span></span><br><span class="line">        <span class="comment">// merge的过程就是将两个序列排序</span></span><br><span class="line">        merge(arr, left, mid, right);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> left, <span class="keyword">int</span> m, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 申请辅助数组,存放合并后的序列</span></span><br><span class="line">        <span class="keyword">int</span>[] help = <span class="keyword">new</span> <span class="keyword">int</span>[right - left + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">int</span> i= <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> p1 = left;</span><br><span class="line">        <span class="keyword">int</span> p2 = m + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(p1 &lt;= m &amp;&amp; p2 &lt;= right)&#123;</span><br><span class="line">            help[i++] = arr[p1] &lt; arr[p2] ? arr[p1++] : arr[p2++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 两个必有且只有一个越界</span></span><br><span class="line">        <span class="comment">// 两个循环只会执行一个</span></span><br><span class="line">        <span class="keyword">while</span> (p1 &lt;= m) &#123;</span><br><span class="line">            help[i++] = arr[p1++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (p2 &lt;= right) &#123;</span><br><span class="line">            help[i++] = arr[p2++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; help.length; i++) &#123;</span><br><span class="line">            arr[left + i] = help[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="动画演示">动画演示</h2>
-<p>图片来源：<a href="https://mp.weixin.qq.com/s/vn3KiV-ez79FmbZ36SX9lg" target="_blank" rel="noopener">五分钟学算法 十大经典排序</a><br>
-<img src="http://ww1.sinaimg.cn/large/006QzbZDly1g212okix09g30qi0exx1i.gif"></p>
-<hr>
-<h2 id="merge过程">merge过程</h2>
-<img src="https://i.loli.net/2019/05/06/5ccfb1d47cdcc.png">
-<hr>
-<p><strong>p1,p2每次只会移动一个，所以必定会有一个越界。如果p1耗尽，需要把p2后面内容拷贝至help数组，反之。</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (p1 &lt;= m) &#123;</span><br><span class="line">    help[i++] = arr[p1++];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> (p2 &lt;= right) &#123;</span><br><span class="line">    help[i++] = arr[p2++];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="时间复杂度">时间复杂度</h2>
-<p><strong>当有n个记录时，需进行⌈log2n⌉躺归并排序，其关键字比较次数不超过n，元素移动次数都是n，</strong><br>
-<strong>因此，归并排序的时间复杂度为O(nlog2n)。</strong></p>
-<hr>
-<h2 id="空间复杂度">空间复杂度</h2>
-<p><strong>用顺序表实现归并排序时，需要和待排序记录个数相等的辅助存储空间，所以空间复杂度为O(n)。</strong></p>
-<hr>
-<h2 id="特点">特点</h2>
-<p><strong>归并排序是一种稳定的排序。</strong></p>
-<h1 id="感谢阅读">感谢阅读</h1>
+<h3 id="hashmap">HashMap</h3>
+<p>put方法是用来向HashMap中添加新的元素，从put方法的具体实现可知，会先调用hashCode方法得到该元素的hashCode值，然后查看table中是否存在该hashCode值，如果存在则调用equals方法重新确定是否存在该元素，如果存在，则更新value值，否则将新的元素添加到HashMap中。从这里可以看出，hashCode方法的存在是为了减少equals方法的调用次数，从而提高程序效率。</p>
 
                 
 
@@ -249,12 +229,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/article/二分查找/" data-toggle="tooltip" data-placement="top" title="二分查找（Binary search）">&larr; Previous Post</a>
+                            <a href="/article/简历/" data-toggle="tooltip" data-placement="top" title="简历">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/article/选择排序/" data-toggle="tooltip" data-placement="top" title="选择排序（Selection Sort）">Next Post &rarr;</a>
+                            <a href="/article/SpringBoot核心技术/" data-toggle="tooltip" data-placement="top" title="SpringBoot 核心技术">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -313,7 +293,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#归并排序"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x5F52;&#x5E76;&#x6392;&#x5E8F;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#代码实现"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x4EE3;&#x7801;&#x5B9E;&#x73B0;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#动画演示"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x52A8;&#x753B;&#x6F14;&#x793A;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#merge过程"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">merge&#x8FC7;&#x7A0B;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#时间复杂度"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#空间复杂度"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">&#x7A7A;&#x95F4;&#x590D;&#x6742;&#x5EA6;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#特点"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">&#x7279;&#x70B9;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#hashcode"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">HashCode</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#hashmap"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">HashMap</span></a></li></ol>
         
         </div>
       </aside>
@@ -333,7 +313,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#排序算法" title="排序算法">排序算法</a>
+                          <a class="tag" href="/tags/#面试" title="面试">面试</a>
                         
                     </div>
                 </section>
