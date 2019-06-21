@@ -100,13 +100,6 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/Java8/</loc>
-        <lastmod>2019-05-07T11:42:27.606Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/tags/NIO/</loc>
         <lastmod>2019-05-07T11:42:45.584Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -143,7 +136,14 @@
 
     <url>
         <loc>https://github-yuteng.github.io/tags/%E9%9D%A2%E8%AF%95/</loc>
-        <lastmod>2019-06-19T12:53:18.376Z</lastmod>
+        <lastmod>2019-06-19T14:08:55.807Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/Java8/</loc>
+        <lastmod>2019-06-21T10:33:57.410Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

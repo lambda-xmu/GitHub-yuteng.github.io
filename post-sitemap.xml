@@ -7,8 +7,16 @@
     </url>
 
     <url>
+        <loc>https://github-yuteng.github.io/article/Java8%E6%96%B0%E7%89%B9%E6%80%A7/</loc>
+        <lastmod>2019-06-21T10:33:57.410Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://github-yuteng.github.io/article/%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98/</loc>
-        <lastmod>2019-06-19T12:53:18.376Z</lastmod>
+        <lastmod>2019-06-19T14:08:55.807Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -73,14 +81,6 @@
     <url>
         <loc>https://github-yuteng.github.io/article/NIO/</loc>
         <lastmod>2019-05-07T11:42:45.584Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://github-yuteng.github.io/article/Java8%E6%96%B0%E7%89%B9%E6%80%A7/</loc>
-        <lastmod>2019-05-07T11:42:27.606Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
