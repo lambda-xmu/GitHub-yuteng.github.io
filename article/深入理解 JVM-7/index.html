@@ -387,24 +387,24 @@
 <hr>
 <blockquote>
 <p><strong>1、&lt; clinit&gt;()方法：是由编译器自动收集类中的所有类变量(静态变量)的赋值动作和静态语句块(static{})中的语句合并产生的。</strong></p>
-</blockquote>
 <ul>
 <li><strong>编译器收集的顺序是由语句在源文件中出现的 <font color="#EE2C2C">顺序</font> 所决定的。</strong></li>
 </ul>
+</blockquote>
 <blockquote>
 <p><strong>2、&lt; clinit&gt;()方法与类的构造函数(或者说实例构造器&lt; init&gt;()方法)不同，它不需要显式地调用父类构造器。</strong></p>
 </blockquote>
 <ul>
 <li><strong>虚拟机会保证在子类的&lt; clinit&gt;()方法执行之前，父类的&lt; clinit&gt;()方法已经执行完毕。</strong></li>
-<li>**因此在虚拟机中第一个被执行的 &lt; clinit&gt;()方法的类肯定是 java.lang.Object **</li>
+<li><strong>因此在虚拟机中第一个被执行的 &lt; clinit&gt;()方法的类肯定是 java.lang.Object</strong></li>
 <li><strong>由于父类的&lt; clinit&gt;()方法先执行，也就意味着父类中定义的静态语句块要优先于子类的变量赋值操作。</strong></li>
 </ul>
 <blockquote>
 <p><strong>3、&lt; clinit&gt;()方法对于类或接口来说并不是必需的。</strong></p>
-</blockquote>
 <ul>
 <li><strong>如果一个类中没有静态语句块，也没有对变量的赋值操作，那么编译器可以不为这个类生成<clinit>()方法。</clinit></strong></li>
 </ul>
+</blockquote>
 <blockquote>
 <p><strong>4、接口中不能使用静态语句块，但仍然有变量初始化的赋值操作，因此接口与类一样都会生成&lt; clinit&gt;()方法。</strong></p>
 </blockquote>
