@@ -37,13 +37,6 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/ORM-%E6%A1%86%E6%9E%B6/</loc>
-        <lastmod>2019-04-21T07:28:19.645Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/tags/NoSQL/</loc>
         <lastmod>2019-04-27T05:01:56.229Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -121,13 +114,6 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/Spring%E5%85%A8%E5%AE%B6%E6%A1%B6/</loc>
-        <lastmod>2019-05-16T13:02:38.785Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</loc>
         <lastmod>2019-06-12T06:26:41.819Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -144,6 +130,20 @@
     <url>
         <loc>https://github-yuteng.github.io/tags/Java8/</loc>
         <lastmod>2019-06-21T10:33:57.410Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/Spring%E5%85%A8%E5%AE%B6%E6%A1%B6/</loc>
+        <lastmod>2019-06-30T06:32:56.157Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/ORM-%E6%A1%86%E6%9E%B6/</loc>
+        <lastmod>2019-07-09T03:52:44.807Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

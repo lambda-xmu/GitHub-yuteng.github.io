@@ -7,6 +7,22 @@
     </url>
 
     <url>
+        <loc>https://github-yuteng.github.io/article/Hibernate/</loc>
+        <lastmod>2019-07-09T03:52:44.807Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/article/SpringMVC/</loc>
+        <lastmod>2019-06-30T06:32:56.157Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://github-yuteng.github.io/article/Java8%E6%96%B0%E7%89%B9%E6%80%A7/</loc>
         <lastmod>2019-06-21T10:33:57.410Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -183,14 +199,6 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/article/Hibernate/</loc>
-        <lastmod>2019-04-21T07:28:19.645Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/article/Hexo%20%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
         <lastmod>2019-04-21T07:28:16.549Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -209,14 +217,6 @@
     <url>
         <loc>https://github-yuteng.github.io/article/Mybatis/</loc>
         <lastmod>2019-04-21T07:27:57.893Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://github-yuteng.github.io/article/SpringMVC/</loc>
-        <lastmod>2019-04-21T07:27:42.421Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
