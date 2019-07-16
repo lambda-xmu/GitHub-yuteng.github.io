@@ -257,14 +257,13 @@
             
         </h3>
         <div class="post-content-preview">
-            HashCode
+            equals() &amp; hashCode()
+在重写equals方法的同时，必须重写hashCode方法。
+123public boolean equals(Object obj) &#123;    return (this == obj);&#125;
 1public native int hashCode();//该方法返回一个int类型的数值，并且是本地方法
 
-配合基于散列的集合一起正常运行，散列集合包括HashSet、HashMap以及HashTable。
-不同的对象可能会生成相同的hashcode值。
-如果两个对象的hashcode值不等，则必定是两个不同的对象。
 
-集合要添加新的对象时，先调用这个对象的hashC......
+equals ......
         </div>
     </a>
     
