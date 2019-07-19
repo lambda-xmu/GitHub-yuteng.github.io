@@ -142,14 +142,14 @@
 
                         
                         <li>
-                            <a href="/about/">关于我</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">关于我</a>
                         </li>
                         
                     
@@ -619,19 +619,16 @@
 <hr>
 <h2 id="8-多线程">8、多线程</h2>
 <h3 id="什么是线程">什么是线程？</h3>
+<p><strong>根本区别：进程是操作系统资源分配的基本单位，而线程是 CPU 任务调度和执行的基本单位</strong>。</p>
 <ul>
-<li>
-<p><strong>线程是操作系统能够进行运算调度的最小单位，它被包含在进程之中是进程的实际运作单位。</strong></p>
-</li>
-<li>
-<p><strong>一个进程同时执行多个任务，每一个任务称为一个线程。</strong></p>
-</li>
+<li><strong>一个程序(进程)同时执行多个任务，每一个任务称为一个线程。</strong></li>
+<li><strong>进程是线程的容器，不存在没有线程的进程的。</strong></li>
 </ul>
 <h3 id="进程与线程区别"><strong>进程与线程区别</strong></h3>
 <ul>
 <li><strong>进程</strong>
 <ul>
-<li>进程是程序运行和资源分配的基本单位;</li>
+<li>进程是程序运行和操作系统资源分配的基本单位;</li>
 <li>同一进程中的多个线程之间可以并发执行。</li>
 <li>本质区别在于每个进程拥有自己的一套变量使用自己的内存空间；</li>
 </ul>
@@ -796,7 +793,7 @@
                     
                     
                         <li class="next">
-                            <a href="/article/SpringBoot核心技术/" data-toggle="tooltip" data-placement="top" title="SpringBoot 核心技术">Next Post &rarr;</a>
+                            <a href="/article/线程—JUC/" data-toggle="tooltip" data-placement="top" title="java.util.concurrent">Next Post &rarr;</a>
                         </li>
                     
                 </ul>

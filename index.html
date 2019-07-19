@@ -134,14 +134,14 @@
 
                         
                         <li>
-                            <a href="/about/">关于我</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">关于我</a>
                         </li>
                         
                     
@@ -274,6 +274,43 @@ equal......
         <div class="tags">
             
               <a href="/tags/#面试" title="面试">面试</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/线程—JUC/">
+        <h2 class="post-title">
+            java.util.concurrent
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            一、进程和线程
+根本区别：进程是操作系统资源分配的基本单位，而线程是 CPU 任务调度和执行的基本单位。
+
+一个程序(进程)同时执行多个任务，每一个任务称为一个线程。
+进程是线程的容器，不存在没有线程的进程的。
+
+在开销方面：
+
+每个进程都有独立的代码和数据空间（程序上下文），程序之间的切换会有较大的开销；
+线程可以看做轻量级的进程，同一类线程共享代码和数据空间，每个线程都有自己独立的运行栈......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 于腾 on
+            2019-05-02
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#线程" title="线程">线程</a>
             
         </div>
     
@@ -534,46 +571,6 @@ JSO......
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/article/深入理解 JVM-12/">
-        <h2 class="post-title">
-            JVM Java内存模型与线程
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本篇介绍虚拟机如何实现多线程、多线程之间由于共享和竞争数据而导致的一系列问题及解决方案。
-内存模型：在特定的操作协议下，对特定的内存或高速缓存进行读写访问的过程抽象。
-
-概述
-Java内存模型
-Java与线程
-
-
-一、概述
-多任务处理的必要性：
-
-1、充分利用计算机处理器的能力，避免处理器在磁盘I/O、网络通信或数据库访问时总是处于等待其他资源的状态。
-2、便于一个服务端同时对多个客户端提供......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 于腾 on
-            2019-04-12
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#JVM" title="JVM">JVM</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -727,15 +724,15 @@ Java与线程
         </li>
       
         <li>
+          <a href="/article/线程—JUC/">java.util.concurrent</a>
+        </li>
+      
+        <li>
           <a href="/article/SpringBoot核心技术/">SpringBoot 核心技术</a>
         </li>
       
         <li>
           <a href="/article/Ajax/">Ajax (Asynchronous)</a>
-        </li>
-      
-        <li>
-          <a href="/article/NIO/">NIO（Non-Blocking IO）</a>
         </li>
       
     </ul>
@@ -764,7 +761,7 @@ Java与线程
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">10</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">10</span></li></ul>
     </div>
 
         <hr>

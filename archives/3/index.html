@@ -134,14 +134,14 @@
 
                         
                         <li>
-                            <a href="/about/">关于我</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">关于我</a>
                         </li>
                         
                     
@@ -211,6 +211,36 @@
 
 <div class="post-preview">
 
+    <a href="/article/MySQL/">
+        <h2 class="post-title">
+            MySQL
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            一、MySQL
+检查当前Linux系统是否安装过mysql： rpm -qa|grep -i mysql
+12345678service mysql startps -ef | grep mysqlservice mysql stop/usr/bin/mysqladmin -u root password rootmysql -uroot -p  密码：rootchkconfig --lis......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 于腾 on
+            2019-03-15
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#MySQL" title="MySQL">MySQL</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/article/Servlet/">
         <h2 class="post-title">
             Servlet
@@ -241,45 +271,6 @@ Servlet容器响应客户请求的过程
         <div class="tags">
             
               <a href="/tags/#Servlet" title="Servlet">Servlet</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/线程——JUC理解/">
-        <h2 class="post-title">
-            JUC理解
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            一个程序同时执行多个任务，每一个任务称为一个线程。
-多进程与多线程区别
-
-本质区别在于每个进程拥有自己的一套变量，而线程则共享数据。
-共享变量使线程之间的通信比进程之间的通信更有效，更容易。
-线程更加“轻量级”，创建、撤销一个线程比启动新进程的开销小得多。
-
-
-JUC-&gt; volatile
-
-volatile 关键字：当多个线程进行操作共享数据时，可以保证内存中的数据可见。
-提供一个免......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 于腾 on
-            2019-03-01
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#线程" title="线程">线程</a>
             
         </div>
     
@@ -718,15 +709,15 @@ Tree-Code
         </li>
       
         <li>
+          <a href="/article/线程—JUC/">java.util.concurrent</a>
+        </li>
+      
+        <li>
           <a href="/article/SpringBoot核心技术/">SpringBoot 核心技术</a>
         </li>
       
         <li>
           <a href="/article/Ajax/">Ajax (Asynchronous)</a>
-        </li>
-      
-        <li>
-          <a href="/article/NIO/">NIO（Non-Blocking IO）</a>
         </li>
       
     </ul>
@@ -755,7 +746,7 @@ Tree-Code
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">10</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">10</span></li></ul>
     </div>
 
         <hr>
