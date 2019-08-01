@@ -7,8 +7,16 @@
     </url>
 
     <url>
+        <loc>https://github-yuteng.github.io/article/%E7%AE%80%E5%8E%86/</loc>
+        <lastmod>2019-08-01T00:58:43.232Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://github-yuteng.github.io/article/%E7%BA%BF%E7%A8%8B/</loc>
-        <lastmod>2019-07-31T10:46:06.863Z</lastmod>
+        <lastmod>2019-07-31T10:57:54.878Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -129,14 +137,6 @@
     <url>
         <loc>https://github-yuteng.github.io/article/Ajax/</loc>
         <lastmod>2019-05-13T02:37:05.973Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://github-yuteng.github.io/article/%E7%AE%80%E5%8E%86/</loc>
-        <lastmod>2019-05-12T03:36:19.071Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
