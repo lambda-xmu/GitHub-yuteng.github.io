@@ -121,13 +121,6 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/JDBC/</loc>
-        <lastmod>2019-07-31T07:57:48.573Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/tags/%E7%AE%80%E5%8E%86/</loc>
         <lastmod>2019-08-01T00:58:43.232Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -144,6 +137,20 @@
     <url>
         <loc>https://github-yuteng.github.io/tags/JVM/</loc>
         <lastmod>2019-08-02T08:07:50.226Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/JDBC/</loc>
+        <lastmod>2019-08-02T08:12:58.894Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/Github/</loc>
+        <lastmod>2019-08-02T08:14:19.629Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
