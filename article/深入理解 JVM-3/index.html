@@ -142,7 +142,7 @@
 
                         
                         <li>
-                            <a href="/about/">关于我</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -156,7 +156,7 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">关于我</a>
                         </li>
                         
                     
@@ -219,7 +219,10 @@
 <p><strong>GC 作用于 <code>方法区、堆</code></strong></p>
 <p><strong>元空间(Java8)与永久代Java7)之间最大的区别在于：</strong><br>
 <strong>永久代使用的 JVM 的堆内存， 但是 Java8 以后的元空间并不在虚拟机中而是使用本机物理内存。</strong></p>
-<img src="https://i.loli.net/2019/08/01/5d4274b603c7639120.png" alt="N_]4)CLAP91`RS990R{C6@C.png" title="N_]4)CLAP91`RS990R{C6@C.png">
+<img src="https://i.loli.net/2019/08/02/5d43e7f6f3f8639980.png" alt="H8C~3ZLH0B@[I_L6]VD8G{E.png" title="H8C~3ZLH0B@[I_L6]VD8G{E.png">
+<hr>
+<hr>
+<img src="https://i.loli.net/2019/08/02/5d43ea9d087ce29704.png" alt="30_8695454HA{E}8VUPYI]G.png" title="30_8695454HA{E}8VUPYI]G.png">
 <hr>
 <h2 id="1-引入计数法">1、引入计数法</h2>
 <p><strong>概念：</strong></p>
@@ -357,9 +360,18 @@
 <p><strong>在老年代中：</strong> 因为对象存活率高、没有额外空间对它进行分配担保，就必须使用“<code>标记-清除</code>”或“<code>标记-整理</code>”算法来进行回收。</p>
 <hr>
 <h2 id="三-垃圾收集器">三、垃圾收集器</h2>
+<p><strong>Java8 默认垃圾收集器  -XX:+UseParallelGC (并行GC)</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">java -XX:+PrintCommandLineFlags -version</span><br><span class="line"></span><br><span class="line">-XX:InitialHeapSize=<span class="number">132510208</span> </span><br><span class="line">-XX:MaxHeapSize=<span class="number">2120163328</span> </span><br><span class="line">-XX:+PrintCommandLineFlags </span><br><span class="line">-XX:+UseCompressedClassPointers </span><br><span class="line">-XX:+UseCompressedOops </span><br><span class="line">-XX:-UseLargePagesIndividualAllocation </span><br><span class="line">-XX:+UseParallelGC</span><br></pre></td></tr></table></figure>
+<hr>
 <p><strong>如果说收集算法是内存回收的方法论，那么垃圾收集器就是内存回收的具体实现。</strong></p>
-<p><strong>HotSpot虚拟机：包含的所有收集器如下图所示：</strong><br>
-<img src="http://ww1.sinaimg.cn/large/006vWPzFly1g227g7w30hj30rp0lyab7.jpg" width="600"></p>
+<ul>
+<li><strong>Serial：串行</strong></li>
+<li><strong>Parallel：并行</strong></li>
+<li><strong>CMS（Concurrent Mark Sweep）：并发标记</strong></li>
+<li><strong>GC：G1(Garbage First)</strong></li>
+</ul>
+<p><strong>HotSpot虚拟机：包含的所有收集器（⑦大垃圾收集器）如下图所示：</strong></p>
+<img src="https://i.loli.net/2019/08/02/5d43d9609fa8918958.png" alt="FBHD2J2GFYB`89K}NR$IK[Q.png" title="FBHD2J2GFYB`89K}NR$IK[Q.png">
 <p><strong>相关概念</strong></p>
 <p><strong>并行（Parallel）：</strong> 指多条垃圾收集线程并行工作，但此时用户线程仍然处于等待状态。<br>
 <strong>并发（Concurrent）：</strong> 指用户线程与垃圾收集线程同时执行（但不一定是并行的可能会交替执行）<br>
@@ -368,6 +380,42 @@
 <li><strong>吞吐量 = 运行用户代码时间 /（运行用户代码时间 + 垃圾收集时间）。</strong></li>
 <li><strong>假设虚拟机总共运行了100分钟，其中垃圾收集花掉1分钟，那吞吐量就是99%。</strong></li>
 </ul>
+<p><strong>Server模式/Client模式 操作系统：</strong></p>
+<ul>
+<li><strong>32位 Window 操作系统, ,不论硬件如何都默认使用 Client 的JVM模式</strong></li>
+<li><strong>32位其它操作 系统，2G内存同时有2个cpu以上用 Server 模式，低于该配置还是 Client 模式</strong></li>
+<li><strong>64位 only server 模式</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>简写</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DefNew</td>
+<td>Default New Generation - Serial</td>
+</tr>
+<tr>
+<td>Tenured</td>
+<td>Old  - Serial Old</td>
+</tr>
+<tr>
+<td>ParNew</td>
+<td>Parallel New Generation</td>
+</tr>
+<tr>
+<td>PSYoungGen</td>
+<td>Parallel Scavenge</td>
+</tr>
+<tr>
+<td>ParOldGen</td>
+<td>Parallel Old Generation</td>
+</tr>
+</tbody>
+</table>
 <hr>
 <h3 id="minor-gc-和-majorfull-gc">Minor GC 和 Major/Full GC</h3>
 <p><strong>新生代GC（Minor GC）：</strong></p>
@@ -389,27 +437,34 @@
 <li>这项工作是由虚拟机在后台自动发起和自动完成的，在用户不可见的情况下把用户正常工作线程全部停掉，这对很多应用来说是难以接收的</li>
 </ul>
 <p><strong>Serial收集器由于没有线程交互的开销，专心做垃圾收集自然可以获得最高的单线程收集效率。</strong></p>
-<p><strong>下图展示了Serial /Serial Old收集器（老年代采用Serial Old收集器）的运行过程：</strong></p>
+<p><strong>当新生代激活了 Serial 收集器，老年代自动激活 Serial Old 收集器。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Xms10m -Xmx10m -XX:+PrintCDetails -XX:+PrintCommandulineFLags -XX:+UseSerialGC</span><br></pre></td></tr></table></figure>
+<p><strong>下图展示了<code>Serial /Serial Old</code>收集器（老年代采用Serial Old收集器）的运行过程：</strong></p>
 <img src="http://ww1.sinaimg.cn/large/006vWPzFly1g22fztoffzj31120i0t9w.jpg" width="900"> 
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Yu</span></span><br><span class="line"><span class="comment"> * java -XX:+PrintCommandLineFlags -version</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * -XX:InitialHeapSize=132510208</span></span><br><span class="line"><span class="comment"> * -XX:MaxHeapSize=2120163328</span></span><br><span class="line"><span class="comment"> * -XX:+PrintCommandLineFlags</span></span><br><span class="line"><span class="comment"> * -XX:+UseCompressedClassPointers</span></span><br><span class="line"><span class="comment"> * -XX:+UseCompressedOops</span></span><br><span class="line"><span class="comment"> * -XX:-UseLargePagesIndividualAllocation</span></span><br><span class="line"><span class="comment"> * -XX:+UseParallelGC</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * -Xms10m -Xmx10m -XX:+PrintGCDetails -XX:+PrintCommandLineFlags -XX:+UseSerialGC</span></span><br><span class="line"><span class="comment"> * GC (Allocation Failure) [DefNew          Default New Generation</span></span><br><span class="line"><span class="comment"> * Full GC (Allocation Failure) [Tenured   Old</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * //TODO DefNew + Tenured</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SerialGC</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                list.add(String.valueOf(++i).intern());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"i:"</span> + i);<span class="comment">//i:145884</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
 <h4 id="2-parnew-收集器-server-模式">2、ParNew 收集器 (Server 模式)</h4>
 <p><strong>ParNew 收集器 就是 Serial 收集器 的多线程版本，它也是一个<code>新生代收集器</code>。</strong><br>
 <strong>除了使用多线程进行垃圾收集之外，其余行为包括Serial收集器可用的所有控制参数、收集算法（复制算法）、Stop The World、对象分配规则、回收策略等与Serial收集器完全相同，两者共用了相当多的代码。</strong></p>
 <img src="http://ww1.sinaimg.cn/large/006vWPzFly1g22g4t6e5fj311q0i1myj.jpg" width="900"> 
-<p>ParNew 收集器 除了使用多线程收集外，其他与 Serial收集器 相比并无太多创新之处，但它却是许多运行在 Server模式下的虚拟机中首选的新生代收集器，其中有一个与性能无关的重要原因是，除了Serial收集器外，目前只有它能和CMS收集器（Concurrent Mark Sweep）配合工作。</p>
-<h4 id="3-parallel-scavenge-收集器">3、Parallel Scavenge 收集器</h4>
-<p><strong>Parallel Scavenge 收集器 也是一个并行的多线程<code>新生代收集器</code>，它也使用<code>复制算法</code>。</strong><br>
-<strong>Parallel Scavenge收集器的特点是它的关注点与其他收集器不同，</strong></p>
-<ul>
-<li><strong>CMS</strong>等收集器的关注点是<strong>尽可能缩短垃圾收集时用户线程的停顿时间，</strong></li>
-<li><strong>Parallel Scavenge</strong>收集器的<strong>目标是达到一个可控制的吞吐量（Throughput）。</strong></li>
-</ul>
-<p><strong>停顿时间越短就越适合需要与用户交互的程序，良好的响应速度能提升用户体验。</strong><br>
-<strong>而高吞吐量则可以高效率地利用CPU时间，尽快完成程序的运算任务，主要适合在后台运算而不需要太多交互的任务。</strong></p>
-<ul>
-<li>另外值得注意的一点是，<strong>Parallel Scavenge收集器无法与CMS收集器配合使用，</strong></li>
-<li>所以在JDK 1.6推出Parallel Old之前，如果新生代选择Parallel Scavenge收集器，老年代只有Serial Old收集器能与之配合使用。</li>
-</ul>
+<p>ParNew 收集器 除了使用多线程收集外，其他与 Serial收集器 相比并无太多创新之处，但它却是许多运行在 Server模式下的虚拟机中首选的新生代收集器，其中有一个与性能无关的重要原因是，除了Serial收集器外，目前<code>只有它能和CMS收集器（Concurrent Mark Sweep）配合工作</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * java -XX:+PrintCommandLineFlags -version</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * -Xms10m -Xmx10m -XX:+PrintGCDetails -XX:+PrintCommandLineFlags -XX:+UseParNewGC</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [GC (Allocation Failure) [ParNew          Parallel New Generation</span></span><br><span class="line"><span class="comment"> * [Full GC (Allocation Failure) [Tenured    Old</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * //TODO ParNew + Tenured</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Java HotSpot(TM) 64-Bit Server VM warning:</span></span><br><span class="line"><span class="comment"> * Using the ParNew young collector with the Serial old collector is deprecated and will likely be removed in a future release</span></span><br><span class="line"><span class="comment"> * 不推荐将 ParNew收集器 与 Serial Old收集器 一起使用，并且可能会在将来的版本中删除</span></span><br><span class="line"><span class="comment"> * 推荐 ParNew收集器 与 CMS收集器一起使用</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParNewGC</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                list.add(String.valueOf(++i).intern());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"i:"</span> + i);<span class="comment">//i:145884</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
+<h4 id="3-parallel-scavenge-收集器">3、Parallel Scavenge 收集器</h4>
+<p><strong>Java8 新生代默认收集器，新生代老年代都用并行收集器(Parallel Scavenge + Parallel Old)。</strong></p>
+<p><strong>Parallel Scavenge 收集器 也是一个并行的多线程<code>新生代收集器</code>，它也使用<code>复制算法</code>。</strong><br>
+<strong>Parallel Scavenge收集器的特点是它的关注点与其他收集器不同：</strong></p>
+<ul>
+<li><strong><code>CMS</code> 等收集器的关注点是尽可能缩短垃圾收集时用户线程的停顿时间；</strong></li>
+<li><strong><code>Parallel Scavenge</code>收集器的目标是达到一个<code>可控制的吞吐量（Throughput）</code>。</strong></li>
+</ul>
+<p><strong>停顿时间越短就越适合需要与用户交互的程序，良好的响应速度能提升用户体验。而高吞吐量则可以高效率地利用CPU时间，尽快完成程序的运算任务，主要适合在后台运算而不需要太多交互的任务。自适应调解策略</strong></p>
+<ul>
+<li>另外值得注意的一点是，<strong>Parallel Scavenge收集器无法与CMS收集器配合使用；</strong></li>
+<li><strong>所以在JDK 1.6推出Parallel Old之前，如果新生代选择Parallel Scavenge收集器，老年代只有Serial Old收集器能与之配合使用，现在与 <code>Parallel Old</code> 配合使用。</strong></li>
+</ul>
+<p><strong>-XX:+UseParallelGC 或 -XX:+UseParallelOldGC(可互相激活)使用Parallel Scanvenge收集器</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Yu</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * -Xms10m -Xmx10m -XX:+PrintGCDetails -XX:+PrintCommandLineFlags -XX:+UseParallelGC</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [GC (Allocation Failure) [PSYoungGen:  Parallel Scavenge</span></span><br><span class="line"><span class="comment"> * [Full GC (Ergonomics) [PSYoungGen: 2047K-&gt;0K(2560K)] [ParOldGen:     Parallel Old Generation</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * //TODO PSYoungGen + ParOldGen</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParallelGC</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                list.add(String.valueOf(++i).intern());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"i:"</span> + i);<span class="comment">//i:145884</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="老年代收集器">老年代收集器</h3>
 <h4 id="1-serial-old-收集器">1、Serial Old 收集器</h4>
@@ -420,15 +475,19 @@
 <li>作为CMS收集器的后备预案，在并发收集发生 Concurrent Mode Failure 时使用。</li>
 </ul>
 <img src="http://ww1.sinaimg.cn/large/006vWPzFly1g22fztoffzj31120i0t9w.jpg" width="900"> 
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Yu</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * -Xms10m -Xmx10m -XX:+PrintGCDetails -XX:+PrintCommandLineFlags -XX:+UseSerialOldGC</span></span><br><span class="line"><span class="comment"> * //TODO 此参数Java8已经被优化,不存在了   </span></span><br><span class="line"><span class="comment"> * Error: Could not create the Java Virtual Machine.</span></span><br><span class="line"><span class="comment"> * Error: A fatal exception has occurred. Program will exit.</span></span><br><span class="line"><span class="comment"> * Unrecognized VM option 'UseSerialOldGC'</span></span><br><span class="line"><span class="comment"> * Did you mean '(+/-)UseSerialGC'?</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 错误：无法创建Java虚拟机。</span></span><br><span class="line"><span class="comment"> * 错误：发生了致命异常。 程序将会退出。</span></span><br><span class="line"><span class="comment"> * 无法识别的VM选项'UseSerialOldGC'</span></span><br><span class="line"><span class="comment"> * 你的意思是'（+/-）UseSerialGC'？</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SerialOldGC</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                list.add(String.valueOf(++i).intern());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"i:"</span> + i);<span class="comment">//i:145884</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
 <h4 id="2-parallel-old-收集器">2、Parallel Old 收集器</h4>
 <p><strong>Parallel Old收集器是Parallel Scavenge收集器的老年代版本，使用<code>多线程</code>和<code>“标记-整理”</code>算法。</strong></p>
-<p>前面已经提到过，这个收集器是在JDK 1.6中才开始提供的，在此之前，如果新生代选择了Parallel Scavenge收集器，老年代除了Serial Old以外别无选择，所以在Parallel Old诞生以后，<code>“吞吐量优先”收集器</code>终于有了比较名副其实的应用组合，在注重吞吐量以及CPU资源敏感的场合，都可以优先考虑<code>Parallel Scavenge加Parallel Old</code>收集器。</p>
+<p>前面已经提到过，这个收集器是在 JDK 1.6 中才开始提供的，在此之前，如果新生代选择了Parallel Scavenge收集器，老年代除了Serial Old以外别无选择，所以在Parallel Old诞生以后，<code>“吞吐量优先”收集器</code>终于有了比较名副其实的应用组合，在注重吞吐量以及CPU资源敏感的场合，都可以优先考虑<code>Parallel Scavenge加Parallel Old</code>收集器。</p>
 <p><strong>Parallel Old收集器的工作流程与Parallel Scavenge相同。</strong></p>
 <p>这里给出Parallel Scavenge/Parallel Old收集器配合使用的流程图：</p>
 <img src="http://ww1.sinaimg.cn/large/006vWPzFly1g22g6j6pwdj311j0gzmyf.jpg" width="900"> 
-<h4 id="3-cms收集器">3、CMS收集器</h4>
-<p><strong>CMS（Concurrent Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器，它非常符合那些集中在互联网站或者B/S系统的服务端上的Java应用这些应用都非常重视服务的响应速度。</strong><br>
-<strong>从名字上（“Mark Sweep”）就可以看出它是基于“标记-清除”算法实现的。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Yu</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * -Xms10m -Xmx10m -XX:+PrintGCDetails -XX:+PrintCommandLineFlags -XX:+UseParallelOldGC</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [GC (Allocation Failure) [PSYoungGen:  Parallel Scavenge</span></span><br><span class="line"><span class="comment"> * [Full GC (Ergonomics) [PSYoungGen: 2047K-&gt;0K(2560K)] [ParOldGen:     Parallel Old Generation</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * //TODO PSYoungGen + ParOldGen</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ParallelOldGC</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                list.add(String.valueOf(++i).intern());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"i:"</span> + i);<span class="comment">//i:145884</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="3-cms-收集器">3、CMS 收集器</h4>
+<p><strong>CMS（Concurrent Mark Sweep）并发标记收集器是一种以获取最短回收停顿时间为目标的收集器，它非常符合那些集中在互联网站或者B/S系统的服务端上的Java应用这些应用都非常重视服务的响应速度。</strong><br>
+<strong>从名字上（“Mark Sweep”）就可以看出它是基于“标记-清除”算法实现的。清除 GC Roots 不可达对象</strong></p>
 <p><strong>CMS收集器工作的整个流程分为以下4个步骤：</strong></p>
 <ul>
 <li><strong>初始标记（CMS initial mark）：</strong> 仅仅只是标记一下GC Roots能直接关联到的对象，速度很快，需要“Stop The World”。</li>
@@ -440,6 +499,7 @@
 <p>由于整个过程中耗时最长的并发标记和并发清除过程收集器线程都可以与用户线程一起工作，<br>
 所以，<strong>从总体上来说，CMS收集器的内存回收过程是与用户线程一起并发执行的。</strong></p>
 </blockquote>
+<p>**老年代使用CMS -XX:+UseConcMarkSweepGC，新生代自动激活使用 ParNewGC 收集器。并且和 Serial Old收集器组合使用，Serial Old将作为CMS出错的后备收集器。 **</p>
 <p><strong>通过下图可以比较清楚地看到CMS收集器的运作步骤中并发和需要停顿的时间：</strong></p>
 <img src="http://ww1.sinaimg.cn/large/006vWPzFly1g22f4wr02hj30yq0hy75t.jpg" width="900">
 <p><strong>优点：</strong><br>
@@ -448,43 +508,91 @@ CMS是一款优秀的收集器，<code>并发收集</code>、<code>低停顿</co
 <p><strong>缺点：</strong></p>
 <ul>
 <li><strong>对CPU资源非常敏感。</strong></li>
+<li><strong>CMS 必须要在老年代堆内存用尽之前完成垃圾回收，否则 CMS 回收失败时，将触发保护机制，串行老年代收集器将会以 STW 的方式进行一次 GC，从而造成较大的停顿时间。</strong></li>
 <li><strong>无法处理浮动垃圾（Floating Garbage）</strong>，由于CMS并发清理阶段用户线程还在运行着，伴随程序运行自然就还会有新的垃圾不断产生。</li>
 <li><strong>标记-清除算法导致的空间碎片</strong>，这意味着收集结束时会有大量空间碎片产生。</li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Yu</span></span><br><span class="line"><span class="comment"> * -Xms10m -Xmx10m -XX:+PrintGCDetails -XX:+PrintCommandLineFlags -XX:+UseConcMarkSweepGC</span></span><br><span class="line"><span class="comment"> * 老年代使用CMS -XX:+UseConcMarkSweepGC，新生代自动激活使用 ParNewGC 收集器。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [GC (Allocation Failure) [ParNew:</span></span><br><span class="line"><span class="comment"> * [Full GC (Allocation Failure) [CMS:</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * //TODO ParNew + CMS</span></span><br><span class="line"><span class="comment"> * [GC (CMS Initial Mark)</span></span><br><span class="line"><span class="comment"> * [CMS-concurrent-mark-start]</span></span><br><span class="line"><span class="comment"> * [GC (CMS Final Remark)</span></span><br><span class="line"><span class="comment"> * [CMS-concurrent-sweep-start]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CMSGC</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                list.add(String.valueOf(++i).intern());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"i:"</span> + i);<span class="comment">//i:145884</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
+<h3 id="垃圾收集器的选择">垃圾收集器的选择</h3>
+<p><strong>组合：</strong></p>
+<ul>
+<li><strong>单CPU或小内存，单机程序。</strong>
+<ul>
+<li><strong><code>-XX:+UseSerialGC</code></strong></li>
+</ul>
+</li>
+<li><strong>多CPU，需要最大吞吐量，如后台计算型应用。</strong>
+<ul>
+<li><strong><code>-XX:+UseParallelGC/-XX:+UseParallelOldGC</code></strong></li>
+</ul>
+</li>
+<li><strong>多CPU ，追求低停顿时间，需快速响应如互联网应用。</strong>
+<ul>
+<li><strong><code>-XX:+UseConcMarkSweepGC/-XX:+UseParNewGC</code></strong></li>
+</ul>
+</li>
+</ul>
 <hr>
 <h2 id="四-g1收集器">四、G1收集器</h2>
 <p><strong>G1（Garbage-First）收集器是收集器技术发展最前沿的成果之一，面向服务端应用的垃圾收集器。</strong></p>
+<p><strong>Java9 默认收集器</strong></p>
 <p><strong>与其他GC收集器相比，G1具备如下特点：</strong></p>
-<p><strong>并行与并发：</strong> G1 能充分利用多CPU、多核环境下的硬件优势，使用多个CPU来缩短“Stop The World”停顿时间，部分其他收集器原本需要停顿Java线程执行的GC动作，G1收集器仍然可以通过并发的方式让Java程序继续执行。</p>
-<p><strong>分代收集：</strong> 与其他收集器一样，分代概念在G1中依然得以保留。虽然G1可以不需要其他收集器配合就能独立管理整个GC堆，但它能够采用不同方式去处理新创建的对象和已存活一段时间、熬过多次GC的旧对象来获取更好的收集效果。</p>
+<ul>
+<li>
+<p><strong>并行与并发：</strong> G1 能充分利用多CPU、多核环境下的硬件优势，使用多个CPU来缩短“Stop The World”停顿时间，部分其他收集器原本需要停顿 Java 线程执行的 GC 动作，G1收集器仍然可以通过并发的方式让Java程序继续执行。</p>
+</li>
+<li>
+<p><strong>分代收集：</strong> 与其他收集器一样，分代概念在G1中依然得以保留。虽然G1可以不需要其他收集器配合就能独立管理整个GC堆，但它能够采用不同方式去处理新创建的对象和已存活一段时间、熬过多次GC的旧对象来获取更好的收集效果，G1没有内存碎片。</p>
+</li>
+<li>
 <p><strong>空间整合：</strong> G1从整体来看是基于“标记-整理”算法实现的收集器，从局部（两个Region之间）上来看是基于“复制”算法实现的。这意味着G1运行期间不会产生内存空间碎片，收集后能提供规整的可用内存。此特性有利于程序长时间运行，分配大对象时不会因为无法找到连续内存空间而提前触发下一次GC。</p>
-<p><strong>可预测的停顿：</strong> 这是G1相对CMS的一大优势，降低停顿时间是G1和CMS共同的关注点，但G1除了降低停顿外，还能建立可预测的停顿时间模型，能让使用者明确指定在一个长度为M毫秒的时间片段内，消耗在GC上的时间不得超过N毫秒，这几乎已经是实时Java（RTSJ）的垃圾收集器的特征了。</p>
-<h3 id="横跨整个堆内存">横跨整个堆内存</h3>
-<p>在G1之前的其他收集器进行收集的范围都是整个新生代或者老生代，而G1不再是这样。G1在使用时，Java堆的内存布局与其他收集器有很大区别，<strong>它将整个Java堆划分为多个大小相等的独立区域（Region）虽然还保留新生代和老年代的概念</strong>，新生代和老年代不再是物理隔离的了，而都是一部分Region（不需要连续）的集合。</p>
-<h3 id="建立可预测的时间模型">建立可预测的时间模型</h3>
+</li>
+<li>
+<p><strong>可预测的停顿：</strong> 这是G1相对CMS的一大优势，<code>降低停顿时间是G1和CMS共同的关注点</code>，但G1除了降低停顿外，还能建立可预测的停顿时间模型，能让使用者明确指定在一个长度为M毫秒的时间片段内，消耗在GC上的时间不得超过N毫秒，这几乎已经是实时Java（RTSJ）的垃圾收集器的特征了。</p>
+</li>
+</ul>
+<hr>
+<h3 id="1-横跨整个堆内存">1、横跨整个堆内存</h3>
+<p>在G1之前的其他收集器进行收集的范围都是整个新生代或者老生代，而G1不再是这样。G1在使用时，Java堆的内存布局与其他收集器有很大区别，<strong><code>它将整个Java堆划分为多个大小相等的独立区域（Region 1M~32M不等，必须是2的幂，默认为2048个分区）虽然还保留新生代和老年代的概念</code></strong>，新生代和老年代不再是物理隔离的了，而都是一部分 Region（不需要连续，不要求对象存储一定是物理上的连续，只要逻辑上连续即可）的集合。</p>
+<hr>
+<h3 id="2-建立可预测的时间模型">2、建立可预测的时间模型</h3>
 <p><strong>有计划地避免在整个Java堆中进行全区域的垃圾收集。</strong></p>
 <p>G1跟踪各个Region里面的垃圾堆积的价值大小（回收所获得的空间大小以及回收所需时间的经验值），<strong>在后台维护一个优先列表，每次根据允许的收集时间</strong>，优先回收价值最大的Region（这也就是Garbage-First名称的来由）。这种使用Region划分内存空间以及有优先级的区域回收方式，保证了G1收集器在有限的时间内可以获取尽可能高的收集效率。</p>
-<h3 id="避免全堆扫描remembered-set">避免全堆扫描——Remembered Set</h3>
-<p><strong>G1把Java堆分为多个Region，就是“化整为零”。</strong></p>
+<hr>
+<h3 id="3-避免全堆扫描remembered-set">3、避免全堆扫描——Remembered Set</h3>
+<p><strong>G1把Java堆分为多个Region，就是“<code>化整为零</code>”。</strong></p>
 <p>但是Region不可能是孤立的，一个对象分配在某个Region中，可以与整个Java堆任意的对象发生引用关系。在做可达性分析确定对象是否存活的时候，需要扫描整个Java堆才能保证准确性，这显然是对GC效率的极大伤害。</p>
 <p>为了避免全堆扫描的发生，虚拟机<strong>为G1中每个Region维护了一个与之对应的Remembered Set</strong>。<br>
 虚拟机发现程序在对Reference类型的数据进行写操作时，会产生一个Write Barrier暂时中断写操作，检查Reference引用的对象是否处于不同的Region之中（在分代的例子中就是检查是否老年代中的对象引用了新生代中的对象）。如果是，便通过CardTable把相关引用信息记录到被引用对象所属的Region的Remembered Set之中。当进行内存回收时，在GC根节点的枚举范围中加入Remembered Set即可保证不对全堆扫描也不会有遗漏。</p>
+<h3 id="4-g1收集器收集步骤">4、G1收集器收集步骤</h3>
 <p><strong>如果不计算维护Remembered Set的操作，G1收集器的运作大致可划分为以下几个步骤：</strong></p>
+<ul>
+<li>
 <p><strong>初始标记（Initial Marking）：</strong> 仅仅只是标记一下GC Roots 能直接关联到的对象，并且修改TAMS（Nest Top Mark Start）的值，让下一阶段用户程序并发运行时，能在正确可以的Region中创建对象，此阶段需要停顿线程，但耗时很短。</p>
+</li>
+<li>
 <p><strong>并发标记（Concurrent Marking）：</strong> 从GC Root 开始对堆中对象进行可达性分析，找到存活对象，此阶段耗时较长，但可与用户程序并发执行。</p>
+</li>
+<li>
 <p><strong>最终标记（Final Marking）：</strong> 为了修正在并发标记期间因用户程序继续运作而导致标记产生变动的那一部分标记记录，虚拟机将这段时间对象变化记录在线程的Remembered Set Logs里面，最终标记阶段需要把Remembered Set Logs的数据合并到Remembered Set中，这阶段需要停顿线程，但是可并行执行。</p>
+</li>
+<li>
 <p><strong>筛选回收（Live Data Counting and Evacuation）：</strong> 首先对各个Region中的回收价值和成本进行排序，根据用户所期望的GC 停顿是时间来制定回收计划。此阶段其实也可以做到与用户程序一起并发执行，但是因为只回收一部分Region，时间是用户可控制的，而且停顿用户线程将大幅度提高收集效率。</p>
+</li>
+</ul>
 <hr>
 <p><strong>通过下图可以比较清楚地看到G1收集器的运作步骤中并发和需要停顿的阶段（Safepoint处）：</strong></p>
 <img src="http://ww1.sinaimg.cn/large/006vWPzFly1g22fiaq0c9j30vy0igabm.jpg" width="900">
+<p><strong>Java11、12 -&gt; ZGC</strong></p>
+<hr>
 <h2 id="五-总结-收集器各个功能">五、总结 收集器各个功能</h2>
 <table>
 <thead>
 <tr>
 <th>收集器</th>
-<th>串/并行，并发</th>
-<th>新生代.老年代</th>
+<th>串/并行/并发</th>
+<th>新生代/老年代</th>
 <th>算法</th>
 <th>目标</th>
 <th>适用场景</th>
@@ -542,8 +650,8 @@ CMS是一款优秀的收集器，<code>并发收集</code>、<code>低停顿</co
 <tr>
 <td>G1</td>
 <td>并发</td>
-<td>both</td>
-<td>标记-整理+复制算法</td>
+<td>Both</td>
+<td>标整+复制算法</td>
 <td>响应速度优先</td>
 <td>面向服务端应用，将来替换CMS</td>
 </tr>
@@ -759,26 +867,42 @@ CMS是一款优秀的收集器，<code>并发收集</code>、<code>低停顿</co
 <hr>
 <h2 id="八-error和exception">八、Error和Exception</h2>
 <p><strong>Error类 和 Exception类都是继承 Throwable类。</strong></p>
-<p>Error（错误）是系统中的错误，程序员是不能改变的和处理的，是在程序编译时出现的错误，只能通过修改程序才能修正。一般是指与虚拟机相关的问题，如系统崩溃，虚拟机错误，内存空间不足，方法调用栈溢等。对于这类错误的导致的应用程序中断，仅靠程序本身无法恢复和和预防，遇到这样的错误，建议让程序终止。</p>
-<p>Exception（异常）表示程序可以处理的异常，可以捕获且可能恢复。遇到这类异常，应该尽可能处理异常，使程序恢复运行，而不应该随意终止异常。</p>
-<p>Exception又分为两类</p>
-<p>CheckedException：（编译时异常） 需要用try——catch显示的捕获，对于可恢复的异常使用CheckedException。</p>
-<p>UnCheckedException（RuntimeException）：（运行时异常）不需要捕获，对于程序错误（不可恢复）的异常使用RuntimeException。</p>
-<p>常见的RuntimeException异常</p>
-<p>illegalArgumentException：此异常表明向方法传递了一个不合法或不正确的参数。</p>
-<p>illegalStateException：在不合理或不正确时间内唤醒一方法时出现的异常信息。换句话说，即 <a href="https://www.baidu.com/s?wd=Java&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1YvnhckPhDduHRdPWP9njmv0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EPHTYn1D3PHc1" target="_blank" rel="noopener">Java</a> 环境或 <a href="https://www.baidu.com/s?wd=Java&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1YvnhckPhDduHRdPWP9njmv0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EPHTYn1D3PHc1" target="_blank" rel="noopener">Java</a> 应用不满足请求操作。</p>
-<p>NullpointerException：空指针异常（我目前遇见的最多的）</p>
-<p>IndexOutOfBoundsException：索引超出边界异常</p>
-<p>常见的CheckedException异常</p>
-<p>我们在编写程序过程中try——catch捕获到的一场都是CheckedException。</p>
-<p>io包中的IOExecption及其子类，都是CheckedException。</p>
-<p>Error 和 Exception就像是水池和水池里的水的区别</p>
 <ul>
 <li>
-<p>“水池”，就是代码正常运行的外部环境，如果水池崩溃（系统崩溃），或者池水溢出（内存溢出）等，这些都是跟水池外部环境有关。这些就是java中的error。</p>
+<p>Error（错误）是系统中的错误，程序员是不能改变的和处理的，是在程序编译时出现的错误，只能通过修改程序才能修正。一般是指与虚拟机相关的问题，如系统崩溃，虚拟机错误，内存空间不足，方法调用栈溢等。对于这类错误的导致的应用程序中断，仅靠程序本身无法恢复和和预防，遇到这样的错误，建议让程序终止。</p>
 </li>
 <li>
-<p>“水池里的水”，就是正常运行的代码，水污染了、有杂质了，浑浊了，这些影响水质的因素就是Exception。</p>
+<p>Exception（异常）表示程序可以处理的异常，可以捕获且可能恢复。遇到这类异常，应该尽可能处理异常，使程序恢复运行，而不应该随意终止异常。Exception又分为两类：</p>
+<ul>
+<li>
+<p>CheckedException：（编译时异常） 需要用 try—catch 显示的捕获，对于可恢复的异常使用CheckedException。</p>
+</li>
+<li>
+<p>UnCheckedException（RuntimeException）：（运行时异常）不需要捕获，对于程序错误（不可恢复）的异常使用 RuntimeException。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="常见的runtimeexception异常">常见的RuntimeException异常</h3>
+<ul>
+<li>illegalArgumentException：此异常表明向方法传递了一个不合法或不正确的参数。</li>
+<li>illegalStateException：在不合理或不正确时间内唤醒一方法时出现的异常信息。</li>
+<li>NullpointerException：空指针异常。</li>
+<li>IndexOutOfBoundsException：索引超出边界异常</li>
+</ul>
+<h3 id="常见的checkedexception异常">常见的CheckedException异常</h3>
+<ul>
+<li>我们在编写程序过程中 try—catch 捕获到的一场都是 CheckedException。</li>
+<li>io包中的IOExecption及其子类，都是 CheckedException。</li>
+</ul>
+<hr>
+<p><strong>Error 和 Exception 就像是水池和水池里的水的区别</strong></p>
+<ul>
+<li>
+<p>“水池”，就是代码正常运行的外部环境，如果水池崩溃（系统崩溃），或者池水溢出（内存溢出）等，这些都是跟水池外部环境有关。这些就是java中的 Error。</p>
+</li>
+<li>
+<p>“水池里的水”，就是正常运行的代码，水污染了、有杂质了，浑浊了，这些影响水质的因素就是 Exception。</p>
 </li>
 </ul>
 <h1 id="感谢阅读">感谢阅读</h1>
@@ -854,7 +978,7 @@ CMS是一款优秀的收集器，<code>并发收集</code>、<code>低停顿</co
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#一-垃圾收集器与内存分配策略"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;&#x5783;&#x573E;&#x6536;&#x96C6;&#x5668;&#x4E0E;&#x5185;&#x5B58;&#x5206;&#x914D;&#x7B56;&#x7565;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#jvm体系结构"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">JVM&#x4F53;&#x7CFB;&#x7ED3;&#x6784;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-引入计数法"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">1&#x3001;&#x5F15;&#x5165;&#x8BA1;&#x6570;&#x6CD5;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#引用计数算法的缺陷"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x7B97;&#x6CD5;&#x7684;&#x7F3A;&#x9677;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-可达性分析算法-gc-roots"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">2&#x3001;&#x53EF;&#x8FBE;&#x6027;&#x5206;&#x6790;&#x7B97;&#x6CD5; GC Roots</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#概念"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">&#x6982;&#x5FF5;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-引用"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">3&#x3001;&#x5F15;&#x7528;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#强引用strong-reference"><span class="toc-nav-number">1.4.0.1.</span> <span class="toc-nav-text">&#x5F3A;&#x5F15;&#x7528;(Strong Reference)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#软引用"><span class="toc-nav-number">1.4.0.2.</span> <span class="toc-nav-text">&#x8F6F;&#x5F15;&#x7528;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#弱引用"><span class="toc-nav-number">1.4.0.3.</span> <span class="toc-nav-text">&#x5F31;&#x5F15;&#x7528;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#weakhashmap"><span class="toc-nav-number">1.4.0.3.1.</span> <span class="toc-nav-text">WeakHashMap</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#虚引用"><span class="toc-nav-number">1.4.0.4.</span> <span class="toc-nav-text">&#x865A;&#x5F15;&#x7528;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#引用队列-referencequeue"><span class="toc-nav-number">1.4.0.5.</span> <span class="toc-nav-text">&#x5F15;&#x7528;&#x961F;&#x5217; ReferenceQueue</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#生存还是死亡"><span class="toc-nav-number">1.4.1.</span> <span class="toc-nav-text">&#x751F;&#x5B58;&#x8FD8;&#x662F;&#x6B7B;&#x4EA1;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二-垃圾收集算法"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;&#x5783;&#x573E;&#x6536;&#x96C6;&#x7B97;&#x6CD5;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-标记-清除算法mark-sweep"><span class="toc-nav-number">1.5.1.</span> <span class="toc-nav-text">1&#x3001;&#x6807;&#x8BB0; &#x2014; &#x6E05;&#x9664;&#x7B97;&#x6CD5;&#xFF08;Mark-Sweep&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-复制算法copying"><span class="toc-nav-number">1.5.2.</span> <span class="toc-nav-text">2&#x3001;&#x590D;&#x5236;&#x7B97;&#x6CD5;&#xFF08;Copying&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-标记-整理算法mark-compact"><span class="toc-nav-number">1.5.3.</span> <span class="toc-nav-text">3&#x3001;&#x6807;&#x8BB0; &#x2014; &#x6574;&#x7406;&#x7B97;&#x6CD5;(Mark-Compact)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-分代收集算法generational-collection"><span class="toc-nav-number">1.5.4.</span> <span class="toc-nav-text">4&#x3001;&#x5206;&#x4EE3;&#x6536;&#x96C6;&#x7B97;&#x6CD5;&#xFF08;Generational Collection&#xFF09;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三-垃圾收集器"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">&#x4E09;&#x3001;&#x5783;&#x573E;&#x6536;&#x96C6;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#minor-gc-和-majorfull-gc"><span class="toc-nav-number">1.6.1.</span> <span class="toc-nav-text">Minor GC &#x548C; Major/Full GC</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#新生代收集器"><span class="toc-nav-number">1.6.2.</span> <span class="toc-nav-text">&#x65B0;&#x751F;&#x4EE3;&#x6536;&#x96C6;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-serial-收集器-client-模式"><span class="toc-nav-number">1.6.2.1.</span> <span class="toc-nav-text">1&#x3001;Serial &#x6536;&#x96C6;&#x5668; (Client &#x6A21;&#x5F0F;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-parnew-收集器-server-模式"><span class="toc-nav-number">1.6.2.2.</span> <span class="toc-nav-text">2&#x3001;ParNew &#x6536;&#x96C6;&#x5668; (Server &#x6A21;&#x5F0F;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-parallel-scavenge-收集器"><span class="toc-nav-number">1.6.2.3.</span> <span class="toc-nav-text">3&#x3001;Parallel Scavenge &#x6536;&#x96C6;&#x5668;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#老年代收集器"><span class="toc-nav-number">1.6.3.</span> <span class="toc-nav-text">&#x8001;&#x5E74;&#x4EE3;&#x6536;&#x96C6;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-serial-old-收集器"><span class="toc-nav-number">1.6.3.1.</span> <span class="toc-nav-text">1&#x3001;Serial Old &#x6536;&#x96C6;&#x5668;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-parallel-old-收集器"><span class="toc-nav-number">1.6.3.2.</span> <span class="toc-nav-text">2&#x3001;Parallel Old &#x6536;&#x96C6;&#x5668;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-cms收集器"><span class="toc-nav-number">1.6.3.3.</span> <span class="toc-nav-text">3&#x3001;CMS&#x6536;&#x96C6;&#x5668;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#四-g1收集器"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">&#x56DB;&#x3001;G1&#x6536;&#x96C6;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#横跨整个堆内存"><span class="toc-nav-number">1.7.1.</span> <span class="toc-nav-text">&#x6A2A;&#x8DE8;&#x6574;&#x4E2A;&#x5806;&#x5185;&#x5B58;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#建立可预测的时间模型"><span class="toc-nav-number">1.7.2.</span> <span class="toc-nav-text">&#x5EFA;&#x7ACB;&#x53EF;&#x9884;&#x6D4B;&#x7684;&#x65F6;&#x95F4;&#x6A21;&#x578B;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#避免全堆扫描remembered-set"><span class="toc-nav-number">1.7.3.</span> <span class="toc-nav-text">&#x907F;&#x514D;&#x5168;&#x5806;&#x626B;&#x63CF;&#x2014;&#x2014;Remembered Set</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#五-总结-收集器各个功能"><span class="toc-nav-number">1.8.</span> <span class="toc-nav-text">&#x4E94;&#x3001;&#x603B;&#x7ED3; &#x6536;&#x96C6;&#x5668;&#x5404;&#x4E2A;&#x529F;&#x80FD;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#垃圾收集的相关常用参数"><span class="toc-nav-number">1.8.1.</span> <span class="toc-nav-text">&#x5783;&#x573E;&#x6536;&#x96C6;&#x7684;&#x76F8;&#x5173;&#x5E38;&#x7528;&#x53C2;&#x6570;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#六-jvm参数类型"><span class="toc-nav-number">1.9.</span> <span class="toc-nav-text">&#x516D;&#x3001;JVM&#x53C2;&#x6570;&#x7C7B;&#x578B;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#jvm调优相关"><span class="toc-nav-number">1.9.1.</span> <span class="toc-nav-text">JVM&#x8C03;&#x4F18;&#x76F8;&#x5173;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#常见参数"><span class="toc-nav-number">1.9.2.</span> <span class="toc-nav-text">&#x5E38;&#x89C1;&#x53C2;&#x6570;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#七-oom-error"><span class="toc-nav-number">1.10.</span> <span class="toc-nav-text">&#x4E03;&#x3001;OOM Error</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#stackoverflowerror"><span class="toc-nav-number">1.10.1.</span> <span class="toc-nav-text">StackOverflowError</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#java-heap-space"><span class="toc-nav-number">1.10.2.</span> <span class="toc-nav-text">Java heap space</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#gc-overhead-limit-exceeded"><span class="toc-nav-number">1.10.3.</span> <span class="toc-nav-text">GC overhead limit exceeded</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#direct-buffer-memory"><span class="toc-nav-number">1.10.4.</span> <span class="toc-nav-text">Direct buffer memory</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#unable-to-create-new-native-thread"><span class="toc-nav-number">1.10.5.</span> <span class="toc-nav-text">Unable to create new native thread</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#metaspace"><span class="toc-nav-number">1.10.6.</span> <span class="toc-nav-text">Metaspace</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#八-error和exception"><span class="toc-nav-number">1.11.</span> <span class="toc-nav-text">&#x516B;&#x3001;Error&#x548C;Exception</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#一-垃圾收集器与内存分配策略"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;&#x5783;&#x573E;&#x6536;&#x96C6;&#x5668;&#x4E0E;&#x5185;&#x5B58;&#x5206;&#x914D;&#x7B56;&#x7565;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#jvm体系结构"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">JVM&#x4F53;&#x7CFB;&#x7ED3;&#x6784;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-引入计数法"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">1&#x3001;&#x5F15;&#x5165;&#x8BA1;&#x6570;&#x6CD5;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#引用计数算法的缺陷"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x7B97;&#x6CD5;&#x7684;&#x7F3A;&#x9677;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-可达性分析算法-gc-roots"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">2&#x3001;&#x53EF;&#x8FBE;&#x6027;&#x5206;&#x6790;&#x7B97;&#x6CD5; GC Roots</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#概念"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">&#x6982;&#x5FF5;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-引用"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">3&#x3001;&#x5F15;&#x7528;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#强引用strong-reference"><span class="toc-nav-number">1.4.0.1.</span> <span class="toc-nav-text">&#x5F3A;&#x5F15;&#x7528;(Strong Reference)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#软引用"><span class="toc-nav-number">1.4.0.2.</span> <span class="toc-nav-text">&#x8F6F;&#x5F15;&#x7528;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#弱引用"><span class="toc-nav-number">1.4.0.3.</span> <span class="toc-nav-text">&#x5F31;&#x5F15;&#x7528;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#weakhashmap"><span class="toc-nav-number">1.4.0.3.1.</span> <span class="toc-nav-text">WeakHashMap</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#虚引用"><span class="toc-nav-number">1.4.0.4.</span> <span class="toc-nav-text">&#x865A;&#x5F15;&#x7528;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#引用队列-referencequeue"><span class="toc-nav-number">1.4.0.5.</span> <span class="toc-nav-text">&#x5F15;&#x7528;&#x961F;&#x5217; ReferenceQueue</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#生存还是死亡"><span class="toc-nav-number">1.4.1.</span> <span class="toc-nav-text">&#x751F;&#x5B58;&#x8FD8;&#x662F;&#x6B7B;&#x4EA1;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二-垃圾收集算法"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;&#x5783;&#x573E;&#x6536;&#x96C6;&#x7B97;&#x6CD5;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-标记-清除算法mark-sweep"><span class="toc-nav-number">1.5.1.</span> <span class="toc-nav-text">1&#x3001;&#x6807;&#x8BB0; &#x2014; &#x6E05;&#x9664;&#x7B97;&#x6CD5;&#xFF08;Mark-Sweep&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-复制算法copying"><span class="toc-nav-number">1.5.2.</span> <span class="toc-nav-text">2&#x3001;&#x590D;&#x5236;&#x7B97;&#x6CD5;&#xFF08;Copying&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-标记-整理算法mark-compact"><span class="toc-nav-number">1.5.3.</span> <span class="toc-nav-text">3&#x3001;&#x6807;&#x8BB0; &#x2014; &#x6574;&#x7406;&#x7B97;&#x6CD5;(Mark-Compact)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-分代收集算法generational-collection"><span class="toc-nav-number">1.5.4.</span> <span class="toc-nav-text">4&#x3001;&#x5206;&#x4EE3;&#x6536;&#x96C6;&#x7B97;&#x6CD5;&#xFF08;Generational Collection&#xFF09;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三-垃圾收集器"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">&#x4E09;&#x3001;&#x5783;&#x573E;&#x6536;&#x96C6;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#minor-gc-和-majorfull-gc"><span class="toc-nav-number">1.6.1.</span> <span class="toc-nav-text">Minor GC &#x548C; Major/Full GC</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#新生代收集器"><span class="toc-nav-number">1.6.2.</span> <span class="toc-nav-text">&#x65B0;&#x751F;&#x4EE3;&#x6536;&#x96C6;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-serial-收集器-client-模式"><span class="toc-nav-number">1.6.2.1.</span> <span class="toc-nav-text">1&#x3001;Serial &#x6536;&#x96C6;&#x5668; (Client &#x6A21;&#x5F0F;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-parnew-收集器-server-模式"><span class="toc-nav-number">1.6.2.2.</span> <span class="toc-nav-text">2&#x3001;ParNew &#x6536;&#x96C6;&#x5668; (Server &#x6A21;&#x5F0F;)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-parallel-scavenge-收集器"><span class="toc-nav-number">1.6.2.3.</span> <span class="toc-nav-text">3&#x3001;Parallel Scavenge &#x6536;&#x96C6;&#x5668;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#老年代收集器"><span class="toc-nav-number">1.6.3.</span> <span class="toc-nav-text">&#x8001;&#x5E74;&#x4EE3;&#x6536;&#x96C6;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-serial-old-收集器"><span class="toc-nav-number">1.6.3.1.</span> <span class="toc-nav-text">1&#x3001;Serial Old &#x6536;&#x96C6;&#x5668;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-parallel-old-收集器"><span class="toc-nav-number">1.6.3.2.</span> <span class="toc-nav-text">2&#x3001;Parallel Old &#x6536;&#x96C6;&#x5668;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3-cms-收集器"><span class="toc-nav-number">1.6.3.3.</span> <span class="toc-nav-text">3&#x3001;CMS &#x6536;&#x96C6;&#x5668;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#垃圾收集器的选择"><span class="toc-nav-number">1.6.4.</span> <span class="toc-nav-text">&#x5783;&#x573E;&#x6536;&#x96C6;&#x5668;&#x7684;&#x9009;&#x62E9;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#四-g1收集器"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">&#x56DB;&#x3001;G1&#x6536;&#x96C6;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-横跨整个堆内存"><span class="toc-nav-number">1.7.1.</span> <span class="toc-nav-text">1&#x3001;&#x6A2A;&#x8DE8;&#x6574;&#x4E2A;&#x5806;&#x5185;&#x5B58;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-建立可预测的时间模型"><span class="toc-nav-number">1.7.2.</span> <span class="toc-nav-text">2&#x3001;&#x5EFA;&#x7ACB;&#x53EF;&#x9884;&#x6D4B;&#x7684;&#x65F6;&#x95F4;&#x6A21;&#x578B;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-避免全堆扫描remembered-set"><span class="toc-nav-number">1.7.3.</span> <span class="toc-nav-text">3&#x3001;&#x907F;&#x514D;&#x5168;&#x5806;&#x626B;&#x63CF;&#x2014;&#x2014;Remembered Set</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-g1收集器收集步骤"><span class="toc-nav-number">1.7.4.</span> <span class="toc-nav-text">4&#x3001;G1&#x6536;&#x96C6;&#x5668;&#x6536;&#x96C6;&#x6B65;&#x9AA4;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#五-总结-收集器各个功能"><span class="toc-nav-number">1.8.</span> <span class="toc-nav-text">&#x4E94;&#x3001;&#x603B;&#x7ED3; &#x6536;&#x96C6;&#x5668;&#x5404;&#x4E2A;&#x529F;&#x80FD;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#垃圾收集的相关常用参数"><span class="toc-nav-number">1.8.1.</span> <span class="toc-nav-text">&#x5783;&#x573E;&#x6536;&#x96C6;&#x7684;&#x76F8;&#x5173;&#x5E38;&#x7528;&#x53C2;&#x6570;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#六-jvm参数类型"><span class="toc-nav-number">1.9.</span> <span class="toc-nav-text">&#x516D;&#x3001;JVM&#x53C2;&#x6570;&#x7C7B;&#x578B;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#jvm调优相关"><span class="toc-nav-number">1.9.1.</span> <span class="toc-nav-text">JVM&#x8C03;&#x4F18;&#x76F8;&#x5173;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#常见参数"><span class="toc-nav-number">1.9.2.</span> <span class="toc-nav-text">&#x5E38;&#x89C1;&#x53C2;&#x6570;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#七-oom-error"><span class="toc-nav-number">1.10.</span> <span class="toc-nav-text">&#x4E03;&#x3001;OOM Error</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#stackoverflowerror"><span class="toc-nav-number">1.10.1.</span> <span class="toc-nav-text">StackOverflowError</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#java-heap-space"><span class="toc-nav-number">1.10.2.</span> <span class="toc-nav-text">Java heap space</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#gc-overhead-limit-exceeded"><span class="toc-nav-number">1.10.3.</span> <span class="toc-nav-text">GC overhead limit exceeded</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#direct-buffer-memory"><span class="toc-nav-number">1.10.4.</span> <span class="toc-nav-text">Direct buffer memory</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#unable-to-create-new-native-thread"><span class="toc-nav-number">1.10.5.</span> <span class="toc-nav-text">Unable to create new native thread</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#metaspace"><span class="toc-nav-number">1.10.6.</span> <span class="toc-nav-text">Metaspace</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#八-error和exception"><span class="toc-nav-number">1.11.</span> <span class="toc-nav-text">&#x516B;&#x3001;Error&#x548C;Exception</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#常见的runtimeexception异常"><span class="toc-nav-number">1.11.1.</span> <span class="toc-nav-text">&#x5E38;&#x89C1;&#x7684;RuntimeException&#x5F02;&#x5E38;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#常见的checkedexception异常"><span class="toc-nav-number">1.11.2.</span> <span class="toc-nav-text">&#x5E38;&#x89C1;&#x7684;CheckedException&#x5F02;&#x5E38;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a></li></ol>
         
         </div>
       </aside>
