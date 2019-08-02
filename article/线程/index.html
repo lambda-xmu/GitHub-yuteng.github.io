@@ -149,14 +149,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -220,6 +220,7 @@
 <li><strong>3、使用 Callable 和 Future 创建线程；</strong></li>
 <li><strong>4、使用线程池例如用 Executor框架；</strong></li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UnableToCreateNewNativeThread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Thread thread = <span class="keyword">new</span> Thread();</span><br><span class="line">        thread.start();</span><br><span class="line">        thread.start();<span class="comment">//Exception in thread "main" java.lang.IllegalThreadStateException</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*源码层次</span></span><br><span class="line"><span class="comment">public synchronized void start() &#123;</span></span><br><span class="line"><span class="comment">    if (threadStatus != 0)//TODO 当一个线程第二次 start 状态已经改变</span></span><br><span class="line"><span class="comment">        throw new IllegalThreadStateException();</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    group.add(this);</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    boolean started = false;</span></span><br><span class="line"><span class="comment">    try &#123;</span></span><br><span class="line"><span class="comment">        start0();</span></span><br><span class="line"><span class="comment">        started = true;</span></span><br><span class="line"><span class="comment">    &#125; finally &#123;</span></span><br><span class="line"><span class="comment">        try &#123;</span></span><br><span class="line"><span class="comment">            if (!started) &#123;</span></span><br><span class="line"><span class="comment">                group.threadStartFailed(this);</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">        &#125; catch (Throwable ignore) &#123;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="callable">Callable</h3>
 <ul>
