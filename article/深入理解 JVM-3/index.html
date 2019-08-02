@@ -232,8 +232,8 @@
 </ul>
 <p><strong>优点：</strong><br>
 1、即刻回收垃圾，在更改引用时就知道该对象是否为垃圾若是垃圾立马进行回收。<br>
-2、STW短，回收垃圾不需要遍历堆了。（Stop-The-World）。<br>
-3、不需要根据 GC roots 遍历。</p>
+2、STW短，回收垃圾不需要遍历堆了。（Stop-The-World）<br>
+3、不需要根据 GC Roots 遍历。</p>
 <p><strong>缺点：</strong><br>
 1、计数器值增减频繁。<br>
 2、计数器需要占用很多位。<br>
