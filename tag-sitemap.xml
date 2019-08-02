@@ -121,13 +121,6 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/%E7%AE%80%E5%8E%86/</loc>
-        <lastmod>2019-08-01T00:58:43.232Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/tags/%E7%BA%BF%E7%A8%8B/</loc>
         <lastmod>2019-08-02T01:39:14.050Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -142,15 +135,22 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/Github/</loc>
-        <lastmod>2019-08-02T08:14:19.629Z</lastmod>
+        <loc>https://github-yuteng.github.io/tags/JVM/</loc>
+        <lastmod>2019-08-02T08:17:32.565Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/JVM/</loc>
-        <lastmod>2019-08-02T08:17:32.565Z</lastmod>
+        <loc>https://github-yuteng.github.io/tags/%E7%AE%80%E5%8E%86/</loc>
+        <lastmod>2019-08-02T09:53:27.814Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/Linux/</loc>
+        <lastmod>2019-08-02T11:03:09.042Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
