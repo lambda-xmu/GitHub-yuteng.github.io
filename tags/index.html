@@ -141,14 +141,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -198,9 +198,11 @@
             <!-- 标签云 -->
             <div id='tag_cloud' class="tags">
                 
+                    <a href="#Ajax" title="Ajax" rel="1">Ajax</a>
+                
                     <a href="#SourceCode" title="SourceCode" rel="1">SourceCode</a>
                 
-                    <a href="#Ajax" title="Ajax" rel="1">Ajax</a>
+                    <a href="#Hexo" title="Hexo" rel="1">Hexo</a>
                 
                     <a href="#JavaScript" title="JavaScript" rel="1">JavaScript</a>
                 
@@ -220,8 +222,6 @@
                 
                     <a href="#简历" title="简历" rel="1">简历</a>
                 
-                    <a href="#Hexo" title="Hexo" rel="1">Hexo</a>
-                
                     <a href="#Maven" title="Maven" rel="1">Maven</a>
                 
                     <a href="#重中之重" title="重中之重" rel="1">重中之重</a>
@@ -238,9 +238,9 @@
                 
                     <a href="#ORM 框架" title="ORM 框架" rel="2">ORM 框架</a>
                 
-                    <a href="#Spring全家桶" title="Spring全家桶" rel="3">Spring全家桶</a>
-                
                     <a href="#NoSQL" title="NoSQL" rel="1">NoSQL</a>
+                
+                    <a href="#Spring全家桶" title="Spring全家桶" rel="3">Spring全家桶</a>
                 
                     <a href="#面试" title="面试" rel="1">面试</a>
                 
@@ -248,6 +248,28 @@
 
             <!-- 标签列表 -->
 
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="Ajax">
+                    <span class="tag-text">Ajax</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/article/Ajax/">
+                        <h2 class="post-title">
+                            Ajax (Asynchronous)
+                        </h2>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
             
             <div class="one-tag-list">
                 <span class="fa fa-tag listing-seperator" id="SourceCode">
@@ -272,8 +294,8 @@
             </div>
             
             <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="Ajax">
-                    <span class="tag-text">Ajax</span>
+                <span class="fa fa-tag listing-seperator" id="Hexo">
+                    <span class="tag-text">Hexo</span>
                 </span>
                 
                   <!-- <li class="listing-item">
@@ -281,9 +303,9 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/article/Ajax/">
+                     <a href="/article/Hexo 博客搭建/">
                         <h2 class="post-title">
-                            Ajax (Asynchronous)
+                            Hexo 博客搭建
                         </h2>
                         
                     </a>
@@ -612,28 +634,6 @@
             </div>
             
             <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="Hexo">
-                    <span class="tag-text">Hexo</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/Hexo 博客搭建/">
-                        <h2 class="post-title">
-                            Hexo 博客搭建
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
                 <span class="fa fa-tag listing-seperator" id="Maven">
                     <span class="tag-text">Maven</span>
                 </span>
@@ -855,6 +855,28 @@
             </div>
             
             <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="NoSQL">
+                    <span class="tag-text">NoSQL</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/article/Redis/">
+                        <h2 class="post-title">
+                            Redis
+                        </h2>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
                 <span class="fa fa-tag listing-seperator" id="Spring全家桶">
                     <span class="tag-text">Spring全家桶</span>
                 </span>
@@ -879,21 +901,6 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/article/SpringMVC/">
-                        <h2 class="post-title">
-                            SpringMVC
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
                      <a href="/article/SpringBoot核心技术/">
                         <h2 class="post-title">
                             SpringBoot 核心技术
@@ -904,21 +911,14 @@
                 </div>
                 <hr>
                 
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="NoSQL">
-                    <span class="tag-text">NoSQL</span>
-                </span>
-                
                   <!-- <li class="listing-item">
                   <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/article/Redis/">
+                     <a href="/article/SpringMVC/">
                         <h2 class="post-title">
-                            Redis
+                            SpringMVC
                         </h2>
                         
                     </a>
