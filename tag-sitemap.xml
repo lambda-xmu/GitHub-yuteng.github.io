@@ -2,13 +2,6 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/</loc>
-        <lastmod>2019-04-21T07:27:30.860Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/tags/Hexo/</loc>
         <lastmod>2019-04-21T07:28:16.549Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -18,13 +11,6 @@
     <url>
         <loc>https://github-yuteng.github.io/tags/NoSQL/</loc>
         <lastmod>2019-04-27T05:01:56.229Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://github-yuteng.github.io/tags/Servlet/</loc>
-        <lastmod>2019-05-06T04:06:59.167Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -142,13 +128,6 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/Java-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
-        <lastmod>2019-08-19T06:37:38.319Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/tags/%E7%AE%80%E5%8E%86/</loc>
         <lastmod>2019-08-19T06:52:02.899Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -158,6 +137,27 @@
     <url>
         <loc>https://github-yuteng.github.io/tags/%E7%BA%BF%E7%A8%8B/</loc>
         <lastmod>2019-08-19T07:16:50.534Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/Java-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
+        <lastmod>2019-08-19T07:22:06.415Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/</loc>
+        <lastmod>2019-08-19T07:24:15.368Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/Servlet/</loc>
+        <lastmod>2019-08-19T07:30:08.345Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
