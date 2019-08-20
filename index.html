@@ -262,9 +262,16 @@
 责任链设计模式 —&gt; 行为型模式
 
 
+职责链模式(Chain of Responsibility Patterm) ，又叫责任链模式，为请求创建了一个接收者对象的链，这种模式对请求的发送者和接收者进行解耦。
 
-创建请求
-123456789101112131415161718192021222324public class PurchaseRequest &#123;    private int type = 0;//请求类型    private float price = 0.0f;//金额    private int ......
+
+职责链模式通常每个接收者都包含对另一个接收者的引用。如果这个对象不能处理该请求，那么它会把相同的请求传给下一个接收者，依此类推。
+
+
+
+
+
+1、如果金......
         </div>
     </a>
     
@@ -639,9 +646,9 @@ equal......
             
         
             
-            <a href="/tags/#JDBC" title="JDBC" rel="2">JDBC</a>
-            
         
+            
+            <a href="/tags/#JDBC" title="JDBC" rel="2">JDBC</a>
             
         
             
@@ -657,9 +664,9 @@ equal......
             
         
             
-        
-            
             <a href="/tags/#Spring全家桶" title="Spring全家桶" rel="3">Spring全家桶</a>
+            
+        
             
         
             
