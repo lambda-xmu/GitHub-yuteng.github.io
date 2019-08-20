@@ -8,7 +8,14 @@
     
     <url>
         <loc>https://github-yuteng.github.io/about/</loc>
-        <lastmod>2019-08-07T09:34:01.364Z</lastmod>
+        <lastmod>2019-08-20T02:03:37.942Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://github-yuteng.github.io/archive/</loc>
+        <lastmod>2019-08-20T02:03:11.643Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -16,13 +23,6 @@
     <url>
         <loc>https://github-yuteng.github.io/tags/</loc>
         <lastmod>2019-04-17T04:49:15.714Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://github-yuteng.github.io/archive/</loc>
-        <lastmod>2019-04-17T04:38:43.300Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
