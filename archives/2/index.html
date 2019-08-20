@@ -211,43 +211,6 @@
 
 <div class="post-preview">
 
-    <a href="/article/java-util-concurrent/">
-        <h2 class="post-title">
-            java.util.concurrent
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            一、进程和线程
-根本区别：进程是操作系统资源分配的基本单位，而线程是 CPU 任务调度和执行的基本单位。
-
-一个程序(进程)同时执行多个任务，每一个任务称为一个线程。
-进程是线程的容器，不存在没有线程的进程的。
-
-在开销方面：
-
-每个进程都有独立的代码和数据空间（程序上下文），程序之间的切换会有较大的开销；
-线程可以看做轻量级的进程，同一类线程共享代码和数据空间，每个线程都有自己独立的运行栈......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 于腾 on
-            2019-05-02
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#线程" title="线程">线程</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
     <a href="/article/SpringBoot核心技术/">
         <h2 class="post-title">
             SpringBoot 核心技术
@@ -576,6 +539,49 @@ Java与线程
 </div>
 <hr>
 
+<div class="post-preview">
+
+    <a href="/article/深入理解 JVM-3/">
+        <h2 class="post-title">
+            JVM 垃圾收集器-内存分配
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            一、垃圾收集器与内存分配策略
+Java与C++之间有一堵由内存动态分配和垃圾收集技术所围成的“高墙”，
+墙外面的人想进去，墙里面的人却想出来。
+JVM体系结构
+GC 作用于 方法区、堆
+元空间(Java8)与永久代Java7)之间最大的区别在于：
+永久代使用的 JVM 的堆内存， 但是 Java8 以后的元空间并不在虚拟机中而是使用本机物理内存。
+
+
+
+
+
+1、引入计数法
+概念：
+
+在对象中......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 于腾 on
+            2019-04-08
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#JVM" title="JVM">JVM</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
 
 
 <!-- Pager -->
@@ -639,8 +645,6 @@ Java与线程
             
         
             
-        
-            
             <a href="/tags/#JVM" title="JVM" rel="4">JVM</a>
             
         
@@ -655,9 +659,9 @@ Java与线程
             
         
             
-        
-            
             <a href="/tags/#JDBC" title="JDBC" rel="2">JDBC</a>
+            
+        
             
         
             
@@ -778,7 +782,7 @@ Java与线程
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">9</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">9</span></li></ul>
     </div>
 
         <hr>
