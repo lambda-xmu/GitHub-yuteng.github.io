@@ -264,6 +264,8 @@
 <li><strong>比如，还是制作纯豆浆，不添加任何的配料，使用钩子方法对前面的模板方法进行改造。</strong></li>
 </ul>
 <hr>
+<p><img src="../../img/articleImg/TemplateHook.png" alt=""></p>
+<hr>
 <h4 id="模版抽象类-hook">模版抽象类 Hook</h4>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//抽象类，表示制作豆浆的流程</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">SoyaMilk</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//模版方法，final 不让子类覆盖</span></span><br><span class="line">    <span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">make</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        select();</span><br><span class="line">        <span class="keyword">if</span> (customerWantCondiments()) &#123;</span><br><span class="line">            addCondiments();</span><br><span class="line">        &#125;</span><br><span class="line">        soak();</span><br><span class="line">        beat();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">select</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"1、选材准备"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//抽象方法，子类去实现，添加不同的配料</span></span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">addCondiments</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//浸泡</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">soak</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"3、浸泡"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//打碎</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">beat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"4、放入豆浆机打碎"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//钩子方法，判断是否添加配料</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">customerWantCondiments</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
@@ -278,7 +280,17 @@
 <hr>
 <h3 id="模版模式在spring框架中的应用">模版模式在Spring框架中的应用</h3>
 <ul>
-<li><strong>Spring IOC 容器初始化时运用到的模版模式。</strong></li>
+<li><strong>Spring IOC 容器初始化时运用到的模版模式。</strong>
+<ul>
+<li>refresh();  模版方法</li>
+</ul>
+</li>
+<li><strong>钩子方法</strong>
+<ul>
+<li>postProcessBeanFactory();</li>
+<li>onRefresh();</li>
+</ul>
+</li>
 </ul>
 <h1 id="感谢阅读">感谢阅读</h1>
 
