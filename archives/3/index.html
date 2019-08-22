@@ -134,14 +134,14 @@
 
                         
                         <li>
-                            <a href="/about/">至此至终</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">至此至终</a>
                         </li>
                         
                     
@@ -208,6 +208,38 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/article/深入理解 JVM-13/">
+        <h2 class="post-title">
+            JVM 线程安全与锁优化
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            本篇将介绍线程安全所涉及的概念和分类、同步实现的方式及虚拟机的底层运作原理，虚拟机为实现高效并发所采取的一系列锁优化措施。
+一、线程安全
+
+《Java Concurrency In Practice》的作者Brian Goetz对“线程安全”有个比较恰当的定义：
+当多个线程访问一个对象时，如果不用考虑这些线程在运行时环境下的调度和交替执行，也不需要进行额外的同步，或者在调用方进行任何其他的协......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 于腾 on
+            2019-04-14
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#JVM" title="JVM">JVM</a>
+            
+        </div>
+    
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -560,40 +592,6 @@ ORM的思想
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/article/JDBC/">
-        <h2 class="post-title">
-            Java DataBase Connectivity
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            一、JDBC是 java 访问数据库的基石
-1、JDBC基础
-
-JDBC(Java Database Connectivity)是一个独立于特定数据库管理系统、通用的SQL数据库存取和操作的公共接口（一组API）。
-定义了用来访问数据库的标准Java类库，使用这个类库可以以一种标准的方法、方便地访问数据库资源。
-JDBC为访问不同的数据库提供了一种统一的途径，为开发者屏蔽了一些细节问题。
-J......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 于腾 on
-            2019-03-20
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#JDBC" title="JDBC">JDBC</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -657,7 +655,7 @@ J......
             
         
             
-            <a href="/tags/#Java 设计模式（行为型）" title="Java 设计模式（行为型）" rel="4">Java 设计模式（行为型）</a>
+            <a href="/tags/#Java 设计模式（行为型）" title="Java 设计模式（行为型）" rel="5">Java 设计模式（行为型）</a>
             
         
             
@@ -763,6 +761,10 @@ J......
         </li>
       
         <li>
+          <a href="/article/命令设计模式/">命令设计模式（Command）</a>
+        </li>
+      
+        <li>
           <a href="/article/模版设计模式/">模版设计模式（Template）</a>
         </li>
       
@@ -772,10 +774,6 @@ J......
       
         <li>
           <a href="/article/观察者设计模式/">观察者设计模式（Observer）</a>
-        </li>
-      
-        <li>
-          <a href="/article/策略设计模式/">策略设计模式（Strategy）</a>
         </li>
       
     </ul>
@@ -804,7 +802,7 @@ J......
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li></ul>
     </div>
 
         <hr>
