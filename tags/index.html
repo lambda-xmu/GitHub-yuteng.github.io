@@ -134,6 +134,13 @@
 
                         
                         <li>
+                            <a href="/about/">至此至终</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -142,13 +149,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">至此至终</a>
                         </li>
                         
                     
@@ -202,6 +202,8 @@
                 
                     <a href="#Hexo" title="Hexo" rel="1">Hexo</a>
                 
+                    <a href="#Ajax" title="Ajax" rel="1">Ajax</a>
+                
                     <a href="#JavaScript" title="JavaScript" rel="1">JavaScript</a>
                 
                     <a href="#Servlet" title="Servlet" rel="1">Servlet</a>
@@ -212,15 +214,13 @@
                 
                     <a href="#排序算法" title="排序算法" rel="3">排序算法</a>
                 
-                    <a href="#JVM" title="JVM" rel="4">JVM</a>
-                
                     <a href="#Java 设计模式（行为型）" title="Java 设计模式（行为型）" rel="6">Java 设计模式（行为型）</a>
+                
+                    <a href="#JVM" title="JVM" rel="4">JVM</a>
                 
                     <a href="#简历" title="简历" rel="1">简历</a>
                 
                     <a href="#Java 设计模式（结构型）" title="Java 设计模式（结构型）" rel="2">Java 设计模式（结构型）</a>
-                
-                    <a href="#Ajax" title="Ajax" rel="1">Ajax</a>
                 
                     <a href="#Maven" title="Maven" rel="1">Maven</a>
                 
@@ -288,6 +288,28 @@
                      <a href="/article/Hexo 博客搭建/">
                         <h2 class="post-title">
                             Hexo 博客搭建
+                        </h2>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="Ajax">
+                    <span class="tag-text">Ajax</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/article/Ajax/">
+                        <h2 class="post-title">
+                            Ajax (Asynchronous)
                         </h2>
                         
                     </a>
@@ -438,73 +460,6 @@
             </div>
             
             <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="JVM">
-                    <span class="tag-text">JVM</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/深入理解 JVM-13/">
-                        <h2 class="post-title">
-                            JVM 线程安全与锁优化
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/深入理解 JVM-12/">
-                        <h2 class="post-title">
-                            JVM Java内存模型与线程
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/深入理解 JVM-7/">
-                        <h2 class="post-title">
-                            JVM 虚拟机类加载机制
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/深入理解 JVM-3/">
-                        <h2 class="post-title">
-                            JVM 垃圾收集器-内存分配
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
                 <span class="fa fa-tag listing-seperator" id="Java 设计模式（行为型）">
                     <span class="tag-text">Java 设计模式（行为型）</span>
                 </span>
@@ -531,7 +486,7 @@
                  <div class="post-preview">
                      <a href="/article/状态设计模式/">
                         <h2 class="post-title">
-                            状态设计模式（Status）
+                            状态设计模式（State）
                         </h2>
                         
                     </a>
@@ -602,6 +557,73 @@
             </div>
             
             <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="JVM">
+                    <span class="tag-text">JVM</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/article/深入理解 JVM-13/">
+                        <h2 class="post-title">
+                            JVM 线程安全与锁优化
+                        </h2>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/article/深入理解 JVM-12/">
+                        <h2 class="post-title">
+                            JVM Java内存模型与线程
+                        </h2>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/article/深入理解 JVM-7/">
+                        <h2 class="post-title">
+                            JVM 虚拟机类加载机制
+                        </h2>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/article/深入理解 JVM-3/">
+                        <h2 class="post-title">
+                            JVM 垃圾收集器-内存分配
+                        </h2>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
                 <span class="fa fa-tag listing-seperator" id="简历">
                     <span class="tag-text">简历</span>
                 </span>
@@ -651,28 +673,6 @@
                      <a href="/article/代理设计模式/">
                         <h2 class="post-title">
                             代理设计模式（Proxy）
-                        </h2>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="Ajax">
-                    <span class="tag-text">Ajax</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/Ajax/">
-                        <h2 class="post-title">
-                            Ajax (Asynchronous)
                         </h2>
                         
                     </a>
@@ -994,9 +994,9 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/article/SpringBoot核心技术/">
+                     <a href="/article/Spring/">
                         <h2 class="post-title">
-                            SpringBoot 核心技术
+                            Spring
                         </h2>
                         
                     </a>
@@ -1024,9 +1024,9 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/article/Spring/">
+                     <a href="/article/SpringBoot核心技术/">
                         <h2 class="post-title">
-                            Spring
+                            SpringBoot 核心技术
                         </h2>
                         
                     </a>
