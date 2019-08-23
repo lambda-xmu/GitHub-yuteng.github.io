@@ -142,13 +142,6 @@
 
                         
                         <li>
-                            <a href="/about/">至此至终</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -157,6 +150,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">至此至终</a>
                         </li>
                         
                     
@@ -239,6 +239,8 @@
 <ul>
 <li><strong>遥控器控制 Light、TV 开关。</strong></li>
 </ul>
+<p><img src="../../img/articleImg/CommandRemote.png" alt=""></p>
+<hr>
 <p><img src="../../img/articleImg/CommandDemo.png" alt=""></p>
 <hr>
 <h4 id="command-命令接口">Command 命令接口</h4>
@@ -271,10 +273,35 @@
 <h3 id="client">Client</h3>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"==========--- Light ---========="</span>);</span><br><span class="line">        <span class="comment">// Light 接收者</span></span><br><span class="line">        LightReceiver lightReceiver = <span class="keyword">new</span> LightReceiver();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建 Light 打开命令</span></span><br><span class="line">        LightOnCommand lightOnCommand = <span class="keyword">new</span> LightOnCommand(lightReceiver);</span><br><span class="line">        <span class="comment">//创建 Light 关闭命令</span></span><br><span class="line">        LightOffCommand lightOffCommand = <span class="keyword">new</span> LightOffCommand(lightReceiver);</span><br><span class="line">        <span class="comment">//远程遥控对象</span></span><br><span class="line">        RemoteController remoteController = <span class="keyword">new</span> RemoteController();</span><br><span class="line">        <span class="comment">//给遥控器设置设置命令 no=1/0 Light 开/关 操作</span></span><br><span class="line">        remoteController.setCommand(<span class="number">0</span>, lightOnCommand, lightOffCommand);</span><br><span class="line"></span><br><span class="line">        System.out.print(<span class="string">"按下电灯开按钮："</span>);</span><br><span class="line">        remoteController.onButtonWasPushed(<span class="number">0</span>);</span><br><span class="line">        System.out.print(<span class="string">"按下电灯关按钮："</span>);</span><br><span class="line">        remoteController.offButtonWasPushed(<span class="number">0</span>);</span><br><span class="line">        System.out.print(<span class="string">"撤销："</span>);</span><br><span class="line">        remoteController.undoButtonWasPushed();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"==========--- TV ---========="</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// TV 接收者</span></span><br><span class="line">        TVReceiver tvReceiver = <span class="keyword">new</span> TVReceiver();</span><br><span class="line">        <span class="comment">//创建 TV 打开命令</span></span><br><span class="line">        TVOnCommand tvOnCommand = <span class="keyword">new</span> TVOnCommand(tvReceiver);</span><br><span class="line">        <span class="comment">//创建 TV 关闭命令</span></span><br><span class="line">        TVOffCommand tvOffCommand = <span class="keyword">new</span> TVOffCommand(tvReceiver);</span><br><span class="line">        <span class="comment">//给遥控器设置设置命令 no=1/0 TV 开/关 操作</span></span><br><span class="line">        remoteController.setCommand(<span class="number">1</span>, tvOnCommand, tvOffCommand);</span><br><span class="line"></span><br><span class="line">        System.out.print(<span class="string">"按下TV开按钮："</span>);</span><br><span class="line">        remoteController.onButtonWasPushed(<span class="number">1</span>);</span><br><span class="line">        System.out.print(<span class="string">"按下TV关按钮："</span>);</span><br><span class="line">        remoteController.offButtonWasPushed(<span class="number">1</span>);</span><br><span class="line">        System.out.print(<span class="string">"撤销："</span>);</span><br><span class="line">        remoteController.undoButtonWasPushed();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<h3 id="模版模式在spring框架中的应用">模版模式在Spring框架中的应用</h3>
+<h3 id="命令模式的注意事项和细节">命令模式的注意事项和细节</h3>
 <ul>
-<li><strong>JdbcTemplate</strong></li>
+<li><strong>将发起请求的对象与执行请求的对象解耦。发起请求的对象是调用者，调用者只要调用命令对象的 execute() 方法就可以让接收者工作，而不必知道具体的接收者对象是谁、是如何实现的，命令对象会负责让接收者执行请求的动作；</strong></li>
+<li><strong><code>请求发起者</code> 和 <code>请求执行者</code> 之间的解耦是通过命令对象实现的，命令对象起到纽带桥梁作用。</strong></li>
+<li><strong>容易设计一个命令队列。只要把命令对象放到列队，就可以多线程的执行命令；</strong></li>
+<li><strong>容易实现对请求的撤销和重做；</strong></li>
+<li><strong>命令模式不足：可能导致某些系统有过多的具体命令类，增加了系统的复杂度，在使用的时候要注意；</strong></li>
+<li><strong>空命令也是一种设计模式，它为我们省去了判空的操作。在上面的实例中，如果没有用空命令，我们每按下一</strong><br>
+<strong>个按键都要判空，给编码带来一定的麻烦；</strong></li>
+<li><strong>命令模式经典的应用场景：界面的一个按钮都是一条命令、模拟CMD (DOS命令)的撤销/恢复、触发-反馈机制。</strong></li>
 </ul>
+<hr>
+<h3 id="模版模式在spring框架中的应用">模版模式在Spring框架中的应用</h3>
+<p><strong>JdbcTemplate  -&gt; Invoker</strong></p>
+<ul>
+<li>
+<p><strong>query();</strong></p>
+<ul>
+<li>
+<p>InnerClass  QueryStatementCallback implements <code>StatementCallback</code></p>
+</li>
+<li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">doInStatement</span><span class="params">(Statement var1)</span> <span class="keyword">throws</span> SQLException, DataAccessException</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>StatementCallback 命令接口（Command）</strong></p>
+<p><strong>QueryStatementCallback 匿名内部类 命令接收者（Receiver），实现了命令接口</strong></p>
 <h1 id="感谢阅读">感谢阅读</h1>
 
                 
@@ -289,7 +316,7 @@
                     
                     
                         <li class="next">
-                            <a href="/article/模版设计模式/" data-toggle="tooltip" data-placement="top" title="模版设计模式（Template）">Next Post &rarr;</a>
+                            <a href="/article/状态设计模式/" data-toggle="tooltip" data-placement="top" title="状态设计模式（Status）">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -348,7 +375,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#什么是命令设计模式"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4EC0;&#x4E48;&#x662F;&#x547D;&#x4EE4;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#xFF1F;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#模版设计模式应用实例"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x6A21;&#x7248;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x5E94;&#x7528;&#x5B9E;&#x4F8B;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#command-命令接口"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">Command &#x547D;&#x4EE4;&#x63A5;&#x53E3;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#tvreceiver"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">TVReceiver</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#tvoncommand"><span class="toc-nav-number">1.1.2.1.</span> <span class="toc-nav-text">TVOnCommand</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#tvoffcommand"><span class="toc-nav-number">1.1.2.2.</span> <span class="toc-nav-text">TVOffCommand</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#lightreceiver"><span class="toc-nav-number">1.1.3.</span> <span class="toc-nav-text">LightReceiver</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#lightoncommand"><span class="toc-nav-number">1.1.3.1.</span> <span class="toc-nav-text">LightOnCommand</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#lightoffcommand"><span class="toc-nav-number">1.1.3.2.</span> <span class="toc-nav-text">LightOffCommand</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#nocommand"><span class="toc-nav-number">1.1.4.</span> <span class="toc-nav-text">NoCommand</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#remotecontroller"><span class="toc-nav-number">1.1.5.</span> <span class="toc-nav-text">RemoteController</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#client"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Client</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#模版模式在spring框架中的应用"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">&#x6A21;&#x7248;&#x6A21;&#x5F0F;&#x5728;Spring&#x6846;&#x67B6;&#x4E2D;&#x7684;&#x5E94;&#x7528;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#什么是命令设计模式"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4EC0;&#x4E48;&#x662F;&#x547D;&#x4EE4;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#xFF1F;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#模版设计模式应用实例"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x6A21;&#x7248;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x5E94;&#x7528;&#x5B9E;&#x4F8B;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#command-命令接口"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">Command &#x547D;&#x4EE4;&#x63A5;&#x53E3;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#tvreceiver"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">TVReceiver</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#tvoncommand"><span class="toc-nav-number">1.1.2.1.</span> <span class="toc-nav-text">TVOnCommand</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#tvoffcommand"><span class="toc-nav-number">1.1.2.2.</span> <span class="toc-nav-text">TVOffCommand</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#lightreceiver"><span class="toc-nav-number">1.1.3.</span> <span class="toc-nav-text">LightReceiver</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#lightoncommand"><span class="toc-nav-number">1.1.3.1.</span> <span class="toc-nav-text">LightOnCommand</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#lightoffcommand"><span class="toc-nav-number">1.1.3.2.</span> <span class="toc-nav-text">LightOffCommand</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#nocommand"><span class="toc-nav-number">1.1.4.</span> <span class="toc-nav-text">NoCommand</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#remotecontroller"><span class="toc-nav-number">1.1.5.</span> <span class="toc-nav-text">RemoteController</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#client"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Client</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#命令模式的注意事项和细节"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">&#x547D;&#x4EE4;&#x6A21;&#x5F0F;&#x7684;&#x6CE8;&#x610F;&#x4E8B;&#x9879;&#x548C;&#x7EC6;&#x8282;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#模版模式在spring框架中的应用"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">&#x6A21;&#x7248;&#x6A21;&#x5F0F;&#x5728;Spring&#x6846;&#x67B6;&#x4E2D;&#x7684;&#x5E94;&#x7528;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
         
         </div>
       </aside>
