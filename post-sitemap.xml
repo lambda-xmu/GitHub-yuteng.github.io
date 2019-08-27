@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>https://github-yuteng.github.io/article/%E7%AE%80%E5%8E%86/</loc>
+        <lastmod>2019-08-27T02:29:01.585Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://github-yuteng.github.io/article/%E8%AE%BF%E9%97%AE%E8%80%85%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
         <lastmod>2019-08-23T10:06:21.969Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -65,14 +73,6 @@
     <url>
         <loc>https://github-yuteng.github.io/article/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%83%E5%A4%A7%E5%8E%9F%E5%88%99/</loc>
         <lastmod>2019-08-20T10:08:38.696Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://github-yuteng.github.io/article/%E7%AE%80%E5%8E%86/</loc>
-        <lastmod>2019-08-20T02:04:38.303Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
