@@ -211,6 +211,145 @@
 
 <div class="post-preview">
 
+    <a href="/article/代理设计模式/">
+        <h2 class="post-title">
+            代理设计模式（Proxy）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+什么是代理设计模式？
+代理设计模式 —&gt; 结构型模式
+代理模式：为一个对象提供一个替身，以控制对这个对象的访问，可以详细访问某个对象的方法。即通过代理对象访问目标对象，这样做的好处是可以在目标对象实现的基础上，增强额外的功能操作，即扩展目标对象的功能。
+分类：
+
+静态代理
+动态代理（JDK代理、接口代理）— javaassist 字节码操作
+CGLib 代理（Code Generat......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 于腾 on
+            2019-08-08
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Java 设计模式（结构型）" title="Java 设计模式（结构型）">Java 设计模式（结构型）</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/原型设计模式/">
+        <h2 class="post-title">
+            原型设计模式（Prototype）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            什么是原型设计模式？
+原型设计模式 —&gt; 创建型模式
+传统模式
+传统的方式的优缺点
+
+优点是比较好理解，简单易操作;
+在创建新的对象时，总是需要重新获取原始对象的属性，如果创建的对象比较复杂时，效率较低;
+总是需要重新初始化对象，而不是动态地获得对象运行时的状态，不够灵活;
+改进的思路：
+
+思路：Java 中 Object 类是所有类的根类，Object 类提供了一个 clone() ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 于腾 on
+            2019-08-04
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Java 设计模式（创建型）" title="Java 设计模式（创建型）">Java 设计模式（创建型）</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/工厂设计模式/">
+        <h2 class="post-title">
+            工厂设计模式（Factory）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            什么是工厂设计模式？
+工厂设计模式 —&gt; 创建型模式
+对象都需要创建，如果创建的时候直接 new 该对象，就会对该对象严重耦合
+假如我们要更换对象，所有 new 对象的地方都需要修改一遍，显然违背了软件设计的开闭原则（OCP）。如果我们使用工厂来生产对象，我们就只和工厂打交道就可以了，彻底和对象解耦，如果要更换对象，直接在工厂里更换该对象即可，达到了与对象解耦的目的；
+工厂模式最大的优......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 于腾 on
+            2019-08-03
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Java 设计模式（创建型）" title="Java 设计模式（创建型）">Java 设计模式（创建型）</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/单例设计模式/">
+        <h2 class="post-title">
+            单例设计模式（Singleton）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            什么是单例设计模式？
+单例设计模式 —&gt; 创建型模式
+单例模式，是一种常用的软件设计模式。在它的核心结构中只包含一个被称为单例的特殊类。
+通过单例模式可以保证系统中，应用该模式的类只有一个实例。即一个类只有一个对象实例。
+在java语言中，单例带来了两大好处：
+（1）对于频繁使用的对象（数据源、Session工厂），可以省略创建对象所花费的时间，这对于重量级的对象而言，是非常可观的一笔......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 于腾 on
+            2019-08-02
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Java 设计模式（创建型）" title="Java 设计模式（创建型）">Java 设计模式（创建型）</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/article/设计模式七大原则/">
         <h2 class="post-title">
             设计模式七大原则
@@ -234,73 +373,11 @@ Scott Maye......
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 于腾 on
-            2019-08-06
+            2019-08-01
         </p>
         <div class="tags">
             
               <a href="/tags/#Java 设计模式" title="Java 设计模式">Java 设计模式</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/HashMapSourceCode/">
-        <h2 class="post-title">
-            HashMap Source Code
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-HashMap SourceCode
-感谢阅读
-...
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 于腾 on
-            2019-08-03
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#SourceCode" title="SourceCode">SourceCode</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/ShardingSphere/">
-        <h2 class="post-title">
-            ShardingSphere
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-一、ShardingSphere
-ShardingSphere是一套开源的分布式数据库中间件解决方案组成的生态圈，它由 Sharding-JDBC、Sharding-Proxy 和 Sharding-Sidecar（计划中）这3款相互独立的产品组成。 他们均提供标准化的数据分片、分布式事务和数据库治理功能，可适用于如Java同构、异构语言、容器、云原生等各种多样化的应用场景。
-Shardi......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 于腾 on
-            2019-07-20
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#JDBC" title="JDBC">JDBC</a>
             
         </div>
     
@@ -337,6 +414,37 @@ Shardi......
         <div class="tags">
             
               <a href="/tags/#线程" title="线程">线程</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/ShardingSphere/">
+        <h2 class="post-title">
+            ShardingSphere
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+一、ShardingSphere
+ShardingSphere是一套开源的分布式数据库中间件解决方案组成的生态圈，它由 Sharding-JDBC、Sharding-Proxy 和 Sharding-Sidecar（计划中）这3款相互独立的产品组成。 他们均提供标准化的数据分片、分布式事务和数据库治理功能，可适用于如Java同构、异构语言、容器、云原生等各种多样化的应用场景。
+Shardi......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 于腾 on
+            2019-07-20
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#JDBC" title="JDBC">JDBC</a>
             
         </div>
     
@@ -454,114 +562,6 @@ J2EE开发的一站式解决方案；
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/article/Ajax/">
-        <h2 class="post-title">
-            Ajax (Asynchronous)
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            一、Ajax 简介
-允许浏览器与服务器通信而无须刷新当前页面的技术。
-Ajax并不是一项新技术，它实际上是几种技术，每种技术各尽其职，以一种全新的方式聚合在一起。
-
-服务器端语言：服务器需要具备向浏览器发送特定信息的能力。Ajax与服务器端语言无关。
-XML：Ajax 程序需要某种格式化的格式来在服务器和客户端之间传递信息。
-XHTML：使用扩展超媒体标记语言和CSS (Cascading ......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 于腾 on
-            2019-04-28
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Ajax" title="Ajax">Ajax</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/NIO/">
-        <h2 class="post-title">
-            NIO（Non-Blocking IO）
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            一、Java NIO 简介
-Java NIO（New IO）是从Java 1.4版本开始引入的一个新的IO API，可以替代标准的Java IO API。 NIO与原来的IO有同样的作用和目的，但是使用的方式完全不同。NIO支持面向缓冲区的、基于通道的IO操作。NIO将以更加高效的方式进行文件的读写操作。
-java.nio.file
-
-
-
-IO
-NIO
-
-
-
-
-面向流(Stream Orie......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 于腾 on
-            2019-04-25
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#NIO" title="NIO">NIO</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/Java8新特性/">
-        <h2 class="post-title">
-            Java 8 新特性
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            一、Java 8 新特性
-1.7：HashMap 创建对象 运用 HashCode 方法 计算数组索引值。 如果数组内有对象，则发生Hash碰撞，此时增加链表链接（数组加链表）。
-1.8：当数组容量 大于64，链表长度大于8时，链表转为 红黑树。
-
-ConcurrentHashMap
-
-1.7 锁分段机制 ， 16个隔离级别  隔离级别，段的长度不好评定，容易浪费空间。hash算法，数组加链......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 于腾 on
-            2019-04-22
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Java8" title="Java8">Java8</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -625,6 +625,10 @@ ConcurrentHashMap
             
         
             
+            <a href="/tags/#Java 设计模式（创建型）" title="Java 设计模式（创建型）" rel="3">Java 设计模式（创建型）</a>
+            
+        
+            
             <a href="/tags/#Java 设计模式（行为型）" title="Java 设计模式（行为型）" rel="7">Java 设计模式（行为型）</a>
             
         
@@ -638,10 +642,6 @@ ConcurrentHashMap
             <a href="/tags/#Java 设计模式（结构型）" title="Java 设计模式（结构型）" rel="2">Java 设计模式（结构型）</a>
             
         
-            
-        
-            
-            <a href="/tags/#Java 设计模式（创建型）" title="Java 设计模式（创建型）" rel="2">Java 设计模式（创建型）</a>
             
         
             
@@ -667,9 +667,9 @@ ConcurrentHashMap
             
         
             
-        
-            
             <a href="/tags/#Spring全家桶" title="Spring全家桶" rel="3">Spring全家桶</a>
+            
+        
             
         
             
@@ -731,6 +731,10 @@ ConcurrentHashMap
         </li>
       
         <li>
+          <a href="/article/HashMapSourceCode/">HashMap Source Code</a>
+        </li>
+      
+        <li>
           <a href="/article/访问者设计模式/">访问者设计模式（Visitor）</a>
         </li>
       
@@ -740,10 +744,6 @@ ConcurrentHashMap
       
         <li>
           <a href="/article/命令设计模式/">命令设计模式（Command）</a>
-        </li>
-      
-        <li>
-          <a href="/article/模版设计模式/">模版方法设计模式（Template）</a>
         </li>
       
     </ul>
@@ -772,7 +772,7 @@ ConcurrentHashMap
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">8</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">6</span></li></ul>
     </div>
 
         <hr>
