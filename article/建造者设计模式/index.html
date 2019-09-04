@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          至此至终 - 于腾 | Blog
+          建造者设计模式（Builder） - 于腾 | Blog
         
     </title>
 
-    <link rel="canonical" href="https://github-yuteng.github.io/about/">
+    <link rel="canonical" href="https://github-yuteng.github.io/article/建造者设计模式/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -71,8 +71,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/header_img/earth.jpg')
-            /*page*/
+            background-image: url('/img/article_header/article_bg.jpg')
+            /*post*/
         
     }
     
@@ -85,10 +85,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>至此至终</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">感谢经历</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Java 设计模式（创建型）" title="Java 设计模式（创建型）">Java 设计模式（创建型）</a>
+                            
+                        </div>
+                        <h1>建造者设计模式（Builder）</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by 于腾 on
+                            2019-08-06
+                        </span>
                     </div>
                 
 
@@ -191,258 +199,183 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <h3 id="永远年轻永远热泪盈眶"><strong>永远年轻，永远热泪盈眶</strong></h3>
-<hr>
-<h3 id="关于我">关于我</h3>
-<p><strong>情感从来是纯洁而不媚俗的，脏的是我们自以为是的个性和懦弱无能的逃避。</strong><br>
-<strong>人们以现实为借口告诉自己要不冷不热，而我理解的成熟是依然懂得拥抱激情。</strong></p>
-<hr>
-<h3 id="兴趣方向">兴趣方向</h3>
-<ul>
-<li><strong>Java 后台开发、大数据</strong></li>
-</ul>
-<hr>
-<h3 id="参与社区">参与社区</h3>
-<p><strong>CSDN博客：<a href="https://blog.csdn.net/CSDN_CoolY" target="_blank" rel="noopener">https://blog.csdn.net/CSDN_CoolY</a></strong><br>
-<strong>Github：<a href="https://github.com/GitHub-yuteng" target="_blank" rel="noopener">https://github.com/GitHub-yuteng</a></strong></p>
-<hr>
-<h3 id="联系我">联系我</h3>
-<ul>
-<li><strong>Email: <a href="mailto:soft_yt@163.com" target="_blank" rel="noopener">soft_yt@163.com</a></strong></li>
-</ul>
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
+                <h2 id="什么是建造者设计模式">什么是建造者设计模式？</h2>
+<p><strong>建造者设计模式 —&gt; 创建型模式</strong></p>
+<h1 id="感谢阅读">感谢阅读</h1>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/article/代理设计模式/" data-toggle="tooltip" data-placement="top" title="代理设计模式（Proxy）">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/article/原型设计模式/" data-toggle="tooltip" data-placement="top" title="原型设计模式（Prototype）">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
 
                 <br>
 
+                <!--打赏-->
+                
+                    <div class="reward">
+                        <div class="reward-button">赏 <span class="reward-code"> 
+                            <span class="alipay-code"> <img class="alipay-img" src="http://ww1.sinaimg.cn/large/006vWPzFly1g0o77ru34uj30dz0drdhv.jpg"><b>支付宝打赏</b></span> 
+                            <span class="wechat-code"> <img class="wechat-img" src="http://ww1.sinaimg.cn/large/006vWPzFly1g0o740lhb9j30rb0ov77z.jpg"><b>微信打赏</b> </span>
+                            </span></div>
+                        <p class="reward-notice">赞赏一下</p>
+                    </div>
+                
+                <!--打赏-->
+
+                <br>
+                <!--分享-->
+                
+                <!--分享-->
+                <br>                       
+                
                 <!-- require APlayer -->
                 
 
-                <!-- 如果开启评论功能 -->
+                <!-- duoshuo Share start -->
                 
-                    <hr>
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#什么是建造者设计模式"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4EC0;&#x4E48;&#x662F;&#x5EFA;&#x9020;&#x8005;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#xFF1F;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Java 设计模式（创建型）" title="Java 设计模式（创建型）">Java 设计模式（创建型）</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
 
                     
-
+                        <li><a href="https://yexua.github.io/" target="_blank">yexua</a></li>
                     
-
+                        <li><a href="https://snailclimb.gitee.io/javaguide/#/" target="_blank">JavaGuide</a></li>
                     
-
+                        <li><a href="http://cyc2018.gitee.io/cs-notes/#/notes/%E5%89%91%E6%8C%87%20Offer%20%E9%A2%98%E8%A7%A3%20-%20%E7%9B%AE%E5%BD%951" target="_blank">剑指Offer</a></li>
                     
-
+                        <li><a href="http://cyc2018.gitee.io/cs-notes/#/" target="_blank">技术面试必备基础知识</a></li>
                     
-
-                    
-
+                </ul>
                 
             </div>
-
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Featured Tags -->
-
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#排序算法" title="排序算法" rel="3">排序算法</a>
-            
-        
-            
-            <a href="/tags/#Java 设计模式（创建型）" title="Java 设计模式（创建型）" rel="4">Java 设计模式（创建型）</a>
-            
-        
-            
-            <a href="/tags/#Java 设计模式（行为型）" title="Java 设计模式（行为型）" rel="7">Java 设计模式（行为型）</a>
-            
-        
-            
-            <a href="/tags/#JVM" title="JVM" rel="4">JVM</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Java 设计模式（结构型）" title="Java 设计模式（结构型）" rel="2">Java 设计模式（结构型）</a>
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#JDBC" title="JDBC" rel="2">JDBC</a>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-            <a href="/tags/#线程" title="线程" rel="2">线程</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#ORM 框架" title="ORM 框架" rel="2">ORM 框架</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#Spring全家桶" title="Spring全家桶" rel="3">Spring全家桶</a>
-            
-        
-            
-        
+        </div>
     </div>
-</section>
+</article>
 
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">ABOUT ME</a></h5>
-    <div class="short-about">
 
-        
-            <img id = "avatar_pic" src="/img/avatar/yt.png" />
-        
 
-        
-            <p>永远年轻，永远热泪盈眶</p>
-        
 
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
 
-            
 
-            
 
-            
-                <li>
-                    <a target="_blank"  href="https://github.com/GitHub-yuteng">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-            
-            
-            
-        </ul>
-    </div>
-</section>
 
-        <hr>
-    
-        
-  <h5>RECENT POSTS</h3>
-  <div class="widget">
-    <ul>
-      
-        <li>
-          <a href="/article/简历/">简历</a>
-        </li>
-      
-        <li>
-          <a href="/article/HashMapSourceCode/">HashMap Source Code</a>
-        </li>
-      
-        <li>
-          <a href="/article/访问者设计模式/">访问者设计模式（Visitor）</a>
-        </li>
-      
-        <li>
-          <a href="/article/状态设计模式/">状态设计模式（State）</a>
-        </li>
-      
-        <li>
-          <a href="/article/命令设计模式/">命令设计模式（Command）</a>
-        </li>
-      
-    </ul>
-  </div>
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
-        <hr>
-    
-        <!-- Friends Blog -->
-
-<h5>FRIENDS</h5>
-<ul class="list-inline">
-
-    
-        <li><a href="https://yexua.github.io/" target="_blank">yexua</a></li>
-    
-        <li><a href="https://snailclimb.gitee.io/javaguide/#/" target="_blank">JavaGuide</a></li>
-    
-        <li><a href="http://cyc2018.gitee.io/cs-notes/#/notes/%E5%89%91%E6%8C%87%20Offer%20%E9%A2%98%E8%A7%A3%20-%20%E7%9B%AE%E5%BD%951" target="_blank">剑指Offer</a></li>
-    
-        <li><a href="http://cyc2018.gitee.io/cs-notes/#/" target="_blank">技术面试必备基础知识</a></li>
-    
-</ul>
-
-        <hr>
-    
-        
-    <h5>ARCHIVES</h5>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">6</span></li></ul>
-    </div>
-
-        <hr>
-    
-</div>
-
-        
-    </div>
-</div>
 
 
     <!-- Footer -->
