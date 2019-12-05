@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          HashMap Source Code - 于腾 | Blog
+          操作系统 - 于腾 | Blog
         
     </title>
 
-    <link rel="canonical" href="https://github-yuteng.github.io/article/HashMapSourceCode/">
+    <link rel="canonical" href="https://github-yuteng.github.io/article/操作系统/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -88,14 +88,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#SourceCode" title="SourceCode">SourceCode</a>
+                              <a class="tag" href="/tags/#操作系统" title="操作系统">操作系统</a>
                             
                         </div>
-                        <h1>HashMap Source Code</h1>
+                        <h1>操作系统</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by 于腾 on
-                            2019-10-01
+                            2019-12-05
                         </span>
                     </div>
                 
@@ -213,7 +213,220 @@
                 post-container">
 
                 <hr>
-<h2 id="hashmap-sourcecode">HashMap SourceCode</h2>
+<h2 id="操作系统">操作系统</h2>
+<h3 id="一">一、</h3>
+<h3 id="二-进程process">二、进程（Process）</h3>
+<h4 id="21-进程的概念">2.1、进程的概念</h4>
+<ul>
+<li><strong>计算机中一个具有独立功能的程序关于某数据集合上的一次动态执行过程。</strong></li>
+<li><strong>操作系统进行资源分配和调度的基本单位，以及操作系统结构的基础。</strong></li>
+</ul>
+<h4 id="22-进程的组成">2.2、进程的组成</h4>
+<ul>
+<li>程序代码；</li>
+<li>程序处理的数据；</li>
+<li>程序计数器中的值，指示下一条将运行的指令；</li>
+<li>一组通用的寄存器的当前值，堆、栈;</li>
+<li>一组系统资源（如内存资源，打开的文件，网络）；</li>
+<li>总之，进程包含了正在运行的一个程序的所有状态信息。</li>
+</ul>
+<h4 id="23-进程与程序的联系">2.3、进程与程序的联系</h4>
+<ul>
+<li>进程 ≠ 程序</li>
+<li>程序是产生进程的基础；</li>
+<li>程序的每次运行构成不同的进程；</li>
+<li>进程是程序功能的体现；</li>
+<li>通过多次执行，一个程序可对应多个进程；通过调用关系，一个进程可包括多个程序。</li>
+</ul>
+<p><strong>类比：有一个计算机科学家，想亲手给女儿做一个生日蛋糕。所以他就找了一本有关做蛋糕的食谱，买了一些原料，面粉、鸡蛋、糖、香料等，然后边看边学边做。这时小儿子哭着跑进来，说手被蜜蜂蛰了。教授只好把蛋糕先放在一边。他在食谱上做了个标记，把状态信息记录了起来。然后又去找了一本医疗手册，查到了相关的内容，按照上面的指令一步步地执行。 当伤口处理完之后，又回到厨房继续做蛋糕。</strong></p>
+<ul>
+<li>食谱 = 程序</li>
+<li>原料 = 数据</li>
+<li>科学家 = CPU</li>
+<li>做蛋糕 = 进程</li>
+<li>CPU从一个进程（做蛋糕）切换（中断进程）到另一个进程（医疗救护 —&gt; 优先级更高）</li>
+</ul>
+<h4 id="24-进程与程序的区别">2.4、进程与程序的区别</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">进程</th>
+<th style="text-align:center">程序</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">动态/状态变化的过程</td>
+<td style="text-align:center">静态/永久保存</td>
+</tr>
+<tr>
+<td style="text-align:center">进程是程序的执行</td>
+<td style="text-align:center">程序是有序代码的集合</td>
+</tr>
+<tr>
+<td style="text-align:center">核心态/用户态</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">暂时性/运行性</td>
+<td style="text-align:center">永久性</td>
+</tr>
+</tbody>
+</table>
+<h4 id="25-进程的特点">2.5、进程的特点</h4>
+<p>动态性：可动态地创建，结束进程。<br>
+并发性：进程可以被独立调度并占用处理器运行。<br>
+独立性：不同进程的工作不互相影响（操作系统保证，内存管理页表）。<br>
+制约性：因访问共享数据/资源或进程间同步而产生制约。</p>
+<h4 id="26-进程控制结构-pcb">2.6、进程控制结构 PCB</h4>
+<p>程序 = 算法 + 数据结构</p>
+<ul>
+<li>
+<p><strong>描述进程的数据结构：进程控制块 （Process Control Block，PCB）</strong></p>
+<ul>
+<li><strong>操作系统为每个进程都维护了一个 PCB ，用来保存与进程有关的各种状态信息。</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>进程控制块：操作系统管理控制进程运行所用的信息集合。</strong></p>
+<ul>
+<li>操作系统用 PCB 来描述进程的基本情况以及运行变化的过程。</li>
+<li><strong><code>PCB 是进程存在的唯一标识。</code></strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>进程的创建：为该进程生成一个 PCB；</strong><br>
+<strong>进程的终止：回收它的PCB;</strong><br>
+<strong>进程的组织管理：通过对PCB的组织管理来实现;</strong></p>
+<p><strong>PCB 含有以下三大类信息：</strong></p>
+<ul>
+<li>
+<p><strong>1、进程标识信息，如本进程标识，本进程的父进程标识，用户标识。</strong></p>
+</li>
+<li>
+<p><strong>2、处理机状态信息保存区，保存进程的运行现场信息。</strong></p>
+<ul>
+<li>用户可见寄存器</li>
+<li>控制和状态寄存器</li>
+<li>栈指针</li>
+</ul>
+</li>
+<li>
+<p><strong>3、进程控制信息</strong></p>
+<ul>
+<li>调度和状态信息，用于操作系统调度进程并占用处理机使用。</li>
+<li>进程间通信信息，为支持进程间的与通信相关的各种标识、信号、信件等,<br>
+这些信息存在接收方的进程控制块中。</li>
+<li>存储管理信息，包含有指向本进程映像存储空间的数据结构。</li>
+<li>进程所用资源，说明由进程打开、使用的系统资源，如打开的文件等。</li>
+<li>有关数据结构连接信息，进程可以连接到一个进程队列中，或连接到相关<br>
+的其他进程的PCB。</li>
+</ul>
+</li>
+</ul>
+<h4 id="27-进程的生命周期">2.7、进程的生命周期</h4>
+<h5 id="271-进程生命周期管理">2.7.1、进程生命周期管理</h5>
+<ul>
+<li><code>进程创建</code> =&gt; 三个主要条件
+<ul>
+<li>系统初始化时；init 进程</li>
+<li>用户请求创建一个新的进程；</li>
+<li>正在运行的进程执行了创建进程的系统调用；</li>
+</ul>
+</li>
+<li><code>进程运行</code>
+<ul>
+<li>内核选择一个就绪的进程，让它占用处理机并执行；</li>
+<li>如何选择？=&gt; 系统调度</li>
+</ul>
+</li>
+<li><code>进程等待（阻塞）</code>
+<ul>
+<li>请求并等待系统服务，无法马上完成；</li>
+<li>启动某种操作，无法马上完成；</li>
+<li>需要的数据没有到达；</li>
+</ul>
+</li>
+<li><code>进程唤醒</code>
+<ul>
+<li>进程只能被别的进程唤醒或操作系统唤醒；</li>
+<li>被阻塞进程需要的资源可以被满足；</li>
+<li>被阻塞进程等待的事件到达；</li>
+<li>将该进程的PCB插入到就绪队列；</li>
+</ul>
+</li>
+<li><code>进程结束</code>
+<ul>
+<li>正常退出</li>
+<li>错误退出</li>
+<li>致命错误</li>
+<li>被其他进程 kill</li>
+</ul>
+</li>
+</ul>
+<h5 id="272-进程状态变化模型">2.7.2、进程状态变化模型</h5>
+<p>进程在生命结束前处于且仅处于三种基本状态之一，不同系统设置的进程状态数目不同。</p>
+<ul>
+<li>创建状态（New）：一个进程正在被创建，还没有初始化完成没有转到就绪状态之前。
+<ul>
+<li>NULL —&gt; New：一个新进程被产生出来执行一个程序。</li>
+<li>New —&gt; Ready：当进程被创建完成并初始化后，一切准备就绪运行时变为就绪状态。</li>
+</ul>
+</li>
+<li><code>就绪状态（Ready）</code>：一个进程获得除处理机之外的一切所需资源，一旦得到处理机即可运行。</li>
+<li><code>运行状态（Running）</code>：一个进程正在处理机上运行时。</li>
+<li><code>等待状态（又称阻塞状态 Blocked）</code>：一个进程正在等待某一事件而暂停运行时。如等待某资源，等待输入输出完成。</li>
+<li>结束状态（Exit）：一个进程正在从系统中消失的状态。</li>
+</ul>
+<p><img src="../../img/articleImg/OS-Process-1.png" alt=""></p>
+<h5 id="273-进程挂起模式">2.7.3、进程挂起模式</h5>
+<p>进程在挂起状态时，意味着进程没有占用内存空间。处于挂起状态的进程映像在磁盘上。</p>
+<p><strong>挂起状态</strong></p>
+<ul>
+<li><strong><code>阻塞挂起状态（Block-Suspend）</code>：进程在外存并等待某事件的出现；</strong></li>
+<li><strong><code>就绪挂起状态（Ready-Suspend）</code>：进程在外存，但只要进入内存，即可运行；</strong></li>
+</ul>
+<p><img src="../../img/articleImg/OS-Process-2.png" alt=""></p>
+<p><strong>挂起状态相关的转换</strong></p>
+<p>挂起(Suspend) ：把一个进程从内存转到外存；可能有以下几种情况</p>
+<ul>
+<li>
+<p><strong>阻塞到阻塞挂起：</strong> 没有进程处于就绪状态或就绪进程要求更多内存资源时，<br>
+会进行这种转换，以提交新进程或运行就绪进程；</p>
+</li>
+<li>
+<p><strong>就绪到就绪挂起：</strong> 当有高优先级阻塞(系统认为会很快就绪的)进程和低优先<br>
+就绪进程时，系统会选择挂起低优先级就绪进程；</p>
+</li>
+<li>
+<p><strong>运行到就绪挂起：</strong> 对抢先式分时系统，当有高优先级阻塞挂起进程因事件出<br>
+现而进入就绪挂起时，系统可能会把运行进程转到就绪挂起状态；</p>
+</li>
+</ul>
+<p><strong>在外存时的状态转换</strong></p>
+<ul>
+<li><strong>阻塞挂起到就绪挂起：</strong> 当有阻塞挂起进程因相关事件出现时，系统会把阻塞<br>
+挂起进程转换为就绪挂起进程。虽然已经转为就绪状态，但资源还在外存。</li>
+</ul>
+<p><strong>解挂/激活（Active）</strong></p>
+<p>把一个程序从外存转到内存；</p>
+<ul>
+<li><strong>就绪挂起到就绪：</strong> 没有就绪进程或挂起就绪进程优先级高于就绪进程时，会进<br>
+行这种转换;</li>
+<li><strong>阻塞挂起到阻塞：</strong> 当一个进程释放足够内存时，系统会把一个高优先级阻塞挂<br>
+起(系统认为会很快出现所等待的事件)进程转换为阻塞进程;</li>
+</ul>
+<p><strong>OS通过 PCB 和进程的状态管理PCB</strong></p>
+<p><img src="../../img/articleImg/OS-Process-3.png" alt=""></p>
+<h5 id="274-进程状态队列">2.7.4、进程状态队列</h5>
+<ul>
+<li>由操作系统来维护<code>一组队列</code>，用来表示系统当中所有进程的当前状态；</li>
+<li>不同的状态分别用不同的队列来表示(就绪队列、各种类型的阻塞队列) ；</li>
+<li>每个进程的PCB都根据它的状态加入到相应的队列当中，当一个进程的状态发生<br>
+变化时，它的PCB从一个状态队列中脱离出来，加入到另外一个队列。</li>
+</ul>
+<p><img src="../../img/articleImg/OS-Process-4.png" alt=""></p>
+<h3 id="三-线程thread">三、线程（Thread）</h3>
 <h1 id="感谢阅读">感谢阅读</h1>
 
                 
@@ -223,12 +436,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/article/操作系统/" data-toggle="tooltip" data-placement="top" title="操作系统">&larr; Previous Post</a>
+                            <a href="/article/简历/" data-toggle="tooltip" data-placement="top" title="简历">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/article/访问者设计模式/" data-toggle="tooltip" data-placement="top" title="访问者设计模式（Visitor）">Next Post &rarr;</a>
+                            <a href="/article/HashMapSourceCode/" data-toggle="tooltip" data-placement="top" title="HashMap Source Code">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -287,7 +500,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#hashmap-sourcecode"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">HashMap SourceCode</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#操作系统"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#一"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#二-进程process"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;&#x8FDB;&#x7A0B;&#xFF08;Process&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#21-进程的概念"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">2.1&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x6982;&#x5FF5;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#22-进程的组成"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">2.2&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x7EC4;&#x6210;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#23-进程与程序的联系"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">2.3&#x3001;&#x8FDB;&#x7A0B;&#x4E0E;&#x7A0B;&#x5E8F;&#x7684;&#x8054;&#x7CFB;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#24-进程与程序的区别"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">2.4&#x3001;&#x8FDB;&#x7A0B;&#x4E0E;&#x7A0B;&#x5E8F;&#x7684;&#x533A;&#x522B;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#25-进程的特点"><span class="toc-nav-number">1.2.5.</span> <span class="toc-nav-text">2.5&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x7279;&#x70B9;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#26-进程控制结构-pcb"><span class="toc-nav-number">1.2.6.</span> <span class="toc-nav-text">2.6&#x3001;&#x8FDB;&#x7A0B;&#x63A7;&#x5236;&#x7ED3;&#x6784; PCB</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#27-进程的生命周期"><span class="toc-nav-number">1.2.7.</span> <span class="toc-nav-text">2.7&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#271-进程生命周期管理"><span class="toc-nav-number">1.2.7.1.</span> <span class="toc-nav-text">2.7.1&#x3001;&#x8FDB;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x7BA1;&#x7406;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#272-进程状态变化模型"><span class="toc-nav-number">1.2.7.2.</span> <span class="toc-nav-text">2.7.2&#x3001;&#x8FDB;&#x7A0B;&#x72B6;&#x6001;&#x53D8;&#x5316;&#x6A21;&#x578B;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#273-进程挂起模式"><span class="toc-nav-number">1.2.7.3.</span> <span class="toc-nav-text">2.7.3&#x3001;&#x8FDB;&#x7A0B;&#x6302;&#x8D77;&#x6A21;&#x5F0F;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#274-进程状态队列"><span class="toc-nav-number">1.2.7.4.</span> <span class="toc-nav-text">2.7.4&#x3001;&#x8FDB;&#x7A0B;&#x72B6;&#x6001;&#x961F;&#x5217;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#三-线程thread"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">&#x4E09;&#x3001;&#x7EBF;&#x7A0B;&#xFF08;Thread&#xFF09;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
         
         </div>
       </aside>
@@ -307,7 +520,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#SourceCode" title="SourceCode">SourceCode</a>
+                          <a class="tag" href="/tags/#操作系统" title="操作系统">操作系统</a>
                         
                     </div>
                 </section>

@@ -588,7 +588,7 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@SessionAttributes</span>(value=&#123;<span class="string">"user"</span>&#125;)</span><br><span class="line"><span class="class"><span class="keyword">class</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line">@RequestMapping("/testSessionAttributes")</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testSessionAttributes</span><span class="params">(Map&lt;String, Object&gt; map)</span></span>&#123;</span><br><span class="line">	User user = <span class="keyword">new</span> User(<span class="string">"Tom"</span>, <span class="string">"123456"</span>, <span class="number">15</span>);</span><br><span class="line">	map.put(<span class="string">"user"</span>, user);</span><br><span class="line">	map.put(<span class="string">"dept"</span>, <span class="string">"dept"</span>);</span><br><span class="line">	<span class="keyword">return</span> SUCCESS;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">request user: $&#123;requestScope.user &#125; 可以在 request 域中取出模型信息。</span><br><span class="line">session user: $&#123;sessionScope.user &#125; 可以在 session 域中取出模型信息。</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@SessionAttributes</span>(value=&#123;<span class="string">"user"</span>&#125;)</span><br><span class="line"><span class="class"><span class="keyword">class</span></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/testSessionAttributes"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testSessionAttributes</span><span class="params">(Map&lt;String, Object&gt; map)</span></span>&#123;</span><br><span class="line">	User user = <span class="keyword">new</span> User(<span class="string">"Tom"</span>, <span class="string">"123456"</span>, <span class="number">15</span>);</span><br><span class="line">	map.put(<span class="string">"user"</span>, user);</span><br><span class="line">	map.put(<span class="string">"dept"</span>, <span class="string">"dept"</span>);</span><br><span class="line">	<span class="keyword">return</span> SUCCESS;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">request user: $&#123;requestScope.user &#125; 可以在 request 域中取出模型信息。</span><br><span class="line">session user: $&#123;sessionScope.user &#125; 可以在 session 域中取出模型信息。</span><br></pre></td></tr></table></figure>
 <hr>
 <ul>
 <li>@SessionAttributes(types=User.class) 将隐含模型中所有类型为User.class属性添加到会话中</li>
@@ -736,9 +736,11 @@
 <p><strong>一般情况下，控制器方法返回字符串类型的值会被当成逻辑视图名处理。</strong></p>
 <blockquote>
 <p><strong>如果返回的字符串中带 forward：或 redirect：前缀时，SpringMVC 会对他们进行特殊处理。</strong></p>
-</blockquote>
 <ul>
 <li>将 forward： 和 redirect： 当成指示符，其后的字符串作为 URL 来处理 。</li>
+</ul>
+</blockquote>
+<ul>
 <li><strong>“redirect：success.jsp”</strong> 会完成一个到 success.jsp 的重定向的操作。</li>
 <li><strong>“forward：success.jsp”</strong> 会完成一个到 success.jsp 的转发操作。</li>
 </ul>
