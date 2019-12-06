@@ -278,7 +278,7 @@
 并发性：进程可以被独立调度并占用处理器运行。<br>
 独立性：不同进程的工作不互相影响（操作系统保证，内存管理页表）。<br>
 制约性：因访问共享数据/资源或进程间同步而产生制约。</p>
-<h4 id="26-进程控制结构-pcb">2.6、进程控制结构 PCB</h4>
+<h4 id="26-进程控制块-pcb">2.6、进程控制块 PCB</h4>
 <p>程序 = 算法 + 数据结构</p>
 <ul>
 <li>
@@ -426,7 +426,71 @@
 变化时，它的PCB从一个状态队列中脱离出来，加入到另外一个队列。</li>
 </ul>
 <p><img src="../../img/articleImg/OS-Process-4.png" alt=""></p>
-<h3 id="三-线程thread">三、线程（Thread）</h3>
+<h5 id="275-进程的上下文切换">2.7.5、进程的上下文切换</h5>
+<p><strong>由于CPU时间片运行结束，暂停当前运行进程，从运行状态变成其他状态，</strong><br>
+<strong>并且调度另一个进程，从就绪状态变成运行状态，称为一次上下文切换。</strong></p>
+<ul>
+<li>切换前，保存进程上下文信息到 PCB
+<ul>
+<li>寄存器</li>
+<li>CPU状态</li>
+<li>内存地址空间</li>
+</ul>
+</li>
+<li>切换后，从PCB里获取进程信息恢复进程上下文</li>
+<li>快速切换（汇编实现）</li>
+</ul>
+<hr>
+<h4 id="28-线程thread">2.8、线程（Thread）</h4>
+<p>为什么需要线程？</p>
+<ul>
+<li>进程之间如何通讯，共享数据；</li>
+<li>进程开销比较大，分配资源，创建PCB；</li>
+<li>撤销进程时，回收资源，撤销 PCB；</li>
+<li>进程切换时，保存当前进程的状态信息等；</li>
+</ul>
+<h5 id="281-线程的概念">2.8.1、线程的概念</h5>
+<ul>
+<li><strong>进程当中的一条执行流程。</strong></li>
+<li><strong>线程 = 进程 - 共享资源</strong></li>
+<li><strong>进程是操作系统资源分配的基本单位，而线程是 CPU 任务调度和执行的基本单位</strong>。</li>
+</ul>
+<p><strong>优点：</strong></p>
+<ul>
+<li>一个进程中可以同时存在多个线程；</li>
+<li>各个线程之间可以并发地执行；</li>
+<li>各个线程之间可以共享地址空间和文件等资源。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>一个线程崩溃，会导致其所属进程的所有线程崩溃。</li>
+</ul>
+<h5 id="281-线程的实现">2.8.1、线程的实现</h5>
+<p><strong>用户线程：在用户空间实现。操作系统看不到的线程。</strong></p>
+<ul>
+<li>
+<p>TCB （Thread Control Block）在用户线程里面。</p>
+</li>
+<li>
+<p>缺点：如果一个进程中的某个线程阻塞，除非它自己主动交出CPU使用权，<br>
+否则它所在的进程当中的其他线程将无法继续运行。由于时间片分配给的进<br>
+程，每个线程得到的时间片更少，执行会较慢。</p>
+</li>
+</ul>
+<p><strong>内核线程：在内核中实现。操作系统管理起来的线程。</strong></p>
+<ul>
+<li>
+<p>TCB （Thread Control Block）在内核里面。</p>
+</li>
+<li>
+<p>内核线程是指在操作系统的内核当中实现的一种线程机制，由操作系统的内<br>
+核来完成线程的创建，终止和管理。</p>
+</li>
+</ul>
+<p><strong>轻量级进程：在内核中实现，支持用户线程。</strong></p>
+<ul>
+<li>一个进程可有一个或多个轻量级进程，每个量级进程由一个单独的内核线程来支持。</li>
+</ul>
 <h1 id="感谢阅读">感谢阅读</h1>
 
                 
@@ -500,7 +564,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#操作系统"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#一"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#二-进程process"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;&#x8FDB;&#x7A0B;&#xFF08;Process&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#21-进程的概念"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">2.1&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x6982;&#x5FF5;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#22-进程的组成"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">2.2&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x7EC4;&#x6210;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#23-进程与程序的联系"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">2.3&#x3001;&#x8FDB;&#x7A0B;&#x4E0E;&#x7A0B;&#x5E8F;&#x7684;&#x8054;&#x7CFB;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#24-进程与程序的区别"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">2.4&#x3001;&#x8FDB;&#x7A0B;&#x4E0E;&#x7A0B;&#x5E8F;&#x7684;&#x533A;&#x522B;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#25-进程的特点"><span class="toc-nav-number">1.2.5.</span> <span class="toc-nav-text">2.5&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x7279;&#x70B9;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#26-进程控制结构-pcb"><span class="toc-nav-number">1.2.6.</span> <span class="toc-nav-text">2.6&#x3001;&#x8FDB;&#x7A0B;&#x63A7;&#x5236;&#x7ED3;&#x6784; PCB</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#27-进程的生命周期"><span class="toc-nav-number">1.2.7.</span> <span class="toc-nav-text">2.7&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#271-进程生命周期管理"><span class="toc-nav-number">1.2.7.1.</span> <span class="toc-nav-text">2.7.1&#x3001;&#x8FDB;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x7BA1;&#x7406;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#272-进程状态变化模型"><span class="toc-nav-number">1.2.7.2.</span> <span class="toc-nav-text">2.7.2&#x3001;&#x8FDB;&#x7A0B;&#x72B6;&#x6001;&#x53D8;&#x5316;&#x6A21;&#x578B;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#273-进程挂起模式"><span class="toc-nav-number">1.2.7.3.</span> <span class="toc-nav-text">2.7.3&#x3001;&#x8FDB;&#x7A0B;&#x6302;&#x8D77;&#x6A21;&#x5F0F;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#274-进程状态队列"><span class="toc-nav-number">1.2.7.4.</span> <span class="toc-nav-text">2.7.4&#x3001;&#x8FDB;&#x7A0B;&#x72B6;&#x6001;&#x961F;&#x5217;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#三-线程thread"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">&#x4E09;&#x3001;&#x7EBF;&#x7A0B;&#xFF08;Thread&#xFF09;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#操作系统"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#一"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#二-进程process"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;&#x8FDB;&#x7A0B;&#xFF08;Process&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#21-进程的概念"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">2.1&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x6982;&#x5FF5;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#22-进程的组成"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">2.2&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x7EC4;&#x6210;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#23-进程与程序的联系"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">2.3&#x3001;&#x8FDB;&#x7A0B;&#x4E0E;&#x7A0B;&#x5E8F;&#x7684;&#x8054;&#x7CFB;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#24-进程与程序的区别"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">2.4&#x3001;&#x8FDB;&#x7A0B;&#x4E0E;&#x7A0B;&#x5E8F;&#x7684;&#x533A;&#x522B;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#25-进程的特点"><span class="toc-nav-number">1.2.5.</span> <span class="toc-nav-text">2.5&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x7279;&#x70B9;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#26-进程控制块-pcb"><span class="toc-nav-number">1.2.6.</span> <span class="toc-nav-text">2.6&#x3001;&#x8FDB;&#x7A0B;&#x63A7;&#x5236;&#x5757; PCB</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#27-进程的生命周期"><span class="toc-nav-number">1.2.7.</span> <span class="toc-nav-text">2.7&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#271-进程生命周期管理"><span class="toc-nav-number">1.2.7.1.</span> <span class="toc-nav-text">2.7.1&#x3001;&#x8FDB;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x7BA1;&#x7406;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#272-进程状态变化模型"><span class="toc-nav-number">1.2.7.2.</span> <span class="toc-nav-text">2.7.2&#x3001;&#x8FDB;&#x7A0B;&#x72B6;&#x6001;&#x53D8;&#x5316;&#x6A21;&#x578B;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#273-进程挂起模式"><span class="toc-nav-number">1.2.7.3.</span> <span class="toc-nav-text">2.7.3&#x3001;&#x8FDB;&#x7A0B;&#x6302;&#x8D77;&#x6A21;&#x5F0F;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#274-进程状态队列"><span class="toc-nav-number">1.2.7.4.</span> <span class="toc-nav-text">2.7.4&#x3001;&#x8FDB;&#x7A0B;&#x72B6;&#x6001;&#x961F;&#x5217;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#275-进程的上下文切换"><span class="toc-nav-number">1.2.7.5.</span> <span class="toc-nav-text">2.7.5&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x5207;&#x6362;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#28-线程thread"><span class="toc-nav-number">1.2.8.</span> <span class="toc-nav-text">2.8&#x3001;&#x7EBF;&#x7A0B;&#xFF08;Thread&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#281-线程的概念"><span class="toc-nav-number">1.2.8.1.</span> <span class="toc-nav-text">2.8.1&#x3001;&#x7EBF;&#x7A0B;&#x7684;&#x6982;&#x5FF5;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#281-线程的实现"><span class="toc-nav-number">1.2.8.2.</span> <span class="toc-nav-text">2.8.1&#x3001;&#x7EBF;&#x7A0B;&#x7684;&#x5B9E;&#x73B0;</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number"></span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a>
         
         </div>
       </aside>
