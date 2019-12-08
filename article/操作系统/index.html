@@ -142,14 +142,14 @@
 
                         
                         <li>
-                            <a href="/about/">至此至终</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">至此至终</a>
                         </li>
                         
                     
@@ -459,8 +459,23 @@
 </li>
 </ul>
 <p><img src="../../img/articleImg/OS-Process-5.png" alt=""></p>
-<hr>
-<h3 id="28-线程thread">2.8、线程（Thread）</h3>
+<h3 id="28-进程间通信-ipc"><code>2.8、进程间通信 IPC</code></h3>
+<p><strong>Inter-Process Communication</strong></p>
+<p>发送路径：直接、间接</p>
+<p>消息传递：阻塞、非阻塞</p>
+<ul>
+<li>信号（Signal）：软件终端通知事件处理；不能传输要交换的任何数据；
+<ul>
+<li>Catch：指定信号处理函数被调用；</li>
+<li>Ignore：依靠操作系统的默认操作；</li>
+<li>Mask：闭塞信号，因此不会传送；</li>
+</ul>
+</li>
+<li>管道</li>
+<li>消息队列</li>
+<li>共享内存</li>
+</ul>
+<h3 id="29-线程thread">2.9、线程（Thread）</h3>
 <p>为什么需要线程？</p>
 <ul>
 <li>进程之间如何通讯，共享数据；</li>
@@ -468,7 +483,7 @@
 <li>撤销进程时，回收资源，撤销 PCB；</li>
 <li>进程切换时，保存当前进程的状态信息等；</li>
 </ul>
-<h4 id="281-线程的概念">2.8.1、线程的概念</h4>
+<h4 id="291-线程的概念">2.9.1、线程的概念</h4>
 <ul>
 <li><strong>进程当中的一条执行流程。</strong></li>
 <li><strong>线程 = 进程 - 共享资源</strong></li>
@@ -484,7 +499,7 @@
 <ul>
 <li>一个线程崩溃，会导致其所属进程的所有线程崩溃。</li>
 </ul>
-<h4 id="282-线程的实现">2.8.2、线程的实现</h4>
+<h4 id="292-线程的实现">2.9…2、线程的实现</h4>
 <p><strong>用户线程：在用户空间实现。操作系统看不到的线程。</strong></p>
 <ul>
 <li>
@@ -509,6 +524,22 @@
 <p><strong>轻量级进程：在内核中实现，支持用户线程。</strong></p>
 <ul>
 <li>一个进程可有一个或多个轻量级进程，每个量级进程由一个单独的内核线程来支持。</li>
+</ul>
+<h4 id="293-死锁">2.9…3、死<strong>锁</strong></h4>
+<p><strong><code>资源互斥、请求保持、不可剥夺、循环等待</code></strong></p>
+<ul>
+<li>银行家算法  =&gt; 开销较大、一般用来做调试；
+<ul>
+<li>要知道每个线程需要资源多少</li>
+</ul>
+</li>
+<li>死锁检测算法</li>
+</ul>
+<h4 id="294-死锁恢复">2.9…4、死锁恢复</h4>
+<ul>
+<li>选择一个受害者  —  最小的成本；</li>
+<li>回滚  —  返回到一些安全状态，重启进程到安全状态；</li>
+<li>饥饿  —  同一进程可能一直被选作受害者，包括回滚的数量；</li>
 </ul>
 <h2 id="三-调度">三、调度</h2>
 <h3 id="31-调度原则">3.1、调度原则</h3>
@@ -593,7 +624,7 @@
 <li>Deadl ine越早优先级越高</li>
 <li>执行Deadl ine最早的任务</li>
 </ul>
-<h2 id="四-中断">四、中断</h2>
+<h2 id="四-中断-竞态条件">四、中断 竞态条件</h2>
 <p><code>Critical section (临界区)：</code>临界区是指进程中的一段需要访问共享资源并且当另一个进程处于相应代码区域时便不会被执行的代码区域。同一时间临界区中最大存在一个线程。</p>
 <p><code>Mutual exclusion (互斥)：</code>当一个进程处于临界区并访问共享资源时，没有其他进程会处于临界区并且访问任何相同的共享资源。</p>
 <p><code>Dead lock (死锁)：</code>两个或以上的进程，在相互等待完成特定任务，最终没法将自身任务进行下去。</p>
@@ -613,11 +644,68 @@
 </li>
 </ul>
 <h3 id="42-基于软件的解决方案">4.2、基于软件的解决方案</h3>
+<ul>
+<li>编写代码</li>
+</ul>
 <h3 id="43-锁的抽象">4.3、锁的抽象</h3>
 <ul>
 <li>硬件提供了一些原语；</li>
 <li>OS 提供更高级的编程抽象 —&gt; 锁、信号量；</li>
 <li>锁是抽象的数据结构，一个二进制状态；</li>
+<li>提供互斥访问</li>
+</ul>
+<h2 id="五-信号量-管程">五、信号量、管程</h2>
+<h3 id="51-信号量的使用">5.1、信号量的使用</h3>
+<p><strong>抽象数据类型：一个整形（semaphore）， 两个原子操作</strong></p>
+<ul>
+<li>
+<p><strong>P()：sem减1，如果 sem&lt; 0, 等待，否则继续；</strong></p>
+</li>
+<li>
+<p><strong>V()：sem加1，如果 sem&lt;=0 ，唤醒一个等待的P；</strong></p>
+</li>
+<li>
+<p>信号量是整数；</p>
+</li>
+<li>
+<p>信号量是被保护的变量;</p>
+<ul>
+<li>初始化完成后，唯一改变一个信号量的值的办法是通过P()和V();</li>
+<li>操作必须是原子；</li>
+</ul>
+</li>
+<li>
+<p>P()能够阻塞，V()不会阻塞；</p>
+</li>
+<li>
+<p>两种类型信号量：</p>
+<ul>
+<li>二进制信号量：可以是 0 或 1；</li>
+<li>一般/计数信号量：可取任何非负值；</li>
+<li>两者相互表现（给定一个可以实现另一个）</li>
+</ul>
+</li>
+<li>
+<p>信号量可以用在2个方面</p>
+<ul>
+<li>互斥</li>
+<li>条件同步（调度约束一个线程等待另一个线程的事情发生）</li>
+</ul>
+</li>
+</ul>
+<h3 id="52-管程">5.2、管程</h3>
+<p>目的：分离互斥和条件同步的关注。</p>
+<p>什么是管程：</p>
+<ul>
+<li>
+<p>包含了一系列共享变量，以及针对这些变量操作函数的组合；</p>
+</li>
+<li>
+<p>一个锁：指定临界区，互斥性；一个管程只能有一个线程进入；</p>
+</li>
+<li>
+<p>0或者多个条件变量：等待/通知信号量用于管理并发访问共享数据；</p>
+</li>
 </ul>
 <h1 id="感谢阅读">感谢阅读</h1>
 
@@ -692,7 +780,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#操作系统"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二-进程process"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;&#x8FDB;&#x7A0B;&#xFF08;Process&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#21-进程的概念"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">2.1&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x6982;&#x5FF5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#22-进程的组成"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">2.2&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x7EC4;&#x6210;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#23-进程与程序的联系"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">2.3&#x3001;&#x8FDB;&#x7A0B;&#x4E0E;&#x7A0B;&#x5E8F;&#x7684;&#x8054;&#x7CFB;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#25-进程的特点"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">2.5&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x7279;&#x70B9;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#26-进程控制块-pcb"><span class="toc-nav-number">1.2.5.</span> <span class="toc-nav-text">2.6&#x3001;&#x8FDB;&#x7A0B;&#x63A7;&#x5236;&#x5757; PCB</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#27-进程的生命周期"><span class="toc-nav-number">1.2.6.</span> <span class="toc-nav-text">2.7&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#271-进程生命周期管理"><span class="toc-nav-number">1.2.6.1.</span> <span class="toc-nav-text">2.7.1&#x3001;&#x8FDB;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x7BA1;&#x7406;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#272-进程状态变化模型"><span class="toc-nav-number">1.2.6.2.</span> <span class="toc-nav-text">2.7.2&#x3001;&#x8FDB;&#x7A0B;&#x72B6;&#x6001;&#x53D8;&#x5316;&#x6A21;&#x578B;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#273-进程挂起模式"><span class="toc-nav-number">1.2.6.3.</span> <span class="toc-nav-text">2.7.3&#x3001;&#x8FDB;&#x7A0B;&#x6302;&#x8D77;&#x6A21;&#x5F0F;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#274-进程状态队列"><span class="toc-nav-number">1.2.6.4.</span> <span class="toc-nav-text">2.7.4&#x3001;&#x8FDB;&#x7A0B;&#x72B6;&#x6001;&#x961F;&#x5217;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#275-进程的上下文切换"><span class="toc-nav-number">1.2.6.5.</span> <span class="toc-nav-text">2.7.5&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x5207;&#x6362;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#28-线程thread"><span class="toc-nav-number">1.2.7.</span> <span class="toc-nav-text">2.8&#x3001;&#x7EBF;&#x7A0B;&#xFF08;Thread&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#281-线程的概念"><span class="toc-nav-number">1.2.7.1.</span> <span class="toc-nav-text">2.8.1&#x3001;&#x7EBF;&#x7A0B;&#x7684;&#x6982;&#x5FF5;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#282-线程的实现"><span class="toc-nav-number">1.2.7.2.</span> <span class="toc-nav-text">2.8.2&#x3001;&#x7EBF;&#x7A0B;&#x7684;&#x5B9E;&#x73B0;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三-调度"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">&#x4E09;&#x3001;&#x8C03;&#x5EA6;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#31-调度原则"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">3.1&#x3001;&#x8C03;&#x5EA6;&#x539F;&#x5219;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#32-调度算法"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">3.2&#x3001;&#x8C03;&#x5EA6;&#x7B97;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#33-实时调度"><span class="toc-nav-number">1.3.3.</span> <span class="toc-nav-text">3.3&#x3001;&#x5B9E;&#x65F6;&#x8C03;&#x5EA6;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#四-中断"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">&#x56DB;&#x3001;&#x4E2D;&#x65AD;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#41-禁用硬件中断"><span class="toc-nav-number">1.4.1.</span> <span class="toc-nav-text">4.1&#x3001;&#x7981;&#x7528;&#x786C;&#x4EF6;&#x4E2D;&#x65AD;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#42-基于软件的解决方案"><span class="toc-nav-number">1.4.2.</span> <span class="toc-nav-text">4.2&#x3001;&#x57FA;&#x4E8E;&#x8F6F;&#x4EF6;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#43-锁的抽象"><span class="toc-nav-number">1.4.3.</span> <span class="toc-nav-text">4.3&#x3001;&#x9501;&#x7684;&#x62BD;&#x8C61;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#操作系统"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#一"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x4E00;&#x3001;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#二-进程process"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">&#x4E8C;&#x3001;&#x8FDB;&#x7A0B;&#xFF08;Process&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#21-进程的概念"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">2.1&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x6982;&#x5FF5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#22-进程的组成"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">2.2&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x7EC4;&#x6210;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#23-进程与程序的联系"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">2.3&#x3001;&#x8FDB;&#x7A0B;&#x4E0E;&#x7A0B;&#x5E8F;&#x7684;&#x8054;&#x7CFB;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#25-进程的特点"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">2.5&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x7279;&#x70B9;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#26-进程控制块-pcb"><span class="toc-nav-number">1.2.5.</span> <span class="toc-nav-text">2.6&#x3001;&#x8FDB;&#x7A0B;&#x63A7;&#x5236;&#x5757; PCB</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#27-进程的生命周期"><span class="toc-nav-number">1.2.6.</span> <span class="toc-nav-text">2.7&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#271-进程生命周期管理"><span class="toc-nav-number">1.2.6.1.</span> <span class="toc-nav-text">2.7.1&#x3001;&#x8FDB;&#x7A0B;&#x751F;&#x547D;&#x5468;&#x671F;&#x7BA1;&#x7406;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#272-进程状态变化模型"><span class="toc-nav-number">1.2.6.2.</span> <span class="toc-nav-text">2.7.2&#x3001;&#x8FDB;&#x7A0B;&#x72B6;&#x6001;&#x53D8;&#x5316;&#x6A21;&#x578B;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#273-进程挂起模式"><span class="toc-nav-number">1.2.6.3.</span> <span class="toc-nav-text">2.7.3&#x3001;&#x8FDB;&#x7A0B;&#x6302;&#x8D77;&#x6A21;&#x5F0F;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#274-进程状态队列"><span class="toc-nav-number">1.2.6.4.</span> <span class="toc-nav-text">2.7.4&#x3001;&#x8FDB;&#x7A0B;&#x72B6;&#x6001;&#x961F;&#x5217;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#275-进程的上下文切换"><span class="toc-nav-number">1.2.6.5.</span> <span class="toc-nav-text">2.7.5&#x3001;&#x8FDB;&#x7A0B;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x5207;&#x6362;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#28-进程间通信-ipc"><span class="toc-nav-number">1.2.7.</span> <span class="toc-nav-text"><code>2.8&#x3001;&#x8FDB;&#x7A0B;&#x95F4;&#x901A;&#x4FE1; IPC</code></span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#29-线程thread"><span class="toc-nav-number">1.2.8.</span> <span class="toc-nav-text">2.9&#x3001;&#x7EBF;&#x7A0B;&#xFF08;Thread&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#291-线程的概念"><span class="toc-nav-number">1.2.8.1.</span> <span class="toc-nav-text">2.9.1&#x3001;&#x7EBF;&#x7A0B;&#x7684;&#x6982;&#x5FF5;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#292-线程的实现"><span class="toc-nav-number">1.2.8.2.</span> <span class="toc-nav-text">2.9&#x2026;2&#x3001;&#x7EBF;&#x7A0B;&#x7684;&#x5B9E;&#x73B0;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#293-死锁"><span class="toc-nav-number">1.2.8.3.</span> <span class="toc-nav-text">2.9&#x2026;3&#x3001;&#x6B7B;<strong>&#x9501;</strong></span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#294-死锁恢复"><span class="toc-nav-number">1.2.8.4.</span> <span class="toc-nav-text">2.9&#x2026;4&#x3001;&#x6B7B;&#x9501;&#x6062;&#x590D;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#三-调度"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">&#x4E09;&#x3001;&#x8C03;&#x5EA6;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#31-调度原则"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">3.1&#x3001;&#x8C03;&#x5EA6;&#x539F;&#x5219;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#32-调度算法"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">3.2&#x3001;&#x8C03;&#x5EA6;&#x7B97;&#x6CD5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#33-实时调度"><span class="toc-nav-number">1.3.3.</span> <span class="toc-nav-text">3.3&#x3001;&#x5B9E;&#x65F6;&#x8C03;&#x5EA6;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#四-中断-竞态条件"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">&#x56DB;&#x3001;&#x4E2D;&#x65AD; &#x7ADE;&#x6001;&#x6761;&#x4EF6;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#41-禁用硬件中断"><span class="toc-nav-number">1.4.1.</span> <span class="toc-nav-text">4.1&#x3001;&#x7981;&#x7528;&#x786C;&#x4EF6;&#x4E2D;&#x65AD;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#42-基于软件的解决方案"><span class="toc-nav-number">1.4.2.</span> <span class="toc-nav-text">4.2&#x3001;&#x57FA;&#x4E8E;&#x8F6F;&#x4EF6;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#43-锁的抽象"><span class="toc-nav-number">1.4.3.</span> <span class="toc-nav-text">4.3&#x3001;&#x9501;&#x7684;&#x62BD;&#x8C61;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#五-信号量-管程"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">&#x4E94;&#x3001;&#x4FE1;&#x53F7;&#x91CF;&#x3001;&#x7BA1;&#x7A0B;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#51-信号量的使用"><span class="toc-nav-number">1.5.1.</span> <span class="toc-nav-text">5.1&#x3001;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x4F7F;&#x7528;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#52-管程"><span class="toc-nav-number">1.5.2.</span> <span class="toc-nav-text">5.2&#x3001;&#x7BA1;&#x7A0B;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#感谢阅读"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x611F;&#x8C22;&#x9605;&#x8BFB;</span></a></li></ol>
         
         </div>
       </aside>
