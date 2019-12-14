@@ -1113,6 +1113,15 @@
 <hr>
 <h2 id="springmvc-运行流程">SpringMVC 运行流程</h2>
 <p><img src="../../img/articleImg/SpringMVC.png" alt=""></p>
+<ul>
+<li>用户向服务端发送请求，这个请求会先到前端控制器 DispatcherServlet(也叫中央控制器)</li>
+<li>DispatcherServlet 接收到请求后会调用HandlerMapping处理器映射器，得知该请求该由哪个 Controller来处理（并未调用Controller，只是得知）；</li>
+<li>DispatcherServlet 调用 HandlerAdapter 处理器适配器，告诉处理器适配器应该要去执行哪个 Controller；</li>
+<li>HandlerAdapter 处理器适配器去执行 Controller 并得到 ModelAndView，并层层返回给DispatcherServlet；</li>
+<li>DispatcherServlet 将 ModelAndView 交给 ViewReslover 视图解析器解析返回真正的视图；</li>
+<li>DispatcherServlet 将模型数据填充到视图中；</li>
+<li>DispatcherServlet 将结果响应给用户；</li>
+</ul>
 <h2 id="spring-的环境下使用springmvc">Spring 的环境下使用SpringMVC</h2>
 <p><strong>Spring 的 IOC 容器不应该扫描 SpringMVC 中的 bean, 对应的SpringMVC 的 IOC 容器不应该扫描 Spring 中的 bean</strong></p>
 <ul>
