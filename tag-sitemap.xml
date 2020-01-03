@@ -86,13 +86,6 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/JVM/</loc>
-        <lastmod>2019-08-08T01:45:08.767Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/tags/%E7%BA%BF%E7%A8%8B/</loc>
         <lastmod>2019-08-19T07:16:50.534Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -170,15 +163,22 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
-        <lastmod>2019-12-13T13:21:48.547Z</lastmod>
+        <loc>https://github-yuteng.github.io/tags/Spring%E5%85%A8%E5%AE%B6%E6%A1%B6/</loc>
+        <lastmod>2019-12-14T05:45:53.102Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/Spring%E5%85%A8%E5%AE%B6%E6%A1%B6/</loc>
-        <lastmod>2019-12-14T05:45:53.102Z</lastmod>
+        <loc>https://github-yuteng.github.io/tags/JVM/</loc>
+        <lastmod>2020-01-02T05:39:17.978Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
+        <lastmod>2020-01-02T08:29:57.107Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
