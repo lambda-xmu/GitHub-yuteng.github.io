@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>https://github-yuteng.github.io/article/TCP%E3%80%81UDP%E3%80%81HTTP%E3%80%81HTTPS/</loc>
+        <lastmod>2020-02-22T11:33:34.257Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://github-yuteng.github.io/article/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%20JVM-3/</loc>
         <lastmod>2020-01-30T08:16:00.434Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -305,14 +313,6 @@
     <url>
         <loc>https://github-yuteng.github.io/article/NIO/</loc>
         <lastmod>2019-05-07T11:42:45.584Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://github-yuteng.github.io/article/TCP%E3%80%81UDP%E3%80%81HTTP%E3%80%81HTTPS/</loc>
-        <lastmod>2019-05-07T11:42:10.510Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

@@ -23,13 +23,6 @@
     </url>
 
     <url>
-        <loc>https://github-yuteng.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</loc>
-        <lastmod>2019-05-07T11:42:10.510Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://github-yuteng.github.io/tags/NIO/</loc>
         <lastmod>2019-05-07T11:42:45.584Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -179,6 +172,13 @@
     <url>
         <loc>https://github-yuteng.github.io/tags/JVM/</loc>
         <lastmod>2020-01-30T08:16:00.434Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://github-yuteng.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</loc>
+        <lastmod>2020-02-22T11:33:34.257Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
